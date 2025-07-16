@@ -1,0 +1,42 @@
+{
+  "build": {
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "http://localhost:5175",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "ClaudeEditor",
+    "version": "4.6.9"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.powerautomation.claudeditor",
+      "icon": [
+        "icons/icon.png"
+      ]
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "ClaudeEditor v4.6.9 - AI Code Editor with Kimi K2",
+        "width": 1400,
+        "height": 900,
+        "center": true
+      }
+    ]
+  }
+}
