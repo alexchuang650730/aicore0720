@@ -1,0 +1,473 @@
+/**
+ * SmartUI 响应式样式系统
+ * 基于AG-UI指导的智能响应式设计
+ */
+
+/* CSS变量定义 */
+:root {
+  /* SmartUI 核心变量 */
+  --smartui-viewport-width: 1200px;
+  --smartui-viewport-height: 800px;
+  --smartui-header-height: 80px;
+  --smartui-sidebar-width: 300px;
+  --smartui-font-scale: 1.0;
+  --smartui-spacing-scale: 1.0;
+  --smartui-layout-columns: 3;
+  
+  /* 响应式断点 */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  
+  /* 动态间距 */
+  --spacing-xs: calc(4px * var(--smartui-spacing-scale));
+  --spacing-sm: calc(8px * var(--smartui-spacing-scale));
+  --spacing-md: calc(16px * var(--smartui-spacing-scale));
+  --spacing-lg: calc(24px * var(--smartui-spacing-scale));
+  --spacing-xl: calc(32px * var(--smartui-spacing-scale));
+  
+  /* 动态字体大小 */
+  --font-xs: calc(12px * var(--smartui-font-scale));
+  --font-sm: calc(14px * var(--smartui-font-scale));
+  --font-base: calc(16px * var(--smartui-font-scale));
+  --font-lg: calc(18px * var(--smartui-font-scale));
+  --font-xl: calc(20px * var(--smartui-font-scale));
+  --font-2xl: calc(24px * var(--smartui-font-scale));
+  --font-3xl: calc(30px * var(--smartui-font-scale));
+}
+
+/* 基础布局 - 默认桌面三栏布局 */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  height: var(--smartui-header-height);
+  background-color: #1e3a8a;
+  color: white;
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - var(--smartui-header-height));
+  overflow: hidden;
+}
+
+.file-explorer-section {
+  width: 300px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.editor-section {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar {
+  width: var(--smartui-sidebar-width);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #e9ecef;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+/* 移动端布局 (xs, sm) */
+.device-mobile .app-content {
+  flex-direction: column;
+}
+
+.device-mobile .file-explorer-section {
+  width: 100%;
+  height: 200px;
+  border-right: none;
+  border-bottom: 1px solid #e9ecef;
+  order: 1;
+}
+
+.device-mobile .editor-section {
+  width: 100%;
+  flex: 1;
+  border-right: none;
+  order: 2;
+}
+
+.device-mobile .sidebar {
+  width: 100%;
+  height: 300px;
+  border-left: none;
+  border-top: 1px solid #e9ecef;
+  order: 3;
+}
+
+/* 平板布局 (md) */
+.device-tablet .app-content {
+  flex-direction: row;
+}
+
+.device-tablet .file-explorer-section {
+  display: none; /* 平板隐藏文件浏览器 */
+}
+
+.device-tablet .editor-section {
+  flex: 1;
+}
+
+.device-tablet .sidebar {
+  width: 250px;
+}
+
+/* 大屏桌面布局 (xxl) */
+.device-large_desktop .sidebar {
+  width: 400px;
+}
+
+.device-large_desktop .file-explorer-section {
+  width: 350px;
+}
+
+/* 触控优化 */
+.touch-optimized button,
+.touch-optimized .clickable,
+.touch-optimized .task-item {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--spacing-md);
+  margin: var(--spacing-xs);
+}
+
+.touch-optimized .task-item {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  border-radius: 8px;
+}
+
+/* 禁用触控设备的hover效果 */
+@media (hover: none) {
+  .touch-optimized .hover\:bg-gray-100:hover {
+    background-color: inherit;
+  }
+  
+  .touch-optimized .hover\:shadow-md:hover {
+    box-shadow: inherit;
+  }
+}
+
+/* 字体缩放 */
+.device-mobile {
+  font-size: var(--font-base);
+}
+
+.device-tablet {
+  font-size: calc(var(--font-base) * 1.05);
+}
+
+.device-desktop {
+  font-size: var(--font-base);
+}
+
+.device-large_desktop {
+  font-size: calc(var(--font-base) * 1.1);
+}
+
+/* 标题字体缩放 */
+.app-header h1 {
+  font-size: var(--font-3xl);
+  margin: 0;
+}
+
+.app-header p {
+  font-size: var(--font-lg);
+  margin: var(--spacing-xs) 0 0 0;
+  opacity: 0.9;
+}
+
+/* 任务列表响应式 */
+.task-list {
+  padding: var(--spacing-md);
+}
+
+.task-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 智能体状态响应式 */
+.agent-status {
+  padding: var(--spacing-md);
+}
+
+.agent-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 工具管理器响应式 */
+.tool-manager {
+  padding: var(--spacing-md);
+}
+
+.tool-tabs {
+  display: flex;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: var(--spacing-md);
+}
+
+.tool-tab {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tool-tab.active {
+  border-bottom-color: #1e3a8a;
+  color: #1e3a8a;
+}
+
+/* 聊天界面响应式 */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+.chat-input-area {
+  padding: var(--spacing-md);
+  border-top: 1px solid #e9ecef;
+  background: white;
+}
+
+.chat-input {
+  width: 100%;
+  min-height: 60px;
+  padding: var(--spacing-md);
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  resize: vertical;
+  font-size: var(--font-base);
+}
+
+/* 按钮响应式 */
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.btn-primary {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+}
+
+/* 移动端特殊优化 */
+.device-mobile .chat-input {
+  font-size: 16px; /* 防止iOS缩放 */
+}
+
+.device-mobile .tool-tabs {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.device-mobile .tool-tab {
+  flex-shrink: 0;
+}
+
+/* 平板特殊优化 */
+.device-tablet .sidebar {
+  position: relative;
+}
+
+.device-tablet .sidebar-toggle {
+  display: block;
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  z-index: 10;
+}
+
+/* 桌面特殊优化 */
+.device-desktop .sidebar-toggle,
+.device-large_desktop .sidebar-toggle {
+  display: none;
+}
+
+/* 加载状态 */
+.smartui-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* 动画效果 */
+@keyframes smartui-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.smartui-animate-in {
+  animation: smartui-fade-in 0.3s ease-out;
+}
+
+/* 滚动条样式 */
+.smartui-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.smartui-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.smartui-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.smartui-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 应用滚动条到相关元素 */
+.file-explorer-section,
+.sidebar,
+.chat-messages {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* 打印样式 */
+@media print {
+  .app-header,
+  .file-explorer-section,
+  .sidebar {
+    display: none;
+  }
+  
+  .app-content {
+    height: auto;
+  }
+  
+  .editor-section {
+    width: 100%;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .app {
+    --border-color: #000;
+  }
+  
+  .task-item,
+  .agent-card,
+  .chat-input {
+    border-color: #000;
+    border-width: 2px;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --border-color: #404040;
+  }
+  
+  .app {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+  
+  .file-explorer-section,
+  .editor-section {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+  }
+  
+  .sidebar,
+  .task-item,
+  .agent-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+}
+
