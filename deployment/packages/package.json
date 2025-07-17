@@ -1,0 +1,95 @@
+{
+  "name": "powerautomation-unified",
+  "version": "4.6.9.8",
+  "description": "PowerAutomation v4.6.9.8 - 业界领先的个人/企业工作流自动化解决方案。六大工作流 + Local Manus 多模型集成 + SmartUI 开发自动化。零成本运行，0.36s 响应，一键安装。",
+  "main": "core/components/claude_router_mcp/unified_mcp_server.py",
+  "bin": {
+    "powerautomation": "./bin/powerautomation.js"
+  },
+  "scripts": {
+    "install": "node scripts/install.js",
+    "start": "node bin/powerautomation.js start",
+    "test": "node bin/powerautomation.js test --skip-python-deps",
+    "postinstall": "node scripts/postinstall.js",
+    "prepublishOnly": "npm run test",
+    "prepack": "node scripts/prepack.js",
+    "publish-npm": "node scripts/publish.js"
+  },
+  "keywords": [
+    "powerautomation",
+    "workflow-automation",
+    "industry-leading",
+    "enterprise-solution",
+    "six-workflows",
+    "local-manus",
+    "multi-model-integration",
+    "smartui",
+    "development-automation",
+    "claude-code",
+    "kimi-k2",
+    "claudeditor",
+    "zero-cost",
+    "high-performance",
+    "one-click-install",
+    "ai-proxy",
+    "intelligent-routing",
+    "mcp",
+    "automation",
+    "ai-development"
+  ],
+  "author": {
+    "name": "PowerAutomation Team",
+    "email": "support@powerautomation.ai",
+    "url": "https://github.com/alexchuang650730"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexchuang650730/aicore0716.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexchuang650730/aicore0716/issues"
+  },
+  "homepage": "https://github.com/alexchuang650730/aicore0716#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "dependencies": {
+    "ws": "^8.14.2",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "files": [
+    "core/components/claude_router_mcp/",
+    "bin/",
+    "scripts/",
+    "claude_code_final_proxy.py",
+    "one_click_install.sh",
+    "install_powerautomation_v4697.sh",
+    "install_powerautomation_macos.sh",
+    "claude_code_proxy_config.sh",
+    "quick_start.sh",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "PUBLISH_GUIDE.md",
+    "FINAL_PUBLISH_INSTRUCTIONS.md"
+  ],
+  "preferGlobal": true,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
+

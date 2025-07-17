@@ -1,0 +1,119 @@
+{
+    "memory_rag": {
+        "enabled": true,
+        "embedding_model": "all-MiniLM-L6-v2",
+        "vector_store": "faiss",
+        "max_documents": 10000,
+        "chunk_size": 512,
+        "chunk_overlap": 50,
+        "similarity_threshold": 0.7,
+        "max_results": 10
+    },
+    "providers": {
+        "groq": {
+            "enabled": true,
+            "priority": 1,
+            "max_tps": 120,
+            "max_latency": 0.5,
+            "timeout": 30,
+            "retry_attempts": 3
+        },
+        "together": {
+            "enabled": true,
+            "priority": 2,
+            "max_tps": 100,
+            "max_latency": 1.0,
+            "timeout": 30,
+            "retry_attempts": 3
+        },
+        "novita": {
+            "enabled": true,
+            "priority": 3,
+            "max_tps": 80,
+            "max_latency": 1.5,
+            "timeout": 30,
+            "retry_attempts": 3
+        },
+        "infini_ai": {
+            "enabled": false,
+            "priority": 4,
+            "max_tps": 60,
+            "max_latency": 2.0,
+            "timeout": 30,
+            "retry_attempts": 3
+        }
+    },
+    "modes": {
+        "teacher_mode": {
+            "enabled": true,
+            "detail_level": "high",
+            "code_review": true,
+            "best_practices": true,
+            "academic_style": true
+        },
+        "assistant_mode": {
+            "enabled": true,
+            "detail_level": "medium",
+            "efficiency_focus": true,
+            "concise_responses": true,
+            "casual_tone": true
+        }
+    },
+    "aws_s3": {
+        "enabled": false,
+        "bucket": "",
+        "region": "us-east-1",
+        "access_key_id": "",
+        "secret_access_key": "",
+        "encryption": true
+    },
+    "server": {
+        "host": "127.0.0.1",
+        "port": 8080,
+        "max_connections": 1000,
+        "keepalive_timeout": 30,
+        "request_timeout": 60,
+        "worker_processes": 4
+    },
+    "security": {
+        "api_key_required": false,
+        "rate_limiting": {
+            "enabled": true,
+            "requests_per_minute": 100,
+            "burst_size": 20
+        },
+        "cors": {
+            "enabled": true,
+            "allowed_origins": ["*"],
+            "allowed_methods": ["GET", "POST", "OPTIONS"],
+            "allowed_headers": ["Content-Type", "Authorization"]
+        }
+    },
+    "logging": {
+        "level": "INFO",
+        "format": "json",
+        "file": "~/.powerautomation/logs/memory_rag.log",
+        "max_size": "100MB",
+        "backup_count": 5,
+        "rotation": "daily"
+    },
+    "performance": {
+        "vector_cache_size": 5000,
+        "query_cache_size": 2000,
+        "batch_size": 32,
+        "max_workers": 4,
+        "memory_limit": "2GB"
+    },
+    "monitoring": {
+        "enabled": true,
+        "metrics_endpoint": "/metrics",
+        "health_endpoint": "/health",
+        "prometheus_enabled": false,
+        "alert_thresholds": {
+            "response_time": 5.0,
+            "error_rate": 0.05,
+            "memory_usage": 0.8
+        }
+    }
+}
+

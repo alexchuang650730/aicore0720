@@ -1,0 +1,11 @@
+#!/bin/bash
+# PowerAutomation Claude Code 包装器
+# 自动启动 ClaudeEditor 和相关服务
+
+echo "🚀 启动 PowerAutomation 生态系统..."
+
+# 获取脚本目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 启动 PowerAutomation 生态系统
+python3 "$SCRIPT_DIR/start_powerautomation_ecosystem.py" "$@"
