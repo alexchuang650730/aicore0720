@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaudeEditor v4.7.1 - AI-Powered Code Editor with Memory RAG</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 300px 1fr 350px;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .panel {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .panel h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* 修复1: 实时状态对齐布局 */
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s ease;
+        }
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .status-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .status-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .status-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        .status-change {
+            font-size: 12px;
+            color: #28a745;
+            margin-left: 4px;
+        }
+        
+        /* Git 仓库统计 */
+        .git-section {
+            margin: 20px 0;
+        }
+        .git-repo {
+            background: #2d3748;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .git-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .git-stat {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .git-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        .git-stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        /* 修复3: 六大工作流内容 */
+        .workflow-section {
+            margin: 20px 0;
+        }
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .workflow-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .workflow-item:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+        .workflow-item.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .workflow-icon {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+        .workflow-label {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .workflow-status {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+        
+        /* 修复4: 快速工作区功能 */
+        .quick-actions {
+            margin-top: 20px;
+        }
+        .action-button {
+            width: 100%;
+            margin: 6px 0;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .action-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .action-button.primary { background: #667eea; color: white; }
+        .action-button.success { background: #28a745; color: white; }
+        .action-button.info { background: #17a2b8; color: white; }
+        .action-button.warning { background: #ffc107; color: #333; }
+        .action-button.memory-rag { 
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52); 
+            color: white;
+            position: relative;
+        }
+        
+        /* 修复2: 代码编辑器语法高亮 */
+        .code-area {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 400px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .code-line {
+            display: block;
+            padding: 2px 0;
+        }
+        .code-line-number {
+            color: #858585;
+            margin-right: 16px;
+            user-select: none;
+            width: 30px;
+            display: inline-block;
+            text-align: right;
+        }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .function { color: #dcdcaa; }
+        .variable { color: #4fc1ff; }
+        .property { color: #9cdcfe; }
+        .tag { color: #4fc1ff; }
+        .attribute { color: #9cdcfe; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+        
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+        .message.ai {
+            background: #e9ecef;
+            color: #333;
+        }
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .input-area button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .input-area button:hover {
+            background: #5a6fd8;
+        }
+        .feature-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+        .memory-rag-badge {
+            background: #ff6b6b;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* Memory RAG Modal */
+        .memory-rag-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .memory-rag-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 80%;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .memory-rag-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .memory-rag-title {
+            font-size: 1.8em;
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+        .close-button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 ClaudeEditor v4.7.1</h1>
+        <p>跨平台 Mobile/Desktop AI 代碼編輯器 - PowerAutomation 生態系統</p>
+        <div style="margin-top: 15px;">
+            <span class="feature-badge">飛書生態集成</span>
+            <span class="feature-badge">Mobile/Desktop 統一</span>
+            <span class="feature-badge">多 AI 模型</span>
+            <span class="feature-badge">企業私有雲</span>
+            <span class="feature-badge">實時協作</span>
+            <span class="feature-badge memory-rag-badge">🧠 Memory RAG</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- 左側狀態面板 -->
+        <div class="panel">
+            <!-- 修复1: 实时状态对齐布局 -->
+            <h2>📊 實時狀態</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-icon">💎</div>
+                    <div class="status-label">積分</div>
+                    <div class="status-value">2,847 <span class="status-change">(+127)</span></div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">💰</div>
+                    <div class="status-label">收益</div>
+                    <div class="status-value">¥1,234</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">🟢</div>
+                    <div class="status-label">系統狀態</div>
+                    <div class="status-value">運行中</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">⚡</div>
+                    <div class="status-label">性能</div>
+                    <div class="status-value">優秀</div>
+                </div>
+            </div>
+
+            <!-- Git 仓库统计 -->
+            <div class="git-section">
+                <h2>📁 Git倉庫統計</h2>
+                <div class="git-repo">
+                    <span>📁 aicore0716</span>
+                    <span style="background: #007acc; padding: 4px 8px; border-radius: 4px; font-size: 12px;">main</span>
+                </div>
+                <div class="git-stats">
+                    <div class="git-stat">
+                        <div class="git-stat-value">12</div>
+                        <div class="git-stat-label">今日Checkin</div>
+                    </div>
+                    <div class="git-stat">
+                        <div class="git-stat-value">45</div>
+                        <div class="git-stat-label">本周Checkin</div>
+                    </div>
+                    <div class="git-stat">
+                        <div class="git-stat-value">3</div>
+                        <div class="git-stat-label">待處理PR</div>
+                    </div>
+                    <div class="git-stat">
+                        <div class="git-stat-value">28</div>
+                        <div class="git-stat-label">本月提交</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 修复3: 六大工作流内容 -->
+            <div class="workflow-section">
+                <h2>🎯 六大工作流</h2>
+                <div class="workflow-grid">
+                    <div class="workflow-item active" onclick="selectWorkflow(this, 'analysis')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🔍</div>
+                        <div class="workflow-label">代碼分析</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'refactor')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🛠️</div>
+                        <div class="workflow-label">自動重構</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'test')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🧪</div>
+                        <div class="workflow-label">單元測試</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'deploy')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">📦</div>
+                        <div class="workflow-label">構建部署</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'performance')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🚀</div>
+                        <div class="workflow-label">性能優化</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'monitoring')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">📊</div>
+                        <div class="workflow-label">監控運維</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 修复4: 快速工作区功能 -->
+            <div class="quick-actions">
+                <h2>⚡ 快速操作</h2>
+                <button class="action-button primary" onclick="quickAction('analysis')">
+                    <span>🔍 AI 代碼分析</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button success" onclick="quickAction('refactor')">
+                    <span>🛠️ 智能重構</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button info" onclick="quickAction('deploy')">
+                    <span>📦 一鍵部署</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button warning" onclick="quickAction('sync')">
+                    <span>🔄 同步到移動端</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button memory-rag" onclick="openMemoryRAG()">
+                    <span>📊 Memory RAG 監控</span>
+                    <span>🧠</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 中間代碼編輯區 -->
+        <div class="panel">
+            <h2>💻 代碼編輯器</h2>
+            <!-- 修复2: 真正的语法高亮 -->
+            <div class="code-area" id="codeEditor">
+                <div class="code-line">
+                    <span class="code-line-number">1</span>
+                    <span class="keyword">import</span> <span class="variable">React</span> <span class="keyword">from</span> <span class="string">'react'</span><span class="operator">;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">2</span>
+                    <span class="keyword">import</span> <span class="operator">{</span> <span class="variable">PowerAutomation</span><span class="operator">,</span> <span class="variable">MemoryRAG</span> <span class="operator">}</span> <span class="keyword">from</span> <span class="string">'@powerautomation/core'</span><span class="operator">;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">3</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">4</span>
+                    <span class="comment">// ClaudeEditor v4.7.1 - Memory RAG 智能記憶系統</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">5</span>
+                    <span class="keyword">const</span> <span class="function">ClaudeEditor</span> <span class="operator">=</span> <span class="operator">()</span> <span class="operator">=></span> <span class="operator">{</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">6</span>
+                    &nbsp;&nbsp;<span class="keyword">const</span> <span class="operator">[</span><span class="variable">memoryRAG</span><span class="operator">,</span> <span class="variable">setMemoryRAG</span><span class="operator">]</span> <span class="operator">=</span> <span class="function">useState</span><span class="operator">(</span><span class="keyword">null</span><span class="operator">);</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">7</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">8</span>
+                    &nbsp;&nbsp;<span class="comment">// Memory RAG 智能學習系統</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">9</span>
+                    &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">memorySystem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="function">MemoryRAG</span><span class="operator">({</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">10</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">personalizedLearning</span><span class="operator">:</span> <span class="keyword">true</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">11</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">behaviorAnalysis</span><span class="operator">:</span> <span class="keyword">true</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">12</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">smartCaching</span><span class="operator">:</span> <span class="keyword">true</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">13</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">multiProviderRouting</span><span class="operator">:</span> <span class="keyword">true</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">14</span>
+                    &nbsp;&nbsp;<span class="operator">});</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">15</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">16</span>
+                    &nbsp;&nbsp;<span class="comment">// 多 AI 模型 + Memory RAG 增強</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">17</span>
+                    &nbsp;&nbsp;<span class="keyword">const</span> <span class="variable">aiModels</span> <span class="operator">=</span> <span class="operator">{</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">18</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">claude</span><span class="operator">:</span> <span class="string">'Claude Enterprise + Memory'</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">19</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">gemini</span><span class="operator">:</span> <span class="string">'Gemini Private + RAG'</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">20</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">kimi</span><span class="operator">:</span> <span class="string">'Kimi K2 Local + Memory'</span><span class="operator">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">21</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="property">grok</span><span class="operator">:</span> <span class="string">'Grok Private + Smart Cache'</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">22</span>
+                    &nbsp;&nbsp;<span class="operator">};</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">23</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">24</span>
+                    &nbsp;&nbsp;<span class="keyword">return</span> <span class="operator">(</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">25</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attribute">className</span><span class="operator">=</span><span class="string">"claudeditor-workspace"</span><span class="tag">&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">26</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;MemoryRAGSmartUI</span> <span class="attribute">enabled</span><span class="operator">=</span><span class="operator">{</span><span class="keyword">true</span><span class="operator">}</span> <span class="tag">/&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">27</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;PersonalizedLearning</span> <span class="attribute">adaptive</span><span class="operator">=</span><span class="operator">{</span><span class="keyword">true</span><span class="operator">}</span> <span class="tag">/&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">28</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;SmartCaching</span> <span class="attribute">hitRate</span><span class="operator">=</span><span class="string">"92%"</span> <span class="tag">/&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">29</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;MultiProviderRouting</span> <span class="attribute">intelligent</span><span class="operator">=</span><span class="operator">{</span><span class="keyword">true</span><span class="operator">}</span> <span class="tag">/&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">30</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">31</span>
+                    &nbsp;&nbsp;<span class="operator">);</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">32</span>
+                    <span class="operator">};</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">33</span>
+                </div>
+                <div class="code-line">
+                    <span class="code-line-number">34</span>
+                    <span class="keyword">export</span> <span class="keyword">default</span> <span class="function">ClaudeEditor</span><span class="operator">;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右側 AI 助手 -->
+        <div class="panel">
+            <h2>🤖 AI 編程助手</h2>
+            <div class="chat-area">
+                <div class="messages" id="messages">
+                    <div class="message ai">
+                        👋 您好！我是 ClaudeEditor v4.7.1 AI 助手，現在配備了 Memory RAG 智能記憶系統！
+                        <br><br>
+                        ✨ <strong>Memory RAG 新功能：</strong><br>
+                        • 🧠 個性化學習和記憶<br>
+                        • 📊 實時性能監控<br>
+                        • 🎯 智能行為分析<br>
+                        • 🔄 多 Provider 智能路由<br>
+                        <br>
+                        🎯 <strong>立即體驗：</strong><br>
+                        點擊左側工作流或快速操作按鈕！
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" placeholder="輸入您的編程需求..." id="userInput">
+                    <button onclick="sendMessage()">發送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory RAG SmartUI 模態框 -->
+    <div id="memoryRAGModal" class="memory-rag-modal">
+        <div class="memory-rag-content">
+            <div class="memory-rag-header">
+                <div class="memory-rag-title">🧠 Memory RAG SmartUI</div>
+                <button class="close-button" onclick="closeMemoryRAG()">×</button>
+            </div>
+            <div style="text-align: center; padding: 40px;">
+                <h3 style="color: #ff6b6b; margin-bottom: 20px;">📊 Memory RAG 監控面板</h3>
+                <p>智能記憶系統正在運行中...</p>
+                <div style="margin: 20px 0;">
+                    <div style="background: #f0f0f0; height: 4px; border-radius: 2px;">
+                        <div style="background: #ff6b6b; height: 100%; width: 75%; border-radius: 2px; animation: loading 2s infinite;"></div>
+                    </div>
+                </div>
+                <p style="color: #666;">響應時間: 0.85s | 緩存命中率: 92% | 學習準確率: 94%</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 修复4: 快速工作区功能实现
+        function quickAction(action) {
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            
+            let response = '';
+            switch(action) {
+                case 'analysis':
+                    response = '🔍 <strong>AI 代碼分析啟動</strong><br>正在分析當前代碼結構...<br>✅ 發現 3 個優化建議<br>📊 代碼質量評分: A+';
+                    break;
+                case 'refactor':
+                    response = '🛠️ <strong>智能重構開始</strong><br>正在應用最佳實踐...<br>✅ 重構完成 5 個函數<br>🚀 性能提升 15%';
+                    break;
+                case 'deploy':
+                    response = '📦 <strong>一鍵部署啟動</strong><br>正在構建項目...<br>✅ 構建成功<br>🌐 部署到生產環境';
+                    break;
+                case 'sync':
+                    response = '🔄 <strong>同步到移動端</strong><br>正在同步代碼和設置...<br>✅ 同步完成<br>📱 移動端已更新';
+                    break;
+            }
+            
+            aiDiv.innerHTML = response;
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 修复3: 六大工作流功能实现
+        function selectWorkflow(element, workflow) {
+            // 移除所有活跃状态
+            document.querySelectorAll('.workflow-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 设置当前选中
+            element.classList.add('active');
+            
+            // 更新代码编辑器内容
+            updateCodeEditor(workflow);
+            
+            // 发送消息到AI助手
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            
+            let response = '';
+            switch(workflow) {
+                case 'analysis':
+                    response = '🔍 <strong>代碼分析工作流</strong><br>正在分析代碼質量、性能和安全性...<br>📊 生成詳細分析報告';
+                    break;
+                case 'refactor':
+                    response = '🛠️ <strong>自動重構工作流</strong><br>智能識別重構機會...<br>🔄 應用現代化最佳實踐';
+                    break;
+                case 'test':
+                    response = '🧪 <strong>單元測試工作流</strong><br>自動生成測試用例...<br>✅ 提升測試覆蓋率';
+                    break;
+                case 'deploy':
+                    response = '📦 <strong>構建部署工作流</strong><br>自動化CI/CD流程...<br>🚀 零停機部署';
+                    break;
+                case 'performance':
+                    response = '🚀 <strong>性能優化工作流</strong><br>分析性能瓶頸...<br>⚡ 優化執行效率';
+                    break;
+                case 'monitoring':
+                    response = '📊 <strong>監控運維工作流</strong><br>實時監控系統狀態...<br>🧠 Memory RAG 智能分析';
+                    break;
+            }
+            
+            aiDiv.innerHTML = response;
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 修复2: 更新代码编辑器内容
+        function updateCodeEditor(workflow) {
+            const codeEditor = document.getElementById('codeEditor');
+            // 这里可以根据不同的工作流显示不同的代码示例
+            // 当前保持现有的Memory RAG代码示例
+        }
+        
+        function openMemoryRAG() {
+            document.getElementById('memoryRAGModal').style.display = 'block';
+        }
+        
+        function closeMemoryRAG() {
+            document.getElementById('memoryRAGModal').style.display = 'none';
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('memoryRAGModal');
+            if (event.target === modal) {
+                closeMemoryRAG();
+            }
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+            const userMessage = input.value.trim();
+            
+            if (!userMessage) return;
+            
+            // 添加用户消息
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = userMessage;
+            messages.appendChild(userDiv);
+            
+            // 模拟 AI 回应
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'message ai';
+                
+                let response = '';
+                if (userMessage.includes('Memory RAG') || userMessage.includes('記憶') || userMessage.includes('memory')) {
+                    response = '🧠 Memory RAG 系統狀態：<br><br>✅ 個性化學習：94% 準確率<br>📊 緩存命中率：92%<br>⚡ 平均響應時間：0.85s<br>🎯 智能路由：4 個 Provider 活躍<br><br>💡 建議：點擊左側 "Memory RAG 監控" 查看詳細洞察！';
+                } else if (userMessage.includes('工作流') || userMessage.includes('workflow')) {
+                    response = '🎯 六大工作流已就緒：<br><br>🔍 代碼分析 - 智能質量檢測<br>🛠️ 自動重構 - 現代化升級<br>🧪 單元測試 - 自動生成測試<br>📦 構建部署 - CI/CD 自動化<br>🚀 性能優化 - 瓶頸分析<br>📊 監控運維 - Memory RAG 增強<br><br>點擊任意工作流開始使用！';
+                } else {
+                    response = `💡 收到您的需求："${userMessage}"<br><br>🤖 正在調用最適合的 AI 模型...<br>⚡ Memory RAG 智能分析中...<br>🔄 同步到您的移動設備...<br><br>✨ PowerAutomation v4.7.1 為您服務！`;
+                }
+                
+                aiDiv.innerHTML = response;
+                messages.appendChild(aiDiv);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+            
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 回车发送
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // 模拟实时数据更新
+        setInterval(() => {
+            // 更新积分
+            const scoreElement = document.querySelector('.status-card .status-value');
+            if (scoreElement) {
+                const currentScore = parseInt(scoreElement.textContent.replace(/[^\d]/g, ''));
+                const newScore = currentScore + Math.floor(Math.random() * 5);
+                scoreElement.innerHTML = `${newScore.toLocaleString()} <span class="status-change">(+${Math.floor(Math.random() * 10) + 1})</span>`;
+            }
+        }, 5000);
+        
+        // 添加加载动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes loading {
+                0% { width: 0%; }
+                50% { width: 75%; }
+                100% { width: 100%; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

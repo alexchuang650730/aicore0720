@@ -1,0 +1,386 @@
+/* TestPanel.css - 测试管理面板样式 */
+
+.test-panel {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.test-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.test-panel-header h3 {
+  margin: 0;
+  color: #4CAF50;
+  font-size: 1.5rem;
+}
+
+.test-statistics {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background: #2d2d2d;
+  border-radius: 6px;
+  min-width: 60px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.stat-value.passed {
+  color: #28a745;
+}
+
+.stat-value.failed {
+  color: #dc3545;
+}
+
+.stat-value.running {
+  color: #007bff;
+}
+
+.test-panel-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .test-panel-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.test-suites-section,
+.test-cases-section {
+  background: #2d2d2d;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.test-suites-section h4,
+.test-cases-section h4 {
+  margin: 0 0 15px 0;
+  color: #4CAF50;
+  font-size: 1.2rem;
+}
+
+.test-suites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-suite-item {
+  background: #3d3d3d;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.test-suite-item:hover {
+  background: #4d4d4d;
+  border-color: #4CAF50;
+}
+
+.test-suite-item.selected {
+  border-color: #4CAF50;
+  background: #4d4d4d;
+}
+
+.suite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.suite-name {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.suite-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.suite-description {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.suite-stats {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.test-cases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.test-case-item {
+  background: #3d3d3d;
+  border-radius: 6px;
+  padding: 10px;
+  border-left: 4px solid #555;
+}
+
+.test-case-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.test-status {
+  font-size: 1.2rem;
+  min-width: 20px;
+}
+
+.test-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.test-type {
+  background: #555;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.test-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.test-result {
+  background: #2d2d2d;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+.result-info {
+  display: flex;
+  gap: 15px;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8rem;
+  background: #4d2d2d;
+  padding: 5px;
+  border-radius: 3px;
+  border-left: 3px solid #dc3545;
+}
+
+.coverage-section {
+  grid-column: 1 / -1;
+  background: #2d2d2d;
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.coverage-section h4 {
+  margin: 0 0 15px 0;
+  color: #4CAF50;
+  font-size: 1.2rem;
+}
+
+.coverage-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.coverage-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coverage-label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.coverage-bar {
+  position: relative;
+  background: #555;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.coverage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #28a745, #4CAF50);
+  transition: width 0.3s ease;
+}
+
+.coverage-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .test-panel {
+    padding: 15px;
+    margin: 5px;
+  }
+  
+  .test-panel-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .test-statistics {
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .suite-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .test-case-header {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .coverage-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.test-case-item .test-status:contains('🔄') {
+  animation: pulse 1.5s infinite;
+}
+
+/* 滚动条样式 */
+.test-suites-list::-webkit-scrollbar,
+.test-cases-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.test-suites-list::-webkit-scrollbar-track,
+.test-cases-list::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.test-suites-list::-webkit-scrollbar-thumb,
+.test-cases-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+
+.test-suites-list::-webkit-scrollbar-thumb:hover,
+.test-cases-list::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+

@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClaudeEditor v4.7.2 - AI-Powered Code Editor with Memory RAG</title>
-    
-    <!-- Monaco Editor CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
-    
+    <title>ClaudeEditor v4.7.1 - AI-Powered Code Editor with Memory RAG</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -24,44 +20,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .nav-left, .nav-center, .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            color: white;
         }
         .nav-left {
-            gap: 20px; /* 增加PowerAutomation和ClaudeEditor之间的间距 */
-        }
-        .nav-center {
-            flex: 1;
-            justify-content: flex-end; /* 将按钮推到右边 */
-        }
-        .nav-title {
-            color: white;
-            font-weight: 700;
-            font-size: 24px; /* 进一步增大字体 */
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .nav-icon {
-            font-size: 24px; /* 图标也相应增大 */
+            font-size: 20px;
+        }
+        .nav-title {
+            font-size: 18px;
+            font-weight: 700;
         }
         .nav-subtitle {
             font-size: 14px;
             opacity: 0.9;
-        }
-        
-        /* ClaudeEditor标题样式 - 纯橙色，确保无渐变 */
-        .claude-title {
-            color: #FF8C00 !important; /* 纯橙色 */
-            font-size: 24px !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.5px;
-            background: none !important; /* 确保没有背景渐变 */
-            -webkit-background-clip: initial !important;
-            -webkit-text-fill-color: #FF8C00 !important;
-            text-shadow: none !important; /* 确保没有阴影 */
-            filter: none !important; /* 确保没有滤镜 */
         }
         .nav-right {
             display: flex;
@@ -118,7 +94,7 @@
             width: 100%;
         }
         .main-content.edit-mode {
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 300px 1fr 350px;
         }
         .main-content.chat-mode {
             grid-template-columns: 300px 2fr;
@@ -140,95 +116,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        
-        /* AI 模型控制面板样式 */
-        .ai-control-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        .ai-control-section h2 {
-            color: white;
-            margin-bottom: 15px;
-        }
-        .model-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .model-btn {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 12px;
-            padding: 12px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .model-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-        .model-btn.active {
-            background: rgba(255,255,255,0.4);
-            border-color: rgba(255,255,255,0.6);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
-        }
-        .model-name {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .model-type {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-        .model-info {
-            margin-bottom: 15px;
-        }
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        .token-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .token-card {
-            background: rgba(255,255,255,0.15);
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-        }
-        .token-icon {
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-        .token-label {
-            font-size: 11px;
-            opacity: 0.9;
-            margin-bottom: 4px;
-        }
-        .token-value {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        .efficiency-info {
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 12px;
-        }
-        .efficiency-rate {
-            color: #4ade80;
-            font-weight: 700;
         }
         
         /* 修复1: 实时状态对齐布局 */
@@ -341,11 +228,28 @@
             font-size: 14px;
             color: white;
             transition: all 0.2s ease;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
         }
         .quick-action-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .quick-action-btn.blue {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+        .quick-action-btn.green {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        .quick-action-btn.cyan {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+        }
+        .quick-action-btn.orange {
+            background: linear-gradient(135deg, #ea580c, #f59e0b);
+        }
+        .quick-action-btn.purple {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+        }
+        .quick-action-btn.indigo {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
         }
         .action-icon {
             font-size: 16px;
@@ -373,26 +277,34 @@
         .file-btn {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 8px 12px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
             transition: all 0.2s ease;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+        .file-btn.primary {
+            background: #3b82f6;
             color: white;
-            margin-bottom: 8px;
+        }
+        .file-btn.secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        .file-btn.tertiary {
+            background: #e5e7eb;
+            color: #374151;
         }
         .file-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            transform: translateY(-1px);
+            opacity: 0.9;
         }
         .file-icon {
             margin-right: 8px;
         }
         
-        /* 快速指令样式 */
+        /* Command MCP 样式 */
         .command-section {
             margin-bottom: 12px;
         }
@@ -420,26 +332,6 @@
             border-radius: 6px;
             cursor: pointer;
         }
-        .command-status {
-            margin-top: 8px;
-            padding: 6px 8px;
-            background: #f3f4f6;
-            border-radius: 6px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: pulse 1.5s infinite;
-        }
-        .status-text {
-            color: #374151;
-        }
         
         /* 最近部署文件样式 */
         .recent-files h3 {
@@ -466,6 +358,11 @@
             background: #f9fafb;
             border-radius: 8px;
             font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .file-item:hover {
+            background-color: #f0f8ff;
         }
         .file-type-icon {
             margin-right: 8px;
@@ -491,48 +388,14 @@
             font-size: 10px;
         }
         
-        /* 六大工作流样式 */
+        /* 修复3: 六大工作流内容 */
         .workflow-section {
             margin: 20px 0;
-        }
-        .workflow-details {
-            border: none;
-            background: transparent;
-        }
-        .workflow-summary {
-            list-style: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 12px;
-        }
-        .workflow-summary::-webkit-details-marker {
-            display: none;
-        }
-        .workflow-summary h2 {
-            margin: 0;
-            color: #667eea;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .dropdown-arrow {
-            font-size: 12px;
-            color: #9ca3af;
-            transition: transform 0.3s ease;
-        }
-        .workflow-details[open] .dropdown-arrow {
-            transform: rotate(180deg);
         }
         .workflow-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-top: 12px;
         }
         .workflow-item {
             background: #f8f9fa;
@@ -881,10 +744,6 @@
             gap: 8px;
         }
         
-        .file-icon {
-            font-size: 16px;
-        }
-        
         .file-title {
             font-weight: 600;
             color: #333;
@@ -967,13 +826,29 @@
             font-size: 14px;
             line-height: 1.5;
             overflow: auto;
+            display: flex;
+        }
+        
+        .line-numbers {
+            background: #1e1e1e;
+            color: #858585;
+            padding: 16px 8px;
+            text-align: right;
+            user-select: none;
+            border-right: 1px solid #3e3e42;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            min-width: 50px;
         }
         
         .editor-content {
+            flex: 1;
             padding: 16px;
             min-height: 100%;
             white-space: pre-wrap;
             word-wrap: break-word;
+            outline: none;
         }
         
         .editor-status {
@@ -1014,33 +889,11 @@
         .syntax-tag { color: #569cd6; }
         .syntax-attribute { color: #92c5f7; }
         
-        /* 行号样式 */
-        .line-numbers {
-            background: #1e1e1e;
-            color: #858585;
-            padding: 16px 8px;
-            text-align: right;
-            user-select: none;
-            border-right: 1px solid #3e3e42;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
         .edit-panel {
             display: flex;
             flex-direction: column;
         }
         
-        /* 文件项悬停效果 */
-        .file-item {
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .file-item:hover {
-            background-color: #f0f8ff;
-        }
         .memory-rag-modal {
             display: none;
             position: fixed;
@@ -1099,126 +952,6 @@
                 gap: 15px;
             }
         }
-        
-        /* AI模型控制样式 */
-        .ai-model-control {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 20px;
-            color: white;
-            margin-bottom: 20px;
-        }
-        .ai-model-title {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        .ai-model-title .icon {
-            margin-right: 8px;
-        }
-        .model-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .model-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 12px;
-            padding: 16px 12px;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        .model-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-        .model-btn.active {
-            background: rgba(255,255,255,0.4);
-            border-color: rgba(255,255,255,0.6);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
-        }
-        .model-name {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .model-type {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-        .model-info {
-            margin-bottom: 15px;
-        }
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        .info-label {
-            opacity: 0.9;
-        }
-        .info-value {
-            font-weight: 600;
-        }
-        .token-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .token-card {
-            background: rgba(255,255,255,0.15);
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-        .token-icon {
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-        .token-label {
-            font-size: 11px;
-            opacity: 0.9;
-            margin-bottom: 4px;
-        }
-        .token-value {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        .efficiency-info {
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 12px;
-        }
-        .efficiency-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-        .efficiency-rate {
-            color: #4ade80;
-            font-weight: 700;
-        }
-        
-        /* ClaudeEditor标题样式 */
-        .claude-title {
-            color: #667eea !important;
-            font-size: 22px !important;
-            font-weight: 800 !important;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
     </style>
 </head>
 <body>
@@ -1226,10 +959,8 @@
     <div class="top-nav">
         <div class="nav-left">
             <span class="nav-icon">🌐</span>
-            <span class="nav-title">PowerAutomation</span>
-            <span class="claude-title">ClaudeEditor</span>
-        </div>
-        <div class="nav-center">
+            <span class="nav-title">PowerAutomation AI</span>
+            <span class="nav-subtitle">智慧UI助手-在線 | MCP協調中</span>
         </div>
         <div class="nav-right">
             <button class="nav-btn" id="editBtn" onclick="switchMode('edit')">
@@ -1250,195 +981,234 @@
     <div class="main-content chat-mode" id="mainContent">
         <!-- 左側狀態面板 -->
         <div class="panel">
-            <!-- AI模型控制 -->
-            <div class="ai-model-control">
-                <div class="ai-model-title">
-                    <span class="icon">🤖</span>
-                    AI模型控制
+            <!-- 修复1: 实时状态对齐布局 -->
+            <h2>📊 實時狀態</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-icon">💎</div>
+                    <div class="status-label">積分</div>
+                    <div class="status-value">2,847 <span class="status-change">(+127)</span></div>
                 </div>
-                
-                <div class="model-buttons">
-                    <div class="model-btn" onclick="switchModel('k2')">
-                        <div class="model-name">K2</div>
-                        <div class="model-type">高级</div>
-                    </div>
-                    <div class="model-btn active" onclick="switchModel('claude')">
-                        <div class="model-name">Claude</div>
-                        <div class="model-type">标准</div>
-                    </div>
+                <div class="status-card">
+                    <div class="status-icon">💰</div>
+                    <div class="status-label">收益</div>
+                    <div class="status-value">¥1,234</div>
                 </div>
-                
-                <div class="model-info">
-                    <div class="info-row">
-                        <span class="info-label">当前模型:</span>
-                        <span class="info-value">Claude-3.5-Sonnet</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">当前仓库:</span>
-                        <span class="info-value">aicore0716</span>
-                    </div>
+                <div class="status-card">
+                    <div class="status-icon">🟢</div>
+                    <div class="status-label">系統狀態</div>
+                    <div class="status-value">運行中</div>
                 </div>
-                
-                <div class="token-stats">
-                    <div class="token-card">
-                        <div class="token-icon">💰</div>
-                        <div class="token-label">已节省Token</div>
-                        <div class="token-value">12,847</div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-icon">📊</div>
-                        <div class="token-label">总Token使用</div>
-                        <div class="token-value">45,623</div>
-                    </div>
-                </div>
-                
-                <div class="efficiency-info">
-                    <div class="efficiency-row">
-                        <span>节省率:</span>
-                        <span class="efficiency-rate">28.2%</span>
-                    </div>
-                    <div class="efficiency-row">
-                        <span>上次切换:</span>
-                        <span>2分钟前</span>
-                    </div>
+                <div class="status-card">
+                    <div class="status-icon">⚡</div>
+                    <div class="status-label">性能</div>
+                    <div class="status-value">優秀</div>
                 </div>
             </div>
 
-            <!-- Git 仓库统计 -->
+            <!-- Git 仓库统计 - 折叠式设计 -->
             <div class="git-section">
-                <h2>📁 Git倉庫統計</h2>
-                <div class="git-repo">
-                    <span>📁 aicore0716</span>
-                    <span style="background: #007acc; padding: 4px 8px; border-radius: 4px; font-size: 12px;">main</span>
-                </div>
-                <div class="git-stats">
-                    <div class="git-stat">
-                        <div class="git-stat-value">12</div>
-                        <div class="git-stat-label">今日Checkin</div>
+                <h2 onclick="toggleGitStats()" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>📁 Git倉庫統計</span>
+                    <span class="git-toggle" id="gitToggle">▼</span>
+                </h2>
+                <div id="gitStatsContent" style="display: none;">
+                    <div class="git-repo">
+                        <span>📁 aicore0716</span>
+                        <span style="background: #007acc; padding: 4px 8px; border-radius: 4px; font-size: 12px;">main</span>
                     </div>
-                    <div class="git-stat">
-                        <div class="git-stat-value">45</div>
-                        <div class="git-stat-label">本周Checkin</div>
-                    </div>
-                    <div class="git-stat">
-                        <div class="git-stat-value">3</div>
-                        <div class="git-stat-label">待處理PR</div>
-                    </div>
-                    <div class="git-stat">
-                        <div class="git-stat-value">28</div>
-                        <div class="git-stat-label">本月提交</div>
+                    <div class="git-stats">
+                        <div class="git-stat">
+                            <div class="git-stat-value">12</div>
+                            <div class="git-stat-label">今日Checkin</div>
+                        </div>
+                        <div class="git-stat">
+                            <div class="git-stat-value">45</div>
+                            <div class="git-stat-label">本周Checkin</div>
+                        </div>
+                        <div class="git-stat">
+                            <div class="git-stat-value">3</div>
+                            <div class="git-stat-label">待處理PR</div>
+                        </div>
+                        <div class="git-stat">
+                            <div class="git-stat-value">28</div>
+                            <div class="git-stat-label">本月提交</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 文件管理区 -->
+            <!-- 快速操作区 - 折叠式设计 -->
+            <div class="quick-actions-section">
+                <h2 onclick="toggleQuickActions()" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>⚡ 快速操作</span>
+                    <span class="quick-toggle" id="quickToggle">▼</span>
+                </h2>
+                <div class="quick-actions-grid" id="quickActionsContent" style="display: none;">
+                    <button class="quick-action-btn purple" onclick="createNewTask()">
+                        <span class="action-icon">➕</span>
+                        <span class="action-text">新建任務</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                    <button class="quick-action-btn indigo" onclick="showTaskList()">
+                        <span class="action-icon">📋</span>
+                        <span class="action-text">任務列表</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                    <button class="quick-action-btn blue" onclick="quickAction('analyze')">
+                        <span class="action-icon">🔍</span>
+                        <span class="action-text">AI代碼分析</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                    <button class="quick-action-btn green" onclick="quickAction('refactor')">
+                        <span class="action-icon">🔧</span>
+                        <span class="action-text">智能重構</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                    <button class="quick-action-btn cyan" onclick="quickAction('deploy')">
+                        <span class="action-icon">📦</span>
+                        <span class="action-text">一鍵部署</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                    <button class="quick-action-btn orange" onclick="quickAction('sync')">
+                        <span class="action-icon">📱</span>
+                        <span class="action-text">同步到移動端</span>
+                        <span class="action-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 文件管理区 - 折叠式设计 -->
             <div class="file-management-section">
-                <h2>⚡ 快速操作</h2>
-                <div class="quick-actions-grid">
-                    <button class="quick-action-btn" onclick="openFileManager()">
-                        <span class="action-icon">📂</span>
-                        <span class="action-text">打開文件夾</span>
-                        <span class="action-arrow">→</span>
-                    </button>
-                    <button class="quick-action-btn" onclick="cloneRepository()">
-                        <span class="action-icon">🔄</span>
-                        <span class="action-text">克隆Git倉庫</span>
-                        <span class="action-arrow">→</span>
-                    </button>
-                    <button class="quick-action-btn" onclick="connectRemote()">
-                        <span class="action-icon">💻</span>
-                        <span class="action-text">連接遠程主機</span>
-                        <span class="action-arrow">→</span>
-                    </button>
-                </div>
-                
-                <!-- 快速指令 -->
-                <div class="command-section">
-                    <h3>⚡ 快速指令</h3>
-                    <div class="command-input">
-                        <input type="text" placeholder="輸入指令... (如: /deploy, /analyze)" id="commandInput">
-                        <button onclick="executeCommand()">▶</button>
+                <h2 onclick="toggleFileManagement()" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>📁 文件管理</span>
+                    <span class="file-toggle" id="fileToggle">▼</span>
+                </h2>
+                <div id="fileManagementContent" style="display: none;">
+                    <div class="file-actions">
+                        <button class="file-btn primary" onclick="openFileManager()">
+                            <span class="file-icon">📂</span>
+                            <span class="file-text">打開文件夾</span>
+                        </button>
+                        <button class="file-btn secondary" onclick="cloneRepository()">
+                            <span class="file-icon">🔄</span>
+                            <span class="file-text">克隆Git倉庫</span>
+                        </button>
+                        <button class="file-btn tertiary" onclick="connectRemote()">
+                            <span class="file-icon">💻</span>
+                            <span class="file-text">連接遠程主機</span>
+                        </button>
                     </div>
-                    <div class="command-status" id="commandStatus" style="display: none;">
-                        <div class="status-indicator"></div>
-                        <span class="status-text">正在通过Claude Router执行...</span>
+                    
+                    <!-- Command MCP -->
+                    <div class="command-section">
+                        <h3>⚡ Command MCP</h3>
+                        <div class="command-input">
+                            <input type="text" placeholder="輸入命令... (如: npm install)" id="commandInput">
+                            <button onclick="executeCommand()">▶</button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- 最近部署文件 -->
-                <div class="recent-files">
-                    <h3>📄 最近部署文件 <span class="dropdown-arrow">▼</span></h3>
-                    <div class="file-list">
-                        <div class="file-item" onclick="openFile('归纳器_v1.2.0.js', 'javascript', 856)">
-                            <span class="file-type-icon js">📄</span>
-                            <div class="file-info">
-                                <div class="file-name">归纳器_v1.2.0.js</div>
-                                <div class="file-meta">856KB 4小时前</div>
+                    <!-- 最近部署文件 - 折叠式设计 -->
+                    <div class="recent-files">
+                        <h3 onclick="toggleRecentFiles()" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                            <span>📄 最近部署文件</span>
+                            <span class="recent-toggle" id="recentToggle">▼</span>
+                        </h3>
+                        <div class="file-list" id="recentFilesContent" style="display: none;">
+                            <div class="file-item" onclick="openFile('归纳器_v1.2.0.js', 'javascript', 856)">
+                                <span class="file-type-icon js">📄</span>
+                                <div class="file-info">
+                                    <div class="file-name">归纳器_v1.2.0.js</div>
+                                    <div class="file-meta">856KB 4小时前</div>
+                                </div>
+                                <span class="deploy-status deployed">已部署</span>
                             </div>
-                            <span class="deploy-status deployed">已部署</span>
-                        </div>
-                        <div class="file-item" onclick="openFile('SmartUILayout_响应式布局组件_v2.1.jsx', 'jsx', 124)">
-                            <span class="file-type-icon react">⚛️</span>
-                            <div class="file-info">
-                                <div class="file-name">SmartUILayout_响应式布局组件_v2.1.jsx</div>
-                                <div class="file-meta">124KB 6小时前</div>
+                            <div class="file-item" onclick="openFile('SmartUILayout_响应式布局组件_v2.1.jsx', 'jsx', 124)">
+                                <span class="file-type-icon react">⚛️</span>
+                                <div class="file-info">
+                                    <div class="file-name">SmartUILayout_响应式布局组件_v2.1.jsx</div>
+                                    <div class="file-meta">124KB 6小时前</div>
+                                </div>
+                                <span class="deploy-status deployed">已部署</span>
                             </div>
-                            <span class="deploy-status deployed">已部署</span>
-                        </div>
-                        <div class="file-item" onclick="openFile('MCP_协调器核心模块_v3.0.py', 'python', 89)">
-                            <span class="file-type-icon py">🐍</span>
-                            <div class="file-info">
-                                <div class="file-name">MCP_协调器核心模块_v3.0.py</div>
-                                <div class="file-meta">89KB 8小时前</div>
+                            <div class="file-item" onclick="openFile('MCP_协调器核心模块_v3.0.py', 'python', 89)">
+                                <span class="file-type-icon py">🐍</span>
+                                <div class="file-info">
+                                    <div class="file-name">MCP_协调器核心模块_v3.0.py</div>
+                                    <div class="file-meta">89KB 8小时前</div>
+                                </div>
+                                <span class="deploy-status deployed">已部署</span>
                             </div>
-                            <span class="deploy-status deployed">已部署</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 六大工作流Dashboard -->
+            <!-- 修复3: 六大工作流内容 - 折叠式设计 -->
             <div class="workflow-section">
-                <details class="workflow-details">
-                    <summary class="workflow-summary">
-                        <h2>🎯 六大工作流Dashboard</h2>
-                        <span class="dropdown-arrow">▼</span>
-                    </summary>
-                    <div class="workflow-grid">
-                        <div class="workflow-item active" onclick="selectWorkflow(this, 'analysis')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">🔍</div>
-                            <div class="workflow-label">代碼分析</div>
-                        </div>
-                        <div class="workflow-item" onclick="selectWorkflow(this, 'refactor')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">🛠️</div>
-                            <div class="workflow-label">自動重構</div>
-                        </div>
-                        <div class="workflow-item" onclick="selectWorkflow(this, 'test')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">🧪</div>
-                            <div class="workflow-label">單元測試</div>
-                        </div>
-                        <div class="workflow-item" onclick="selectWorkflow(this, 'deploy')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">📦</div>
-                            <div class="workflow-label">構建部署</div>
-                        </div>
-                        <div class="workflow-item" onclick="selectWorkflow(this, 'performance')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">🚀</div>
-                            <div class="workflow-label">性能優化</div>
-                        </div>
-                        <div class="workflow-item" onclick="selectWorkflow(this, 'monitoring')">
-                            <div class="workflow-status"></div>
-                            <div class="workflow-icon">📊</div>
-                            <div class="workflow-label">監控運維</div>
-                        </div>
+                <h2 onclick="toggleWorkflow()" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <span>🎯 六大工作流</span>
+                    <span class="workflow-toggle" id="workflowToggle">▼</span>
+                </h2>
+                <div class="workflow-grid" id="workflowGrid" style="display: none;">
+                    <div class="workflow-item active" onclick="selectWorkflow(this, 'analysis')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🔍</div>
+                        <div class="workflow-label">代碼分析</div>
                     </div>
-                </details>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'refactor')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🛠️</div>
+                        <div class="workflow-label">自動重構</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'test')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🧪</div>
+                        <div class="workflow-label">單元測試</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'deploy')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">📦</div>
+                        <div class="workflow-label">構建部署</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'performance')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">🚀</div>
+                        <div class="workflow-label">性能優化</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow(this, 'monitoring')">
+                        <div class="workflow-status"></div>
+                        <div class="workflow-icon">📊</div>
+                        <div class="workflow-label">監控運維</div>
+                    </div>
+                </div>
             </div>
 
+            <!-- 修复4: 快速工作区功能 -->
+            <div class="quick-actions">
+                <h2>⚡ 快速操作</h2>
+                <button class="action-button primary" onclick="quickAction('analysis')">
+                    <span>🔍 AI 代碼分析</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button success" onclick="quickAction('refactor')">
+                    <span>🛠️ 智能重構</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button info" onclick="quickAction('deploy')">
+                    <span>📦 一鍵部署</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button warning" onclick="quickAction('sync')">
+                    <span>🔄 同步到移動端</span>
+                    <span>→</span>
+                </button>
+                <button class="action-button memory-rag" onclick="openMemoryRAG()">
+                    <span>📊 Memory RAG 監控</span>
+                    <span>🧠</span>
+                </button>
+            </div>
         </div>
 
         <!-- 中間代碼編輯區 -->
@@ -1464,7 +1234,7 @@
             
             <!-- Monaco Editor 容器 -->
             <div class="editor-container" id="editorContainer">
-                <div class="editor-placeholder">
+                <div class="editor-placeholder" id="editorPlaceholder">
                     <div class="placeholder-content">
                         <div class="placeholder-icon">📝</div>
                         <div class="placeholder-title">选择文件开始编辑</div>
@@ -1474,7 +1244,8 @@
                 
                 <!-- 实际的代码编辑器 -->
                 <div class="code-editor" id="codeEditor" style="display: none;">
-                    <div class="editor-content" id="editorContent"></div>
+                    <div class="line-numbers" id="lineNumbers"></div>
+                    <div class="editor-content" id="editorContent" contenteditable="true"></div>
                 </div>
             </div>
             
@@ -1520,6 +1291,7 @@
                         🎯 <strong>立即體驗：</strong><br>
                         點擊左側工作流或快速操作按鈕！
                     </div>
+                </div>
                  <!-- AI助手輸入區 -->
             <div class="input-section">
                 <!-- 文件上传区域 -->
@@ -1578,6 +1350,444 @@
     </div>
 
     <script>
+        // 全局变量
+        let currentFile = null;
+        let currentMode = 'chat';
+        
+        // 模式切换功能
+        function switchMode(mode) {
+            currentMode = mode;
+            const mainContent = document.getElementById('mainContent');
+            const editPanel = document.getElementById('editPanel');
+            const chatPanel = document.getElementById('chatPanel');
+            
+            // 更新导航按钮状态
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(mode + 'Btn').classList.add('active');
+            
+            // 更新布局
+            mainContent.className = `main-content ${mode}-mode`;
+            
+            // 显示/隐藏面板
+            if (mode === 'edit') {
+                editPanel.style.display = 'flex';
+                chatPanel.style.display = 'block';
+            } else if (mode === 'chat') {
+                editPanel.style.display = 'none';
+                chatPanel.style.display = 'block';
+            } else if (mode === 'present') {
+                editPanel.style.display = 'none';
+                chatPanel.style.display = 'none';
+            }
+        }
+        
+        // 文件打开功能
+        function openFile(fileName, fileType, fileSize) {
+            currentFile = { name: fileName, type: fileType, size: fileSize };
+            
+            // 切换到编辑模式
+            switchMode('edit');
+            
+            // 显示文件头部
+            const fileHeader = document.getElementById('fileHeader');
+            const fileIcon = document.getElementById('fileIcon');
+            const fileTitle = document.getElementById('fileTitle');
+            const fileSizeElement = document.getElementById('fileSize');
+            
+            fileHeader.style.display = 'flex';
+            fileTitle.textContent = fileName;
+            fileSizeElement.textContent = fileSize + 'KB';
+            
+            // 设置文件图标
+            const iconMap = {
+                'javascript': '📜',
+                'jsx': '⚛️',
+                'python': '🐍',
+                'html': '🌐',
+                'css': '🎨'
+            };
+            fileIcon.textContent = iconMap[fileType] || '📄';
+            
+            // 隐藏占位符，显示编辑器
+            document.getElementById('editorPlaceholder').style.display = 'none';
+            document.getElementById('codeEditor').style.display = 'flex';
+            document.getElementById('editorStatus').style.display = 'flex';
+            
+            // 加载文件内容
+            loadFileContent(fileName, fileType);
+            
+            // 更新语言模式
+            const languageMode = document.getElementById('languageMode');
+            const languageMap = {
+                'javascript': 'JavaScript',
+                'jsx': 'React JSX',
+                'python': 'Python',
+                'html': 'HTML',
+                'css': 'CSS'
+            };
+            languageMode.textContent = languageMap[fileType] || 'Plain Text';
+            
+            // 发送消息到AI助手
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = `📝 <strong>已打开文件: ${fileName}</strong><br>文件类型: ${languageMap[fileType] || 'Plain Text'}<br>文件大小: ${fileSize}KB<br><br>✨ 编辑器已准备就绪，支持语法高亮和LSP功能！`;
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 加载文件内容
+        function loadFileContent(fileName, fileType) {
+            const editorContent = document.getElementById('editorContent');
+            const lineNumbers = document.getElementById('lineNumbers');
+            
+            // 模拟文件内容
+            let content = '';
+            if (fileType === 'javascript') {
+                content = `// 归纳器 v1.2.0 - 智能内容归纳工具
+class ContentSummarizer {
+    constructor(options = {}) {
+        this.maxLength = options.maxLength || 500;
+        this.language = options.language || 'zh-CN';
+        this.model = options.model || 'claude-3.5-sonnet';
+    }
+    
+    async summarize(content) {
+        try {
+            const response = await this.callAI(content);
+            return this.formatSummary(response);
+        } catch (error) {
+            console.error('归纳失败:', error);
+            throw error;
+        }
+    }
+    
+    async callAI(content) {
+        // AI 调用逻辑
+        return await fetch('/api/summarize', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content, model: this.model })
+        });
+    }
+    
+    formatSummary(response) {
+        return {
+            summary: response.summary,
+            keyPoints: response.keyPoints,
+            confidence: response.confidence
+        };
+    }
+}
+
+export default ContentSummarizer;`;
+            } else if (fileType === 'jsx') {
+                content = `import React, { useState, useEffect } from 'react';
+import './SmartUILayout.css';
+
+const SmartUILayout = ({ children, responsive = true }) => {
+    const [screenSize, setScreenSize] = useState('desktop');
+    const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 768) {
+                setScreenSize('mobile');
+            } else if (width < 1024) {
+                setScreenSize('tablet');
+            } else {
+                setScreenSize('desktop');
+            }
+        };
+        
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        setIsLoading(false);
+        
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    if (isLoading) {
+        return <div className="loading-spinner">加载中...</div>;
+    }
+    
+    return (
+        <div className={\`smart-layout \${screenSize} \${responsive ? 'responsive' : ''}\`}>
+            <header className="layout-header">
+                <h1>SmartUI Layout v2.1</h1>
+            </header>
+            <main className="layout-main">
+                {children}
+            </main>
+            <footer className="layout-footer">
+                <p>© 2024 SmartUI Layout</p>
+            </footer>
+        </div>
+    );
+};
+
+export default SmartUILayout;`;
+            } else if (fileType === 'python') {
+                content = `#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+MCP 协调器核心模块 v3.0
+Multi-Channel Protocol Coordinator
+"""
+
+import asyncio
+import json
+import logging
+from typing import Dict, List, Optional, Any
+from dataclasses import dataclass
+from enum import Enum
+
+class ChannelStatus(Enum):
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    ERROR = "error"
+    MAINTENANCE = "maintenance"
+
+@dataclass
+class Channel:
+    id: str
+    name: str
+    status: ChannelStatus
+    priority: int
+    config: Dict[str, Any]
+
+class MCPCoordinator:
+    """MCP 协调器核心类"""
+    
+    def __init__(self, config_path: str = "mcp_config.json"):
+        self.channels: Dict[str, Channel] = {}
+        self.config_path = config_path
+        self.logger = logging.getLogger(__name__)
+        self._running = False
+        
+    async def initialize(self) -> bool:
+        """初始化协调器"""
+        try:
+            await self._load_config()
+            await self._setup_channels()
+            self._running = True
+            self.logger.info("MCP协调器初始化成功")
+            return True
+        except Exception as e:
+            self.logger.error(f"初始化失败: {e}")
+            return False
+    
+    async def _load_config(self) -> None:
+        """加载配置文件"""
+        with open(self.config_path, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+            
+        for channel_config in config.get('channels', []):
+            channel = Channel(
+                id=channel_config['id'],
+                name=channel_config['name'],
+                status=ChannelStatus.INACTIVE,
+                priority=channel_config.get('priority', 1),
+                config=channel_config
+            )
+            self.channels[channel.id] = channel
+    
+    async def start_coordination(self) -> None:
+        """开始协调工作"""
+        if not self._running:
+            await self.initialize()
+            
+        tasks = []
+        for channel in self.channels.values():
+            if channel.status == ChannelStatus.ACTIVE:
+                task = asyncio.create_task(self._monitor_channel(channel))
+                tasks.append(task)
+        
+        await asyncio.gather(*tasks)
+    
+    async def _monitor_channel(self, channel: Channel) -> None:
+        """监控单个通道"""
+        while self._running:
+            try:
+                # 通道监控逻辑
+                await self._check_channel_health(channel)
+                await asyncio.sleep(5)  # 5秒检查一次
+            except Exception as e:
+                self.logger.error(f"通道 {channel.name} 监控错误: {e}")
+                channel.status = ChannelStatus.ERROR
+    
+    async def _check_channel_health(self, channel: Channel) -> None:
+        """检查通道健康状态"""
+        # 健康检查逻辑
+        pass
+
+if __name__ == "__main__":
+    coordinator = MCPCoordinator()
+    asyncio.run(coordinator.start_coordination())`;
+            }
+            
+            // 应用语法高亮
+            const highlightedContent = applySyntaxHighlighting(content, fileType);
+            editorContent.innerHTML = highlightedContent;
+            
+            // 生成行号
+            const lines = content.split('\n');
+            let lineNumbersHTML = '';
+            for (let i = 1; i <= lines.length; i++) {
+                lineNumbersHTML += `<div>${i}</div>`;
+            }
+            lineNumbers.innerHTML = lineNumbersHTML;
+            
+            // 更新文件统计
+            updateFileStats(content);
+        }
+        
+        // 语法高亮功能
+        function applySyntaxHighlighting(content, fileType) {
+            if (fileType === 'javascript' || fileType === 'jsx') {
+                return content
+                    .replace(/\b(class|function|const|let|var|if|else|for|while|return|import|export|default|async|await|try|catch|throw|new)\b/g, '<span class="syntax-keyword">$1</span>')
+                    .replace(/'([^']*)'|"([^"]*)"/g, '<span class="syntax-string">\'$1$2\'</span>')
+                    .replace(/\/\/.*$/gm, '<span class="syntax-comment">$&</span>')
+                    .replace(/\/\*[\s\S]*?\*\//g, '<span class="syntax-comment">$&</span>')
+                    .replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>')
+                    .replace(/\b([A-Z][a-zA-Z0-9]*)\b/g, '<span class="syntax-function">$1</span>');
+            } else if (fileType === 'python') {
+                return content
+                    .replace(/\b(class|def|if|elif|else|for|while|return|import|from|as|try|except|finally|with|async|await|yield)\b/g, '<span class="syntax-keyword">$1</span>')
+                    .replace(/'([^']*)'|"([^"]*)"/g, '<span class="syntax-string">\'$1$2\'</span>')
+                    .replace(/#.*$/gm, '<span class="syntax-comment">$&</span>')
+                    .replace(/"""[\s\S]*?"""/g, '<span class="syntax-comment">$&</span>')
+                    .replace(/\b(\d+)\b/g, '<span class="syntax-number">$1</span>')
+                    .replace(/\bself\b/g, '<span class="syntax-variable">self</span>');
+            }
+            return content;
+        }
+        
+        // 更新文件统计
+        function updateFileStats(content) {
+            const lines = content.split('\n').length;
+            const chars = content.length;
+            document.getElementById('fileStats').textContent = `${lines} 行, ${chars} 字符`;
+        }
+        
+        // 保存文件
+        function saveFile() {
+            if (!currentFile) return;
+            
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = `💾 <strong>文件已保存: ${currentFile.name}</strong><br>✅ 保存成功<br>🔄 已同步到远程仓库`;
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 关闭文件
+        function closeFile() {
+            currentFile = null;
+            
+            // 隐藏文件头部和编辑器
+            document.getElementById('fileHeader').style.display = 'none';
+            document.getElementById('codeEditor').style.display = 'none';
+            document.getElementById('editorStatus').style.display = 'none';
+            
+            // 显示占位符
+            document.getElementById('editorPlaceholder').style.display = 'flex';
+            
+            // 切换回对话模式
+            switchMode('chat');
+        }
+        
+        // 折叠功能实现
+        function toggleWorkflow() {
+            const grid = document.getElementById('workflowGrid');
+            const toggle = document.getElementById('workflowToggle');
+            
+            if (grid.style.display === 'none') {
+                grid.style.display = 'grid';
+                toggle.textContent = '▲';
+            } else {
+                grid.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        function toggleGitStats() {
+            const content = document.getElementById('gitStatsContent');
+            const toggle = document.getElementById('gitToggle');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                toggle.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        function toggleQuickActions() {
+            const content = document.getElementById('quickActionsContent');
+            const toggle = document.getElementById('quickToggle');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'flex';
+                toggle.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        function toggleFileManagement() {
+            const content = document.getElementById('fileManagementContent');
+            const toggle = document.getElementById('fileToggle');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                toggle.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        function toggleRecentFiles() {
+            const content = document.getElementById('recentFilesContent');
+            const toggle = document.getElementById('recentToggle');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'flex';
+                toggle.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+        
+        // 新建任务功能
+        function createNewTask() {
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = '➕ <strong>新建任務</strong><br>請輸入任務標題和描述...<br>📝 任務類型：開發 | 測試 | 部署 | 文檔<br>⏰ 預計完成時間：請選擇';
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // 显示任务列表功能
+        function showTaskList() {
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = '📋 <strong>任務列表</strong><br><br>🔄 <strong>進行中 (3)</strong><br>• 完善 ClaudeEditor 編輯功能<br>• 優化 Memory RAG 性能<br>• 更新 MCP 協調器<br><br>✅ <strong>已完成 (12)</strong><br>• 部署 v4.7.1 版本<br>• 集成語法高亮功能<br>• 添加文件管理器<br><br>📅 <strong>計劃中 (5)</strong><br>• 移動端適配<br>• 多語言支持';
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
         // 修复4: 快速工作区功能实现
         function quickAction(action) {
             const messages = document.getElementById('messages');
@@ -1615,9 +1825,6 @@
             // 设置当前选中
             element.classList.add('active');
             
-            // 更新代码编辑器内容
-            updateCodeEditor(workflow);
-            
             // 发送消息到AI助手
             const messages = document.getElementById('messages');
             const aiDiv = document.createElement('div');
@@ -1650,13 +1857,6 @@
             messages.scrollTop = messages.scrollHeight;
         }
         
-        // 修复2: 更新代码编辑器内容
-        function updateCodeEditor(workflow) {
-            const codeEditor = document.getElementById('codeEditor');
-            // 这里可以根据不同的工作流显示不同的代码示例
-            // 当前保持现有的Memory RAG代码示例
-        }
-        
         function openMemoryRAG() {
             document.getElementById('memoryRAGModal').style.display = 'block';
         }
@@ -1675,80 +1875,40 @@
         
         function sendMessage() {
             const input = document.getElementById('userInput');
-            const message = input.value.trim();
-            
-            if (!message && uploadedFiles.length === 0) return;
-            
             const messages = document.getElementById('messages');
+            const userMessage = input.value.trim();
             
-            // 用户消息
+            if (!userMessage) return;
+            
+            // 添加用户消息
             const userDiv = document.createElement('div');
             userDiv.className = 'message user';
-            
-            let messageContent = message || '发送了文件';
-            
-            // 如果有上传的文件，显示文件信息
-            if (uploadedFiles.length > 0) {
-                messageContent += '<br><br>📎 <strong>附件:</strong><br>';
-                uploadedFiles.forEach(fileData => {
-                    messageContent += `${fileData.type} ${fileData.name} (${fileData.size})<br>`;
-                });
-            }
-            
-            userDiv.innerHTML = messageContent;
+            userDiv.textContent = userMessage;
             messages.appendChild(userDiv);
             
-            // AI回复
+            // 模拟 AI 回应
             setTimeout(() => {
                 const aiDiv = document.createElement('div');
                 aiDiv.className = 'message ai';
                 
-                let aiResponse = '✅ <strong>已收到您的消息</strong><br>';
-                
-                if (uploadedFiles.length > 0) {
-                    aiResponse += `📎 <strong>文件分析:</strong><br>`;
-                    aiResponse += `• 共收到 ${uploadedFiles.length} 个文件<br>`;
-                    
-                    const imageFiles = uploadedFiles.filter(f => f.type === '🖼️');
-                    const codeFiles = uploadedFiles.filter(f => ['📜', '⚛️', '🐍', '🌐', '🎨'].includes(f.type));
-                    const docFiles = uploadedFiles.filter(f => f.type === '📄');
-                    
-                    if (imageFiles.length > 0) {
-                        aiResponse += `• ${imageFiles.length} 个图片文件 - 可进行图像识别和分析<br>`;
-                    }
-                    if (codeFiles.length > 0) {
-                        aiResponse += `• ${codeFiles.length} 个代码文件 - 可进行代码审查和优化建议<br>`;
-                    }
-                    if (docFiles.length > 0) {
-                        aiResponse += `• ${docFiles.length} 个文档文件 - 可进行内容提取和分析<br>`;
-                    }
-                    
-                    aiResponse += '<br>🔍 <strong>分析建议:</strong><br>';
-                    aiResponse += '• 请告诉我您希望对这些文件进行什么类型的分析<br>';
-                    aiResponse += '• 我可以帮您进行代码审查、图像识别、文档总结等';
+                let response = '';
+                if (userMessage.includes('Memory RAG') || userMessage.includes('記憶') || userMessage.includes('memory')) {
+                    response = '🧠 Memory RAG 系統狀態：<br><br>✅ 個性化學習：94% 準確率<br>📊 緩存命中率：92%<br>⚡ 平均響應時間：0.85s<br>🎯 智能路由：4 個 Provider 活躍<br><br>💡 建議：點擊左側 "Memory RAG 監控" 查看詳細洞察！';
+                } else if (userMessage.includes('工作流') || userMessage.includes('workflow')) {
+                    response = '🎯 六大工作流已就緒：<br><br>🔍 代碼分析 - 智能質量檢測<br>🛠️ 自動重構 - 現代化升級<br>🧪 單元測試 - 自動生成測試<br>📦 構建部署 - CI/CD 自動化<br>🚀 性能優化 - 瓶頸分析<br>📊 監控運維 - Memory RAG 增強<br><br>點擊任意工作流開始使用！';
+                } else if (userMessage.includes('文件') || userMessage.includes('编辑') || userMessage.includes('file')) {
+                    response = '📝 <strong>文件编辑功能：</strong><br><br>✅ 支持多种文件类型：JavaScript、React JSX、Python、HTML、CSS<br>✅ 完整的语法高亮和LSP支持<br>✅ 实时行号和状态显示<br>✅ 智能代码补全<br><br>💡 <strong>使用方法：</strong><br>点击左侧"最近部署文件"中的任意文件即可开始编辑！';
+                } else {
+                    response = `💡 收到您的需求："${userMessage}"<br><br>🤖 正在調用最適合的 AI 模型...<br>⚡ Memory RAG 智能分析中...<br>🔄 同步到您的移動設備...<br><br>✨ PowerAutomation v4.7.1 為您服務！`;
                 }
                 
-                if (message) {
-                    if (message.includes('Memory RAG') || message.includes('記憶') || message.includes('memory')) {
-                        aiResponse = '🧠 Memory RAG 系統狀態：<br><br>✅ 個性化學習：94% 準確率<br>📊 緩存命中率：92%<br>⚡ 平均響應時間：0.85s<br>🎯 智能路由：4 個 Provider 活躍<br><br>💡 建議：點擊左側 "Memory RAG 監控" 查看詳細洞察！';
-                    } else if (message.includes('工作流') || message.includes('workflow')) {
-                        aiResponse = '🎯 六大工作流已就緒：<br><br>🔍 代碼分析 - 智能質量檢測<br>🛠️ 自動重構 - 現代化升級<br>🧪 單元測試 - 自動生成測試<br>📦 構建部署 - CI/CD 自動化<br>🚀 性能優化 - 瓶頸分析<br>📊 監控運維 - Memory RAG 增強<br><br>點擊任意工作流開始使用！';
-                    } else {
-                        aiResponse += `<br><br>💬 <strong>关于您的需求:</strong><br>${message}<br>我正在为您准备详细的解决方案...`;
-                    }
-                }
-                
-                aiDiv.innerHTML = aiResponse;
+                aiDiv.innerHTML = response;
                 messages.appendChild(aiDiv);
                 messages.scrollTop = messages.scrollHeight;
             }, 1000);
             
             input.value = '';
             messages.scrollTop = messages.scrollHeight;
-            
-            // 清空上传的文件
-            clearFiles();
-            document.getElementById('fileUploadArea').style.display = 'none';
         }
         
         // 回车发送
@@ -1767,7 +1927,6 @@
             uploadArea.style.display = isVisible ? 'none' : 'block';
             
             if (!isVisible) {
-                // 设置拖拽事件
                 setupDragAndDrop();
             }
         }
@@ -1776,15 +1935,12 @@
             const uploadArea = document.getElementById('fileUploadArea');
             const fileInput = document.getElementById('fileInput');
             
-            // 点击上传区域触发文件选择
             uploadArea.addEventListener('click', () => {
                 fileInput.click();
             });
             
-            // 文件选择事件
             fileInput.addEventListener('change', handleFileSelect);
             
-            // 拖拽事件
             uploadArea.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 uploadArea.classList.add('dragover');
@@ -1810,7 +1966,7 @@
         
         function handleFiles(files) {
             for (let file of files) {
-                if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                if (file.size > 10 * 1024 * 1024) {
                     alert(`文件 ${file.name} 超过10MB限制`);
                     continue;
                 }
@@ -1879,57 +2035,52 @@
             document.getElementById('fileInput').value = '';
         }
         
-        // AI 模型切换功能
-        function switchModel(model) {
-            // 更新按钮状态
-            document.querySelectorAll('.model-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.closest('.model-btn').classList.add('active');
-            
-            // 更新当前模型显示
-            const currentModelElement = document.getElementById('currentModel');
-            if (model === 'k2') {
-                currentModelElement.textContent = 'Kimi-K2-Advanced';
-            } else {
-                currentModelElement.textContent = 'Claude-3.5-Sonnet';
-            }
-            
-            // 更新上次切换时间
-            document.getElementById('lastSwitch').textContent = '刚刚';
-            
-            // 发送消息到AI助手
+        // 其他功能函数
+        function openFileManager() {
             const messages = document.getElementById('messages');
             const aiDiv = document.createElement('div');
             aiDiv.className = 'message ai';
-            aiDiv.innerHTML = `🔄 <strong>AI模型已切换</strong><br>当前模型: ${currentModelElement.textContent}<br>✅ 切换成功，开始使用新模型`;
+            aiDiv.innerHTML = '📂 <strong>文件管理器已打开</strong><br>正在扫描本地文件夹...<br>✅ 发现 15 个项目文件夹<br>📁 选择文件夹开始编辑';
             messages.appendChild(aiDiv);
             messages.scrollTop = messages.scrollHeight;
         }
         
-        // 模拟Token统计更新
-        setInterval(() => {
-            const savedTokens = document.getElementById('savedTokens');
-            const totalTokens = document.getElementById('totalTokens');
-            const efficiencyRate = document.getElementById('efficiencyRate');
-            
-            if (savedTokens && totalTokens && efficiencyRate) {
-                const currentSaved = parseInt(savedTokens.textContent.replace(/,/g, ''));
-                const currentTotal = parseInt(totalTokens.textContent.replace(/,/g, ''));
-                
-                const newSaved = currentSaved + Math.floor(Math.random() * 10);
-                const newTotal = currentTotal + Math.floor(Math.random() * 20);
-                const newRate = ((newSaved / newTotal) * 100).toFixed(1);
-                
-                savedTokens.textContent = newSaved.toLocaleString();
-                totalTokens.textContent = newTotal.toLocaleString();
-                efficiencyRate.textContent = newRate + '%';
-            }
-        }, 10000);
+        function cloneRepository() {
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = '🔄 <strong>Git仓库克隆</strong><br>请输入仓库URL...<br>🌐 支持GitHub、GitLab、Bitbucket<br>📦 自动安装依赖';
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
         
-        // 模拟实时数据更新新
+        function connectRemote() {
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = '💻 <strong>远程主机连接</strong><br>正在建立SSH连接...<br>🔐 安全连接已建立<br>⚡ 远程编辑已就绪';
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        function executeCommand() {
+            const commandInput = document.getElementById('commandInput');
+            const command = commandInput.value.trim();
+            
+            if (!command) return;
+            
+            const messages = document.getElementById('messages');
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'message ai';
+            aiDiv.innerHTML = `⚡ <strong>执行命令: ${command}</strong><br>正在执行...<br>✅ 命令执行成功<br>📊 输出已显示在终端`;
+            messages.appendChild(aiDiv);
+            messages.scrollTop = messages.scrollHeight;
+            
+            commandInput.value = '';
+        }
+        
+        // 模拟实时数据更新
         setInterval(() => {
-            // 更新积分 - 使用合理范围
             const scoreElement = document.querySelector('.status-card .status-value');
             if (scoreElement) {
                 const baseScore = 2847;
@@ -1950,278 +2101,6 @@
             }
         `;
         document.head.appendChild(style);
-        
-        // 文件点击编辑功能
-        function openFile(filename, language, size) {
-            console.log('Opening file:', filename, language, size);
-            
-            // 切换到编辑模式
-            switchMode('edit');
-            
-            // 更新文件标题栏
-            const fileHeader = document.getElementById('fileHeader');
-            const fileIcon = document.getElementById('fileIcon');
-            const fileTitle = document.getElementById('fileTitle');
-            const fileSize = document.getElementById('fileSize');
-            
-            if (fileHeader && fileIcon && fileTitle && fileSize) {
-                fileHeader.style.display = 'flex';
-                
-                // 设置文件图标
-                const iconMap = {
-                    'javascript': '📜',
-                    'jsx': '⚛️',
-                    'python': '🐍',
-                    'html': '🌐',
-                    'css': '🎨'
-                };
-                fileIcon.textContent = iconMap[language] || '📄';
-                
-                // 设置文件名和大小
-                fileTitle.textContent = filename;
-                fileSize.textContent = `${size}KB`;
-            }
-            
-            // 创建Monaco Editor
-            const editorContainer = document.getElementById('editorContainer');
-            if (editorContainer) {
-                editorContainer.innerHTML = `
-                    <div class="editor-content">
-                        <div class="editor-header">
-                            <span class="editor-language">${language}</span>
-                            <span class="editor-filename">${filename}</span>
-                        </div>
-                        <div id="monacoEditor" style="height: 400px; border: 1px solid #ddd;"></div>
-                    </div>
-                `;
-                
-                // 初始化Monaco Editor
-                require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' }});
-                require(['vs/editor/editor.main'], function() {
-                    // 示例代码内容
-                    const sampleCode = {
-                        'javascript': `// ${filename}
-// 文件大小: ${size}KB
-// 语言: ${language}
-
-function example() {
-    console.log('Hello from ${filename}');
-    return 'File loaded successfully';
-}
-
-// 编辑器已就绪，可以开始编辑代码
-example();`,
-                        'python': `# ${filename}
-# 文件大小: ${size}KB
-# 语言: ${language}
-
-def example():
-    print(f'Hello from ${filename}')
-    return 'File loaded successfully'
-
-# 编辑器已就绪，可以开始编辑代码
-if __name__ == "__main__":
-    example()`,
-                        'jsx': `// ${filename}
-// 文件大小: ${size}KB
-// 语言: ${language}
-
-import React from 'react';
-
-function ExampleComponent() {
-    return (
-        <div>
-            <h1>Hello from ${filename}</h1>
-            <p>File loaded successfully</p>
-        </div>
-    );
-}
-
-export default ExampleComponent;`
-                    };
-                    
-                    const code = sampleCode[language] || sampleCode['javascript'];
-                    
-                    window.monacoEditor = monaco.editor.create(document.getElementById('monacoEditor'), {
-                        value: code,
-                        language: language === 'jsx' ? 'javascript' : language,
-                        theme: 'vs-dark',
-                        fontSize: 14,
-                        lineNumbers: 'on',
-                        roundedSelection: false,
-                        scrollBeyondLastLine: false,
-                        readOnly: false,
-                        automaticLayout: true,
-                        minimap: { enabled: true },
-                        wordWrap: 'on',
-                        folding: true,
-                        lineNumbersMinChars: 3,
-                        scrollbar: {
-                            vertical: 'visible',
-                            horizontal: 'visible'
-                        }
-                    });
-                });
-            }
-            
-            // 发送消息到AI助手
-            const messages = document.getElementById('messages');
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            aiDiv.innerHTML = `📝 <strong>文件已打开</strong><br>文件名: ${filename}<br>语言: ${language}<br>大小: ${size}KB<br><br>✅ 编辑器已就绪，您可以开始编辑代码！`;
-            messages.appendChild(aiDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        
-        // 模式切换功能
-        function switchMode(mode) {
-            console.log('Switching to mode:', mode);
-            
-            // 更新导航按钮状态
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            const editPanel = document.getElementById('editPanel');
-            const chatPanel = document.getElementById('chatPanel');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (mode === 'edit') {
-                // 激活编辑按钮
-                const editBtn = document.querySelector('button[onclick*="edit"], button:first-child');
-                if (editBtn) {
-                    editBtn.classList.add('active');
-                }
-                
-                // 切换到编辑模式布局
-                if (mainContent) {
-                    mainContent.className = 'main-content edit-mode';
-                }
-                
-                // 显示编辑面板
-                if (editPanel) {
-                    editPanel.style.display = 'block';
-                }
-                
-                // 隐藏AI助手对话面板
-                if (chatPanel) {
-                    chatPanel.style.display = 'none';
-                }
-                
-            } else if (mode === 'chat') {
-                // 激活对话按钮
-                const chatBtn = document.querySelector('button[onclick*="chat"], button:last-child');
-                if (chatBtn) {
-                    chatBtn.classList.add('active');
-                }
-                
-                // 切换到对话模式布局
-                if (mainContent) {
-                    mainContent.className = 'main-content chat-mode';
-                }
-                
-                // 隐藏编辑面板
-                if (editPanel) {
-                    editPanel.style.display = 'none';
-                }
-                
-                // 显示AI助手对话面板
-                if (chatPanel) {
-                    chatPanel.style.display = 'block';
-                }
-            }
-        }
-        
-        // 文件管理功能
-        function openFileManager() {
-            const messages = document.getElementById('messages');
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            aiDiv.innerHTML = '📂 <strong>文件管理器</strong><br>正在打开文件浏览器...<br>✅ 您可以浏览和选择文件进行编辑';
-            messages.appendChild(aiDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        
-        // 保存文件功能
-        function saveFile() {
-            const fileTitle = document.getElementById('fileTitle');
-            const filename = fileTitle ? fileTitle.textContent : '未知文件';
-            
-            const messages = document.getElementById('messages');
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            aiDiv.innerHTML = `💾 <strong>文件已保存</strong><br>文件名: ${filename}<br>✅ 保存成功！`;
-            messages.appendChild(aiDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        
-        // 关闭文件功能
-        function closeFile() {
-            const fileHeader = document.getElementById('fileHeader');
-            const editorContainer = document.getElementById('editorContainer');
-            
-            if (fileHeader) {
-                fileHeader.style.display = 'none';
-            }
-            
-            if (editorContainer) {
-                editorContainer.innerHTML = `
-                    <div class="editor-placeholder">
-                        <div class="placeholder-content">
-                            <div class="placeholder-icon">📝</div>
-                            <div class="placeholder-title">选择文件开始编辑</div>
-                            <div class="placeholder-subtitle">从左侧文件列表选择文件，或创建新文件</div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // 切换回对话模式
-            switchMode('chat');
-            
-            const messages = document.getElementById('messages');
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            aiDiv.innerHTML = '✅ <strong>文件已关闭</strong><br>编辑器已重置，您可以选择其他文件继续编辑';
-            messages.appendChild(aiDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        
-        // AI模型切换功能
-        function switchModel(model) {
-            console.log('Switching to model:', model);
-            
-            // 更新按钮状态
-            document.querySelectorAll('.model-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // 激活选中的模型按钮
-            const modelBtns = document.querySelectorAll('.model-btn');
-            if (model === 'k2' && modelBtns[0]) {
-                modelBtns[0].classList.add('active');
-                // 更新当前模型信息
-                const modelInfo = document.querySelector('.info-value');
-                if (modelInfo) {
-                    modelInfo.textContent = 'K2-Advanced';
-                }
-            } else if (model === 'claude' && modelBtns[1]) {
-                modelBtns[1].classList.add('active');
-                // 更新当前模型信息
-                const modelInfo = document.querySelector('.info-value');
-                if (modelInfo) {
-                    modelInfo.textContent = 'Claude-3.5-Sonnet';
-                }
-            }
-            
-            // 发送切换消息到AI助手
-            const messages = document.getElementById('messages');
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            aiDiv.innerHTML = `🤖 <strong>AI模型已切换</strong><br>当前模型: ${model === 'k2' ? 'K2-Advanced' : 'Claude-3.5-Sonnet'}<br>✅ 模型切换成功！`;
-            messages.appendChild(aiDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
     </script>
 </body>
 </html>
