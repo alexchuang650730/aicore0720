@@ -1,0 +1,89 @@
+{
+  "test_summary": {
+    "total_tests": 13,
+    "passed_tests": 11,
+    "failed_tests": 2,
+    "success_rate": 84.61538461538461
+  },
+  "test_results": [
+    {
+      "test_name": "路由指令: /help",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.95)",
+      "timestamp": "2025-07-15T06:14:16.564687"
+    },
+    {
+      "test_name": "路由指令: /status",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.95)",
+      "timestamp": "2025-07-15T06:14:16.564741"
+    },
+    {
+      "test_name": "路由指令: /add-dir /test/path",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.30)",
+      "timestamp": "2025-07-15T06:14:16.564791"
+    },
+    {
+      "test_name": "路由指令: /review code.py",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.90)",
+      "timestamp": "2025-07-15T06:14:16.564831"
+    },
+    {
+      "test_name": "路由指令: /chat 请解释代码",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.30)",
+      "timestamp": "2025-07-15T06:14:16.564886"
+    },
+    {
+      "test_name": "路由指令: /unknown-command",
+      "passed": true,
+      "details": "✅ 路由到 k2_local (置信度: 0.50)",
+      "timestamp": "2025-07-15T06:14:16.564928"
+    },
+    {
+      "test_name": "智能路由器统计",
+      "passed": true,
+      "details": "✅ 统计正常: 6 个请求",
+      "timestamp": "2025-07-15T06:14:16.564942"
+    },
+    {
+      "test_name": "K2 /add-dir",
+      "passed": true,
+      "details": "✅ 目录添加功能正常",
+      "timestamp": "2025-07-15T06:14:16.570959"
+    },
+    {
+      "test_name": "K2 /chat",
+      "passed": true,
+      "details": "✅ 聊天功能正常",
+      "timestamp": "2025-07-15T06:14:16.671271"
+    },
+    {
+      "test_name": "K2 /ask",
+      "passed": true,
+      "details": "✅ 问答功能正常",
+      "timestamp": "2025-07-15T06:14:16.771679"
+    },
+    {
+      "test_name": "K2 未知指令处理",
+      "passed": true,
+      "details": "✅ 未知指令处理正常",
+      "timestamp": "2025-07-15T06:14:16.771712"
+    },
+    {
+      "test_name": "Command MCP集成测试",
+      "passed": false,
+      "details": "❌ 测试失败: unexpected indent (command_manager.py, line 850)",
+      "timestamp": "2025-07-15T06:14:16.781089"
+    },
+    {
+      "test_name": "Claude Code去除测试",
+      "passed": false,
+      "details": "❌ 测试失败: unexpected indent (command_manager.py, line 850)",
+      "timestamp": "2025-07-15T06:14:16.789392"
+    }
+  ],
+  "test_timestamp": "2025-07-15T06:14:16.789601"
+}

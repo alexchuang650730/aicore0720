@@ -8,6 +8,9 @@
     <!-- Monaco Editor CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
     
+    <!-- Core Dependency Checker -->
+    <script src="core_dependency_check.js"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -1766,11 +1769,6 @@ console.log("语言类型: ${language}");`;
         function openFolder() {
             console.log('打开文件夹按钮被点击');
             
-            // 自动切换到对话模式
-            if (currentMode !== 'chat') {
-                switchMode('chat');
-            }
-            
             const folderHtml = `
                 <div class="folder-browser">
                     <h3>📂 打开文件夹</h3>
@@ -1888,11 +1886,6 @@ console.log("语言类型: ${language}");`;
         
         function cloneRepository() {
             console.log('克隆Git仓库按钮被点击');
-            
-            // 自动切换到对话模式
-            if (currentMode !== 'chat') {
-                switchMode('chat');
-            }
             
             const gitHtml = `
                 <div class="git-clone">
@@ -2014,11 +2007,6 @@ console.log("语言类型: ${language}");`;
         
         function connectRemote() {
             console.log('连接远程主机按钮被点击');
-            
-            // 自动切换到对话模式
-            if (currentMode !== 'chat') {
-                switchMode('chat');
-            }
             
             const sshHtml = `
                 <div class="ssh-connection">
@@ -2148,11 +2136,6 @@ console.log("语言类型: ${language}");`;
         
         function connectLocalTerminal() {
             console.log('连接本地终端按钮被点击');
-            
-            // 自动切换到对话模式
-            if (currentMode !== 'chat') {
-                switchMode('chat');
-            }
             
             // 自动检测平台
             const platform = detectPlatform();
@@ -2523,8 +2506,21 @@ console.log("语言类型: ${language}");`;
         }
         
         // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             console.log('ClaudeEditor v4.7.3 初始化中...');
+            
+            // 🔗 强制检查core依赖 - 这是强绑定的关键
+            console.log('🔍 检查Core依赖...');
+            const coreCheck = await window.coreDependencyChecker.checkCoreAvailability();
+            
+            if (coreCheck.status === 'error') {
+                console.error('❌ Core依赖检查失败:', coreCheck.message);
+                window.coreDependencyChecker.showCoreError(coreCheck);
+                return; // 停止初始化，强制用户修复core依赖
+            }
+            
+            console.log('✅ Core依赖检查通过:', coreCheck.message);
+            console.log('📦 Core版本:', coreCheck.coreVersion);
             
             // 绑定按钮事件 - 确保按钮能正常工作
             const openFolderBtn = document.getElementById('openFolderBtn');
