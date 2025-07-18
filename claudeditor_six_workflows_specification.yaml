@@ -1,0 +1,785 @@
+# ClaudeEditor 六大工作流規格定義
+# 用於 MCP 整合和 AG-UI SmartUI 生成
+version: "1.0"
+updated: "2025-01-18"
+
+# 六大工作流核心定義
+workflows:
+  # 工作流1：目標驅動開發
+  goal_driven_development:
+    id: "workflow_1"
+    name: "目標驅動開發"
+    icon: "🎯"
+    description: "確保開發始終對齊用戶目標，防止功能偏離"
+    priority: 1
+    
+    # UI 規格
+    ui_specification:
+      position: "left_panel_top"
+      color_scheme:
+        primary: "#4CAF50"
+        secondary: "#81C784"
+        accent: "#388E3C"
+      
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "目標驅動開發"
+            subtitle: "精準對齊用戶需求"
+            expandable: true
+            
+        - type: "progress_indicator"
+          properties:
+            style: "circular"
+            show_percentage: true
+            
+        - type: "alignment_meter"
+          properties:
+            min: 0
+            max: 100
+            warning_threshold: 60
+            critical_threshold: 40
+    
+    # MCP 工具整合
+    mcp_tools:
+      - tool_id: "goal_analyzer"
+        name: "目標分析器"
+        provider: "aci.dev"
+        capabilities:
+          - "需求解析"
+          - "目標量化"
+          - "驗收標準生成"
+          
+      - tool_id: "deviation_detector"
+        name: "偏離檢測器"
+        provider: "mcp.so"
+        capabilities:
+          - "實時偏離監測"
+          - "智能糾偏建議"
+          - "風險預警"
+    
+    # 工作流階段
+    stages:
+      - id: "goal_analysis"
+        name: "目標分析"
+        description: "深入理解用戶需求和業務目標"
+        required_inputs:
+          - "user_requirements"
+          - "business_context"
+          - "success_criteria"
+        outputs:
+          - "structured_goals"
+          - "measurable_objectives"
+          - "risk_assessment"
+        validation_rules:
+          - "目標必須可測量"
+          - "需求必須明確"
+          - "驗收標準必須完整"
+          
+      - id: "requirement_decomposition"
+        name: "需求分解"
+        description: "將目標分解為可執行的任務"
+        required_inputs:
+          - "structured_goals"
+          - "technical_constraints"
+        outputs:
+          - "task_breakdown"
+          - "dependency_graph"
+          - "priority_matrix"
+          
+      - id: "implementation_planning"
+        name: "實施規劃"
+        description: "制定詳細的開發計劃"
+        required_inputs:
+          - "task_breakdown"
+          - "resource_availability"
+        outputs:
+          - "development_roadmap"
+          - "milestone_schedule"
+          - "resource_allocation"
+          
+      - id: "development_execution"
+        name: "開發執行"
+        description: "按照目標進行實際開發"
+        required_inputs:
+          - "development_roadmap"
+          - "coding_standards"
+        outputs:
+          - "source_code"
+          - "unit_tests"
+          - "documentation"
+        real_time_monitoring:
+          - "code_quality_metrics"
+          - "goal_alignment_score"
+          - "progress_tracking"
+          
+      - id: "goal_validation"
+        name: "目標驗證"
+        description: "驗證開發成果是否達成目標"
+        required_inputs:
+          - "completed_features"
+          - "success_criteria"
+        outputs:
+          - "validation_report"
+          - "gap_analysis"
+          - "improvement_suggestions"
+    
+    # 測試用例
+    test_cases:
+      - id: "tc_goal_alignment_01"
+        name: "目標對齊度測試"
+        type: "automated"
+        steps:
+          - "創建測試目標"
+          - "執行開發流程"
+          - "檢查對齊度分數"
+        expected_result: "對齊度 >= 80%"
+        
+      - id: "tc_deviation_detection_01"
+        name: "偏離檢測測試"
+        type: "automated"
+        steps:
+          - "設置目標參數"
+          - "模擬偏離場景"
+          - "驗證檢測準確性"
+        expected_result: "偏離檢測準確率 >= 95%"
+
+  # 工作流2：智能代碼生成
+  intelligent_code_generation:
+    id: "workflow_2"
+    name: "智能代碼生成"
+    icon: "🤖"
+    description: "AI 驅動的高質量代碼生成"
+    priority: 2
+    
+    ui_specification:
+      position: "left_panel_second"
+      color_scheme:
+        primary: "#2196F3"
+        secondary: "#64B5F6"
+        accent: "#1976D2"
+        
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "智能代碼生成"
+            subtitle: "AI 加速開發效率"
+            expandable: true
+            
+        - type: "code_preview"
+          properties:
+            syntax_highlighting: true
+            max_lines: 20
+            
+        - type: "quality_badge"
+          properties:
+            metrics: ["complexity", "maintainability", "coverage"]
+    
+    mcp_tools:
+      - tool_id: "code_generator"
+        name: "代碼生成器"
+        provider: "mcp.so"
+        capabilities:
+          - "多語言支持"
+          - "設計模式應用"
+          - "最佳實踐遵循"
+          
+      - tool_id: "code_optimizer"
+        name: "代碼優化器"
+        provider: "aci.dev"
+        capabilities:
+          - "性能優化"
+          - "可讀性提升"
+          - "安全漏洞修復"
+    
+    stages:
+      - id: "specification_analysis"
+        name: "規格分析"
+        description: "分析代碼生成需求"
+        required_inputs:
+          - "functional_requirements"
+          - "technical_specifications"
+          - "coding_standards"
+        outputs:
+          - "code_blueprint"
+          - "architecture_design"
+          
+      - id: "code_generation"
+        name: "代碼生成"
+        description: "使用 AI 生成代碼"
+        required_inputs:
+          - "code_blueprint"
+          - "language_preference"
+        outputs:
+          - "generated_code"
+          - "unit_tests"
+          - "documentation"
+        quality_checks:
+          - "syntax_validation"
+          - "logic_verification"
+          - "security_scanning"
+          
+      - id: "code_optimization"
+        name: "代碼優化"
+        description: "優化生成的代碼"
+        required_inputs:
+          - "generated_code"
+          - "performance_targets"
+        outputs:
+          - "optimized_code"
+          - "performance_metrics"
+          - "optimization_report"
+          
+      - id: "code_review"
+        name: "代碼審查"
+        description: "AI 輔助代碼審查"
+        required_inputs:
+          - "optimized_code"
+          - "review_criteria"
+        outputs:
+          - "review_report"
+          - "improvement_suggestions"
+          - "approval_status"
+    
+    test_cases:
+      - id: "tc_code_quality_01"
+        name: "代碼質量測試"
+        type: "automated"
+        steps:
+          - "生成測試代碼"
+          - "運行質量檢查"
+          - "驗證指標達標"
+        expected_result: "質量分數 >= 85"
+
+  # 工作流3：自動化測試驗證
+  automated_testing_validation:
+    id: "workflow_3"
+    name: "自動化測試驗證"
+    icon: "✅"
+    description: "全面的自動化測試覆蓋"
+    priority: 3
+    
+    ui_specification:
+      position: "left_panel_third"
+      color_scheme:
+        primary: "#FF9800"
+        secondary: "#FFB74D"
+        accent: "#F57C00"
+        
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "自動化測試"
+            subtitle: "確保代碼質量"
+            expandable: true
+            
+        - type: "test_coverage_chart"
+          properties:
+            chart_type: "donut"
+            show_legend: true
+            
+        - type: "test_results_panel"
+          properties:
+            show_passed: true
+            show_failed: true
+            show_skipped: false
+    
+    mcp_tools:
+      - tool_id: "test_generator"
+        name: "測試生成器"
+        provider: "mcp.so"
+        capabilities:
+          - "測試用例生成"
+          - "邊界條件識別"
+          - "測試數據生成"
+          
+      - tool_id: "test_runner"
+        name: "測試執行器"
+        provider: "zapier"
+        capabilities:
+          - "並行執行"
+          - "跨平台測試"
+          - "結果聚合"
+    
+    stages:
+      - id: "test_planning"
+        name: "測試規劃"
+        description: "制定測試策略"
+        required_inputs:
+          - "feature_specifications"
+          - "risk_assessment"
+        outputs:
+          - "test_strategy"
+          - "test_scenarios"
+          - "coverage_targets"
+          
+      - id: "test_case_generation"
+        name: "測試用例生成"
+        description: "自動生成測試用例"
+        required_inputs:
+          - "test_scenarios"
+          - "code_analysis"
+        outputs:
+          - "test_cases"
+          - "test_data"
+          - "expected_results"
+          
+      - id: "test_execution"
+        name: "測試執行"
+        description: "執行自動化測試"
+        required_inputs:
+          - "test_cases"
+          - "test_environment"
+        outputs:
+          - "test_results"
+          - "coverage_report"
+          - "defect_list"
+        parallel_execution: true
+        
+      - id: "result_analysis"
+        name: "結果分析"
+        description: "分析測試結果"
+        required_inputs:
+          - "test_results"
+          - "quality_thresholds"
+        outputs:
+          - "analysis_report"
+          - "quality_metrics"
+          - "improvement_areas"
+    
+    test_cases:
+      - id: "tc_coverage_01"
+        name: "覆蓋率測試"
+        type: "automated"
+        steps:
+          - "執行全量測試"
+          - "計算覆蓋率"
+          - "驗證達標情況"
+        expected_result: "覆蓋率 >= 80%"
+
+  # 工作流4：持續質量保證
+  continuous_quality_assurance:
+    id: "workflow_4"
+    name: "持續質量保證"
+    icon: "🔍"
+    description: "持續監控和改進代碼質量"
+    priority: 4
+    
+    ui_specification:
+      position: "left_panel_fourth"
+      color_scheme:
+        primary: "#9C27B0"
+        secondary: "#BA68C8"
+        accent: "#7B1FA2"
+        
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "質量保證"
+            subtitle: "持續改進"
+            expandable: true
+            
+        - type: "quality_dashboard"
+          properties:
+            metrics: ["code_quality", "security", "performance"]
+            refresh_interval: 60
+            
+        - type: "trend_chart"
+          properties:
+            time_range: "7d"
+            show_predictions: true
+    
+    mcp_tools:
+      - tool_id: "quality_analyzer"
+        name: "質量分析器"
+        provider: "mcp.so"
+        capabilities:
+          - "代碼質量分析"
+          - "安全漏洞掃描"
+          - "性能瓶頸檢測"
+          
+      - tool_id: "improvement_advisor"
+        name: "改進顧問"
+        provider: "aci.dev"
+        capabilities:
+          - "改進建議生成"
+          - "最佳實踐推薦"
+          - "技術債務管理"
+    
+    stages:
+      - id: "quality_baseline"
+        name: "質量基線"
+        description: "建立質量標準"
+        required_inputs:
+          - "project_requirements"
+          - "industry_standards"
+        outputs:
+          - "quality_criteria"
+          - "measurement_metrics"
+          - "threshold_values"
+          
+      - id: "continuous_monitoring"
+        name: "持續監控"
+        description: "實時監控質量指標"
+        required_inputs:
+          - "source_code"
+          - "quality_criteria"
+        outputs:
+          - "quality_metrics"
+          - "violation_alerts"
+          - "trend_analysis"
+        real_time: true
+        
+      - id: "quality_gates"
+        name: "質量門禁"
+        description: "質量檢查點"
+        required_inputs:
+          - "quality_metrics"
+          - "threshold_values"
+        outputs:
+          - "gate_status"
+          - "blocking_issues"
+          - "remediation_plan"
+          
+      - id: "improvement_implementation"
+        name: "改進實施"
+        description: "實施質量改進"
+        required_inputs:
+          - "improvement_suggestions"
+          - "priority_ranking"
+        outputs:
+          - "improved_code"
+          - "improvement_report"
+          - "lessons_learned"
+    
+    test_cases:
+      - id: "tc_quality_gate_01"
+        name: "質量門禁測試"
+        type: "automated"
+        steps:
+          - "設置質量標準"
+          - "提交代碼變更"
+          - "驗證門禁攔截"
+        expected_result: "正確攔截低質量代碼"
+
+  # 工作流5：智能部署運維
+  smart_deployment_operations:
+    id: "workflow_5"
+    name: "智能部署運維"
+    icon: "🚀"
+    description: "自動化部署和智能運維"
+    priority: 5
+    
+    ui_specification:
+      position: "left_panel_fifth"
+      color_scheme:
+        primary: "#00BCD4"
+        secondary: "#4DD0E1"
+        accent: "#0097A7"
+        
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "智能部署"
+            subtitle: "一鍵部署運維"
+            expandable: true
+            
+        - type: "deployment_status"
+          properties:
+            show_environments: ["dev", "staging", "prod"]
+            show_health_status: true
+            
+        - type: "rollback_control"
+          properties:
+            quick_rollback: true
+            version_history: 10
+    
+    mcp_tools:
+      - tool_id: "deployment_orchestrator"
+        name: "部署編排器"
+        provider: "zapier"
+        capabilities:
+          - "多環境部署"
+          - "藍綠部署"
+          - "金絲雀發布"
+          
+      - tool_id: "ops_monitor"
+        name: "運維監控器"
+        provider: "mcp.so"
+        capabilities:
+          - "實時監控"
+          - "異常檢測"
+          - "自動修復"
+    
+    stages:
+      - id: "deployment_preparation"
+        name: "部署準備"
+        description: "準備部署環境"
+        required_inputs:
+          - "deployment_artifacts"
+          - "environment_config"
+        outputs:
+          - "deployment_plan"
+          - "resource_allocation"
+          - "rollback_strategy"
+          
+      - id: "automated_deployment"
+        name: "自動部署"
+        description: "執行自動化部署"
+        required_inputs:
+          - "deployment_plan"
+          - "approval_status"
+        outputs:
+          - "deployment_status"
+          - "service_endpoints"
+          - "deployment_logs"
+        rollback_enabled: true
+        
+      - id: "health_monitoring"
+        name: "健康監控"
+        description: "監控服務健康"
+        required_inputs:
+          - "service_endpoints"
+          - "health_criteria"
+        outputs:
+          - "health_metrics"
+          - "alert_notifications"
+          - "performance_data"
+        real_time: true
+        
+      - id: "operations_optimization"
+        name: "運維優化"
+        description: "優化運維流程"
+        required_inputs:
+          - "operational_data"
+          - "cost_constraints"
+        outputs:
+          - "optimization_report"
+          - "cost_savings"
+          - "efficiency_gains"
+    
+    test_cases:
+      - id: "tc_deployment_01"
+        name: "部署流程測試"
+        type: "automated"
+        steps:
+          - "準備測試環境"
+          - "執行部署流程"
+          - "驗證部署成功"
+        expected_result: "部署成功率 >= 99%"
+
+  # 工作流6：自適應學習優化
+  adaptive_learning_optimization:
+    id: "workflow_6"
+    name: "自適應學習優化"
+    icon: "🧠"
+    description: "基於 AI 的持續學習和優化"
+    priority: 6
+    
+    ui_specification:
+      position: "left_panel_sixth"
+      color_scheme:
+        primary: "#E91E63"
+        secondary: "#F06292"
+        accent: "#C2185B"
+        
+      components:
+        - type: "workflow_card"
+          properties:
+            title: "學習優化"
+            subtitle: "AI 持續進化"
+            expandable: true
+            
+        - type: "learning_progress"
+          properties:
+            show_model_accuracy: true
+            show_improvement_rate: true
+            
+        - type: "insights_panel"
+          properties:
+            max_insights: 5
+            auto_refresh: true
+    
+    mcp_tools:
+      - tool_id: "learning_engine"
+        name: "學習引擎"
+        provider: "aci.dev"
+        capabilities:
+          - "模式識別"
+          - "預測分析"
+          - "自動優化"
+          
+      - tool_id: "feedback_collector"
+        name: "反饋收集器"
+        provider: "zapier"
+        capabilities:
+          - "用戶反饋收集"
+          - "性能數據采集"
+          - "錯誤日誌分析"
+    
+    stages:
+      - id: "data_collection"
+        name: "數據收集"
+        description: "收集學習數據"
+        required_inputs:
+          - "data_sources"
+          - "collection_rules"
+        outputs:
+          - "training_data"
+          - "validation_data"
+          - "data_quality_report"
+          
+      - id: "pattern_analysis"
+        name: "模式分析"
+        description: "分析使用模式"
+        required_inputs:
+          - "training_data"
+          - "analysis_parameters"
+        outputs:
+          - "usage_patterns"
+          - "anomaly_detection"
+          - "trend_predictions"
+          
+      - id: "model_training"
+        name: "模型訓練"
+        description: "訓練優化模型"
+        required_inputs:
+          - "usage_patterns"
+          - "optimization_goals"
+        outputs:
+          - "trained_model"
+          - "accuracy_metrics"
+          - "improvement_areas"
+          
+      - id: "adaptive_application"
+        name: "自適應應用"
+        description: "應用學習成果"
+        required_inputs:
+          - "trained_model"
+          - "application_context"
+        outputs:
+          - "optimized_behaviors"
+          - "performance_gains"
+          - "user_satisfaction"
+    
+    test_cases:
+      - id: "tc_learning_01"
+        name: "學習效果測試"
+        type: "automated"
+        steps:
+          - "收集訓練數據"
+          - "執行學習流程"
+          - "驗證優化效果"
+        expected_result: "性能提升 >= 20%"
+
+# UI 佈局配置
+ui_layout:
+  left_panel:
+    title: "六大核心工作流"
+    width: "320px"
+    collapsible: true
+    
+    layout_grid:
+      columns: 1
+      rows: 6
+      gap: "8px"
+      padding: "12px"
+    
+    animation:
+      type: "slide-in"
+      duration: "300ms"
+      easing: "ease-out"
+    
+    interactions:
+      - trigger: "hover"
+        action: "show_details"
+        
+      - trigger: "click"
+        action: "expand_workflow"
+        
+      - trigger: "right_click"
+        action: "show_context_menu"
+
+# 集成配置
+integration:
+  mcp_server:
+    endpoint: "ws://localhost:8765/mcp"
+    reconnect_interval: 5000
+    max_reconnect_attempts: 3
+    
+  event_handlers:
+    - event: "workflow_started"
+      handler: "onWorkflowStart"
+      
+    - event: "stage_completed"
+      handler: "onStageComplete"
+      
+    - event: "deviation_detected"
+      handler: "onDeviationDetected"
+      
+    - event: "workflow_completed"
+      handler: "onWorkflowComplete"
+
+# 測試配置
+testing:
+  test_suite:
+    name: "六大工作流集成測試"
+    
+    categories:
+      - name: "UI 測試"
+        tests:
+          - "工作流卡片渲染"
+          - "進度指示器更新"
+          - "交互響應測試"
+          
+      - name: "功能測試"
+        tests:
+          - "工作流啟動"
+          - "階段執行"
+          - "結果驗證"
+          
+      - name: "集成測試"
+        tests:
+          - "MCP 工具調用"
+          - "事件處理"
+          - "數據同步"
+          
+      - name: "性能測試"
+        tests:
+          - "響應時間"
+          - "並發處理"
+          - "資源使用"
+    
+    coverage_target: 90
+    
+# 監控配置
+monitoring:
+  metrics:
+    - name: "workflow_execution_time"
+      type: "histogram"
+      unit: "seconds"
+      
+    - name: "goal_alignment_score"
+      type: "gauge"
+      unit: "percentage"
+      
+    - name: "deviation_count"
+      type: "counter"
+      unit: "count"
+      
+    - name: "tool_usage"
+      type: "counter"
+      labels: ["tool_id", "provider"]
+  
+  alerts:
+    - name: "low_alignment"
+      condition: "goal_alignment_score < 60"
+      severity: "warning"
+      
+    - name: "critical_deviation"
+      condition: "deviation_severity == 'critical'"
+      severity: "critical"
+      
+    - name: "workflow_failure"
+      condition: "workflow_status == 'failed'"
+      severity: "error"

@@ -1,0 +1,14 @@
+{
+  "removed_directories": [],
+  "removed_files": [],
+  "moved_files": [],
+  "errors": [],
+  "summary": {
+    "total_directories_removed": 0,
+    "total_files_removed": 0,
+    "total_files_moved": 0,
+    "total_errors": 0,
+    "cleanup_date": "2025-07-18T22:47:35.473835",
+    "backup_location": "./mcp_backup_20250718_224735"
+  }
+}
