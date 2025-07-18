@@ -27,18 +27,22 @@
 | **XMasters MCP** | 3. 編碼實現<br>6. 監控運維 | 專家系統支持、智能診斷 | 🔄 待集成 |
 | **Stagewise MCP** | 所有工作流 | 階段管理、進度追踪 | 🔄 待集成 |
 
+### ⚠️ 重要 MCP（保留）
+這些 MCP 雖然不直接集成到六大工作流，但提供重要的基礎功能：
+
+1. **aws_bedrock_mcp** - AWS RAG 重要組件，提供知識庫和文檔處理功能
+
 ### ❌ 待移除的 MCP（未集成到工作流）
 這些 MCP 沒有明確集成到工作流中，應該移除：
 
-1. **aws_bedrock_mcp** - 與 memory_rag 功能重複
-2. **intelligent_error_handler_mcp** - 功能應該內置到各工作流
-3. **collaboration_mcp** - 沒有明確的工作流集成點
-4. **operations_mcp** - 功能與 monitoring 工作流重複
-5. **security_mcp** - 應該作為橫切關注點，而非獨立 MCP
-6. **config_mcp** - 配置管理應該是基礎設施，而非 MCP
-7. **monitoring_mcp** - 與第6個工作流功能重複
-8. **data_collection_system.py** - 冗餘文件
-9. **deployment/multi_platform_deployer.py** - 舊部署代碼
+1. **intelligent_error_handler_mcp** - 功能應該內置到各工作流
+2. **collaboration_mcp** - 沒有明確的工作流集成點
+3. **operations_mcp** - 功能與 monitoring 工作流重複
+4. **security_mcp** - 應該作為橫切關注點，而非獨立 MCP
+5. **config_mcp** - 配置管理應該是基礎設施，而非 MCP
+6. **monitoring_mcp** - 與第6個工作流功能重複
+7. **data_collection_system.py** - 冗餘文件
+8. **deployment/multi_platform_deployer.py** - 舊部署代碼
 
 ## 🛠️ 執行計劃
 

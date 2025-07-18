@@ -4,21 +4,22 @@
 
 ### 精簡前後對比
 - **優化前**: 30+ MCP 組件，存在大量冗餘
-- **優化後**: 15 個核心 MCP，每個都有明確職責
+- **優化後**: 16 個核心 MCP，每個都有明確職責
 
 ### 當前 MCP 架構
 
-#### P0 核心 MCP（8個）
+#### P0 核心 MCP（9個）
 系統運行必需的核心組件：
 
 1. **memoryos_mcp** - 記憶與學習中樞
-2. **enhanced_command_mcp** - 命令執行中樞
-3. **mcp_coordinator_mcp** - 協調調度中樞
-4. **claude_router_mcp** - K2/Claude 智能路由
-5. **local_adapter_mcp** - 本地文件系統適配
-6. **command_mcp** - 基礎命令處理
-7. **smartui_mcp** - UI 生成引擎
-8. **ag_ui_mcp** - 適應性 UI
+2. **aws_bedrock_mcp** - AWS RAG 服務，知識庫核心
+3. **enhanced_command_mcp** - 命令執行中樞
+4. **mcp_coordinator_mcp** - 協調調度中樞
+5. **claude_router_mcp** - K2/Claude 智能路由
+6. **local_adapter_mcp** - 本地文件系統適配
+7. **command_mcp** - 基礎命令處理
+8. **smartui_mcp** - UI 生成引擎
+9. **ag_ui_mcp** - 適應性 UI
 
 #### P1 工作流 MCP（5個）
 深度集成到六大工作流的組件：

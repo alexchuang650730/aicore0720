@@ -22,6 +22,7 @@ class MCPWorkflowIntegrationExecutor:
         # P0 核心 MCP（必須保留）
         self.p0_core_mcps = {
             "memoryos_mcp",
+            "aws_bedrock_mcp",  # AWS RAG 核心組件
             "enhanced_command_mcp", 
             "mcp_coordinator_mcp",
             "claude_router_mcp",
@@ -42,7 +43,6 @@ class MCPWorkflowIntegrationExecutor:
         
         # 要移除的 MCP（排除與 ClaudeEditor 相關的）
         self.mcps_to_remove = {
-            "aws_bedrock_mcp",
             "intelligent_error_handler_mcp",
             "collaboration_mcp",
             "operations_mcp",
