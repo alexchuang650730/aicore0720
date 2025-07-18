@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAutomation - 用戶界面</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #059669;
+            --badge-color: #059669;
+        }
+        .primary-bg { background-color: var(--primary-color); }
+        .primary-text { color: var(--primary-color); }
+        .primary-border { border-color: var(--primary-color); }
+        .role-badge {
+            background-color: var(--badge-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 頭部導航 -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="/static/logo.png" alt="PowerAutomation" class="h-8 w-auto">
+                    <span class="ml-2 text-xl font-bold">PowerAutomation</span>
+                    <span class="ml-4 role-badge">用戶</span>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center text-sm text-gray-700 hover:text-gray-900">
+                            <img class="h-8 w-8 rounded-full" src="/static/default-avatar.png" alt="User">
+                            <span class="ml-2">用戶名</span>
+                            <i class="fas fa-chevron-down ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-screen">
+        <!-- 側邊欄導航 -->
+        <nav class="w-64 bg-white shadow-sm">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">導航菜單</h2>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/workspace" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-home mr-3"></i>
+                            <span>工作台</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assistant" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-code mr-3"></i>
+                            <span>代碼助手</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/projects" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-projects mr-3"></i>
+                            <span>我的項目</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/stats" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-stats mr-3"></i>
+                            <span>使用統計</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/settings" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-settings mr-3"></i>
+                            <span>設置</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/help" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-gray-100 hover:primary-text">
+                            <i class="fas fa-help mr-3"></i>
+                            <span>幫助中心</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 主內容區域 -->
+        <main class="flex-1 p-6">
+            <!-- 儀表板標題 -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    用戶工作台
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    歡迎使用PowerAutomation，您當前的角色是用戶
+                </p>
+            </div>
+
+            <!-- 功能卡片網格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-600">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">今日使用</h3>
+                            <p class="text-gray-600">數據載入中...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                            <i class="fas fa-folder text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">最近項目</h3>
+                            <p class="text-gray-600">數據載入中...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-gray-100 text-gray-600">
+                            <i class="fas fa-question text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">未知</h3>
+                            <p class="text-gray-600">數據載入中...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                            <i class="fas fa-arrow-up text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">升級提示</h3>
+                            <p class="text-gray-600">數據載入中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 權限列表 -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">當前權限</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">Claude API基礎使用</span>
+                            <span class="text-sm text-gray-500 block">claude_api</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">K2 API基礎使用</span>
+                            <span class="text-sm text-gray-500 block">k2_api</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">基礎對比功能</span>
+                            <span class="text-sm text-gray-500 block">comparisons</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">預設工作流使用</span>
+                            <span class="text-sm text-gray-500 block">workflows</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">個人資料管理</span>
+                            <span class="text-sm text-gray-500 block">profile</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">
+                            write
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">基本偏好設置</span>
+                            <span class="text-sm text-gray-500 block">preferences</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">
+                            write
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">個人賬單查看</span>
+                            <span class="text-sm text-gray-500 block">billing</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">個人使用統計</span>
+                            <span class="text-sm text-gray-500 block">analytics</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">有限數據導出</span>
+                            <span class="text-sm text-gray-500 block">exports</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">社群內容訪問</span>
+                            <span class="text-sm text-gray-500 block">community</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
+                            read
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 border rounded-lg">
+                        <div>
+                            <span class="font-medium">反饋提交</span>
+                            <span class="text-sm text-gray-500 block">feedback</span>
+                        </div>
+                        <span class="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">
+                            write
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 角色特定的JavaScript功能
+        console.log('PowerAutomation loaded for role:', 'regular_user');
+        
+        // 根據角色顯示不同的功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleFeatures = {"basic_api_access": true, "basic_comparisons": true, "preset_workflows": true, "community_access": true, "basic_analytics": true};
+            
+            // 根據features對象啟用/禁用功能
+            Object.keys(roleFeatures).forEach(feature => {
+                if (roleFeatures[feature]) {
+                    console.log('Feature enabled:', feature);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

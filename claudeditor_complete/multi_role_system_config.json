@@ -1,0 +1,436 @@
+{
+  "role_permissions": {
+    "admin": [
+      {
+        "resource": "system",
+        "level": "admin",
+        "description": "系統完全控制權限"
+      },
+      {
+        "resource": "users",
+        "level": "admin",
+        "description": "用戶管理權限"
+      },
+      {
+        "resource": "billing",
+        "level": "admin",
+        "description": "計費和支付管理"
+      },
+      {
+        "resource": "analytics",
+        "level": "admin",
+        "description": "系統分析和統計"
+      },
+      {
+        "resource": "logs",
+        "level": "read",
+        "description": "系統日誌查看"
+      },
+      {
+        "resource": "settings",
+        "level": "admin",
+        "description": "系統設置管理"
+      },
+      {
+        "resource": "features",
+        "level": "admin",
+        "description": "功能開關管理"
+      },
+      {
+        "resource": "api_keys",
+        "level": "admin",
+        "description": "API密鑰管理"
+      },
+      {
+        "resource": "webhooks",
+        "level": "admin",
+        "description": "Webhook配置"
+      },
+      {
+        "resource": "integrations",
+        "level": "admin",
+        "description": "第三方集成管理"
+      },
+      {
+        "resource": "database",
+        "level": "admin",
+        "description": "數據庫管理"
+      },
+      {
+        "resource": "backups",
+        "level": "admin",
+        "description": "備份和恢復"
+      },
+      {
+        "resource": "exports",
+        "level": "admin",
+        "description": "數據導出"
+      },
+      {
+        "resource": "claude_api",
+        "level": "admin",
+        "description": "Claude API無限使用"
+      },
+      {
+        "resource": "k2_api",
+        "level": "admin",
+        "description": "K2 API無限使用"
+      },
+      {
+        "resource": "comparisons",
+        "level": "admin",
+        "description": "對比測試無限制"
+      },
+      {
+        "resource": "workflows",
+        "level": "admin",
+        "description": "工作流管理"
+      }
+    ],
+    "developer": [
+      {
+        "resource": "claude_api",
+        "level": "write",
+        "description": "Claude API高配額使用"
+      },
+      {
+        "resource": "k2_api",
+        "level": "write",
+        "description": "K2 API高配額使用"
+      },
+      {
+        "resource": "comparisons",
+        "level": "write",
+        "description": "對比測試功能"
+      },
+      {
+        "resource": "workflows",
+        "level": "write",
+        "description": "自定義工作流"
+      },
+      {
+        "resource": "integrations",
+        "level": "write",
+        "description": "API集成功能"
+      },
+      {
+        "resource": "analytics",
+        "level": "read",
+        "description": "使用分析查看"
+      },
+      {
+        "resource": "exports",
+        "level": "write",
+        "description": "數據導出"
+      },
+      {
+        "resource": "logs",
+        "level": "read",
+        "description": "個人日誌查看"
+      },
+      {
+        "resource": "team",
+        "level": "write",
+        "description": "團隊協作功能"
+      },
+      {
+        "resource": "sharing",
+        "level": "write",
+        "description": "代碼分享"
+      },
+      {
+        "resource": "feedback",
+        "level": "write",
+        "description": "反饋提交"
+      },
+      {
+        "resource": "beta_features",
+        "level": "read",
+        "description": "Beta功能訪問"
+      },
+      {
+        "resource": "api_access",
+        "level": "read",
+        "description": "API訪問權限"
+      },
+      {
+        "resource": "webhooks",
+        "level": "read",
+        "description": "Webhook配置"
+      },
+      {
+        "resource": "profile",
+        "level": "write",
+        "description": "個人資料管理"
+      },
+      {
+        "resource": "preferences",
+        "level": "write",
+        "description": "偏好設置"
+      }
+    ],
+    "regular_user": [
+      {
+        "resource": "claude_api",
+        "level": "read",
+        "description": "Claude API基礎使用"
+      },
+      {
+        "resource": "k2_api",
+        "level": "read",
+        "description": "K2 API基礎使用"
+      },
+      {
+        "resource": "comparisons",
+        "level": "read",
+        "description": "基礎對比功能"
+      },
+      {
+        "resource": "workflows",
+        "level": "read",
+        "description": "預設工作流使用"
+      },
+      {
+        "resource": "profile",
+        "level": "write",
+        "description": "個人資料管理"
+      },
+      {
+        "resource": "preferences",
+        "level": "write",
+        "description": "基本偏好設置"
+      },
+      {
+        "resource": "billing",
+        "level": "read",
+        "description": "個人賬單查看"
+      },
+      {
+        "resource": "analytics",
+        "level": "read",
+        "description": "個人使用統計"
+      },
+      {
+        "resource": "exports",
+        "level": "read",
+        "description": "有限數據導出"
+      },
+      {
+        "resource": "community",
+        "level": "read",
+        "description": "社群內容訪問"
+      },
+      {
+        "resource": "feedback",
+        "level": "write",
+        "description": "反饋提交"
+      }
+    ]
+  },
+  "ui_configurations": {
+    "admin": {
+      "navigation": [
+        {
+          "name": "儀表板",
+          "icon": "dashboard",
+          "url": "/admin/dashboard"
+        },
+        {
+          "name": "用戶管理",
+          "icon": "users",
+          "url": "/admin/users"
+        },
+        {
+          "name": "系統設置",
+          "icon": "settings",
+          "url": "/admin/settings"
+        },
+        {
+          "name": "計費管理",
+          "icon": "billing",
+          "url": "/admin/billing"
+        },
+        {
+          "name": "分析報告",
+          "icon": "analytics",
+          "url": "/admin/analytics"
+        },
+        {
+          "name": "系統日誌",
+          "icon": "logs",
+          "url": "/admin/logs"
+        },
+        {
+          "name": "API管理",
+          "icon": "api",
+          "url": "/admin/api"
+        },
+        {
+          "name": "開發工具",
+          "icon": "code",
+          "url": "/dev/tools"
+        }
+      ],
+      "dashboard_widgets": [
+        "system_health",
+        "user_statistics",
+        "revenue_metrics",
+        "api_usage",
+        "error_monitoring",
+        "performance_metrics"
+      ],
+      "features": {
+        "unlimited_api_calls": true,
+        "system_administration": true,
+        "user_management": true,
+        "billing_management": true,
+        "advanced_analytics": true,
+        "beta_features": true,
+        "api_key_management": true,
+        "webhook_configuration": true
+      },
+      "ui_theme": {
+        "primary_color": "#DC2626",
+        "badge": "管理員",
+        "badge_color": "#DC2626"
+      }
+    },
+    "developer": {
+      "navigation": [
+        {
+          "name": "開發工作台",
+          "icon": "code",
+          "url": "/dev/workspace"
+        },
+        {
+          "name": "API測試",
+          "icon": "api",
+          "url": "/dev/api-test"
+        },
+        {
+          "name": "對比分析",
+          "icon": "compare",
+          "url": "/dev/comparisons"
+        },
+        {
+          "name": "工作流",
+          "icon": "workflow",
+          "url": "/dev/workflows"
+        },
+        {
+          "name": "團隊協作",
+          "icon": "team",
+          "url": "/dev/team"
+        },
+        {
+          "name": "使用分析",
+          "icon": "analytics",
+          "url": "/dev/analytics"
+        },
+        {
+          "name": "文檔中心",
+          "icon": "docs",
+          "url": "/dev/docs"
+        },
+        {
+          "name": "反饋中心",
+          "icon": "feedback",
+          "url": "/dev/feedback"
+        }
+      ],
+      "dashboard_widgets": [
+        "api_usage_stats",
+        "comparison_results",
+        "team_activity",
+        "performance_metrics",
+        "recent_workflows",
+        "feature_updates"
+      ],
+      "features": {
+        "high_api_quota": true,
+        "comparison_tools": true,
+        "custom_workflows": true,
+        "team_collaboration": true,
+        "advanced_analytics": true,
+        "beta_features": true,
+        "api_access": true,
+        "export_capabilities": true
+      },
+      "api_limits": {
+        "claude_daily": 1000,
+        "k2_daily": 2000,
+        "comparisons_daily": 500,
+        "exports_monthly": 100
+      },
+      "ui_theme": {
+        "primary_color": "#2563EB",
+        "badge": "開發者",
+        "badge_color": "#2563EB"
+      }
+    },
+    "regular_user": {
+      "navigation": [
+        {
+          "name": "工作台",
+          "icon": "home",
+          "url": "/workspace"
+        },
+        {
+          "name": "代碼助手",
+          "icon": "code",
+          "url": "/assistant"
+        },
+        {
+          "name": "我的項目",
+          "icon": "projects",
+          "url": "/projects"
+        },
+        {
+          "name": "使用統計",
+          "icon": "stats",
+          "url": "/stats"
+        },
+        {
+          "name": "設置",
+          "icon": "settings",
+          "url": "/settings"
+        },
+        {
+          "name": "幫助中心",
+          "icon": "help",
+          "url": "/help"
+        }
+      ],
+      "dashboard_widgets": [
+        "daily_usage",
+        "recent_projects",
+        "tips_and_tricks",
+        "upgrade_prompt"
+      ],
+      "features": {
+        "basic_api_access": true,
+        "basic_comparisons": true,
+        "preset_workflows": true,
+        "community_access": true,
+        "basic_analytics": true
+      },
+      "api_limits": {
+        "claude_daily": 50,
+        "k2_daily": 100,
+        "comparisons_daily": 20,
+        "exports_monthly": 5
+      },
+      "upgrade_prompts": {
+        "show_upgrade_banner": true,
+        "highlight_premium_features": true,
+        "trial_offers": true
+      },
+      "ui_theme": {
+        "primary_color": "#059669",
+        "badge": "用戶",
+        "badge_color": "#059669"
+      }
+    }
+  },
+  "generated_at": "2025-07-18T10:41:26.764961"
+}

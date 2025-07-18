@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAutomation 會員訂閱 - powerauto.ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .plan-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2D3748;
+        }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .plan-price .currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4A5568;
+        }
+
+        .plan-price .amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 5px;
+        }
+
+        .plan-price .period {
+            font-size: 1rem;
+            color: #718096;
+        }
+
+        .plan-billing-note {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+
+        .plan-description {
+            color: #718096;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            color: #4A5568;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48BB78;
+            font-weight: bold;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .subscribe-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .subscribe-btn.secondary {
+            background: #F7FAFC;
+            color: #4A5568;
+            border: 2px solid #E2E8F0;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* 個人版樣式 */
+        .plan-personal {
+            border-top: 4px solid #6B7280;
+        }
+        .plan-personal .plan-price .amount { color: #6B7280; }
+
+        /* 專業版樣式 */
+        .plan-professional {
+            border-top: 4px solid #3B82F6;
+        }
+        .plan-professional .plan-price .amount { color: #3B82F6; }
+
+        /* 團隊版樣式 */
+        .plan-team {
+            border-top: 4px solid #10B981;
+        }
+        .plan-team .plan-price .amount { color: #10B981; }
+
+        /* 企業版樣式 */
+        .plan-enterprise {
+            border-top: 4px solid #8B5CF6;
+        }
+        .plan-enterprise .plan-price .amount { color: #8B5CF6; }
+
+        .points-display {
+            background: linear-gradient(135deg, #FFF5F5, #FED7D7);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .points-display .points-label {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .points-display .points-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #E53E3E;
+        }
+
+        .addon-info {
+            background: #F0FFF4;
+            border: 1px solid #9AE6B4;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #22543D;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+
+        .comparison-table h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: #2D3748;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: 20px;
+            align-items: center;
+        }
+
+        .comparison-header {
+            font-weight: 700;
+            padding: 15px 10px;
+            text-align: center;
+            background: #F8F9FA;
+            border-radius: 8px;
+        }
+
+        .feature-row {
+            padding: 12px 10px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: #4A5568;
+        }
+
+        .feature-value {
+            text-align: center;
+            color: #718096;
+        }
+
+        .feature-value.unlimited {
+            color: #48BB78;
+            font-weight: 600;
+        }
+
+        .feature-value.limited {
+            color: #ED8936;
+        }
+
+        .feature-value.not-available {
+            color: #E53E3E;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                display: none; /* 移動端隱藏比較表 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>選擇最適合您的方案</h1>
+            <p>PowerAutomation - 讓AI成為您的開發夥伴</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- 個人版 -->
+            <div class="pricing-card plan-personal">
+                <span class="plan-icon">👤</span>
+                <h3 class="plan-name">個人版</h3>
+                <div class="plan-price">
+                    <span class="currency">¥</span>
+                    <span class="amount">99</span>
+                    <span class="period">/月</span>
+                </div>
+                <p class="plan-billing-note">入門首選</p>
+                <p class="plan-description">適合個人開發者和學習使用</p>
+                
+                <div class="points-display">
+                    <div class="points-label">每月積分</div>
+                    <div class="points-amount">3,000</div>
+                </div>
+
+                <ul class="features-list">
+                    <li>5小時200條訊息</li>
+                    <li>基礎AI對話</li>
+                    <li>基礎工作流</li>
+                    <li>社區支持</li>
+                </ul>
+
+                <div class="addon-info">
+                    💡 99元積分包可加沖5小時200條訊息
+                </div>
+
+                <a href="#" class="subscribe-btn secondary">選擇個人版</a>
+            </div>
+
+            <!-- 專業版 -->
+            <div class="pricing-card plan-professional">
+                <div class="popular-badge">最受歡迎</div>
+                <span class="plan-icon">💼</span>
+                <h3 class="plan-name">專業版</h3>
+                <div class="plan-price">
+                    <span class="currency">¥</span>
+                    <span class="amount">599</span>
+                    <span class="period">/月</span>
+                </div>
+                <p class="plan-billing-note">無限制使用</p>
+                <p class="plan-description">適合專業開發者和中型項目</p>
+                
+                <div class="points-display">
+                    <div class="points-label">每月積分</div>
+                    <div class="points-amount">50,000</div>
+                </div>
+
+                <ul class="features-list">
+                    <li>無限制使用</li>
+                    <li>全部六大工作流</li>
+                    <li>Claude + K2雙AI模式</li>
+                    <li>Memory RAG智能記憶</li>
+                    <li>優先支持</li>
+                    <li>2元→8元成本優化</li>
+                </ul>
+
+                <a href="#" class="subscribe-btn primary">選擇專業版</a>
+            </div>
+
+            <!-- 團隊版 -->
+            <div class="pricing-card plan-team">
+                <span class="plan-icon">👥</span>
+                <h3 class="plan-name">團隊版</h3>
+                <div class="plan-price">
+                    <span class="currency">¥</span>
+                    <span class="amount">599</span>
+                    <span class="period">/月</span>
+                </div>
+                <p class="plan-billing-note">每5人 · 協作首選</p>
+                <p class="plan-description">適合小型團隊和協作項目</p>
+                
+                <div class="points-display">
+                    <div class="points-label">每月積分(5人共享)</div>
+                    <div class="points-amount">250,000</div>
+                </div>
+
+                <ul class="features-list">
+                    <li>無限制使用</li>
+                    <li>團隊協作功能</li>
+                    <li>全部Professional功能</li>
+                    <li>共享Memory RAG</li>
+                    <li>管理員面板</li>
+                    <li>API訪問權限</li>
+                    <li>團隊分析報告</li>
+                </ul>
+
+                <a href="#" class="subscribe-btn primary">選擇團隊版</a>
+            </div>
+
+            <!-- 企業版 -->
+            <div class="pricing-card plan-enterprise">
+                <span class="plan-icon">🏢</span>
+                <h3 class="plan-name">企業版</h3>
+                <div class="plan-price">
+                    <span class="currency">¥</span>
+                    <span class="amount">999</span>
+                    <span class="period">/人/月</span>
+                </div>
+                <p class="plan-billing-note">企業專享</p>
+                <p class="plan-description">適合大型企業和政府機構</p>
+                
+                <div class="points-display">
+                    <div class="points-label">每人每月積分</div>
+                    <div class="points-amount">1,000,000</div>
+                </div>
+
+                <ul class="features-list">
+                    <li>無限制使用</li>
+                    <li>私有雲部署</li>
+                    <li>企業級協作</li>
+                    <li>無限團隊成員</li>
+                    <li>定制開發服務</li>
+                    <li>24/7專屬技術支持</li>
+                    <li>SLA服務保證</li>
+                    <li>數據安全合規</li>
+                </ul>
+
+                <a href="#" class="subscribe-btn primary">聯繫銷售</a>
+            </div>
+        </div>
+
+        <!-- 功能比較表 -->
+        <div class="comparison-table">
+            <h3>詳細功能比較</h3>
+            <div class="comparison-grid">
+                <div class="comparison-header">功能</div>
+                <div class="comparison-header">個人版</div>
+                <div class="comparison-header">專業版</div>
+                <div class="comparison-header">團隊版</div>
+                <div class="comparison-header">企業版</div>
+
+                <div class="feature-name">每日訊息限制</div>
+                <div class="feature-value limited">200條</div>
+                <div class="feature-value unlimited">無限制</div>
+                <div class="feature-value unlimited">無限制</div>
+                <div class="feature-value unlimited">無限制</div>
+
+                <div class="feature-name">每日使用時長</div>
+                <div class="feature-value limited">5小時</div>
+                <div class="feature-value unlimited">無限制</div>
+                <div class="feature-value unlimited">無限制</div>
+                <div class="feature-value unlimited">無限制</div>
+
+                <div class="feature-name">團隊成員數</div>
+                <div class="feature-value">1人</div>
+                <div class="feature-value">1人</div>
+                <div class="feature-value">5人</div>
+                <div class="feature-value unlimited">無限制</div>
+
+                <div class="feature-name">API訪問</div>
+                <div class="feature-value not-available">❌</div>
+                <div class="feature-value unlimited">✅</div>
+                <div class="feature-value unlimited">✅</div>
+                <div class="feature-value unlimited">✅</div>
+
+                <div class="feature-name">私有雲部署</div>
+                <div class="feature-value not-available">❌</div>
+                <div class="feature-value not-available">❌</div>
+                <div class="feature-value not-available">❌</div>
+                <div class="feature-value unlimited">✅</div>
+
+                <div class="feature-name">技術支持</div>
+                <div class="feature-value">社區支持</div>
+                <div class="feature-value">優先支持</div>
+                <div class="feature-value">優先支持</div>
+                <div class="feature-value unlimited">24/7專屬</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 訂閱按鈕點擊事件
+        document.querySelectorAll('.subscribe-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
+                
+                if (planName === '企業版') {
+                    // 企業版聯繫銷售
+                    alert('企業版需要聯繫銷售團隊，我們將為您提供定制方案。\n\n聯繫方式：\n📧 enterprise@powerauto.ai\n📞 400-800-8080');
+                } else {
+                    // 其他版本跳轉到支付頁面
+                    alert(`正在跳轉到${planName}支付頁面...`);
+                    // 這裡可以集成真實的支付流程
+                    // window.location.href = `/payment?plan=${planName}`;
+                }
+            });
+        });
+
+        // 動畫效果
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 為所有卡片添加動畫
+        document.querySelectorAll('.pricing-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

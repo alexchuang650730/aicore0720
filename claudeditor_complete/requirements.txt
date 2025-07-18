@@ -1,0 +1,328 @@
+# PowerAutomation驅動ClaudeEditor系統依賴
+# PowerAutomation Core + ClaudeEditor 完整集成
+
+# WebSocket通信
+websockets>=11.0.2
+
+# 異步支持
+asyncio-mqtt>=0.13.0
+aiohttp>=3.8.0
+aiofiles>=23.2.1
+
+# 數據處理
+numpy>=1.24.0
+pandas>=2.0.0
+
+# 機器學習和AI
+scikit-learn>=1.3.0
+transformers>=4.21.0
+torch>=2.0.0
+
+# 向量數據庫和搜索
+faiss-cpu>=1.7.4
+chromadb>=0.4.0
+
+# 自然語言處理
+spacy>=3.6.0
+nltk>=3.8.1
+
+# Web框架
+fastapi>=0.100.0
+uvicorn>=0.23.0
+starlette>=0.27.0
+
+# 數據庫
+sqlalchemy>=2.0.0
+sqlite3
+
+# 配置管理
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# 日誌和監控
+loguru>=0.7.0
+prometheus-client>=0.17.0
+
+# 測試框架
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# 代碼質量
+black>=23.7.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# 文檔生成
+mkdocs>=1.5.0
+mkdocs-material>=9.2.0
+
+# 實用工具
+requests>=2.31.0
+click>=8.1.0
+tqdm>=4.66.0
+python-dateutil>=2.8.2
+
+# 安全性
+cryptography>=41.0.0
+bcrypt>=4.0.0
+
+# 環境管理
+python-decouple>=3.8
+
+# Git集成
+GitPython>=3.1.32
+
+# 文件操作
+watchdog>=3.0.0
+pathlib
+
+# JSON和YAML處理
+pyyaml>=6.0
+jsonschema>=4.19.0
+
+# HTTP客戶端
+httpx>=0.24.0
+
+# 時間處理
+arrow>=1.2.3
+
+# 進程管理
+psutil>=5.9.0
+
+# 系統集成
+pywin32>=306; sys_platform == "win32"
+pyobjc>=9.2; sys_platform == "darwin"
+
+# 開發工具
+ipython>=8.14.0
+jupyter>=1.0.0
+
+# 性能分析
+memory-profiler>=0.61.0
+line-profiler>=4.1.0
+
+# 並發處理
+concurrent-futures>=3.1.1
+
+# 網絡工具
+netifaces>=0.11.0
+
+# 音頻處理（用於通知）
+playsound>=1.3.0
+
+# 圖像處理
+Pillow>=10.0.0
+
+# 數據可視化
+matplotlib>=3.7.0
+plotly>=5.15.0
+
+# 緩存
+redis>=4.6.0
+memcached>=1.59
+
+# 消息隊列
+celery>=5.3.0
+
+# API客戶端
+anthropic>=0.3.0
+openai>=0.27.0
+
+# 命令行界面
+rich>=13.5.0
+typer>=0.9.0
+
+# 配置驗證
+cerberus>=1.3.4
+
+# 模板引擎
+jinja2>=3.1.0
+
+# 編碼檢測
+chardet>=5.2.0
+
+# URL處理
+urllib3>=2.0.0
+
+# XML處理
+lxml>=4.9.0
+
+# 壓縮解壓
+zipfile38>=0.0.3
+
+# 系統信息
+platform
+
+# 線程安全
+threading
+
+# 正則表達式
+regex>=2023.8.8
+
+# Base64編碼
+base64
+
+# UUID生成
+uuid
+
+# 時間戳
+time
+
+# 操作系統接口
+os
+sys
+subprocess
+shutil
+
+# 路徑操作
+pathlib
+glob
+
+# 數學運算
+math
+statistics
+
+# 隨機數
+random
+secrets
+
+# 集合操作
+collections
+itertools
+
+# 函數工具
+functools
+operator
+
+# 類型提示
+typing
+typing_extensions
+
+# 抽象基類
+abc
+
+# 上下文管理
+contextlib
+
+# 弱引用
+weakref
+
+# 垃圾回收
+gc
+
+# 信號處理
+signal
+
+# 多進程
+multiprocessing
+
+# 隊列
+queue
+
+# 套接字
+socket
+
+# 選擇器
+selectors
+
+# SSL/TLS
+ssl
+
+# 哈希
+hashlib
+hmac
+
+# 編碼解碼
+codecs
+
+# 國際化
+locale
+gettext
+
+# 臨時文件
+tempfile
+
+# 文件比較
+filecmp
+
+# 文件複製
+shutil
+
+# 歸檔文件
+tarfile
+zipfile
+
+# CSV處理
+csv
+
+# 配置解析
+configparser
+
+# 命令行參數解析
+argparse
+
+# 環境變量
+environ
+
+# 退出處理
+atexit
+
+# 警告處理
+warnings
+
+# 跟踪
+traceback
+
+# 檢查
+inspect
+
+# 複製
+copy
+deepcopy
+
+# 序列化
+pickle
+json
+
+# 數據類
+dataclasses
+
+# 枚舉
+enum
+
+# 小數精度
+decimal
+
+# 分數
+fractions
+
+# 複數
+cmath
+
+# 二進制數據
+struct
+array
+
+# 內存視圖
+memoryview
+
+# 字節數組
+bytearray
+
+# 內置函數增強
+builtins
+
+# 代碼對象
+code
+
+# 幀對象
+frame
+
+# 生成器
+generator
+
+# 協程
+coroutine
+
+# 異步生成器
+async_generator

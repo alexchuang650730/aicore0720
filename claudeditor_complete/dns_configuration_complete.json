@@ -1,0 +1,221 @@
+{
+  "dns_requirements": {
+    "primary_domain": {
+      "description": "主域名配置",
+      "required_info": "您的主域名 (例如: powerautomation.com)",
+      "dns_records": [
+        {
+          "type": "A",
+          "name": "@",
+          "value": "YOUR_AWS_EC2_IP",
+          "ttl": 300,
+          "description": "主域名指向EC2實例"
+        },
+        {
+          "type": "CNAME",
+          "name": "www",
+          "value": "powerautomation.com",
+          "ttl": 300,
+          "description": "www子域名重定向到主域名"
+        }
+      ]
+    },
+    "api_subdomain": {
+      "description": "API子域名配置",
+      "subdomain": "api.powerautomation.com",
+      "dns_records": [
+        {
+          "type": "A",
+          "name": "api",
+          "value": "YOUR_AWS_EC2_IP",
+          "ttl": 300,
+          "description": "API端點"
+        }
+      ]
+    },
+    "admin_subdomain": {
+      "description": "管理後台子域名",
+      "subdomain": "admin.powerautomation.com",
+      "dns_records": [
+        {
+          "type": "A",
+          "name": "admin",
+          "value": "YOUR_AWS_EC2_IP",
+          "ttl": 300,
+          "description": "管理後台"
+        }
+      ]
+    },
+    "developer_subdomain": {
+      "description": "開發者平台子域名",
+      "subdomain": "dev.powerautomation.com",
+      "dns_records": [
+        {
+          "type": "A",
+          "name": "dev",
+          "value": "YOUR_AWS_EC2_IP",
+          "ttl": 300,
+          "description": "開發者平台"
+        }
+      ]
+    },
+    "cdn_subdomain": {
+      "description": "CDN子域名 (可選)",
+      "subdomain": "cdn.powerautomation.com",
+      "dns_records": [
+        {
+          "type": "CNAME",
+          "name": "cdn",
+          "value": "YOUR_CLOUDFRONT_DOMAIN",
+          "ttl": 300,
+          "description": "靜態資源CDN"
+        }
+      ]
+    },
+    "email_configuration": {
+      "description": "郵件服務配置",
+      "mx_records": [
+        {
+          "type": "MX",
+          "name": "@",
+          "value": "10 mail.powerautomation.com",
+          "ttl": 300,
+          "description": "主郵件服務器"
+        }
+      ],
+      "txt_records": [
+        {
+          "type": "TXT",
+          "name": "@",
+          "value": "v=spf1 include:_spf.google.com ~all",
+          "ttl": 300,
+          "description": "SPF記錄"
+        },
+        {
+          "type": "TXT",
+          "name": "_dmarc",
+          "value": "v=DMARC1; p=quarantine; rua=mailto:dmarc@powerautomation.com",
+          "ttl": 300,
+          "description": "DMARC策略"
+        }
+      ]
+    }
+  },
+  "ssl_configuration": {
+    "certificates_needed": [
+      "powerautomation.com",
+      "*.powerautomation.com",
+      "api.powerautomation.com",
+      "admin.powerautomation.com",
+      "dev.powerautomation.com"
+    ],
+    "certificate_providers": {
+      "lets_encrypt": {
+        "description": "免費SSL證書",
+        "renewal": "自動續期",
+        "setup_command": "sudo certbot --nginx -d powerautomation.com -d *.powerautomation.com",
+        "pros": [
+          "免費",
+          "自動續期",
+          "廣泛支持"
+        ],
+        "cons": [
+          "90天有效期",
+          "需要定期續期"
+        ]
+      },
+      "cloudflare": {
+        "description": "Cloudflare SSL",
+        "renewal": "自動管理",
+        "setup": "通過Cloudflare面板配置",
+        "pros": [
+          "免費",
+          "自動管理",
+          "額外安全功能"
+        ],
+        "cons": [
+          "需要將DNS託管到Cloudflare"
+        ]
+      },
+      "aws_acm": {
+        "description": "AWS Certificate Manager",
+        "renewal": "自動續期",
+        "setup": "AWS控制台申請",
+        "pros": [
+          "與AWS集成",
+          "自動續期",
+          "免費"
+        ],
+        "cons": [
+          "僅限AWS服務使用"
+        ]
+      }
+    },
+    "recommended_approach": "cloudflare",
+    "security_headers": {
+      "HSTS": "max-age=31536000; includeSubDomains",
+      "CSP": "default-src 'self'; script-src 'self' 'unsafe-inline'",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff"
+    }
+  },
+  "dns_records_template": [
+    {
+      "Type": "A",
+      "Name": "@",
+      "Value": "[需要填入] 您的AWS EC2公網IP",
+      "TTL": "300",
+      "Description": "主域名 powerautomation.com 指向服務器"
+    },
+    {
+      "Type": "CNAME",
+      "Name": "www",
+      "Value": "powerautomation.com",
+      "TTL": "300",
+      "Description": "www.powerautomation.com 重定向到主域名"
+    },
+    {
+      "Type": "A",
+      "Name": "api",
+      "Value": "[需要填入] 您的AWS EC2公網IP",
+      "TTL": "300",
+      "Description": "API服務端點"
+    },
+    {
+      "Type": "A",
+      "Name": "admin",
+      "Value": "[需要填入] 您的AWS EC2公網IP",
+      "TTL": "300",
+      "Description": "管理後台"
+    },
+    {
+      "Type": "A",
+      "Name": "dev",
+      "Value": "[需要填入] 您的AWS EC2公網IP",
+      "TTL": "300",
+      "Description": "開發者平台"
+    },
+    {
+      "Type": "A",
+      "Name": "beta",
+      "Value": "[需要填入] 您的AWS EC2公網IP",
+      "TTL": "300",
+      "Description": "Beta測試平台"
+    },
+    {
+      "Type": "MX",
+      "Name": "@",
+      "Value": "10 mail.powerautomation.com",
+      "TTL": "300",
+      "Description": "郵件服務器"
+    },
+    {
+      "Type": "TXT",
+      "Name": "@",
+      "Value": "v=spf1 include:_spf.google.com ~all",
+      "TTL": "300",
+      "Description": "SPF反垃圾郵件"
+    }
+  ],
+  "generated_at": "2025-07-18T10:43:02.046019"
+}

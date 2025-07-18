@@ -1,0 +1,47 @@
+{
+  "before_deployment": {
+    "title": "部署前準備",
+    "tasks": [
+      "□ 購買/準備域名",
+      "□ 獲取AWS EC2公網IP地址",
+      "□ 選擇DNS服務商 (推薦Cloudflare)",
+      "□ 準備域名註冊商的DNS控制權限"
+    ]
+  },
+  "dns_configuration": {
+    "title": "DNS配置步驟",
+    "estimated_time": "30分鐘",
+    "tasks": [
+      "□ 添加A記錄指向EC2 IP",
+      "□ 添加CNAME記錄用於www重定向",
+      "□ 配置api子域名",
+      "□ 配置admin子域名",
+      "□ 配置dev子域名",
+      "□ 配置beta子域名",
+      "□ 等待DNS傳播 (最多24小時)"
+    ]
+  },
+  "ssl_setup": {
+    "title": "SSL證書配置",
+    "estimated_time": "20分鐘",
+    "tasks": [
+      "□ 安裝Certbot",
+      "□ 申請Let's Encrypt證書",
+      "□ 配置自動續期",
+      "□ 測試HTTPS訪問",
+      "□ 配置安全頭",
+      "□ 測試SSL評級 (ssllabs.com)"
+    ]
+  },
+  "verification": {
+    "title": "部署驗證",
+    "tasks": [
+      "□ 測試主域名訪問",
+      "□ 測試所有子域名",
+      "□ 驗證HTTPS重定向",
+      "□ 檢查SSL證書有效性",
+      "□ 測試負載均衡 (如果適用)",
+      "□ 驗證郵件服務 (如果配置)"
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "Type": "A",
+    "Name": "@",
+    "Value": "[需要填入] 您的AWS EC2公網IP",
+    "TTL": "300",
+    "Description": "主域名 powerautomation.com 指向服務器"
+  },
+  {
+    "Type": "CNAME",
+    "Name": "www",
+    "Value": "powerautomation.com",
+    "TTL": "300",
+    "Description": "www.powerautomation.com 重定向到主域名"
+  },
+  {
+    "Type": "A",
+    "Name": "api",
+    "Value": "[需要填入] 您的AWS EC2公網IP",
+    "TTL": "300",
+    "Description": "API服務端點"
+  },
+  {
+    "Type": "A",
+    "Name": "admin",
+    "Value": "[需要填入] 您的AWS EC2公網IP",
+    "TTL": "300",
+    "Description": "管理後台"
+  },
+  {
+    "Type": "A",
+    "Name": "dev",
+    "Value": "[需要填入] 您的AWS EC2公網IP",
+    "TTL": "300",
+    "Description": "開發者平台"
+  },
+  {
+    "Type": "A",
+    "Name": "beta",
+    "Value": "[需要填入] 您的AWS EC2公網IP",
+    "TTL": "300",
+    "Description": "Beta測試平台"
+  },
+  {
+    "Type": "MX",
+    "Name": "@",
+    "Value": "10 mail.powerautomation.com",
+    "TTL": "300",
+    "Description": "郵件服務器"
+  },
+  {
+    "Type": "TXT",
+    "Name": "@",
+    "Value": "v=spf1 include:_spf.google.com ~all",
+    "TTL": "300",
+    "Description": "SPF反垃圾郵件"
+  }
+]
