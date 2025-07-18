@@ -11,8 +11,8 @@ import asyncio
 from pathlib import Path
 
 # 設置API密鑰環境變量
-os.environ["K2_API_KEY"] = "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"
-os.environ["CLAUDE_API_KEY"] = "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"
+os.environ["K2_API_KEY"] = "os.getenv("HF_TOKEN", "")"
+os.environ["CLAUDE_API_KEY"] = "os.getenv("ANTHROPIC_API_KEY", "")"
 
 class PowerAutomationWrapper:
     """PowerAutomation包裝器，劫持Claude Code Tool請求"""

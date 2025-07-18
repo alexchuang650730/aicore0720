@@ -6,10 +6,10 @@ import os
 
 # API密鑰配置
 API_KEYS = {
-    "MOONSHOT_API_KEY": "sk-ocQ1YiAJtB2yfaXVXFzkW0973MXXKLR0OCEi0BbVqqmc31UK",
-    "GROQ_API_KEY": "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",
-    "ANTHROPIC_API_KEY": "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",
-    "HF_TOKEN": "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"
+    "MOONSHOT_API_KEY": os.getenv("MOONSHOT_API_KEY", ""),
+    "GROQ_API_KEY": os.getenv("GROQ_API_KEY", ""),
+    "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY", ""),
+    "HF_TOKEN": os.getenv("HF_TOKEN", "")
 }
 
 # 設置環境變量

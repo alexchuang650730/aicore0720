@@ -15,7 +15,7 @@ class GroqK2IntegrationTest:
     def __init__(self):
         # 設置API密鑰（需要你提供）
         self.groq_api_key = os.environ.get('GROQ_API_KEY', '')
-        self.hf_token = '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'
+        self.hf_token = 'os.getenv("HF_TOKEN", "")'
         
     async def test_groq_latency(self):
         """測試Groq實際延遲"""

@@ -17,8 +17,8 @@ class PowerAutomationOneClickSetup:
     def __init__(self):
         self.project_root = Path(__file__).parent
         self.api_keys = {
-            "k2_api_key": "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",
-            "claude_api_key": "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"
+            "k2_api_key": "os.getenv("HF_TOKEN", "")",
+            "claude_api_key": "os.getenv("ANTHROPIC_API_KEY", "")"
         }
         self.config = {}
         
@@ -103,8 +103,8 @@ import asyncio
 from pathlib import Path
 
 # 設置API密鑰環境變量
-os.environ["K2_API_KEY"] = "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"
-os.environ["CLAUDE_API_KEY"] = "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"
+os.environ["K2_API_KEY"] = "os.getenv("HF_TOKEN", "")"
+os.environ["CLAUDE_API_KEY"] = "os.getenv("ANTHROPIC_API_KEY", "")"
 
 class PowerAutomationWrapper:
     """PowerAutomation包裝器，劫持Claude Code Tool請求"""
@@ -168,7 +168,7 @@ if __name__ == "__main__":
 # 自動攔截Claude Code請求並路由到K2
 
 export POWERAUTOMATION_ENABLED=true
-export K2_API_KEY="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"
+export K2_API_KEY="os.getenv("HF_TOKEN", "")"
 
 # 攔截claude命令，重定向到PowerAutomation
 if command -v claude &> /dev/null; then

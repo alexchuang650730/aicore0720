@@ -42,7 +42,7 @@ class K2ChatMCP(BaseMCP):
         self.k2_config = {
             "provider": "moonshot",
             "api_url": "https://api.moonshot.cn/v1/chat/completions",
-            "api_key": os.environ.get('MOONSHOT_API_KEY', 'sk-ocQ1YiAJtB2yfaXVXFzkW0973MXXKLR0OCEi0BbVqqmc31UK'),
+            "api_key": os.environ.get('MOONSHOT_API_KEY', 'os.getenv("MOONSHOT_API_KEY", "")'),
             "models": {
                 "fast": "moonshot-v1-8k",      # 快速模型 ~1.5s
                 "standard": "moonshot-v1-32k",  # 標準模型 ~2s
@@ -57,7 +57,7 @@ class K2ChatMCP(BaseMCP):
         # Groq備用配置（超快但非K2）
         self.groq_config = {
             "api_url": "https://api.groq.com/openai/v1/chat/completions",
-            "api_key": os.environ.get('GROQ_API_KEY', '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'),
+            "api_key": os.environ.get('GROQ_API_KEY', 'os.getenv("GROQ_API_KEY", "")'),
             "model": "llama-3.1-8b-instant",
             "enabled": True
         }
@@ -459,10 +459,10 @@ import os
 
 # API密鑰配置
 API_KEYS = {
-    "MOONSHOT_API_KEY": "sk-ocQ1YiAJtB2yfaXVXFzkW0973MXXKLR0OCEi0BbVqqmc31UK",
-    "GROQ_API_KEY": "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",
-    "ANTHROPIC_API_KEY": "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",
-    "HF_TOKEN": "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"
+    "MOONSHOT_API_KEY": "os.getenv("MOONSHOT_API_KEY", "")",
+    "GROQ_API_KEY": "os.getenv("GROQ_API_KEY", "")",
+    "ANTHROPIC_API_KEY": "os.getenv("ANTHROPIC_API_KEY", "")",
+    "HF_TOKEN": "os.getenv("HF_TOKEN", "")"
 }
 
 # 設置環境變量

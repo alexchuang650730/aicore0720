@@ -15,8 +15,8 @@ class K2ProvidersCompleteTest:
     def __init__(self):
         # 直接設置API密鑰
         self.api_keys = {
-            "groq": "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",
-            "moonshot": "sk-ocQ1YiAJtB2yfaXVXFzkW0973MXXKLR0OCEi0BbVqqmc31UK"
+            "groq": "os.getenv("GROQ_API_KEY", "")",
+            "moonshot": "os.getenv("MOONSHOT_API_KEY", "")"
         }
         
         self.results = []

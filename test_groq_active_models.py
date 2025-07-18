@@ -13,7 +13,7 @@ class GroqActiveModelsTest:
     """Groq活躍模型測試"""
     
     def __init__(self):
-        self.api_key = "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"
+        self.api_key = "os.getenv("GROQ_API_KEY", "")"
         self.api_url = "https://api.groq.com/openai/v1/chat/completions"
         
         # 2024年最新可用模型

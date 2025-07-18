@@ -19,13 +19,13 @@ class ToolCallingComparison:
             "k2": {
                 "provider": "kimi",
                 "api_endpoint": "https://api.moonshot.cn/v1/chat/completions",
-                "api_key": "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",  # 如果可用
+                "api_key": "os.getenv("HF_TOKEN", "")",  # 如果可用
                 "model": "moonshot-v1-8k"
             },
             "claude": {
                 "provider": "anthropic",
                 "api_endpoint": "https://api.anthropic.com/v1/messages",
-                "api_key": "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",
+                "api_key": "os.getenv("ANTHROPIC_API_KEY", "")",
                 "model": "claude-3-sonnet-20240229"
             }
         }
@@ -191,7 +191,7 @@ class ToolCallingComparison:
         expected_tools = scenario["expected_tools"]
         
         # 設置環境變量
-        os.environ["HF_TOKEN"] = "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"
+        os.environ["HF_TOKEN"] = "os.getenv("HF_TOKEN", "")"
         
         try:
             # 使用Groq提供商訪問K2
