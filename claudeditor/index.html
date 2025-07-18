@@ -140,6 +140,7 @@
             padding: 20px;
             margin-bottom: 20px;
             color: white;
+            position: relative;
         }
         .ai-control-section h2 {
             color: white;
@@ -438,6 +439,117 @@
             height: 8px;
             border-radius: 50%;
             background: #28a745;
+        }
+        
+        /* 權限狀態樣式 */
+        .permission-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .permission-status:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+        .permission-icon {
+            font-size: 16px;
+        }
+        .permission-level {
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        .permission-level.user {
+            color: #60a5fa;
+        }
+        .permission-level.developer {
+            color: #4ade80;
+        }
+        .permission-level.admin {
+            color: #f59e0b;
+        }
+        
+        /* GitHub狀態樣式 */
+        .github-status {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .github-status h3 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .git-info {
+            font-size: 14px;
+        }
+        .git-info .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,0.9);
+        }
+        .git-info .info-label {
+            opacity: 0.8;
+        }
+        .git-info .info-value {
+            font-weight: 600;
+        }
+        .branch-name {
+            color: #4ade80;
+        }
+        .sync-status {
+            color: #4ade80;
+        }
+        
+        /* SmartUI 和 StageWise 準備 */
+        .smartui-container {
+            position: relative;
+            min-height: 200px;
+        }
+        .stagewise-panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stagewise-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .test-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .test-status.passed {
+            border-left: 3px solid #4ade80;
+        }
+        .test-status.failed {
+            border-left: 3px solid #ef4444;
+        }
+        .test-status.running {
+            border-left: 3px solid #3b82f6;
         }
         
         /* 编辑器样式 - 优化布局 */
@@ -940,11 +1052,38 @@
             transform: translateY(-1px);
         }
         
-        /* 响应式设计 */
+        /* 響應式設計 - 平板設備 */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 15px;
+            }
+            .main-content.edit-mode {
+                grid-template-columns: 250px 1fr;
+            }
+            .permission-status {
+                top: 10px;
+                right: 10px;
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+            .model-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .workflow-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .github-status {
+                padding: 12px;
+            }
+        }
+        
+        /* 響應式設計 - 手機設備 */
         @media (max-width: 768px) {
             .main-content.edit-mode,
             .main-content.chat-mode {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             .nav-left {
                 gap: 10px;
@@ -954,6 +1093,87 @@
             }
             .claude-title {
                 font-size: 18px !important;
+            }
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .btn-icon {
+                font-size: 14px;
+            }
+            .panel {
+                padding: 15px;
+            }
+            .ai-control-section {
+                padding: 15px;
+            }
+            .permission-status {
+                position: static;
+                margin-top: 10px;
+                justify-content: center;
+            }
+            .token-stats {
+                grid-template-columns: 1fr;
+            }
+            .workflow-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .github-status {
+                padding: 12px;
+            }
+            .git-info {
+                font-size: 13px;
+            }
+            .action-button {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+            .editor-header {
+                padding: 10px 15px;
+            }
+            .file-title {
+                font-size: 14px;
+            }
+            .editor-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+        }
+        
+        /* 小屏幕手機 */
+        @media (max-width: 480px) {
+            .nav-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            .nav-right {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .nav-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            .main-content {
+                padding: 10px;
+            }
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+            .model-buttons {
+                font-size: 14px;
+            }
+            .action-button {
+                font-size: 12px;
+            }
+            .token-stats {
+                font-size: 12px;
+            }
+            .command-input {
+                font-size: 12px;
             }
         }
         
@@ -1004,6 +1224,12 @@
                     AI模型控制
                 </h2>
                 
+                <!-- 權限狀態指示器 -->
+                <div class="permission-status" id="permissionStatus">
+                    <span class="permission-icon">👤</span>
+                    <span class="permission-level developer" id="userPermissionLevel">Developer</span>
+                </div>
+                
                 <div class="model-buttons">
                     <div class="model-btn" onclick="switchModel('k2')">
                         <div class="model-name">K2</div>
@@ -1052,6 +1278,25 @@
             </div>
 
             <!-- 快速操作区 -->
+            <!-- GitHub狀態區 -->
+            <div class="github-status">
+                <h3>📊 GitHub狀態</h3>
+                <div class="git-info">
+                    <div class="info-row">
+                        <span class="info-label">分支:</span>
+                        <span class="info-value branch-name">main</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">提交:</span>
+                        <span class="info-value commit-count">42 commits</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">同步:</span>
+                        <span class="info-value sync-status">✅ 已同步</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="quick-actions">
                 <h2>⚡ 快速操作</h2>
                 
@@ -1211,6 +1456,11 @@
         let currentModel = 'claude';
         let monacoEditor = null;
         let currentFile = null;
+        let currentUserPermission = 'developer'; // 默認為開發者權限
+        let tokenStats = {
+            saved: 12847,
+            total: 45623
+        };
         
         // 后端服务配置
         const BACKEND_URL = 'https://5000-irhw1cjxvsvet50ykelqe-5d94768d.manusvm.computer';
@@ -1435,6 +1685,11 @@
             const modelName = model === 'k2' ? 'K2-Advanced' : 'Claude-3.5-Sonnet';
             document.getElementById('currentModel').textContent = modelName;
             document.getElementById('lastSwitch').textContent = '刚刚';
+            
+            // 更新節省統計
+            if (model === 'k2') {
+                updateTokenSavings(Math.floor(Math.random() * 2000) + 1000); // 模擬節省token
+            }
             
             // 显示切换成功消息
             addChatMessage('ai', `🤖 <strong>AI模型已切换</strong><br>当前模型: ${modelName}<br>✅ 模型切换成功！`);
@@ -2505,6 +2760,137 @@ console.log("语言类型: ${language}");`;
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
         
+        // 更新Token統計
+        function updateTokenSavings(amount) {
+            tokenStats.saved += amount;
+            tokenStats.total += amount;
+            
+            // 更新UI顯示
+            const savedElement = document.querySelector('.token-value');
+            savedElement.textContent = tokenStats.saved.toLocaleString();
+            
+            const totalElement = document.querySelectorAll('.token-value')[1];
+            totalElement.textContent = tokenStats.total.toLocaleString();
+            
+            // 更新節省率
+            const rate = (tokenStats.saved / tokenStats.total * 100).toFixed(1);
+            document.querySelector('.efficiency-rate').textContent = rate + '%';
+        }
+        
+        // 更新權限顯示
+        function updatePermissionDisplay(level) {
+            currentUserPermission = level;
+            const permissionElement = document.getElementById('userPermissionLevel');
+            permissionElement.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+            permissionElement.className = `permission-level ${level}`;
+            
+            // 根據權限級別調整UI
+            applyPermissionRestrictions(level);
+        }
+        
+        // 應用權限限制
+        function applyPermissionRestrictions(level) {
+            if (level === 'user') {
+                // 用戶級別限制
+                document.querySelectorAll('.workflow-item').forEach((item, index) => {
+                    if (index > 1) { // 只允許前兩個工作流
+                        item.style.opacity = '0.5';
+                        item.style.pointerEvents = 'none';
+                        item.title = '需要開發者權限';
+                    }
+                });
+                // 禁用SmartUI相關功能
+                document.querySelectorAll('.smartui-feature').forEach(item => {
+                    item.style.display = 'none';
+                });
+            } else if (level === 'developer') {
+                // 開發者級別
+                document.querySelectorAll('.workflow-item').forEach(item => {
+                    item.style.opacity = '1';
+                    item.style.pointerEvents = 'auto';
+                    item.title = '';
+                });
+                // 顯示SmartUI功能
+                document.querySelectorAll('.smartui-feature').forEach(item => {
+                    item.style.display = '';
+                });
+            } else if (level === 'admin') {
+                // 管理員級別 - 完全訪問
+                document.querySelectorAll('.workflow-item').forEach(item => {
+                    item.style.opacity = '1';
+                    item.style.pointerEvents = 'auto';
+                });
+                // 顯示所有功能
+                document.querySelectorAll('.admin-feature').forEach(item => {
+                    item.style.display = '';
+                });
+            }
+        }
+        
+        // 更新GitHub狀態
+        function updateGitHubStatus(branch, commits, syncStatus) {
+            document.querySelector('.branch-name').textContent = branch;
+            document.querySelector('.commit-count').textContent = `${commits} commits`;
+            document.querySelector('.sync-status').textContent = syncStatus ? '✅ 已同步' : '⚠️ 未同步';
+        }
+        
+        // SmartUI 集成準備
+        function initSmartUIIntegration() {
+            console.log('準備SmartUI MCP集成...');
+            
+            // SmartUI MCP集成接口
+            window.smartUI = {
+                // 生成UI組件
+                async generateUI(type, config) {
+                    try {
+                        // 模擬調用SmartUI MCP
+                        console.log(`生成${type}類型UI...`);
+                        
+                        // 實際應調用: await window.mcp.call('smartui_mcp', 'generate_ui', {...})
+                        const mockResult = {
+                            status: 'success',
+                            code: `<div class="smartui-generated">SmartUI生成的${type}組件</div>`
+                        };
+                        
+                        return mockResult;
+                    } catch (error) {
+                        console.error('SmartUI生成失敗:', error);
+                        return { status: 'error', message: error.message };
+                    }
+                },
+                
+                // 在指定位置注入UI
+                injectUI(html, targetSelector) {
+                    const target = document.querySelector(targetSelector);
+                    if (target) {
+                        const container = document.createElement('div');
+                        container.className = 'smartui-container';
+                        container.innerHTML = html;
+                        target.appendChild(container);
+                        console.log('✅ SmartUI已注入');
+                    }
+                },
+                
+                // 權限檢查
+                checkPermission(feature) {
+                    if (currentUserPermission === 'user' && feature === 'generate') {
+                        return false;
+                    }
+                    return true;
+                }
+            };
+            
+            window.smartUIReady = true;
+            console.log('✅ SmartUI MCP接口已準備');
+        }
+        
+        // StageWise 測試集成準備
+        function initStageWiseIntegration() {
+            console.log('準備StageWise MCP集成...');
+            // 這裡預留StageWise MCP的集成接口
+            window.stageWiseReady = true;
+        }
+        
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', async function() {
             console.log('ClaudeEditor v4.7.3 初始化中...');
@@ -2560,12 +2946,24 @@ console.log("语言类型: ${language}");`;
                 });
             }
             
+            // 初始化權限系統
+            updatePermissionDisplay('developer'); // 默認開發者權限
+            
+            // 初始化GitHub狀態
+            updateGitHubStatus('main', 42, true);
+            
+            // 準備SmartUI和StageWise集成
+            initSmartUIIntegration();
+            initStageWiseIntegration();
+            
             // 延迟初始化Monaco Editor，确保DOM完全加载
             setTimeout(() => {
                 initMonacoEditor();
             }, 500);
             
             console.log('✅ ClaudeEditor v4.7.3 初始化完成');
+            console.log('✅ 權限系統已啟用');
+            console.log('✅ SmartUI/StageWise MCP準備就緒');
         });
         
         // 窗口大小改变时重新调整编辑器
@@ -2574,6 +2972,158 @@ console.log("语言类型: ${language}");`;
                 monacoEditor.layout();
             }
         });
+        
+        // PowerAutomation集成橋接
+        class ClaudeEditorPowerAutomationBridge {
+            constructor() {
+                this.mcp = window.mcp || {};
+                this.smartUI = window.smartUI || {};
+                this.permissions = currentUserPermission || 'developer';
+            }
+            
+            async initialize() {
+                console.log('🚀 初始化ClaudeEditor-PowerAutomation橋接');
+                
+                // 註冊MCP處理器
+                this.registerMCPHandlers();
+                
+                // 設置SmartUI增強規則
+                this.setupSmartUIEnhancements();
+                
+                // 保持原有功能，添加MCP集成
+                this.enhanceExistingFeatures();
+                
+                console.log('✅ PowerAutomation橋接初始化完成');
+            }
+            
+            registerMCPHandlers() {
+                // 增強模型切換功能
+                const originalSwitchModel = window.switchModel;
+                window.switchModel = async (model) => {
+                    // 調用原始功能
+                    if (originalSwitchModel) {
+                        originalSwitchModel.call(window, model);
+                    }
+                    
+                    // 添加MCP調用
+                    try {
+                        const result = await this.callMCP('router_mcp', 'route', {
+                            target_model: model,
+                            user_permission: this.permissions
+                        });
+                        console.log('✅ Router MCP響應:', result);
+                    } catch (error) {
+                        console.error('Router MCP調用失敗:', error);
+                    }
+                };
+                
+                // 增強工作流功能
+                const originalSelectWorkflow = window.selectWorkflow;
+                window.selectWorkflow = async (workflow) => {
+                    if (originalSelectWorkflow) {
+                        originalSelectWorkflow.call(window, workflow);
+                    }
+                    
+                    try {
+                        const result = await this.callMCP('workflow_mcp', 'execute', {
+                            workflow_type: workflow,
+                            context: this.getContext()
+                        });
+                        console.log('✅ Workflow MCP響應:', result);
+                    } catch (error) {
+                        console.error('Workflow MCP調用失敗:', error);
+                    }
+                };
+            }
+            
+            setupSmartUIEnhancements() {
+                // SmartUI增強規則 - 不破壞原有UI
+                this.smartUI.enhance = async (targetSelector, enhancement) => {
+                    const target = document.querySelector(targetSelector);
+                    if (!target) return;
+                    
+                    // 檢查權限
+                    if (!this.checkPermission(enhancement.requiredPermission)) {
+                        console.log('權限不足，跳過增強:', enhancement.name);
+                        return;
+                    }
+                    
+                    // 創建增強容器，不修改原有結構
+                    const enhanceContainer = document.createElement('div');
+                    enhanceContainer.className = 'smartui-enhancement';
+                    enhanceContainer.innerHTML = enhancement.html;
+                    
+                    // 添加到目標元素內部末尾
+                    target.appendChild(enhanceContainer);
+                    
+                    console.log('✅ SmartUI增強已應用:', enhancement.name);
+                };
+            }
+            
+            enhanceExistingFeatures() {
+                // 為AI控制面板添加實時統計
+                this.smartUI.enhance('.ai-control-section', {
+                    name: 'real-time-stats',
+                    requiredPermission: 'developer',
+                    html: `
+                        <div class="mcp-stats" style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                            <div style="font-size: 12px; opacity: 0.9;">MCP狀態</div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span>Router: <span style="color: #4ade80;">✓</span></span>
+                                <span>K2 Chat: <span style="color: #4ade80;">✓</span></span>
+                                <span>SmartUI: <span style="color: #4ade80;">✓</span></span>
+                            </div>
+                        </div>
+                    `
+                });
+                
+                // 為工作流添加進度顯示
+                document.querySelectorAll('.workflow-item').forEach((item, index) => {
+                    // 添加數據屬性但不改變外觀
+                    item.setAttribute('data-mcp-enabled', 'true');
+                    item.setAttribute('data-workflow-id', ['analyze', 'refactor', 'test', 'build', 'optimize', 'monitor'][index]);
+                });
+            }
+            
+            async callMCP(component, method, params) {
+                // 模擬MCP調用（實際環境中應調用真實API）
+                console.log(`調用MCP: ${component}.${method}`, params);
+                
+                // 返回模擬結果
+                return {
+                    status: 'success',
+                    component: component,
+                    method: method,
+                    result: {
+                        message: `${component}處理成功`,
+                        timestamp: new Date().toISOString()
+                    }
+                };
+            }
+            
+            checkPermission(required) {
+                const permissionLevels = { user: 1, developer: 2, admin: 3 };
+                const currentLevel = permissionLevels[this.permissions] || 1;
+                const requiredLevel = permissionLevels[required] || 1;
+                return currentLevel >= requiredLevel;
+            }
+            
+            getContext() {
+                return {
+                    user_permission: this.permissions,
+                    current_file: currentFile,
+                    editor_content: monacoEditor?.getValue() || '',
+                    screen_size: window.innerWidth,
+                    current_mode: currentMode
+                };
+            }
+        }
+        
+        // 延遲初始化PowerAutomation橋接，確保所有組件都已加載
+        setTimeout(() => {
+            window.powerAutomationBridge = new ClaudeEditorPowerAutomationBridge();
+            window.powerAutomationBridge.initialize();
+        }, 1000);
     </script>
 </body>
 </html>

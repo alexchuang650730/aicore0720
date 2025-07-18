@@ -14,8 +14,8 @@ import uuid
 
 # 导入核心组件
 from components.command_mcp.enhanced_command_manager import EnhancedCommandManager
-from components.local_adapter_mcp.local_adapter_manager import LocalAdapterManager
-from components.claude_router_mcp.unified_mcp_server import UnifiedMCPServer
+from components.local_adapter_mcp.local_adapter_manager import LocalAdapterMCPManager
+from components.claude_router_mcp.unified_mcp_server import PowerAutomationUnifiedMCPServer
 from components.memoryos_mcp.memory_engine import MemoryEngine
 from workflows.six_core_workflows import SixCoreWorkflows
 from goal_alignment_system.goal_precision_engine import GoalPrecisionEngine
@@ -31,9 +31,9 @@ class PowerAutomationCoreDriver:
         self.status = "initializing"
         
         # 初始化核心组件
-        self.local_adapter = LocalAdapterManager()
+        self.local_adapter = LocalAdapterMCPManager()
         self.command_manager = EnhancedCommandManager(self.local_adapter)
-        self.claude_router = UnifiedMCPServer()
+        self.claude_router = PowerAutomationUnifiedMCPServer()
         self.memory_engine = MemoryEngine()
         self.workflows = SixCoreWorkflows()
         self.goal_engine = GoalPrecisionEngine()
