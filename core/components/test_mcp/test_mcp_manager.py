@@ -20,6 +20,10 @@ from enum import Enum
 import json
 from pathlib import Path
 
+# 導入測試案例生成器和執行器
+from .test_case_generator import test_case_generator, GeneratedTestCase
+from .test_executors import test_executor_manager, TestExecutionResult
+
 logger = logging.getLogger(__name__)
 
 
@@ -109,72 +113,48 @@ class TestExecutor:
     
     async def execute_test_case(self, test_case: TestCase) -> TestResult:
         """執行單個測試用例"""
-        start_time = time.time()
-        start_time_str = datetime.now().isoformat()
-        
         self.logger.info(f"執行測試: {test_case.name}")
         
-        try:
-            # 模擬測試執行
-            await asyncio.sleep(0.1)  # 模擬執行時間
-            
-            # 根據測試類型執行不同邏輯
-            if test_case.test_type == TestType.UI:
-                result = await self._execute_ui_test(test_case)
-            elif test_case.test_type == TestType.API:
-                result = await self._execute_api_test(test_case)
-            elif test_case.test_type == TestType.E2E:
-                result = await self._execute_e2e_test(test_case)
-            else:
-                result = await self._execute_unit_test(test_case)
-            
-            execution_time = time.time() - start_time
-            
-            test_result = TestResult(
-                test_id=test_case.id,
-                test_name=test_case.name,
-                status=TestStatus.PASSED if result["success"] else TestStatus.FAILED,
-                execution_time=execution_time,
-                start_time=start_time_str,
-                end_time=datetime.now().isoformat(),
-                output=result.get("output"),
-                error_message=result.get("error")
-            )
-            
-        except Exception as e:
-            execution_time = time.time() - start_time
-            test_result = TestResult(
-                test_id=test_case.id,
-                test_name=test_case.name,
-                status=TestStatus.ERROR,
-                execution_time=execution_time,
-                start_time=start_time_str,
-                end_time=datetime.now().isoformat(),
-                error_message=str(e)
-            )
+        # 準備測試配置
+        test_config = {
+            "test_file": test_case.test_file,
+            "test_method": test_case.test_method,
+            "name": test_case.name,
+            "timeout": test_case.timeout
+        }
+        
+        # 使用新的執行器
+        test_type_map = {
+            TestType.UNIT: "unit",
+            TestType.INTEGRATION: "integration",
+            TestType.PERFORMANCE: "performance",
+            TestType.UI: "ui_operation",
+            TestType.API: "integration",
+            TestType.E2E: "ui_operation",
+            TestType.VISUAL: "ui_operation"
+        }
+        
+        executor_type = test_type_map.get(test_case.test_type, "unit")
+        
+        # 執行測試
+        execution_result = await test_executor_manager.execute_test(executor_type, test_config)
+        
+        # 轉換為 TestResult
+        test_result = TestResult(
+            test_id=test_case.id,
+            test_name=test_case.name,
+            status=TestStatus(execution_result.status.upper()) if execution_result.status.upper() in [s.value for s in TestStatus] else TestStatus.ERROR,
+            execution_time=execution_result.execution_time,
+            start_time=execution_result.start_time,
+            end_time=execution_result.end_time,
+            output=execution_result.output,
+            error_message=execution_result.error,
+            artifacts=execution_result.artifacts
+        )
         
         self.test_results.append(test_result)
         return test_result
     
-    async def _execute_ui_test(self, test_case: TestCase) -> Dict[str, Any]:
-        """執行UI測試"""
-        await asyncio.sleep(0.2)  # 模擬UI測試時間
-        return {"success": True, "output": f"UI測試 {test_case.name} 執行成功"}
-    
-    async def _execute_api_test(self, test_case: TestCase) -> Dict[str, Any]:
-        """執行API測試"""
-        await asyncio.sleep(0.1)  # 模擬API測試時間
-        return {"success": True, "output": f"API測試 {test_case.name} 執行成功"}
-    
-    async def _execute_e2e_test(self, test_case: TestCase) -> Dict[str, Any]:
-        """執行E2E測試"""
-        await asyncio.sleep(0.5)  # 模擬E2E測試時間
-        return {"success": True, "output": f"E2E測試 {test_case.name} 執行成功"}
-    
-    async def _execute_unit_test(self, test_case: TestCase) -> Dict[str, Any]:
-        """執行單元測試"""
-        await asyncio.sleep(0.05)  # 模擬單元測試時間
-        return {"success": True, "output": f"單元測試 {test_case.name} 執行成功"}
     
     async def execute_test_suite(self, test_suite: TestSuite) -> List[TestResult]:
         """執行測試套件"""
@@ -343,18 +323,28 @@ class TestMCPManager:
         """AI生成測試用例"""
         self.logger.info(f"為 {component_name} 生成 {test_type.value} 測試用例")
         
-        # 模擬AI測試生成
-        generated_tests = []
+        # 使用測試案例生成器
+        mcp_info = {
+            "name": component_name,
+            "priority": "P1",
+            "category": "component",
+            "description": f"{component_name} MCP 組件"
+        }
         
-        for i in range(3):  # 生成3個測試用例
+        # 生成測試案例並保存到文件
+        generated_test_cases = await test_case_generator.generate_mcp_test_cases(component_name, mcp_info)
+        
+        # 轉換為 TestCase 格式
+        generated_tests = []
+        for gtc in generated_test_cases:
             test_case = TestCase(
-                id=f"ai_generated_{component_name}_{i+1}",
-                name=f"AI生成測試: {component_name} {test_type.value} #{i+1}",
-                description=f"AI自動生成的{component_name}組件{test_type.value}測試",
-                test_type=test_type,
-                test_file=f"ai_generated_{component_name}.py",
-                test_method=f"test_{test_type.value}_{i+1}",
-                tags=["ai_generated", component_name, test_type.value]
+                id=gtc.id,
+                name=gtc.name,
+                description=gtc.description,
+                test_type=TestType(gtc.category) if gtc.category in [t.value for t in TestType] else TestType.UNIT,
+                test_file=str(gtc.to_file_path(test_case_generator.output_dir)),
+                test_method=f"test_{gtc.name}",
+                tags=gtc.tags
             )
             generated_tests.append(test_case)
         
@@ -418,18 +408,170 @@ class TestMCPManager:
         
         return dashboard
     
+    async def generate_mcp_zero_test_suite(self) -> Dict[str, Any]:
+        """生成 MCP-Zero 完整測試套件"""
+        self.logger.info("生成 MCP-Zero 完整測試套件")
+        
+        # 使用測試案例生成器生成所有測試
+        summary_report = await test_case_generator.generate_mcp_zero_test_suite()
+        
+        # 創建測試套件
+        test_suite = TestSuite(
+            id="mcp_zero_complete",
+            name="MCP-Zero 完整測試套件",
+            description="涵蓋所有 MCP 組件的完整測試",
+            test_cases=[],  # 從生成的文件動態加載
+            parallel_execution=True,
+            max_parallel=4
+        )
+        
+        self.test_suites[test_suite.id] = test_suite
+        
+        return summary_report
+    
+    async def run_test_with_results(self, test_suite_id: str) -> Dict[str, Any]:
+        """運行測試並生成結果報告"""
+        if test_suite_id not in self.test_suites:
+            raise ValueError(f"測試套件不存在: {test_suite_id}")
+        
+        # 創建測試會話
+        session_id = await self.create_test_session(
+            f"Test Run - {datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            [test_suite_id]
+        )
+        
+        # 運行測試
+        session_result = await self.run_test_session(session_id)
+        
+        # 生成測試結果報告
+        report_path = test_case_generator.output_dir / f"test_results_{session_id}.json"
+        with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(session_result, f, indent=2, ensure_ascii=False)
+        
+        self.logger.info(f"測試結果已保存: {report_path}")
+        
+        return session_result
+    
+    async def execute_unit_tests(self, mcp_name: Optional[str] = None) -> Dict[str, Any]:
+        """執行單元測試"""
+        self.logger.info(f"執行單元測試: {mcp_name or '所有組件'}")
+        
+        # 生成單元測試案例
+        test_cases = []
+        if mcp_name:
+            # 特定 MCP 的單元測試
+            unit_tests = await self.generate_ai_test_cases(mcp_name, TestType.UNIT)
+            test_cases.extend(unit_tests)
+        else:
+            # 所有 MCP 的單元測試
+            from core.mcp_zero import mcp_registry
+            for name in mcp_registry.mcp_catalog.keys():
+                unit_tests = await self.generate_ai_test_cases(name, TestType.UNIT)
+                test_cases.extend(unit_tests)
+        
+        # 創建測試套件
+        test_suite = TestSuite(
+            id=f"unit_tests_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            name="單元測試套件",
+            description="自動生成的單元測試",
+            test_cases=test_cases,
+            parallel_execution=True,
+            max_parallel=4
+        )
+        
+        # 執行測試
+        results = await self.execute_test_suite(test_suite)
+        
+        return {
+            "test_type": "unit",
+            "total_tests": len(results),
+            "passed": sum(1 for r in results if r.status == TestStatus.PASSED),
+            "failed": sum(1 for r in results if r.status == TestStatus.FAILED),
+            "results": [asdict(r) for r in results]
+        }
+    
+    async def execute_integration_tests(self, test_scenarios: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """執行集成測試"""
+        self.logger.info("執行集成測試")
+        
+        results = []
+        for scenario in test_scenarios:
+            test_config = {
+                "name": scenario.get("name", "integration_test"),
+                "test_file": scenario.get("test_file"),
+                "services": scenario.get("services", [])
+            }
+            
+            result = await test_executor_manager.execute_test("integration", test_config)
+            results.append(result)
+        
+        return {
+            "test_type": "integration",
+            "total_tests": len(results),
+            "passed": sum(1 for r in results if r.status == "passed"),
+            "failed": sum(1 for r in results if r.status == "failed"),
+            "results": [asdict(r) for r in results]
+        }
+    
+    async def execute_performance_tests(self, performance_configs: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """執行性能測試"""
+        self.logger.info("執行性能測試")
+        
+        results = []
+        for config in performance_configs:
+            result = await test_executor_manager.execute_test("performance", config)
+            results.append(result)
+        
+        return {
+            "test_type": "performance",
+            "total_tests": len(results),
+            "passed": sum(1 for r in results if r.status == "passed"),
+            "failed": sum(1 for r in results if r.status == "failed"),
+            "metrics": {
+                "average_response_time": sum(r.metrics.get("average_response_time", 0) for r in results) / len(results) if results else 0,
+                "average_rps": sum(r.metrics.get("requests_per_second", 0) for r in results) / len(results) if results else 0
+            },
+            "results": [asdict(r) for r in results]
+        }
+    
+    async def execute_ui_operation_tests(self, ui_test_configs: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """執行 UI 操作測試"""
+        self.logger.info("執行 UI 操作測試")
+        
+        results = []
+        for config in ui_test_configs:
+            result = await test_executor_manager.execute_test("ui_operation", config)
+            results.append(result)
+        
+        # 收集所有截圖
+        all_artifacts = []
+        for result in results:
+            if result.artifacts:
+                all_artifacts.extend(result.artifacts)
+        
+        return {
+            "test_type": "ui_operation",
+            "total_tests": len(results),
+            "passed": sum(1 for r in results if r.status == "passed"),
+            "failed": sum(1 for r in results if r.status == "failed"),
+            "artifacts": all_artifacts,
+            "results": [asdict(r) for r in results]
+        }
+    
     def get_status(self) -> Dict[str, Any]:
         """獲取Test MCP狀態"""
         return {
             "component": "Test MCP",
-            "version": "4.6.1",
+            "version": "4.7.3",
             "status": "running",
             "test_suites": len(self.test_suites),
             "active_sessions": len([s for s in self.test_sessions.values() if s["status"] == "running"]),
             "total_sessions": len(self.test_sessions),
+            "test_output_dir": str(test_case_generator.output_dir),
             "integrations": {
                 "stagewise_mcp": self.stagewise_integration is not None,
-                "ag_ui_mcp": self.ag_ui_integration is not None
+                "ag_ui_mcp": self.ag_ui_integration is not None,
+                "test_case_generator": True
             }
         }
 

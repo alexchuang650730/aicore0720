@@ -1,0 +1,429 @@
+/* CodeFlow Panel 樣式 */
+
+.codeflow-panel {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 主卡片 */
+.codeflow-main-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+.codeflow-main-card .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 面板標題 */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.panel-icon {
+  font-size: 20px;
+  color: #1890ff;
+}
+
+/* 工作流狀態卡片 */
+.workflow-status-card {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  width: 300px;
+  z-index: 10;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.workflow-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.workflow-name {
+  font-weight: 600;
+  margin-right: auto;
+}
+
+/* Tab 內容 */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-section h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.requirements-input,
+.spec-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.requirements-input:focus,
+.spec-input:focus {
+  outline: none;
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.output-section {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20px;
+}
+
+.output-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 分析結果 */
+.analysis-results {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.analysis-results h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  text-align: center;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1890ff;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* 問題列表 */
+.issues-section {
+  margin-bottom: 20px;
+}
+
+.issues-section h5 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.issue-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.issue-item.error {
+  border-left: 3px solid #ff4d4f;
+  background: #fff2f0;
+}
+
+.issue-item.warning {
+  border-left: 3px solid #faad14;
+  background: #fffbe6;
+}
+
+.issue-item.info {
+  border-left: 3px solid #1890ff;
+  background: #e6f7ff;
+}
+
+.issue-type {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.issue-message {
+  flex: 1;
+  color: #595959;
+}
+
+.issue-line {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* 建議列表 */
+.suggestions-section h5 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #e6f7ff;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #0050b3;
+}
+
+.suggestion-item .anticon {
+  margin-top: 2px;
+  color: #1890ff;
+}
+
+/* 重構選項 */
+.refactoring-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.refactoring-options h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.refactoring-card {
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+}
+
+.refactoring-card:hover {
+  border-color: #40a9ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
+}
+
+.refactoring-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.impact-level {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.refactoring-desc {
+  margin: 8px 0;
+  color: #595959;
+  font-size: 13px;
+}
+
+.code-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.code-before,
+.code-after {
+  background: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.code-before h6,
+.code-after h6 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8c8c8c;
+}
+
+.code-before pre,
+.code-after pre {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: 'Monaco', 'Consolas', monospace;
+}
+
+.code-after {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+}
+
+/* 快速操作按鈕 */
+.quick-actions {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.quick-actions .ant-btn {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s;
+}
+
+.quick-actions .ant-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Monaco 編輯器樣式調整 */
+.monaco-editor {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .code-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .workflow-status-card {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+
+/* 動畫效果 */
+.codeflow-panel .ant-progress-line {
+  transition: all 0.4s cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.issue-item,
+.suggestion-item,
+.refactoring-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 深色主題支持 */
+@media (prefers-color-scheme: dark) {
+  .codeflow-main-card {
+    background: #1f1f1f;
+    color: #fff;
+  }
+
+  .panel-header,
+  .input-section h4,
+  .output-section h4,
+  .analysis-results h4 {
+    color: #fff;
+  }
+
+  .requirements-input,
+  .spec-input {
+    background: #2f2f2f;
+    border-color: #434343;
+    color: #fff;
+  }
+
+  .analysis-results {
+    background: #2f2f2f;
+  }
+
+  .metric-card {
+    background: #2f2f2f;
+  }
+
+  .issue-item {
+    background: #2f2f2f;
+  }
+
+  .code-before {
+    background: #2f2f2f;
+  }
+}

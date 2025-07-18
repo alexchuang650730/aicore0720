@@ -10,7 +10,9 @@ import {
   Collapse,
   Typography,
   Tag,
-  Divider
+  Divider,
+  Spin,
+  List
 } from 'antd';
 import {
   PlayCircleOutlined,
@@ -23,7 +25,9 @@ import {
   FileSearchOutlined,
   BugOutlined,
   CloudUploadOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  ApiOutlined,
+  ThunderboltOutlined
 } from '@ant-design/icons';
 
 const { Text, Title } = Typography;
@@ -31,12 +35,12 @@ const { Panel } = Collapse;
 
 // 工作流圖標映射
 const workflowIcons = {
-  requirement_analysis: <FileSearchOutlined />,
-  architecture_design: <CodeOutlined />,
-  coding_implementation: <CodeOutlined />,
-  testing_validation: <BugOutlined />,
-  deployment_release: <CloudUploadOutlined />,
-  monitoring_operations: <DashboardOutlined />
+  goal_driven_development: <FileSearchOutlined />,
+  intelligent_code_generation: <CodeOutlined />,
+  automated_testing_validation: <BugOutlined />,
+  continuous_quality_assurance: <DashboardOutlined />,
+  smart_deployment_ops: <CloudUploadOutlined />,
+  adaptive_learning_optimization: <SyncOutlined />
 };
 
 // MCP 狀態顏色映射
@@ -60,62 +64,94 @@ export const WorkflowBottomPanel = () => {
   const [costInfo, setCostInfo] = useState({ current: 0, saved: 0 });
   const [mcpStatus, setMcpStatus] = useState({});
   const [collapsed, setCollapsed] = useState(false);
+  const [loadedMcps, setLoadedMcps] = useState([]);
+  const [contextUsage, setContextUsage] = useState({ used: 0, total: 100000, percentage: 0 });
+  const [mcpZeroMode, setMcpZeroMode] = useState(true); // 默認使用 MCP-Zero 模式
+  const [integrationStatus, setIntegrationStatus] = useState(null);
+  const [mcpIntegrationLevel, setMcpIntegrationLevel] = useState({});
 
-  // 六大工作流定義
+  // 六大工作流定義 - 更新為新的工作流系統
   const workflows = [
     {
-      key: 'requirement_analysis',
-      title: '需求分析',
-      description: '分析代碼提取需求',
-      mcps: ['codeflow_mcp', 'stagewise_mcp'],
-      estimatedTime: '10-15分鐘'
+      key: 'goal_driven_development',
+      title: '目標驅動開發',
+      description: '確保開發與用戶目標對齊',
+      mcps: ['business_mcp', 'memoryos_mcp', 'claude_router_mcp'],
+      estimatedTime: '全程跟蹤',
+      integrationLevel: 100
     },
     {
-      key: 'architecture_design',
-      title: '架構設計',
-      description: '生成架構和UI設計',
-      mcps: ['zen_mcp', 'smartui_mcp', 'stagewise_mcp'],
-      estimatedTime: '15-20分鐘'
+      key: 'intelligent_code_generation',
+      title: '智能代碼生成',
+      description: '基於規格智能生成代碼',
+      mcps: ['codeflow_mcp', 'smartui_mcp', 'claude_router_mcp', 'docs_mcp'],
+      estimatedTime: '15-30分鐘',
+      integrationLevel: 100
     },
     {
-      key: 'coding_implementation',
-      title: '編碼實現',
-      description: '智能代碼生成',
-      mcps: ['codeflow_mcp', 'zen_mcp', 'xmasters_mcp', 'smartui_mcp', 'ag_ui_mcp'],
-      estimatedTime: '30-45分鐘'
+      key: 'automated_testing_validation',
+      title: '自動化測試驗證',
+      description: '全面的自動化測試',
+      mcps: ['test_mcp', 'command_mcp', 'claude_router_mcp'],
+      estimatedTime: '20-40分鐘',
+      integrationLevel: 100
     },
     {
-      key: 'testing_validation',
-      title: '測試驗證',
-      description: '自動化測試執行',
-      mcps: ['test_mcp', 'ag_ui_mcp', 'stagewise_mcp'],
-      estimatedTime: '20-30分鐘'
+      key: 'continuous_quality_assurance',
+      title: '持續質量保證',
+      description: '持續監控和改進代碼質量',
+      mcps: ['test_mcp', 'memoryos_mcp', 'claude_router_mcp'],
+      estimatedTime: '持續運行',
+      integrationLevel: 100
     },
     {
-      key: 'deployment_release',
-      title: '部署發布',
-      description: '一鍵部署上線',
-      mcps: ['smartui_mcp', 'stagewise_mcp'],
-      estimatedTime: '10-15分鐘'
+      key: 'smart_deployment_ops',
+      title: '智能部署運維',
+      description: '自動化部署和運維',
+      mcps: ['command_mcp', 'business_mcp', 'claude_router_mcp'],
+      estimatedTime: '10-20分鐘',
+      integrationLevel: 100
     },
     {
-      key: 'monitoring_operations',
-      title: '監控運維',
-      description: '實時監控優化',
-      mcps: ['codeflow_mcp', 'xmasters_mcp', 'stagewise_mcp'],
-      estimatedTime: '持續運行'
+      key: 'adaptive_learning_optimization',
+      title: '自適應學習優化',
+      description: '持續學習和優化系統',
+      mcps: ['memoryos_mcp', 'business_mcp', 'docs_mcp', 'claude_router_mcp'],
+      estimatedTime: '持續學習',
+      integrationLevel: 100
     }
   ];
 
-  // 處理工作流啟動
-  const handleStartWorkflow = (workflowKey) => {
+  // 處理工作流啟動 - MCP-Zero 模式
+  const handleStartWorkflow = async (workflowKey) => {
     setActiveWorkflow(workflowKey);
     setWorkflowStatus('running');
     setCurrentStep(workflows.findIndex(w => w.key === workflowKey));
     setProgress(0);
     
-    // 通知後端啟動工作流
-    window.powerautomation?.startWorkflow(workflowKey);
+    if (mcpZeroMode) {
+      // 使用 MCP-Zero 動態加載
+      try {
+        const response = await fetch('/api/mcpzero/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            task: `執行${workflows.find(w => w.key === workflowKey).title}工作流`,
+            options: {
+              workflow_type: workflowKey,
+              max_tokens: 30000
+            }
+          })
+        });
+        const result = await response.json();
+        window.powerautomation?.startWorkflow(workflowKey, { task_id: result.task_id });
+      } catch (error) {
+        console.error('MCP-Zero 執行失敗:', error);
+      }
+    } else {
+      // 傳統模式
+      window.powerautomation?.startWorkflow(workflowKey);
+    }
   };
 
   // 處理工作流控制
@@ -129,22 +165,60 @@ export const WorkflowBottomPanel = () => {
     }
   };
 
-  // 監聽工作流進度
+  // 監聽工作流進度和 MCP 狀態
   useEffect(() => {
     const handleWorkflowProgress = (event) => {
-      const { workflow, progress, mcpStatus, cost } = event.detail;
+      const { workflow, progress, mcpStatus, cost, loaded_mcps, context_usage } = event.detail;
       setProgress(progress);
       setMcpStatus(mcpStatus);
       setCostInfo(cost);
+      
+      // MCP-Zero 模式下更新加載的 MCP 和上下文使用
+      if (loaded_mcps) {
+        setLoadedMcps(loaded_mcps);
+      }
+      if (context_usage) {
+        setContextUsage(context_usage);
+      }
       
       if (progress === 100) {
         setWorkflowStatus('completed');
       }
     };
 
+    // 定期獲取 MCP-Zero 狀態和集成狀態
+    const fetchMcpStatus = async () => {
+      if (mcpZeroMode && activeWorkflow) {
+        try {
+          // 獲取 MCP-Zero 狀態
+          const response = await fetch('/api/mcpzero/mcps/loaded');
+          const data = await response.json();
+          setLoadedMcps(data.loaded_mcps);
+          setContextUsage({
+            used: data.context_usage.total_context_size,
+            total: 100000,
+            percentage: data.context_usage.percentage_of_max
+          });
+          
+          // 獲取集成狀態
+          const integrationResponse = await fetch('/api/workflows/integration-status');
+          const integrationData = await integrationResponse.json();
+          setIntegrationStatus(integrationData);
+          setMcpIntegrationLevel(integrationData.mcp_status || {});
+        } catch (error) {
+          console.error('獲取 MCP 狀態失敗:', error);
+        }
+      }
+    };
+
     window.addEventListener('workflow:progress', handleWorkflowProgress);
-    return () => window.removeEventListener('workflow:progress', handleWorkflowProgress);
-  }, []);
+    const interval = setInterval(fetchMcpStatus, 2000); // 每 2 秒更新一次
+    
+    return () => {
+      window.removeEventListener('workflow:progress', handleWorkflowProgress);
+      clearInterval(interval);
+    };
+  }, [mcpZeroMode, activeWorkflow]);
 
   // 渲染 MCP 狀態指示器
   const MCPStatusIndicator = ({ mcp, status = 'idle' }) => (
@@ -221,6 +295,18 @@ export const WorkflowBottomPanel = () => {
         <Space>
           <RocketOutlined style={{ fontSize: 18, color: '#1890ff' }} />
           <Title level={5} style={{ margin: 0 }}>六大工作流</Title>
+          {mcpZeroMode && (
+            <Tag icon={<ThunderboltOutlined />} color="blue">
+              MCP-Zero
+            </Tag>
+          )}
+          {integrationStatus && (
+            <Tooltip title={`P1 MCP 集成度: ${integrationStatus.overall_integration_percentage || '0%'}`}>
+              <Tag color={integrationStatus.integration_complete ? 'green' : 'orange'}>
+                {integrationStatus.overall_integration_percentage || '0%'}
+              </Tag>
+            </Tooltip>
+          )}
         </Space>
         <Space>
           {/* 成本顯示 */}
@@ -275,6 +361,40 @@ export const WorkflowBottomPanel = () => {
         </div>
       )}
 
+      {/* MCP-Zero 狀態顯示 */}
+      {mcpZeroMode && activeWorkflow && (
+        <div style={{ 
+          padding: '8px 16px', 
+          background: '#e6f7ff',
+          borderBottom: '1px solid #91d5ff'
+        }}>
+          <Space direction="vertical" size={4} style={{ width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={{ fontSize: 12 }}>上下文使用</Text>
+              <Text type="secondary" style={{ fontSize: 11 }}>
+                {contextUsage.used.toLocaleString()} / {contextUsage.total.toLocaleString()} tokens
+              </Text>
+            </div>
+            <Progress 
+              percent={contextUsage.percentage} 
+              size="small" 
+              strokeColor={contextUsage.percentage > 80 ? '#ff4d4f' : '#1890ff'}
+              showInfo={false}
+            />
+            <div style={{ marginTop: 4 }}>
+              <Text style={{ fontSize: 11, fontWeight: 'bold' }}>動態加載的 MCP:</Text>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
+                {loadedMcps.map(mcp => (
+                  <Tag key={mcp} size="small" color="processing">
+                    {mcp.replace('_mcp', '')}
+                  </Tag>
+                ))}
+              </div>
+            </div>
+          </Space>
+        </div>
+      )}
+      
       {/* 工作流列表 */}
       <div style={{ flex: 1, overflow: 'auto', padding: '8px' }}>
         <Steps
@@ -291,6 +411,11 @@ export const WorkflowBottomPanel = () => {
                   <Space size={4}>
                     {workflowIcons[workflow.key]}
                     <Text style={{ fontSize: 13 }}>{workflow.title}</Text>
+                    {workflow.integrationLevel && (
+                      <Tag color="green" style={{ fontSize: 10 }}>
+                        {workflow.integrationLevel}%
+                      </Tag>
+                    )}
                   </Space>
                   {!activeWorkflow && (
                     <Button
@@ -313,6 +438,17 @@ export const WorkflowBottomPanel = () => {
                     <Text type="secondary" style={{ fontSize: 10 }}>
                       預計: {workflow.estimatedTime}
                     </Text>
+                  </div>
+                  <div style={{ marginTop: 4, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    {workflow.mcps.map(mcp => (
+                      <Tag 
+                        key={mcp} 
+                        style={{ fontSize: 9, padding: '0 4px', margin: 0 }}
+                        color={mcpIntegrationLevel[mcp]?.status === 'active' ? 'success' : 'default'}
+                      >
+                        {mcp.replace('_mcp', '').substring(0, 3).toUpperCase()}
+                      </Tag>
+                    ))}
                   </div>
                 </div>
               }
@@ -338,11 +474,21 @@ export const WorkflowBottomPanel = () => {
             size="small"
             type={activeWorkflow ? 'default' : 'primary'}
             icon={<RocketOutlined />}
-            onClick={() => handleStartWorkflow('requirement_analysis')}
+            onClick={() => handleStartWorkflow('goal_driven_development')}
             disabled={!!activeWorkflow}
           >
             快速開始
           </Button>
+          <Tooltip title={mcpZeroMode ? '切換到傳統模式' : '切換到 MCP-Zero 模式'}>
+            <Button
+              size="small"
+              icon={<ApiOutlined />}
+              onClick={() => setMcpZeroMode(!mcpZeroMode)}
+              type={mcpZeroMode ? 'primary' : 'default'}
+            >
+              {mcpZeroMode ? 'Zero' : '傳統'}
+            </Button>
+          </Tooltip>
           <Button
             size="small"
             icon={<SyncOutlined />}

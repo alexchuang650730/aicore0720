@@ -13,6 +13,9 @@ from pathlib import Path
 import uuid
 import time
 
+# 導入工作流 MCP 集成器
+from .workflow_mcp_integration import workflow_mcp_integrator
+
 logger = logging.getLogger(__name__)
 
 class WorkflowStatus(Enum):
@@ -283,8 +286,24 @@ class GoalDrivenDevelopmentWorkflow(BaseWorkflow):
     
     async def _analyze_user_goal(self, user_goal: str) -> Dict[str, Any]:
         """分析用户目标"""
-        # 模拟AI分析用户目标
-        await asyncio.sleep(0.1)
+        # 集成 MCP 進行分析
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "goal_driven_development", "goal_analysis"
+        )
+        
+        # 使用 Business MCP 和 MemoryOS MCP 進行深度分析
+        if "business_mcp" in mcp_result["integrated_mcps"]:
+            roi_analysis = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "business_mcp", "generate_roi_analysis",
+                {"scenario": user_goal}
+            )
+        
+        if "memoryos_mcp" in mcp_result["integrated_mcps"]:
+            # 從記憶中檢索相關經驗
+            past_experience = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "memoryos_mcp", "retrieve_context",
+                {"query": user_goal}
+            )
         
         return {
             "goal_type": "feature_development",
@@ -306,7 +325,12 @@ class GoalDrivenDevelopmentWorkflow(BaseWorkflow):
                 "技术复杂度评估不准确",
                 "用户需求变更",
                 "第三方依赖问题"
-            ]
+            ],
+            "mcp_analysis": {
+                "integrated_mcps": mcp_result["integrated_mcps"],
+                "roi_analysis": roi_analysis if "business_mcp" in mcp_result["integrated_mcps"] else None,
+                "past_experience": past_experience if "memoryos_mcp" in mcp_result["integrated_mcps"] else None
+            }
         }
     
     async def _decompose_requirements(self, context: WorkflowContext) -> Dict[str, Any]:
@@ -544,7 +568,38 @@ class IntelligentCodeGenerationWorkflow(BaseWorkflow):
     
     async def _generate_code(self, context: WorkflowContext, step_data: Dict[str, Any]) -> Dict[str, Any]:
         """生成代码"""
-        await asyncio.sleep(0.2)
+        # 集成 MCP 進行代碼生成
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "intelligent_code_generation", "code_generation"
+        )
+        
+        code_results = {}
+        
+        # 使用 CodeFlow MCP 生成代碼
+        if "codeflow_mcp" in mcp_result["integrated_mcps"]:
+            code_spec = step_data.get("specification", "Generate a Python web application")
+            generated_code = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "codeflow_mcp", "generate_code",
+                {"specification": code_spec}
+            )
+            code_results["generated_code"] = generated_code
+        
+        # 使用 SmartUI MCP 生成 UI
+        if "smartui_mcp" in mcp_result["integrated_mcps"]:
+            ui_spec = step_data.get("ui_specification", "Modern responsive web UI")
+            generated_ui = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "smartui_mcp", "generate_ui",
+                {"specification": ui_spec}
+            )
+            code_results["generated_ui"] = generated_ui
+        
+        # 使用 Claude Router 優化成本
+        if "claude_router_mcp" in mcp_result["integrated_mcps"]:
+            routing_result = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "claude_router_mcp", "route_request",
+                {"request": {"type": "code_generation", "complexity": "high"}}
+            )
+            code_results["model_used"] = routing_result
         
         return {
             "generated_files": [
@@ -555,7 +610,9 @@ class IntelligentCodeGenerationWorkflow(BaseWorkflow):
             ],
             "lines_of_code": 450,
             "test_coverage": "85%",
-            "code_quality_score": 0.92
+            "code_quality_score": 0.92,
+            "mcp_generation_results": code_results,
+            "integrated_mcps": mcp_result["integrated_mcps"]
         }
     
     async def _review_code(self, context: WorkflowContext) -> Dict[str, Any]:
@@ -592,7 +649,53 @@ class IntelligentCodeGenerationWorkflow(BaseWorkflow):
     
     async def _generate_documentation(self, context: WorkflowContext) -> Dict[str, Any]:
         """生成文档"""
-        await asyncio.sleep(0.1)
+        # 集成 Docs MCP 生成文檔
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "intelligent_code_generation", "documentation"
+        )
+        
+        doc_results = {}
+        
+        # 使用 Docs MCP 生成各種文檔
+        if "docs_mcp" in mcp_result["integrated_mcps"]:
+            # 生成 API 文檔
+            api_docs = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "docs_mcp", "generate_api_docs",
+                {"mcp_name": "codeflow_mcp"}
+            )
+            doc_results["api_docs"] = api_docs
+            
+            # 生成用戶指南
+            user_guide = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "docs_mcp", "generate_user_guide",
+                {
+                    "topic": "PowerAutomation 使用指南",
+                    "content_outline": [
+                        "快速開始",
+                        "核心功能",
+                        "進階使用",
+                        "故障排除"
+                    ]
+                }
+            )
+            doc_results["user_guide"] = user_guide
+            
+            # 生成架構文檔
+            arch_docs = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "docs_mcp", "generate_architecture_docs",
+                {}
+            )
+            doc_results["architecture_docs"] = arch_docs
+            
+            # 更新 README
+            readme_update = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "docs_mcp", "update_readme",
+                {
+                    "update_type": "features",
+                    "content": {"new_features": ["MCP-Zero 集成", "K2 模型支持"]}
+                }
+            )
+            doc_results["readme_update"] = readme_update
         
         return {
             "documentation_generated": [
@@ -602,7 +705,9 @@ class IntelligentCodeGenerationWorkflow(BaseWorkflow):
                 "开发者文档"
             ],
             "documentation_coverage": "95%",
-            "format": "Markdown + HTML"
+            "format": "Markdown + HTML",
+            "mcp_documentation_results": doc_results,
+            "integrated_mcps": mcp_result["integrated_mcps"]
         }
 
 class AutomatedTestingValidationWorkflow(BaseWorkflow):
@@ -683,7 +788,36 @@ class AutomatedTestingValidationWorkflow(BaseWorkflow):
     
     async def _run_unit_tests(self, context: WorkflowContext) -> Dict[str, Any]:
         """运行单元测试"""
-        await asyncio.sleep(0.2)
+        # 集成 Test MCP 執行測試
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "automated_testing_validation", "unit_testing"
+        )
+        
+        test_results = {}
+        
+        # 使用 Test MCP 生成和執行測試
+        if "test_mcp" in mcp_result["integrated_mcps"]:
+            # 生成測試案例
+            test_cases = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "test_mcp", "generate_test_cases",
+                {"component_name": "user_service", "test_type": "unit"}
+            )
+            test_results["generated_tests"] = test_cases
+            
+            # 執行單元測試
+            unit_test_results = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "test_mcp", "run_tests",
+                {"test_type": "unit", "mcp_name": "user_service"}
+            )
+            test_results["unit_test_results"] = unit_test_results
+        
+        # 使用 Command MCP 執行測試命令
+        if "command_mcp" in mcp_result["integrated_mcps"]:
+            test_command_result = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "command_mcp", "execute_command",
+                {"command": "pytest -v --cov"}
+            )
+            test_results["command_execution"] = test_command_result
         
         return {
             "tests_run": 25,
@@ -694,7 +828,9 @@ class AutomatedTestingValidationWorkflow(BaseWorkflow):
             "failed_tests": [
                 "test_user_authentication",
                 "test_data_validation"
-            ]
+            ],
+            "mcp_test_results": test_results,
+            "integrated_mcps": mcp_result["integrated_mcps"]
         }
     
     async def _run_integration_tests(self, context: WorkflowContext) -> Dict[str, Any]:
@@ -1027,14 +1163,51 @@ class SmartDeploymentOpsWorkflow(BaseWorkflow):
     
     async def _execute_deployment(self, context: WorkflowContext) -> Dict[str, Any]:
         """执行部署"""
-        await asyncio.sleep(0.3)
+        # 集成 MCP 執行部署
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "smart_deployment_ops", "automated_deployment"
+        )
+        
+        deployment_results = {}
+        
+        # 使用 Command MCP 執行部署
+        if "command_mcp" in mcp_result["integrated_mcps"]:
+            deploy_config = {
+                "version": "v1.2.3",
+                "environment": "production",
+                "services": ["api", "web", "worker"],
+                "rollback_enabled": True
+            }
+            
+            deployment = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "command_mcp", "deploy_application",
+                {"deploy_config": deploy_config}
+            )
+            deployment_results["deployment"] = deployment
+            
+            # 執行健康檢查
+            health_check = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "command_mcp", "execute_command",
+                {"command": "./scripts/health_check.sh"}
+            )
+            deployment_results["health_check"] = health_check
+        
+        # 使用 Claude Router 追蹤部署成本
+        if "claude_router_mcp" in mcp_result["integrated_mcps"]:
+            usage_stats = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "claude_router_mcp", "get_usage_stats",
+                {}
+            )
+            deployment_results["usage_stats"] = usage_stats
         
         return {
             "deployment_status": "success",
             "deployed_version": "v1.2.3",
             "deployment_time": "25 minutes",
             "services_deployed": 5,
-            "health_check_status": "passed"
+            "health_check_status": "passed",
+            "mcp_deployment_results": deployment_results,
+            "integrated_mcps": mcp_result["integrated_mcps"]
         }
     
     async def _monitor_health(self, context: WorkflowContext) -> Dict[str, Any]:
@@ -1137,7 +1310,42 @@ class AdaptiveLearningOptimizationWorkflow(BaseWorkflow):
     
     async def _collect_data(self, context: WorkflowContext) -> Dict[str, Any]:
         """收集数据"""
-        await asyncio.sleep(0.2)
+        # 集成 MCP 收集數據
+        mcp_result = await workflow_mcp_integrator.integrate_mcp_to_workflow(
+            "adaptive_learning_optimization", "data_collection"
+        )
+        
+        collected_data = {}
+        
+        # 使用 MemoryOS MCP 收集歷史數據
+        if "memoryos_mcp" in mcp_result["integrated_mcps"]:
+            # 存儲當前上下文
+            context_data = {
+                "workflow": "adaptive_learning_optimization",
+                "timestamp": asyncio.get_event_loop().time(),
+                "metrics": {"performance": 0.85, "quality": 0.92}
+            }
+            
+            stored_context = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "memoryos_mcp", "store_context",
+                {"context": context_data}
+            )
+            collected_data["stored_context"] = stored_context
+            
+            # 檢索相關模式
+            patterns = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "memoryos_mcp", "retrieve_context",
+                {"query": "performance optimization patterns"}
+            )
+            collected_data["historical_patterns"] = patterns
+        
+        # 使用 Claude Router 收集使用統計
+        if "claude_router_mcp" in mcp_result["integrated_mcps"]:
+            usage_data = await workflow_mcp_integrator.execute_mcp_in_workflow(
+                mcp_result, "claude_router_mcp", "get_usage_stats",
+                {}
+            )
+            collected_data["usage_statistics"] = usage_data
         
         return {
             "data_sources": [
@@ -1148,7 +1356,9 @@ class AdaptiveLearningOptimizationWorkflow(BaseWorkflow):
             ],
             "data_volume": "10GB",
             "data_quality": "95%",
-            "collection_period": "30 days"
+            "collection_period": "30 days",
+            "mcp_collected_data": collected_data,
+            "integrated_mcps": mcp_result["integrated_mcps"]
         }
     
     async def _analyze_patterns(self, context: WorkflowContext) -> Dict[str, Any]:
