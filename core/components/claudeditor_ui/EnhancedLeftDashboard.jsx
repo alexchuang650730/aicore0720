@@ -23,6 +23,7 @@ const EnhancedLeftDashboard = () => {
   const [activeWorkflow, setActiveWorkflow] = useState('architecture');
   const [workflowProgress, setWorkflowProgress] = useState(35);
   const [workflowStatus, setWorkflowStatus] = useState('running'); // idle, running, paused, completed
+  const [workflowsExpanded, setWorkflowsExpanded] = useState(false); // 折疊狀態
 
   // 六大工作流配置
   const sixWorkflows = [
@@ -281,11 +282,37 @@ const EnhancedLeftDashboard = () => {
 
       {/* 4. 六大工作流區 - 重點部分 */}
       <div className="dashboard-section six-workflows">
-        <h3>🚀 六大工作流</h3>
+        <h3 
+          className="collapsible-header"
+          onClick={() => setWorkflowsExpanded(!workflowsExpanded)}
+          style={{ cursor: 'pointer', userSelect: 'none' }}
+        >
+          <span>🚀 六大工作流</span>
+          <span style={{ float: 'right', fontSize: '0.8em' }}>
+            {workflowsExpanded ? '▼' : '▶'}
+          </span>
+        </h3>
         
-        {/* 當前工作流狀態 */}
-        {activeWorkflow && (
-          <div className="active-workflow-status">
+        {/* 摺疊時顯示的簡要信息 */}
+        {!workflowsExpanded && activeWorkflow && (
+          <div className="workflow-summary">
+            <span className="summary-icon">
+              {sixWorkflows.find(w => w.id === activeWorkflow)?.icon}
+            </span>
+            <span className="summary-text">
+              {sixWorkflows.find(w => w.id === activeWorkflow)?.name}
+              {workflowStatus === 'running' && ' - 執行中'}
+            </span>
+            <span className="summary-progress">{workflowProgress}%</span>
+          </div>
+        )}
+        
+        {/* 展開時顯示的完整內容 */}
+        {workflowsExpanded && (
+          <div className="workflows-expanded">
+            {/* 當前工作流狀態 */}
+            {activeWorkflow && (
+              <div className="active-workflow-status">
             <div className="workflow-header">
               <span className="workflow-name">
                 {sixWorkflows.find(w => w.id === activeWorkflow)?.icon}
@@ -346,15 +373,17 @@ const EnhancedLeftDashboard = () => {
           ))}
         </div>
 
-        {/* 工作流快速啟動 */}
-        <div className="workflow-quick-start">
-          <button className="start-btn primary">
-            🚀 快速開始完整流程
-          </button>
-          <button className="start-btn">
-            📊 查看工作流報告
-          </button>
-        </div>
+            {/* 工作流快速啟動 */}
+            <div className="workflow-quick-start">
+              <button className="start-btn primary">
+                🚀 快速開始完整流程
+              </button>
+              <button className="start-btn">
+                📊 查看工作流報告
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
