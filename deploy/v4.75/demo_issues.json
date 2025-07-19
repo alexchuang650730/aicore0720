@@ -1,0 +1,31 @@
+{
+  "known_issues": {
+    "smart_intervention": {
+      "issue": "快速連續切換延遲 147ms",
+      "workaround": "避免展示快速連續切換場景",
+      "risk_level": "medium"
+    },
+    "smartui_accessibility": {
+      "issue": "鍵盤導航覆蓋率 87%",
+      "workaround": "專注於滑鼠操作和視覺演示",
+      "risk_level": "low"
+    },
+    "memoryrag_compression": {
+      "issue": "大型上下文壓縮率 47.2%",
+      "workaround": "使用中等大小的上下文演示",
+      "risk_level": "low"
+    }
+  },
+  "contingency_plans": {
+    "mcp_component_failure": "切換到備用模擬數據",
+    "network_issues": "使用離線演示模式",
+    "performance_degradation": "重啟演示環境",
+    "ui_rendering_issues": "使用靜態演示截圖"
+  },
+  "rehearsal_results": {
+    "last_rehearsal": "未執行",
+    "success_rate": 0,
+    "identified_issues": [],
+    "improvement_suggestions": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "powerautomation-v475",
+  "version": "4.75.0",
+  "description": "PowerAutomation v4.75 - Claude Code Tool + ClaudeEditor Integration",
+  "scripts": {
+    "start": "node server.js",
+    "demo": "python3 enhanced_demo_server.py",
+    "test": "python3 verify_deployment.py",
+    "metrics": "python3 workflow_automation_metrics.py"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "ws": "^8.0.0",
+    "cors": "^2.8.0"
+  }
+}

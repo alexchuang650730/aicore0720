@@ -1,0 +1,96 @@
+{
+  "mcp_components": {
+    "P0_core": {
+      "smart_intervention": {
+        "port": 3001,
+        "demo_mode": true,
+        "response_time": 100,
+        "success_rate": 0.95,
+        "demo_triggers": {
+          "ui_keywords": ["界面", "組件", "設計", "前端"],
+          "code_keywords": ["代碼", "函數", "類", "API"],
+          "test_keywords": ["測試", "檢查", "驗證", "調試"]
+        }
+      },
+      "codeflow_mcp": {
+        "port": 3002,
+        "demo_mode": true,
+        "generation_speed": 1200,
+        "syntax_accuracy": 0.98,
+        "demo_templates": [
+          "react_component",
+          "nodejs_service",
+          "python_script",
+          "test_suite"
+        ]
+      },
+      "smartui_mcp": {
+        "port": 3003,
+        "demo_mode": true,
+        "component_generation_time": 1.5,
+        "responsive_accuracy": 0.95,
+        "demo_components": [
+          "user_list",
+          "data_table",
+          "navigation_bar",
+          "dashboard_card"
+        ]
+      },
+      "memoryrag_mcp": {
+        "port": 3004,
+        "demo_mode": true,
+        "retrieval_accuracy": 0.90,
+        "compression_ratio": 0.38,
+        "demo_contexts": [
+          "conversation_history",
+          "code_documentation",
+          "project_knowledge"
+        ]
+      }
+    },
+    "P1_important": {
+      "smarttool_mcp": {
+        "port": 3005,
+        "demo_mode": true,
+        "available_tools": 47,
+        "response_time": 180
+      },
+      "test_mcp": {
+        "port": 3006,
+        "demo_mode": true,
+        "generation_accuracy": 0.90,
+        "execution_speed": 95
+      },
+      "claude_router_mcp": {
+        "port": 3007,
+        "demo_mode": true,
+        "routing_accuracy": 0.97,
+        "k2_switch_time": 45
+      }
+    },
+    "P2_auxiliary": {
+      "command_mcp": {
+        "port": 3008,
+        "demo_mode": true
+      },
+      "local_adapter_mcp": {
+        "port": 3009,
+        "demo_mode": true
+      },
+      "mcp_coordinator_mcp": {
+        "port": 3010,
+        "demo_mode": true
+      },
+      "docs_mcp": {
+        "port": 3011,
+        "demo_mode": true
+      }
+    }
+  },
+  "demo_settings": {
+    "simulation_enabled": true,
+    "error_injection": false,
+    "performance_scaling": 0.8,
+    "logging_level": "info"
+  }
+}

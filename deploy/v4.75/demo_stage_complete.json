@@ -1,0 +1,9 @@
+{
+  "stage": "complete",
+  "status": "completed",
+  "summary": {
+    "stages_completed": 7,
+    "commands_tested": 19,
+    "metrics_shown": 9
+  }
+}

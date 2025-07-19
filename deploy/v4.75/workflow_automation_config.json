@@ -1,0 +1,145 @@
+{
+  "version": "4.75",
+  "workflows": {
+    "requirement_analysis": {
+      "name": "需求分析工作流",
+      "stages": [
+        "收集",
+        "解析",
+        "验证",
+        "生成规格"
+      ],
+      "triggers": [
+        "new_issue",
+        "pr_comment",
+        "user_request"
+      ]
+    },
+    "ui_generation": {
+      "name": "UI 生成工作流",
+      "stages": [
+        "规格分析",
+        "组件生成",
+        "样式优化",
+        "响应式适配"
+      ],
+      "triggers": [
+        "spec_ready",
+        "design_update"
+      ]
+    },
+    "code_optimization": {
+      "name": "代码优化工作流",
+      "stages": [
+        "静态分析",
+        "性能分析",
+        "重构建议",
+        "自动优化"
+      ],
+      "triggers": [
+        "commit",
+        "pr_open",
+        "performance_alert"
+      ]
+    },
+    "test_automation": {
+      "name": "测试自动化工作流",
+      "stages": [
+        "单元测试",
+        "集成测试",
+        "E2E测试",
+        "性能测试"
+      ],
+      "triggers": [
+        "code_change",
+        "schedule",
+        "manual"
+      ]
+    },
+    "deployment": {
+      "name": "部署发布工作流",
+      "stages": [
+        "构建",
+        "验证",
+        "部署",
+        "监控"
+      ],
+      "triggers": [
+        "tag_push",
+        "manual_deploy",
+        "auto_deploy"
+      ]
+    },
+    "monitoring_feedback": {
+      "name": "监控反馈工作流",
+      "stages": [
+        "数据收集",
+        "异常检测",
+        "告警",
+        "自动修复"
+      ],
+      "triggers": [
+        "metric_threshold",
+        "error_spike",
+        "user_report"
+      ]
+    }
+  },
+  "automation_rules": {
+    "trigger_conditions": {
+      "github_event": [
+        "push",
+        "pull_request",
+        "issue",
+        "release"
+      ],
+      "metric_threshold": {
+        "error_rate": "> 5%",
+        "response_time": "> 200ms",
+        "memory_usage": "> 80%"
+      },
+      "schedule": [
+        "0 */6 * * *",
+        "0 2 * * *"
+      ]
+    },
+    "routing_rules": {
+      "high_priority": {
+        "condition": "issue.label == 'critical' or pr.label == 'hotfix'",
+        "workflow": [
+          "code_optimization",
+          "test_automation",
+          "deployment"
+        ]
+      },
+      "normal_priority": {
+        "condition": "default",
+        "workflow": [
+          "requirement_analysis",
+          "ui_generation",
+          "test_automation"
+        ]
+      }
+    },
+    "optimization_rules": {
+      "auto_k2_switch": {
+        "condition": "token_count > 1000 or cost_estimate > 0.1",
+        "action": "switch_to_k2_model"
+      },
+      "auto_scale": {
+        "condition": "concurrent_workflows > 10",
+        "action": "scale_workers"
+      }
+    }
+  },
+  "metrics_collection": {
+    "interval": "5m",
+    "retention": "30d",
+    "aggregation": [
+      "avg",
+      "max",
+      "p95",
+      "p99"
+    ]
+  }
+}

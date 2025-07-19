@@ -1,0 +1,32 @@
+{
+  "system_metrics": {
+    "cpu_usage": 25.3,
+    "memory_usage": 187.2,
+    "active_components": 11,
+    "response_time": 124,
+    "throughput": 847,
+    "error_rate": 0.23
+  },
+  "component_metrics": {
+    "smart_intervention": {
+      "detection_accuracy": 94.2,
+      "switch_latency": 89,
+      "memory_usage": 38.1
+    },
+    "codeflow_mcp": {
+      "generation_speed": 1247,
+      "syntax_accuracy": 96.8,
+      "deployment_success": 94.1
+    },
+    "smartui_mcp": {
+      "generation_time": 1.8,
+      "responsive_accuracy": 94.7,
+      "accessibility_score": 87.4
+    },
+    "memoryrag_mcp": {
+      "retrieval_accuracy": 89.7,
+      "compression_ratio": 0.38,
+      "k2_optimization": 27.3
+    }
+  }
+}

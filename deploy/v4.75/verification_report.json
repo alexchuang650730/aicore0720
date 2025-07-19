@@ -1,0 +1,146 @@
+{
+  "timestamp": "2025-07-19T23:46:36.194307",
+  "version": "4.75",
+  "checks": [
+    {
+      "name": "演示 UI 目錄存在",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui"
+    },
+    {
+      "name": "UI 組件: ClaudeEditorDemoPanel.jsx",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui/ClaudeEditorDemoPanel.jsx"
+    },
+    {
+      "name": "UI 組件: StageWiseCommandDemo.jsx",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui/StageWiseCommandDemo.jsx"
+    },
+    {
+      "name": "UI 組件: UnifiedDeploymentUI.jsx",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui/UnifiedDeploymentUI.jsx"
+    },
+    {
+      "name": "UI 組件: WorkflowAutomationDashboard.jsx",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui/WorkflowAutomationDashboard.jsx"
+    },
+    {
+      "name": "UI 組件: MetricsTrackingDashboard.jsx",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_ui/MetricsTrackingDashboard.jsx"
+    },
+    {
+      "name": "MCP 系統: demo_mcp.py",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/demo_mcp.py"
+    },
+    {
+      "name": "MCP 系統: codeflow_mcp.py",
+      "passed": false,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/codeflow_mcp.py"
+    },
+    {
+      "name": "MCP 系統: smartui_mcp.py",
+      "passed": false,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/core/components/smartui_mcp.py"
+    },
+    {
+      "name": "部署文件: deployment_manifest.json",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/deployment_manifest.json"
+    },
+    {
+      "name": "部署文件: deployment_ui_manifest.json",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/deployment_ui_manifest.json"
+    },
+    {
+      "name": "部署文件: workflow_automation_config.json",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/workflow_automation_config.json"
+    },
+    {
+      "name": "部署文件: workflow_automation_metrics.json",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/workflow_automation_metrics.json"
+    },
+    {
+      "name": "部署文件: DEPLOYMENT_SUMMARY.md",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/DEPLOYMENT_SUMMARY.md"
+    },
+    {
+      "name": "Python 系統: unified_deployment_system.py",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/unified_deployment_system.py"
+    },
+    {
+      "name": "Python 系統: workflow_automation_metrics.py",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/workflow_automation_metrics.py"
+    },
+    {
+      "name": "Python 系統: test_validation_metrics_system.py",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/test_validation_metrics_system.py"
+    },
+    {
+      "name": "Python 系統: metrics_calculation_formulas.py",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/metrics_calculation_formulas.py"
+    },
+    {
+      "name": "集成文件: claudeditor_integration.js",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/claudeditor_integration.js"
+    },
+    {
+      "name": "集成文件: deploy_claude_code_tool.sh",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/deploy_claude_code_tool.sh"
+    },
+    {
+      "name": "deploy_claude_code_tool.sh 可執行",
+      "passed": true,
+      "details": "需要執行權限"
+    },
+    {
+      "name": "集成文件: deploy_claudeditor.sh",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/deploy_claudeditor.sh"
+    },
+    {
+      "name": "deploy_claudeditor.sh 可執行",
+      "passed": true,
+      "details": "需要執行權限"
+    },
+    {
+      "name": "集成文件: deploy_unified.sh",
+      "passed": true,
+      "details": "路徑: /Users/alexchuang/alexchuangtest/aicore0720/deploy/v4.75/deploy_unified.sh"
+    },
+    {
+      "name": "deploy_unified.sh 可執行",
+      "passed": true,
+      "details": "需要執行權限"
+    },
+    {
+      "name": "指標數據格式正確",
+      "passed": true,
+      "details": "包含 GitHub 指標"
+    },
+    {
+      "name": "工作流指標存在",
+      "passed": true,
+      "details": "包含 6 個工作流"
+    }
+  ],
+  "summary": {
+    "total": 27,
+    "passed": 25,
+    "failed": 2
+  }
+}

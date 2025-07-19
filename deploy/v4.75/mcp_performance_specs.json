@@ -1,0 +1,472 @@
+{
+  "document_info": {
+    "title": "PowerAutomation v4.75 - MCP 性能規格文檔",
+    "version": "4.75",
+    "generated_by": "codeflow_mcp",
+    "generation_timestamp": "2025-07-20T02:00:00Z",
+    "last_updated": "2025-07-20T02:00:00Z",
+    "schema_version": "1.0"
+  },
+  "performance_specifications": {
+    "P0_core_components": {
+      "smart_intervention": {
+        "component_id": "smart_intervention_mcp",
+        "priority_level": "P0",
+        "description": "智能干預系統核心組件",
+        "performance_requirements": {
+          "detection_accuracy": {
+            "metric_name": "任務類型檢測準確率",
+            "target_value": 95.0,
+            "unit": "%",
+            "measurement_method": "關鍵詞匹配準確率統計",
+            "threshold_warning": 90.0,
+            "threshold_critical": 80.0,
+            "measurement_frequency": "實時"
+          },
+          "switch_latency": {
+            "metric_name": "模式切換延遲",
+            "target_value": 100.0,
+            "unit": "ms",
+            "measurement_method": "從檢測到切換完成的時間",
+            "threshold_warning": 150.0,
+            "threshold_critical": 300.0,
+            "measurement_frequency": "每次切換"
+          },
+          "keyword_coverage": {
+            "metric_name": "關鍵詞覆蓋率",
+            "target_value": 90.0,
+            "unit": "%",
+            "measurement_method": "關鍵詞庫覆蓋統計",
+            "threshold_warning": 85.0,
+            "threshold_critical": 75.0,
+            "measurement_frequency": "每日"
+          },
+          "memory_usage": {
+            "metric_name": "內存使用量",
+            "target_value": 50.0,
+            "unit": "MB",
+            "measurement_method": "進程內存監控",
+            "threshold_warning": 100.0,
+            "threshold_critical": 200.0,
+            "measurement_frequency": "每分鐘"
+          }
+        },
+        "dependencies": ["claude_router_mcp", "local_adapter_mcp"],
+        "interfaces": {
+          "input": {
+            "message_analysis": "text/plain",
+            "context_data": "application/json"
+          },
+          "output": {
+            "intervention_decision": "application/json",
+            "switch_command": "application/json"
+          }
+        }
+      },
+      "codeflow_mcp": {
+        "component_id": "codeflow_mcp",
+        "priority_level": "P0",
+        "description": "代碼流程管理核心組件",
+        "performance_requirements": {
+          "generation_speed": {
+            "metric_name": "代碼生成速度",
+            "target_value": 1000.0,
+            "unit": "tokens/s",
+            "measurement_method": "生成令牌數/生成時間",
+            "threshold_warning": 800.0,
+            "threshold_critical": 500.0,
+            "measurement_frequency": "每次生成"
+          },
+          "syntax_accuracy": {
+            "metric_name": "語法正確率",
+            "target_value": 98.0,
+            "unit": "%",
+            "measurement_method": "語法檢查器驗證",
+            "threshold_warning": 95.0,
+            "threshold_critical": 90.0,
+            "measurement_frequency": "每次生成"
+          },
+          "test_coverage_generation": {
+            "metric_name": "測試覆蓋率生成",
+            "target_value": 85.0,
+            "unit": "%",
+            "measurement_method": "生成的測試覆蓋代碼行數比例",
+            "threshold_warning": 75.0,
+            "threshold_critical": 60.0,
+            "measurement_frequency": "每次測試生成"
+          },
+          "deployment_success_rate": {
+            "metric_name": "部署成功率",
+            "target_value": 95.0,
+            "unit": "%",
+            "measurement_method": "成功部署次數/總部署次數",
+            "threshold_warning": 90.0,
+            "threshold_critical": 80.0,
+            "measurement_frequency": "每次部署"
+          }
+        },
+        "dependencies": ["test_mcp", "docs_mcp"],
+        "interfaces": {
+          "input": {
+            "code_requirements": "application/json",
+            "project_context": "application/json"
+          },
+          "output": {
+            "generated_code": "text/plain",
+            "test_cases": "application/json",
+            "deployment_config": "application/json"
+          }
+        }
+      },
+      "smartui_mcp": {
+        "component_id": "smartui_mcp",
+        "priority_level": "P0",
+        "description": "智能UI設計系統核心組件",
+        "performance_requirements": {
+          "component_generation_time": {
+            "metric_name": "組件生成時間",
+            "target_value": 2.0,
+            "unit": "s",
+            "measurement_method": "從請求到組件完成生成的時間",
+            "threshold_warning": 3.0,
+            "threshold_critical": 5.0,
+            "measurement_frequency": "每次生成"
+          },
+          "responsive_accuracy": {
+            "metric_name": "響應式設計準確度",
+            "target_value": 95.0,
+            "unit": "%",
+            "measurement_method": "響應式布局測試通過率",
+            "threshold_warning": 90.0,
+            "threshold_critical": 85.0,
+            "measurement_frequency": "每次生成"
+          },
+          "theme_consistency": {
+            "metric_name": "主題一致性",
+            "target_value": 100.0,
+            "unit": "%",
+            "measurement_method": "主題規則符合率",
+            "threshold_warning": 95.0,
+            "threshold_critical": 90.0,
+            "measurement_frequency": "每次應用主題"
+          },
+          "accessibility_score": {
+            "metric_name": "無障礙訪問評分",
+            "target_value": 90.0,
+            "unit": "分",
+            "measurement_method": "WCAG 2.1 AA標準評估",
+            "threshold_warning": 80.0,
+            "threshold_critical": 70.0,
+            "measurement_frequency": "每次生成"
+          }
+        },
+        "dependencies": ["codeflow_mcp"],
+        "interfaces": {
+          "input": {
+            "ui_requirements": "application/json",
+            "design_preferences": "application/json"
+          },
+          "output": {
+            "component_code": "text/plain",
+            "style_definitions": "text/css",
+            "accessibility_report": "application/json"
+          }
+        }
+      },
+      "memoryrag_mcp": {
+        "component_id": "memoryrag_mcp",
+        "priority_level": "P0",
+        "description": "記憶檢索增強生成核心組件",
+        "performance_requirements": {
+          "retrieval_accuracy": {
+            "metric_name": "檢索準確率",
+            "target_value": 92.0,
+            "unit": "%",
+            "measurement_method": "相關內容檢索準確性評估",
+            "threshold_warning": 85.0,
+            "threshold_critical": 75.0,
+            "measurement_frequency": "每次檢索"
+          },
+          "memory_efficiency": {
+            "metric_name": "記憶體使用效率",
+            "target_value": 85.0,
+            "unit": "%",
+            "measurement_method": "有效內存/總內存使用量",
+            "threshold_warning": 75.0,
+            "threshold_critical": 60.0,
+            "measurement_frequency": "每分鐘"
+          },
+          "k2_optimization_rate": {
+            "metric_name": "K2優化率",
+            "target_value": 30.0,
+            "unit": "%",
+            "measurement_method": "K2模型推理效率提升比例",
+            "threshold_warning": 25.0,
+            "threshold_critical": 15.0,
+            "measurement_frequency": "每次K2調用"
+          },
+          "context_compression_ratio": {
+            "metric_name": "上下文壓縮比",
+            "target_value": 0.35,
+            "unit": "ratio",
+            "measurement_method": "壓縮後大小/原始大小",
+            "threshold_warning": 0.45,
+            "threshold_critical": 0.60,
+            "measurement_frequency": "每次壓縮"
+          }
+        },
+        "dependencies": ["claude_router_mcp"],
+        "interfaces": {
+          "input": {
+            "query": "text/plain",
+            "context_data": "application/json"
+          },
+          "output": {
+            "retrieved_context": "application/json",
+            "compressed_memory": "application/json",
+            "optimization_metrics": "application/json"
+          }
+        }
+      }
+    },
+    "P1_important_components": {
+      "smarttool_mcp": {
+        "component_id": "smarttool_mcp",
+        "priority_level": "P1",
+        "description": "智能工具集成組件",
+        "performance_requirements": {
+          "tool_integration_count": {
+            "metric_name": "集成工具數量",
+            "target_value": 50.0,
+            "unit": "個",
+            "measurement_method": "已集成並可用的工具總數",
+            "threshold_warning": 40.0,
+            "threshold_critical": 30.0,
+            "measurement_frequency": "每日"
+          },
+          "api_response_time": {
+            "metric_name": "API響應時間",
+            "target_value": 200.0,
+            "unit": "ms",
+            "measurement_method": "第三方API調用響應時間",
+            "threshold_warning": 500.0,
+            "threshold_critical": 1000.0,
+            "measurement_frequency": "每次調用"
+          },
+          "success_rate": {
+            "metric_name": "調用成功率",
+            "target_value": 99.0,
+            "unit": "%",
+            "measurement_method": "成功調用次數/總調用次數",
+            "threshold_warning": 95.0,
+            "threshold_critical": 90.0,
+            "measurement_frequency": "實時"
+          }
+        }
+      },
+      "test_mcp": {
+        "component_id": "test_mcp",
+        "priority_level": "P1",
+        "description": "測試自動化組件",
+        "performance_requirements": {
+          "test_generation_accuracy": {
+            "metric_name": "測試生成準確率",
+            "target_value": 90.0,
+            "unit": "%",
+            "measurement_method": "生成的測試用例有效性評估",
+            "threshold_warning": 85.0,
+            "threshold_critical": 75.0,
+            "measurement_frequency": "每次生成"
+          },
+          "execution_speed": {
+            "metric_name": "執行速度",
+            "target_value": 100.0,
+            "unit": "tests/s",
+            "measurement_method": "單位時間執行的測試數量",
+            "threshold_warning": 80.0,
+            "threshold_critical": 50.0,
+            "measurement_frequency": "每次測試運行"
+          },
+          "coverage_analysis_accuracy": {
+            "metric_name": "覆蓋率分析準確度",
+            "target_value": 95.0,
+            "unit": "%",
+            "measurement_method": "覆蓋率統計準確性驗證",
+            "threshold_warning": 90.0,
+            "threshold_critical": 85.0,
+            "measurement_frequency": "每次分析"
+          }
+        }
+      },
+      "claude_router_mcp": {
+        "component_id": "claude_router_mcp",
+        "priority_level": "P1",
+        "description": "Claude路由管理組件",
+        "performance_requirements": {
+          "routing_accuracy": {
+            "metric_name": "路由準確率",
+            "target_value": 98.0,
+            "unit": "%",
+            "measurement_method": "正確路由決策比例",
+            "threshold_warning": 95.0,
+            "threshold_critical": 90.0,
+            "measurement_frequency": "每次路由"
+          },
+          "k2_switch_time": {
+            "metric_name": "K2切換時間",
+            "target_value": 50.0,
+            "unit": "ms",
+            "measurement_method": "模型切換完成時間",
+            "threshold_warning": 100.0,
+            "threshold_critical": 200.0,
+            "measurement_frequency": "每次切換"
+          },
+          "conversation_sync_rate": {
+            "metric_name": "對話同步率",
+            "target_value": 100.0,
+            "unit": "%",
+            "measurement_method": "對話狀態同步成功比例",
+            "threshold_warning": 98.0,
+            "threshold_critical": 95.0,
+            "measurement_frequency": "實時"
+          }
+        }
+      }
+    },
+    "P2_auxiliary_components": {
+      "command_mcp": {
+        "component_id": "command_mcp",
+        "priority_level": "P2",
+        "description": "命令行接口組件",
+        "performance_requirements": {
+          "command_recognition": {
+            "metric_name": "命令識別率",
+            "target_value": 99.0,
+            "unit": "%",
+            "measurement_method": "命令解析成功率",
+            "threshold_warning": 95.0,
+            "threshold_critical": 90.0,
+            "measurement_frequency": "每次命令"
+          },
+          "execution_time": {
+            "metric_name": "執行時間",
+            "target_value": 100.0,
+            "unit": "ms",
+            "measurement_method": "命令執行完成時間",
+            "threshold_warning": 200.0,
+            "threshold_critical": 500.0,
+            "measurement_frequency": "每次執行"
+          }
+        }
+      },
+      "local_adapter_mcp": {
+        "component_id": "local_adapter_mcp",
+        "priority_level": "P2",
+        "description": "本地環境適配組件",
+        "performance_requirements": {
+          "file_operation_speed": {
+            "metric_name": "文件操作速度",
+            "target_value": 1000.0,
+            "unit": "ops/s",
+            "measurement_method": "單位時間文件操作數量",
+            "threshold_warning": 800.0,
+            "threshold_critical": 500.0,
+            "measurement_frequency": "持續監控"
+          },
+          "sync_accuracy": {
+            "metric_name": "同步準確率",
+            "target_value": 100.0,
+            "unit": "%",
+            "measurement_method": "文件同步一致性驗證",
+            "threshold_warning": 99.0,
+            "threshold_critical": 95.0,
+            "measurement_frequency": "每次同步"
+          }
+        }
+      },
+      "mcp_coordinator_mcp": {
+        "component_id": "mcp_coordinator_mcp",
+        "priority_level": "P2",
+        "description": "MCP組件協調器",
+        "performance_requirements": {
+          "coordination_latency": {
+            "metric_name": "協調延遲",
+            "target_value": 20.0,
+            "unit": "ms",
+            "measurement_method": "組件間通信延遲",
+            "threshold_warning": 50.0,
+            "threshold_critical": 100.0,
+            "measurement_frequency": "每次協調"
+          },
+          "conflict_resolution_rate": {
+            "metric_name": "衝突解決率",
+            "target_value": 95.0,
+            "unit": "%",
+            "measurement_method": "成功解決的衝突比例",
+            "threshold_warning": 90.0,
+            "threshold_critical": 80.0,
+            "measurement_frequency": "每次衝突"
+          }
+        }
+      },
+      "docs_mcp": {
+        "component_id": "docs_mcp",
+        "priority_level": "P2",
+        "description": "文檔管理組件",
+        "performance_requirements": {
+          "scan_speed": {
+            "metric_name": "掃描速度",
+            "target_value": 100.0,
+            "unit": "files/s",
+            "measurement_method": "單位時間掃描的文件數量",
+            "threshold_warning": 80.0,
+            "threshold_critical": 50.0,
+            "measurement_frequency": "每次掃描"
+          },
+          "categorization_accuracy": {
+            "metric_name": "分類準確率",
+            "target_value": 90.0,
+            "unit": "%",
+            "measurement_method": "文檔分類正確率",
+            "threshold_warning": 85.0,
+            "threshold_critical": 75.0,
+            "measurement_frequency": "每次分類"
+          }
+        }
+      }
+    }
+  },
+  "measurement_protocols": {
+    "data_collection": {
+      "frequency_definitions": {
+        "實時": "每個事件觸發時立即收集",
+        "每次操作": "每次相關操作執行時收集",
+        "每分鐘": "60秒間隔收集",
+        "每日": "24小時間隔收集"
+      },
+      "collection_methods": {
+        "api_monitoring": "通過API端點監控組件性能",
+        "log_analysis": "分析組件日誌獲取性能數據",
+        "direct_measurement": "直接測量組件響應時間和資源使用",
+        "synthetic_testing": "使用合成負載測試性能"
+      }
+    },
+    "threshold_management": {
+      "warning_action": "記錄警告日誌，通知運維團隊",
+      "critical_action": "觸發告警，啟動緊急響應流程",
+      "escalation_policy": "連續3次超過臨界值時升級處理"
+    }
+  },
+  "validation_criteria": {
+    "specification_compliance": {
+      "minimum_pass_rate": 80.0,
+      "target_pass_rate": 95.0,
+      "measurement_period": "7天滾動窗口"
+    },
+    "system_integration": {
+      "component_interaction_success_rate": 98.0,
+      "end_to_end_workflow_success_rate": 95.0,
+      "data_consistency_rate": 99.9
+    }
+  }
+}

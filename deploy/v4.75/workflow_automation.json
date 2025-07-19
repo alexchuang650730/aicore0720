@@ -1,0 +1,118 @@
+{
+  "workflows": [
+    {
+      "id": "requirement_to_deployment",
+      "name": "需求到部署全流程",
+      "triggers": [
+        "new_requirement",
+        "spec_update"
+      ],
+      "stages": [
+        {
+          "name": "需求分析",
+          "tools": [
+            "claude_code_tool"
+          ],
+          "actions": [
+            "parse_requirements",
+            "generate_spec"
+          ]
+        },
+        {
+          "name": "UI 生成",
+          "tools": [
+            "smartui_mcp"
+          ],
+          "actions": [
+            "analyze_spec",
+            "generate_components"
+          ]
+        },
+        {
+          "name": "代码优化",
+          "tools": [
+            "k2_optimizer"
+          ],
+          "actions": [
+            "refactor_code",
+            "optimize_performance"
+          ]
+        },
+        {
+          "name": "测试验证",
+          "tools": [
+            "test_mcp"
+          ],
+          "actions": [
+            "run_tests",
+            "collect_coverage"
+          ]
+        },
+        {
+          "name": "部署发布",
+          "tools": [
+            "deployment_system"
+          ],
+          "actions": [
+            "build_artifacts",
+            "deploy_services"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "continuous_optimization",
+      "name": "持续优化工作流",
+      "triggers": [
+        "metric_threshold",
+        "user_feedback"
+      ],
+      "stages": [
+        {
+          "name": "数据收集",
+          "tools": [
+            "metrics_collector"
+          ],
+          "actions": [
+            "collect_usage",
+            "analyze_patterns"
+          ]
+        },
+        {
+          "name": "K2 训练",
+          "tools": [
+            "k2_training"
+          ],
+          "actions": [
+            "prepare_data",
+            "train_model"
+          ]
+        },
+        {
+          "name": "A/B 测试",
+          "tools": [
+            "ab_testing"
+          ],
+          "actions": [
+            "deploy_variant",
+            "collect_metrics"
+          ]
+        }
+      ]
+    }
+  ],
+  "automation_rules": {
+    "auto_deploy": {
+      "condition": "all_tests_pass && coverage > 80",
+      "action": "deploy_to_production"
+    },
+    "auto_rollback": {
+      "condition": "error_rate > 5",
+      "action": "rollback_deployment"
+    },
+    "auto_optimize": {
+      "condition": "response_time > 200ms",
+      "action": "switch_to_k2"
+    }
+  }
+}

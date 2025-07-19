@@ -1,0 +1,170 @@
+{
+  "version": "4.75",
+  "timestamp": "2025-07-19T23:14:52.080973",
+  "deployment_targets": [
+    {
+      "id": "claude_code_tool",
+      "name": "Claude Code Tool 集成",
+      "description": "Claude Code Tool 的完整部署和集成",
+      "components": [
+        {
+          "name": "MCP Server",
+          "type": "backend",
+          "path": "core/mcp_server",
+          "config": {
+            "port": 3001,
+            "models": [
+              "claude-3-opus",
+              "k2-optimizer"
+            ],
+            "rate_limit": "100/min"
+          }
+        },
+        {
+          "name": "Command Interface",
+          "type": "frontend",
+          "path": "core/components/command_interface",
+          "dependencies": [
+            "mcp_server"
+          ]
+        },
+        {
+          "name": "Tool Registry",
+          "type": "service",
+          "path": "core/tools",
+          "auto_discover": true
+        }
+      ]
+    },
+    {
+      "id": "claudeditor",
+      "name": "ClaudeEditor 部署",
+      "description": "ClaudeEditor PC/Web 双版本部署",
+      "components": [
+        {
+          "name": "Editor Core",
+          "type": "application",
+          "path": "claudeditor/core",
+          "platforms": [
+            "desktop",
+            "web"
+          ]
+        },
+        {
+          "name": "SmartUI Components",
+          "type": "ui_library",
+          "path": "core/components/smartui_mcp"
+        },
+        {
+          "name": "K2 Integration",
+          "type": "integration",
+          "path": "core/k2_integration",
+          "config": {
+            "auto_switch": true,
+            "cost_optimization": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "demo_system",
+      "name": "演示系统",
+      "description": "StageWise 演示和可视化系统",
+      "components": [
+        {
+          "name": "StageWise Demo",
+          "type": "demo",
+          "path": "deploy/v4.75/StageWiseCommandDemo.jsx"
+        },
+        {
+          "name": "Metrics Dashboard",
+          "type": "dashboard",
+          "path": "deploy/v4.75/MetricsVisualizationDashboard.jsx"
+        },
+        {
+          "name": "Test Validation",
+          "type": "monitoring",
+          "path": "deploy/v4.75/TestValidationDashboard.jsx"
+        }
+      ]
+    }
+  ],
+  "deployment_workflow": {
+    "stages": [
+      {
+        "id": "pre_check",
+        "name": "前置检查",
+        "steps": [
+          "check_environment",
+          "verify_dependencies",
+          "backup_existing"
+        ]
+      },
+      {
+        "id": "build",
+        "name": "构建阶段",
+        "steps": [
+          "build_claude_code_tool",
+          "build_claudeditor",
+          "build_demo_ui"
+        ]
+      },
+      {
+        "id": "deploy",
+        "name": "部署阶段",
+        "steps": [
+          "deploy_backend_services",
+          "deploy_frontend_apps",
+          "configure_integrations"
+        ]
+      },
+      {
+        "id": "test",
+        "name": "测试验证",
+        "steps": [
+          "run_integration_tests",
+          "verify_endpoints",
+          "check_ui_responsiveness"
+        ]
+      },
+      {
+        "id": "finalize",
+        "name": "完成部署",
+        "steps": [
+          "update_routing",
+          "enable_monitoring",
+          "generate_report"
+        ]
+      }
+    ]
+  },
+  "integration_points": {
+    "claude_to_editor": {
+      "protocol": "websocket",
+      "endpoint": "/ws/claude-editor",
+      "features": [
+        "real_time_sync",
+        "command_sharing",
+        "state_management"
+      ]
+    },
+    "editor_to_demo": {
+      "protocol": "http",
+      "endpoint": "/api/demo",
+      "features": [
+        "live_preview",
+        "metric_collection",
+        "event_streaming"
+      ]
+    },
+    "unified_command": {
+      "protocol": "mcp",
+      "endpoint": "/mcp/unified",
+      "features": [
+        "command_routing",
+        "k2_switching",
+        "cost_tracking"
+      ]
+    }
+  }
+}

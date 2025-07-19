@@ -1,0 +1,49 @@
+{
+  "environment": "demo",
+  "version": "v4.75",
+  "demo_mode": true,
+  "features": {
+    "smart_intervention": {
+      "enabled": true,
+      "demo_keywords": ["React組件", "UI設計", "代碼生成", "測試", "部署"],
+      "auto_switch_delay": 2000,
+      "demo_scenarios": true
+    },
+    "codeflow_automation": {
+      "enabled": true,
+      "demo_projects": ["react-user-list", "nodejs-api", "python-service"],
+      "simulation_mode": true
+    },
+    "smartui_designer": {
+      "enabled": true,
+      "component_library": "demo",
+      "preview_mode": true,
+      "accessibility_warnings": false
+    },
+    "memory_rag": {
+      "enabled": true,
+      "demo_contexts": 50,
+      "compression_demo": true,
+      "k2_optimization": true
+    },
+    "performance_monitor": {
+      "enabled": true,
+      "real_time_updates": true,
+      "demo_metrics": true,
+      "alert_simulation": true
+    }
+  },
+  "ui_settings": {
+    "theme": "professional",
+    "layout": "demo_optimized",
+    "animation_speed": "normal",
+    "debug_overlay": false,
+    "presenter_mode": true
+  },
+  "demo_constraints": {
+    "max_execution_time": 300,
+    "memory_limit": "2GB",
+    "concurrent_operations": 5,
+    "error_recovery": true
+  }
+}

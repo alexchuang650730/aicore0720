@@ -1,0 +1,579 @@
+{
+  "document_info": {
+    "title": "PowerAutomation v4.75 - ClaudeEditor UI 指標規格文檔",
+    "version": "4.75",
+    "generated_by": "codeflow_mcp",
+    "generation_timestamp": "2025-07-20T02:00:00Z",
+    "last_updated": "2025-07-20T02:00:00Z",
+    "schema_version": "1.0"
+  },
+  "ui_performance_specifications": {
+    "ai_model_control_area": {
+      "component_id": "ai_model_control",
+      "description": "AI模型控制區域性能指標",
+      "metrics": {
+        "model_switch_time": {
+          "metric_name": "模型切換時間",
+          "target_value": 1.0,
+          "unit": "s",
+          "measurement_method": "從點擊切換按鈕到模型切換完成的時間",
+          "threshold_warning": 2.0,
+          "threshold_critical": 3.0,
+          "measurement_frequency": "每次切換",
+          "user_experience_impact": "high"
+        },
+        "model_status_visibility": {
+          "metric_name": "模型狀態可見性",
+          "target_value": 9.0,
+          "unit": "分 (1-10)",
+          "measurement_method": "用戶能够清楚識別當前模型狀態的清晰度評分",
+          "threshold_warning": 7.0,
+          "threshold_critical": 5.0,
+          "measurement_frequency": "用戶調查",
+          "user_experience_impact": "medium"
+        },
+        "k2_indicator_clarity": {
+          "metric_name": "K2模式指示清晰度",
+          "target_value": 95.0,
+          "unit": "%",
+          "measurement_method": "用戶識別當前K2模式狀態的準確率",
+          "threshold_warning": 90.0,
+          "threshold_critical": 80.0,
+          "measurement_frequency": "用戶測試",
+          "user_experience_impact": "high"
+        },
+        "control_responsiveness": {
+          "metric_name": "控件響應性",
+          "target_value": 16.0,
+          "unit": "ms",
+          "measurement_method": "控件交互延遲測量",
+          "threshold_warning": 33.0,
+          "threshold_critical": 100.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        }
+      },
+      "accessibility_requirements": {
+        "keyboard_navigation": true,
+        "screen_reader_support": true,
+        "high_contrast_mode": true,
+        "font_scaling_support": true
+      }
+    },
+    "workflow_management_area": {
+      "component_id": "workflow_area",
+      "description": "六大工作流區域性能指標",
+      "metrics": {
+        "workflow_discovery_time": {
+          "metric_name": "工作流發現時間",
+          "target_value": 3.0,
+          "unit": "s",
+          "measurement_method": "用戶找到所需工作流的平均時間",
+          "threshold_warning": 5.0,
+          "threshold_critical": 10.0,
+          "measurement_frequency": "用戶行為分析",
+          "user_experience_impact": "medium"
+        },
+        "workflow_execution_smoothness": {
+          "metric_name": "工作流執行流暢度",
+          "target_value": 0.0,
+          "unit": "中斷次數",
+          "measurement_method": "工作流執行過程中的意外中斷次數",
+          "threshold_warning": 1.0,
+          "threshold_critical": 3.0,
+          "measurement_frequency": "每次執行",
+          "user_experience_impact": "high"
+        },
+        "monitoring_update_latency": {
+          "metric_name": "監控更新延遲",
+          "target_value": 1.0,
+          "unit": "s",
+          "measurement_method": "關鍵指標的實時更新延遲",
+          "threshold_warning": 3.0,
+          "threshold_critical": 5.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "medium"
+        },
+        "workflow_completion_rate": {
+          "metric_name": "工作流完成率",
+          "target_value": 95.0,
+          "unit": "%",
+          "measurement_method": "成功完成的工作流百分比",
+          "threshold_warning": 90.0,
+          "threshold_critical": 80.0,
+          "measurement_frequency": "每日統計",
+          "user_experience_impact": "high"
+        }
+      },
+      "workflow_types": {
+        "code_development": {
+          "name": "代碼開發工作流",
+          "performance_target": {
+            "setup_time": "< 30s",
+            "execution_time": "< 5min",
+            "success_rate": "> 90%"
+          }
+        },
+        "ui_design": {
+          "name": "UI設計工作流",
+          "performance_target": {
+            "component_generation": "< 10s",
+            "preview_rendering": "< 2s",
+            "responsiveness_test": "< 5s"
+          }
+        },
+        "testing_automation": {
+          "name": "測試自動化工作流",
+          "performance_target": {
+            "test_generation": "< 15s",
+            "test_execution": "< 2min",
+            "coverage_analysis": "< 30s"
+          }
+        },
+        "deployment": {
+          "name": "部署工作流",
+          "performance_target": {
+            "preparation": "< 30s",
+            "deployment_execution": "< 3min",
+            "verification": "< 1min"
+          }
+        },
+        "monitoring": {
+          "name": "監控運維工作流",
+          "performance_target": {
+            "dashboard_load": "< 2s",
+            "metric_refresh": "< 1s",
+            "alert_response": "< 500ms"
+          }
+        },
+        "documentation": {
+          "name": "文檔管理工作流",
+          "performance_target": {
+            "scan_completion": "< 1min",
+            "generation": "< 30s",
+            "sync_update": "< 10s"
+          }
+        }
+      }
+    },
+    "code_editor_area": {
+      "component_id": "code_editor",
+      "description": "代碼編輯器區域性能指標",
+      "metrics": {
+        "auto_completion_speed": {
+          "metric_name": "自動完成速度",
+          "target_value": 50.0,
+          "unit": "ms",
+          "measurement_method": "從輸入字元到建議出現的時間",
+          "threshold_warning": 100.0,
+          "threshold_critical": 200.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        },
+        "syntax_highlight_accuracy": {
+          "metric_name": "語法高亮準確性",
+          "target_value": 99.0,
+          "unit": "%",
+          "measurement_method": "正確高亮的代碼比例",
+          "threshold_warning": 95.0,
+          "threshold_critical": 90.0,
+          "measurement_frequency": "每次渲染",
+          "user_experience_impact": "medium"
+        },
+        "error_detection_responsiveness": {
+          "metric_name": "錯誤檢測響應性",
+          "target_value": 200.0,
+          "unit": "ms",
+          "measurement_method": "從代碼更改到錯誤標記顯示的時間",
+          "threshold_warning": 500.0,
+          "threshold_critical": 1000.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        },
+        "file_operation_speed": {
+          "metric_name": "文件操作速度",
+          "target_value": 100.0,
+          "unit": "ms",
+          "measurement_method": "文件打開/保存操作完成時間",
+          "threshold_warning": 500.0,
+          "threshold_critical": 1000.0,
+          "measurement_frequency": "每次操作",
+          "user_experience_impact": "medium"
+        }
+      },
+      "editor_features": {
+        "intelligent_completion": {
+          "accuracy_target": 85.0,
+          "response_time_target": 50.0
+        },
+        "refactoring_support": {
+          "success_rate_target": 95.0,
+          "execution_time_target": 2000.0
+        },
+        "debugging_integration": {
+          "breakpoint_accuracy": 99.0,
+          "variable_inspection_speed": 100.0
+        }
+      }
+    },
+    "ui_designer_area": {
+      "component_id": "ui_designer",
+      "description": "UI設計器區域性能指標",
+      "metrics": {
+        "drag_drop_responsiveness": {
+          "metric_name": "拖放響應性",
+          "target_value": 16.0,
+          "unit": "ms",
+          "measurement_method": "拖放操作的延遲測量 (60fps 目標)",
+          "threshold_warning": 33.0,
+          "threshold_critical": 100.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        },
+        "preview_accuracy": {
+          "metric_name": "預覽準確性",
+          "target_value": 98.0,
+          "unit": "%",
+          "measurement_method": "預覽與實際效果的一致性",
+          "threshold_warning": 95.0,
+          "threshold_critical": 90.0,
+          "measurement_frequency": "每次預覽",
+          "user_experience_impact": "high"
+        },
+        "component_library_access_speed": {
+          "metric_name": "組件庫訪問速度",
+          "target_value": 0.5,
+          "unit": "s",
+          "measurement_method": "打開組件庫的時間",
+          "threshold_warning": 1.0,
+          "threshold_critical": 2.0,
+          "measurement_frequency": "每次訪問",
+          "user_experience_impact": "medium"
+        },
+        "responsive_design_generation": {
+          "metric_name": "響應式設計生成速度",
+          "target_value": 3.0,
+          "unit": "s",
+          "measurement_method": "多尺寸適配代碼生成時間",
+          "threshold_warning": 5.0,
+          "threshold_critical": 10.0,
+          "measurement_frequency": "每次生成",
+          "user_experience_impact": "medium"
+        }
+      },
+      "design_capabilities": {
+        "supported_frameworks": ["React", "Vue", "Angular", "Svelte"],
+        "responsive_breakpoints": ["mobile", "tablet", "desktop", "wide"],
+        "theme_customization": true,
+        "component_variants": true
+      }
+    },
+    "command_center_area": {
+      "component_id": "command_center",
+      "description": "命令中心區域性能指標",
+      "metrics": {
+        "command_discovery_efficiency": {
+          "metric_name": "命令發現效率",
+          "target_value": 3.0,
+          "unit": "擊鍵次數",
+          "measurement_method": "找到目標命令的平均擊鍵次數",
+          "threshold_warning": 5.0,
+          "threshold_critical": 10.0,
+          "measurement_frequency": "用戶行為分析",
+          "user_experience_impact": "medium"
+        },
+        "command_execution_feedback_speed": {
+          "metric_name": "命令執行反饋速度",
+          "target_value": 100.0,
+          "unit": "ms",
+          "measurement_method": "執行後反饋出現的時間",
+          "threshold_warning": 300.0,
+          "threshold_critical": 500.0,
+          "measurement_frequency": "每次執行",
+          "user_experience_impact": "high"
+        },
+        "shortcut_effectiveness": {
+          "metric_name": "快捷鍵有效性",
+          "target_value": 100.0,
+          "unit": "%",
+          "measurement_method": "快捷鍵使用成功率",
+          "threshold_warning": 95.0,
+          "threshold_critical": 90.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "medium"
+        },
+        "search_relevance": {
+          "metric_name": "搜索相關性",
+          "target_value": 90.0,
+          "unit": "%",
+          "measurement_method": "搜索結果相關性評分",
+          "threshold_warning": 80.0,
+          "threshold_critical": 70.0,
+          "measurement_frequency": "每次搜索",
+          "user_experience_impact": "medium"
+        }
+      }
+    },
+    "collaboration_area": {
+      "component_id": "collaboration",
+      "description": "協作區域性能指標",
+      "metrics": {
+        "real_time_sync_latency": {
+          "metric_name": "實時同步延遲",
+          "target_value": 200.0,
+          "unit": "ms",
+          "measurement_method": "操作同步到其他用戶的時間",
+          "threshold_warning": 500.0,
+          "threshold_critical": 1000.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        },
+        "conflict_resolution_time": {
+          "metric_name": "衝突解決時間",
+          "target_value": 30.0,
+          "unit": "s",
+          "measurement_method": "用戶解決衝突的平均時間",
+          "threshold_warning": 60.0,
+          "threshold_critical": 120.0,
+          "measurement_frequency": "每次衝突",
+          "user_experience_impact": "medium"
+        },
+        "presence_awareness_accuracy": {
+          "metric_name": "協作者存在感知準確性",
+          "target_value": 100.0,
+          "unit": "%",
+          "measurement_method": "顯示其他用戶狀態的準確性",
+          "threshold_warning": 95.0,
+          "threshold_critical": 90.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "medium"
+        },
+        "concurrent_editing_stability": {
+          "metric_name": "並發編輯穩定性",
+          "target_value": 99.0,
+          "unit": "%",
+          "measurement_method": "多用戶同時編輯的成功率",
+          "threshold_warning": 95.0,
+          "threshold_critical": 90.0,
+          "measurement_frequency": "實時監控",
+          "user_experience_impact": "high"
+        }
+      }
+    },
+    "performance_monitor_area": {
+      "component_id": "performance_monitor",
+      "description": "性能監控區域指標",
+      "metrics": {
+        "metrics_refresh_rate": {
+          "metric_name": "指標刷新率",
+          "target_value": 1.0,
+          "unit": "Hz",
+          "measurement_method": "關鍵指標的更新頻率",
+          "threshold_warning": 0.5,
+          "threshold_critical": 0.2,
+          "measurement_frequency": "持續監控",
+          "user_experience_impact": "medium"
+        },
+        "alert_response_time": {
+          "metric_name": "告警響應時間",
+          "target_value": 1000.0,
+          "unit": "ms",
+          "measurement_method": "從問題發生到告警顯示的時間",
+          "threshold_warning": 3000.0,
+          "threshold_critical": 5000.0,
+          "measurement_frequency": "每次告警",
+          "user_experience_impact": "high"
+        },
+        "visualization_clarity": {
+          "metric_name": "可視化清晰度",
+          "target_value": 8.5,
+          "unit": "分 (1-10)",
+          "measurement_method": "圖表信息的可理解性評分",
+          "threshold_warning": 7.0,
+          "threshold_critical": 5.0,
+          "measurement_frequency": "用戶調查",
+          "user_experience_impact": "medium"
+        },
+        "dashboard_load_speed": {
+          "metric_name": "儀表板載入速度",
+          "target_value": 2.0,
+          "unit": "s",
+          "measurement_method": "完整儀表板載入完成時間",
+          "threshold_warning": 5.0,
+          "threshold_critical": 10.0,
+          "measurement_frequency": "每次載入",
+          "user_experience_impact": "medium"
+        }
+      }
+    },
+    "smart_intervention_area": {
+      "component_id": "smart_intervention",
+      "description": "智能干預區域指標",
+      "metrics": {
+        "intervention_accuracy": {
+          "metric_name": "干預準確性",
+          "target_value": 90.0,
+          "unit": "%",
+          "measurement_method": "正確識別需要切換場景的比例",
+          "threshold_warning": 85.0,
+          "threshold_critical": 75.0,
+          "measurement_frequency": "每次干預",
+          "user_experience_impact": "high"
+        },
+        "suggestion_relevance": {
+          "metric_name": "建議相關性",
+          "target_value": 80.0,
+          "unit": "%",
+          "measurement_method": "用戶接受建議的比例",
+          "threshold_warning": 70.0,
+          "threshold_critical": 60.0,
+          "measurement_frequency": "用戶反饋",
+          "user_experience_impact": "medium"
+        },
+        "non_intrusive_score": {
+          "metric_name": "非侵入性評分",
+          "target_value": 8.0,
+          "unit": "分 (1-10)",
+          "measurement_method": "用戶對干預時機的滿意度",
+          "threshold_warning": 6.0,
+          "threshold_critical": 4.0,
+          "measurement_frequency": "用戶調查",
+          "user_experience_impact": "high"
+        },
+        "learning_adaptation_speed": {
+          "metric_name": "學習適應速度",
+          "target_value": 10.0,
+          "unit": "次交互",
+          "measurement_method": "適應用戶習慣需要的交互次數",
+          "threshold_warning": 20.0,
+          "threshold_critical": 50.0,
+          "measurement_frequency": "學習分析",
+          "user_experience_impact": "medium"
+        }
+      }
+    }
+  },
+  "global_performance_standards": {
+    "page_load_performance": {
+      "first_contentful_paint": {
+        "target": 1.5,
+        "unit": "s",
+        "critical_threshold": 3.0
+      },
+      "largest_contentful_paint": {
+        "target": 2.5,
+        "unit": "s",
+        "critical_threshold": 4.0
+      },
+      "cumulative_layout_shift": {
+        "target": 0.1,
+        "unit": "score",
+        "critical_threshold": 0.25
+      },
+      "first_input_delay": {
+        "target": 100,
+        "unit": "ms",
+        "critical_threshold": 300
+      }
+    },
+    "runtime_performance": {
+      "memory_usage": {
+        "target": 256,
+        "unit": "MB",
+        "warning_threshold": 512,
+        "critical_threshold": 1024
+      },
+      "cpu_utilization": {
+        "target": 30.0,
+        "unit": "%",
+        "warning_threshold": 60.0,
+        "critical_threshold": 80.0
+      },
+      "frame_rate": {
+        "target": 60,
+        "unit": "fps",
+        "warning_threshold": 30,
+        "critical_threshold": 15
+      }
+    },
+    "accessibility_compliance": {
+      "wcag_level": "AA",
+      "keyboard_navigation_coverage": 100.0,
+      "screen_reader_compatibility": 95.0,
+      "color_contrast_ratio": 4.5,
+      "font_scaling_support": "up to 200%"
+    },
+    "browser_compatibility": {
+      "supported_browsers": {
+        "chrome": ">= 90",
+        "firefox": ">= 88",
+        "safari": ">= 14",
+        "edge": ">= 90"
+      },
+      "mobile_support": {
+        "ios_safari": ">= 14",
+        "chrome_mobile": ">= 90",
+        "samsung_internet": ">= 14"
+      }
+    }
+  },
+  "measurement_methodology": {
+    "performance_monitoring_tools": {
+      "real_user_monitoring": "Google Analytics 4 + Custom RUM",
+      "synthetic_monitoring": "Lighthouse CI + WebPageTest",
+      "error_tracking": "Sentry + Custom Error Handler",
+      "user_behavior_analytics": "Hotjar + Custom Event Tracking"
+    },
+    "testing_protocols": {
+      "automated_testing": {
+        "performance_tests": "Jest + Playwright Performance API",
+        "accessibility_tests": "axe-core + Pa11y",
+        "visual_regression": "Percy + Chromatic",
+        "cross_browser_testing": "BrowserStack + Sauce Labs"
+      },
+      "manual_testing": {
+        "usability_testing": "每月進行用戶可用性測試",
+        "accessibility_audit": "每季度進行專業無障礙審查",
+        "performance_audit": "每月進行性能審查"
+      }
+    },
+    "data_collection_standards": {
+      "sampling_rate": {
+        "performance_metrics": "100% for critical paths, 10% for others",
+        "user_interactions": "100% for key interactions, 1% for others",
+        "error_events": "100%"
+      },
+      "data_retention": {
+        "real_time_metrics": "24 hours",
+        "aggregated_metrics": "1 year",
+        "raw_performance_data": "30 days"
+      }
+    }
+  },
+  "quality_assurance": {
+    "performance_gates": {
+      "pre_deployment": {
+        "lighthouse_score_minimum": 90,
+        "core_web_vitals_pass_rate": 95.0,
+        "accessibility_score_minimum": 90
+      },
+      "production_monitoring": {
+        "real_user_monitoring_threshold": 95.0,
+        "error_rate_maximum": 1.0,
+        "availability_minimum": 99.9
+      }
+    },
+    "user_experience_validation": {
+      "user_satisfaction_surveys": {
+        "frequency": "quarterly",
+        "target_score": 4.5,
+        "sample_size": 500
+      },
+      "task_completion_studies": {
+        "frequency": "monthly",
+        "success_rate_target": 90.0,
+        "time_to_complete_target": "baseline + 10%"
+      }
+    }
+  }
+}
