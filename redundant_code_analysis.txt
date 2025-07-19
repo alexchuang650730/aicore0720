@@ -1,0 +1,78 @@
+================================================================================
+冗餘代碼分析報告
+================================================================================
+
+生成時間: 2025-07-19 07:01:22
+
+## 📊 統計
+- 發現冗餘目錄: 27 個
+- 發現冗餘文件: 66 個
+- 發現空目錄: 10 個
+- 總計需要清理: 103 項
+
+## 📁 冗餘目錄
+- core/mirror_code (93.8 KB)
+- claudeditor/ui/mirror_code (29.0 KB)
+- core/workflows (237.6 KB)
+- .github/workflows (2.5 KB)
+- claudeditor/node_modules/fastq/.github/workflows (1.4 KB)
+- claudeditor/node_modules/@ungap/structured-clone/.github/workflows (872.0 B)
+- claudeditor/node_modules/reusify/.github/workflows (1.7 KB)
+- core/ai_assistants (25.6 KB)
+- __pycache__ (82.3 KB)
+- goal_alignment_system/__pycache__ (21.9 KB)
+- core/__pycache__ (24.4 KB)
+- claudeditor_complete/__pycache__ (16.8 KB)
+- mcp_server/__pycache__ (13.0 KB)
+- mcp_server/tools/__pycache__ (54.3 KB)
+- core/data_collection/__pycache__ (40.7 KB)
+- core/workflows/__pycache__ (94.4 KB)
+- core/components/__pycache__ (1.6 KB)
+- core/components/command_mcp/__pycache__ (21.4 KB)
+- core/components/local_adapter_mcp/__pycache__ (28.2 KB)
+- core/components/claude_router_mcp/__pycache__ (26.4 KB)
+- core/components/memoryos_mcp/__pycache__ (139.8 KB)
+- core/components/claude_router_mcp/startup_trigger/__pycache__ (2.3 KB)
+- core/components/claude_router_mcp/mirror_tracker/__pycache__ (2.8 KB)
+- core/components/claude_router_mcp/tool_mode/__pycache__ (23.7 KB)
+- core/components/claude_router_mcp/k2_router/__pycache__ (22.4 KB)
+- core/components/claude_router_mcp/claude_sync/__pycache__ (29.1 KB)
+- temp (0.0 B)
+
+## 📄 冗餘文件
+- external_tools_integration_test_cases.py (21.5 KB)
+- claudeditor_complete/benchmark_test_suite.py (21.4 KB)
+- core/testing/e2e_test_workflow.py (47.3 KB)
+- core/testing/e2e_framework/e2e_test_framework.py (23.7 KB)
+- core/testing/e2e_framework/regression_test_suite.py (29.5 KB)
+- test_analyzer.py (2.2 KB)
+- test_manus_collection.py (1.9 KB)
+- deploy/tests/unit/test_automation_core.py (12.2 KB)
+- deploy/tests/unit/test_workflow_engine.py (13.5 KB)
+- deploy/tests/integration/test_core_integration.py (14.3 KB)
+- deploy/tests/integration/test_mirror_code_integration.py (10.7 KB)
+- deploy/tests/integration/test_claude_tool_mode.py (16.4 KB)
+- core/testing/test_mcp_milestone_validator.py (24.8 KB)
+- core/testing/test_report_generator.py (40.4 KB)
+- core/components/deepswe_mcp/test_deepswe_poc.py (8.4 KB)
+- core/components/test_mcp/test_executors.py (15.8 KB)
+- core/components/test_mcp/test_mcp_manager.py (20.2 KB)
+- core/components/test_mcp/test_case_generator.py (10.2 KB)
+- __pycache__/claude_code_cli.cpython-313.pyc (15.3 KB)
+- __pycache__/manus_advanced_analyzer.cpython-313.pyc (22.1 KB)
+... 還有 46 個文件
+
+## 📂 空目錄
+- temp
+- uploads
+- logs
+- mcp_backup_20250718_224735
+- downloads
+- data/manus_scroll_collection
+- data/memoryrag_training
+- .git/objects/info
+- deployment/v4.73/docs
+- deployment/v4.73/test_results
+
+## 💾 空間回收
+預計可回收空間: 2.1 MB

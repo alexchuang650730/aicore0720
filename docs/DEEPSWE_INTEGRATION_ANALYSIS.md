@@ -132,6 +132,43 @@ class DeepSWEMCP:
 3. 開發 POC 驗證效果
 4. 根據結果決定全面集成策略
 
+## 🔗 開源資源
+
+DeepSWE 已開源，以下是獲取資源的位置：
+
+### 1. **訓練代碼（rLLM）**
+- **GitHub 倉庫**: https://github.com/agentica-project/rllm
+- 包含完整的強化學習訓練框架
+- 支持自定義數據集訓練
+
+### 2. **預訓練模型**
+- **Hugging Face**: https://huggingface.co/agentica-org/DeepSWE-Preview
+- 基於 Qwen3-32B 的模型權重
+- 可直接下載使用
+
+### 3. **數據集（R2EGym）及訓練配方**
+- **GitHub 倉庫**: https://github.com/agentica-project/rllm
+- 包含訓練數據集和配置
+- 提供詳細的訓練步驟
+
+## 🚀 快速開始指南
+
+```bash
+# 1. 克隆訓練代碼
+git clone https://github.com/agentica-project/rllm.git
+cd rllm
+
+# 2. 下載預訓練模型
+git lfs install
+git clone https://huggingface.co/agentica-org/DeepSWE-Preview
+
+# 3. 安裝依賴
+pip install -r requirements.txt
+
+# 4. 運行推理測試
+python inference.py --model-path ./DeepSWE-Preview
+```
+
 ## 🚀 競爭優勢
 
 集成 DeepSWE 後，PowerAutomation 將擁有：

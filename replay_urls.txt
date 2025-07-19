@@ -1,0 +1,3 @@
+# 在下面添加 Manus replay URLs，每行一個
+# https://manus.im/share/xxx?replay=1
+https://manus.im/share/xHbeFo8tzQV51VeTErhskc?replay=1
