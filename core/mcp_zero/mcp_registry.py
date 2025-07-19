@@ -197,6 +197,37 @@ class MCPRegistry:
                 success_rate=0.82
             ),
             
+            # 新增的 MCP
+            "smarttool_mcp": MCPMetadata(
+                name="smarttool_mcp",
+                description="外部工具智能集成 (mcp.so, aci.dev, zapier)",
+                capabilities=[
+                    "external_tools", "workflow_execution", "tool_recommendation",
+                    "multi_platform", "mcp_so", "aci_dev", "zapier"
+                ],
+                context_size=1200,
+                priority="P1",
+                dependencies=[],
+                tags=["tools", "integration", "external", "automation"],
+                performance_score=0.85,
+                success_rate=0.88
+            ),
+            
+            "memoryrag_mcp": MCPMetadata(
+                name="memoryrag_mcp",
+                description="智能記憶與檢索增強生成",
+                capabilities=[
+                    "memory_management", "rag", "k2_optimization", "learning_adapter",
+                    "manus_replay", "deepswe_integration"
+                ],
+                context_size=2500,
+                priority="P0",
+                dependencies=[],
+                tags=["memory", "rag", "learning", "optimization"],
+                performance_score=0.92,
+                success_rate=0.90
+            ),
+            
             # 其他 MCP...
         }
         
