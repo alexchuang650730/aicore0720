@@ -1,0 +1,12 @@
+{
+  "model_name": "k2-optimizer",
+  "base_model": "gpt-3.5-turbo",
+  "learning_rate": 1e-05,
+  "batch_size": 16,
+  "epochs": 3,
+  "max_length": 2048,
+  "temperature": 0.7,
+  "top_p": 0.9,
+  "input_price_per_million": 2.0,
+  "output_price_per_million": 8.0
+}
