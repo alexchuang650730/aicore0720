@@ -1,11 +1,12 @@
-# PowerAutomation v4.6.8 - AI 驅動的全棧開發平台
+# PowerAutomation v4.74 - AI 驅動的全棧開發平台
 
 <div align="center">
   <img src="docs/images/logo.png" alt="PowerAutomation Logo" width="200"/>
   
-  [![Version](https://img.shields.io/badge/version-4.6.8-blue.svg)](https://github.com/alexchuang650730/aicore0720)
+  [![Version](https://img.shields.io/badge/version-4.74-blue.svg)](https://github.com/alexchuang650730/aicore0720)
   [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
   [![Status](https://img.shields.io/badge/status-active-success.svg)]()
+  [![SmartTool](https://img.shields.io/badge/SmartTool-MCP-orange.svg)]()
 </div>
 
 ## 🚀 概述
