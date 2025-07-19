@@ -35,7 +35,6 @@ aicore0720/
 │   └── v4.73/          # 版本部署（含 mcp_server）
 │
 ├── docs/                  # 文檔
-├── tools/                # 工具腳本
 ├── data/                 # 數據文件
 └── README.md            # 本文件
 ```
@@ -60,12 +59,11 @@ aicore0720/
 - **X-Masters MCP** - 深度推理
 - **MemoryOS MCP** - 智能記憶系統
 
-### 新增工具
-- **Enhanced CodeFlow MCP** - 整合所有功能的增強版
-- **K2 優化器訓練系統** - 支持 K2 模型訓練
-- **K2 定價系統** - input 2元/M tokens, output 8元/M tokens
-- **代碼清理工具** - 智能識別和清理冗餘代碼
-- **MCP 合併分析器** - 分析和優化 MCP 組件
+### 新增功能
+- **Enhanced CodeFlow MCP** - 整合所有功能的增強版（在 codeflow_mcp 中）
+- **K2 優化器訓練系統** - 支持 K2 模型訓練（在 core/training 中）
+- **代碼清理工具** - 智能識別和清理冗餘代碼（在 codeflow_mcp 中）
+- **MCP 合併分析器** - 分析和優化 MCP 組件（在 mcp_coordinator_mcp 中）
 
 ## 🛠️ 快速開始
 
@@ -113,30 +111,22 @@ python -m pytest core/testing/
 
 使用 K2 優化器：
 ```python
-from tools.k2_optimizer_trainer import K2OptimizerTrainer
+from core.training.k2_optimizer_trainer import K2OptimizerTrainer
 
 trainer = K2OptimizerTrainer()
 trainer.train_with_existing_data()
 ```
 
-## 🔧 工具使用
+## 🔧 功能使用
 
 ### 代碼清理
 ```bash
-python tools/cleanup_redundant_code.py
+python core/components/codeflow_mcp/cleanup_redundant_code.py
 ```
 
 ### MCP 分析
 ```bash
-python tools/mcp_consolidation_analyzer.py
-```
-
-### K2 定價計算
-```python
-from tools.k2_pricing_system import K2PricingSystem
-
-pricing = K2PricingSystem()
-cost = pricing.calculate_cost(input_tokens=100000, output_tokens=50000)
+python core/components/mcp_coordinator_mcp/mcp_consolidation_analyzer.py
 ```
 
 ## 📖 文檔
