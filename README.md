@@ -147,15 +147,16 @@ aicore0720/
 ### 🚀 一鍵安裝（推薦）
 
 ```bash
-# 克隆v4.77穩定版
-git clone https://github.com/alexchuang650730/aicore0720.git
-cd aicore0720
+# PowerAutomation v4.77 一鍵安裝
+curl -fsSL https://raw.githubusercontent.com/alexchuang650730/aicore0720/main/install.sh | bash
 
-# 自動化部署腳本
-bash deploy/v4.77/deploy_production.sh
+# 或者使用短網址
+curl -fsSL https://get.powerauto.ai/install | bash
+```
 
-# 或使用完整發布腳本
-bash deploy/v4.77/upgrade_from_v476.sh
+安裝完成後，直接運行：
+```bash
+powerautomation
 ```
 
 ### 📦 手動安裝
