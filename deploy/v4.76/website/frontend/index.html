@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAuto.ai - 革命性AI開發自動化平台</title>
+    <meta name="description" content="PowerAutomation v4.76 - Claude + K2雙AI架構，2元成本產生8元價值">
+    <meta name="keywords" content="AI開發,自動化,Claude,K2,PowerAutomation">
+    
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* 頂部導航 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 0 2rem;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a9eff;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-menu a:hover {
+            color: #4a9eff;
+        }
+        
+        .nav-auth {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4a9eff, #0080ff);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #4a9eff;
+            border: 2px solid #4a9eff;
+        }
+        
+        .btn-outline:hover {
+            background: #4a9eff;
+            color: white;
+        }
+        
+        /* 主頁面區塊 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4a9eff;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        /* 功能特性區塊 */
+        .features {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #4a9eff;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(74, 158, 255, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .feature-card h3 {
+            color: #4a9eff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+        
+        /* 定價區塊 */
+        .pricing {
+            padding: 6rem 2rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #4a9eff;
+        }
+        
+        .pricing-card.popular {
+            border-color: #4a9eff;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #4a9eff, #0080ff);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a9eff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price small {
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: #b0b0b0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .plan-features li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        /* 模態框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a2332, #2d3748);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal h2 {
+            color: #4a9eff;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4a9eff;
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+        }
+        
+        .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .close:hover {
+            color: #4a9eff;
+        }
+        
+        /* 用戶儀表板 */
+        .dashboard {
+            display: none;
+            padding: 6rem 2rem 2rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dashboard-card h3 {
+            color: #4a9eff;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #4a9eff, #00d4ff);
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .features-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+        
+        /* 動畫效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* 消息提示 */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #4a9eff, #0080ff);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.error {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+        }
+        
+        .toast.success {
+            background: linear-gradient(135deg, #2ed573, #1e90ff);
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">🚀 PowerAuto.ai</a>
+            <ul class="nav-menu">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#pricing">定價</a></li>
+                <li><a href="#claudeditor">ClaudeEditor</a></li>
+                <li><a href="#api">API</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="#" class="btn btn-outline" onclick="openModal('loginModal')">登錄</a>
+                <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">註冊</a>
+            </div>
+            <div class="user-menu" style="display: none;">
+                <span id="username"></span>
+                <a href="#" class="btn btn-outline" onclick="logout()">登出</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主頁面 -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1>PowerAutomation v4.76</h1>
+            <p>革命性的AI開發自動化平台 | Claude + K2雙AI架構 | 2元成本產生8元價值</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="95">0</span>
+                    <span class="stat-label">K2準確率%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">響應速度ms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="21">0</span>
+                    <span class="stat-label">MCP組件</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label">成本效益倍數</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="openModal('registerModal')">🎯 免費開始</a>
+                <a href="#claudeditor" class="btn btn-outline">📱 體驗ClaudeEditor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特性 -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">核心功能</h2>
+            <p class="section-subtitle">完整的AI開發自動化解決方案</p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🤖</span>
+                    <h3>Claude + K2雙AI架構</h3>
+                    <p>智能路由自動選擇最佳模型，Claude高精度與K2成本優化完美結合，響應時間<100ms</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🔄</span>
+                    <h3>六大工作流自動化</h3>
+                    <p>需求分析、架構設計、編碼實現、測試驗證、部署發布、監控運維全流程自動化</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">💻</span>
+                    <h3>ClaudeEditor三欄式界面</h3>
+                    <p>AI助手、實時監控、工作流管理一體化，左側控制台/中間編輯器/右側AI助手</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Smart Intervention</h3>
+                    <p>智能介入系統，自動檢測需求並觸發相應演示和部署流程，延遲<100ms</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">📊</span>
+                    <h3>性能監控與優化</h3>
+                    <p>實時監控、成本控制、K2優化算法，MemoryRAG壓縮率達2.4%，大幅降低開發成本</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🔐</span>
+                    <h3>三權限系統集成</h3>
+                    <p>使用者/開發者/管理者權限體系，會員積分與支付系統完整集成，支持多種支付方式</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 定價方案 -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">選擇適合的方案</h2>
+            <p class="section-subtitle">從個人開發者到企業團隊，我們都有完美的解決方案</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <h3 class="plan-name">個人版</h3>
+                    <div class="plan-price">¥99<small>/月</small></div>
+                    <ul class="plan-features">
+                        <li>1,000次K2調用</li>
+                        <li>基礎開發工具</li>
+                        <li>郵件支持</li>
+                        <li>基礎分析報告</li>
+                        <li>ClaudeEditor基礎功能</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="selectPlan('personal')">選擇個人版</button>
+                </div>
+                
+                <div class="pricing-card popular fade-in">
+                    <div class="popular-badge">最受歡迎</div>
+                    <h3 class="plan-name">專業版</h3>
+                    <div class="plan-price">¥599<small>/月</small></div>
+                    <ul class="plan-features">
+                        <li>10,000次K2調用</li>
+                        <li>完整開發工具套件</li>
+                        <li>優先技術支持</li>
+                        <li>高級分析與API訪問</li>
+                        <li>ClaudeEditor完整功能</li>
+                        <li>三欄式界面</li>
+                        <li>Smart Intervention</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('professional')">選擇專業版</button>
+                </div>
+                
+                <div class="pricing-card fade-in">
+                    <h3 class="plan-name">企業版</h3>
+                    <div class="plan-price">¥999<small>/月</small></div>
+                    <ul class="plan-features">
+                        <li>50,000次K2調用</li>
+                        <li>專屬技術支持</li>
+                        <li>定制集成服務</li>
+                        <li>SLA保證</li>
+                        <li>企業級安全</li>
+                        <li>管理員權限</li>
+                        <li>團隊協作功能</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="selectPlan('enterprise')">選擇企業版</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用戶儀表板 -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>控制台</h2>
+                <button class="btn btn-primary" onclick="launchClaudeEditor()">🚀 啟動ClaudeEditor</button>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📊 API使用情況</h3>
+                    <div id="apiUsage">載入中...</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="apiProgress"></div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>💰 成本分析</h3>
+                    <div id="costAnalysis">載入中...</div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>🤖 AI模型性能</h3>
+                    <div id="modelPerformance">載入中...</div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>🔄 最近活動</h3>
+                    <div id="recentActivity">載入中...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 登錄模態框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>登錄 PowerAuto.ai</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">用戶名</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">密碼</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">登錄</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 註冊模態框 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>註冊 PowerAuto.ai</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">用戶名</label>
+                    <input type="text" id="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">郵箱</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">密碼</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="regRole">角色</label>
+                    <select id="regRole">
+                        <option value="user">使用者</option>
+                        <option value="developer">開發者</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">註冊</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 全局變量
+        let currentUser = null;
+        let stripe = null;
+        
+        // API基礎URL
+        const API_BASE = '/api';
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStripe();
+            checkAuthStatus();
+            animateStats();
+            
+            // 事件監聽器
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            
+            // 滾動動畫
+            observeElements();
+        });
+        
+        // 初始化Stripe
+        function initializeStripe() {
+            if (typeof Stripe !== 'undefined') {
+                stripe = Stripe('pk_test_dummy_key'); // 替換為實際的publishable key
+            }
+        }
+        
+        // 檢查認證狀態
+        function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                fetch(API_BASE + '/profile', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.user) {
+                        currentUser = data.user;
+                        updateUIForLoggedInUser();
+                    }
+                })
+                .catch(() => {
+                    localStorage.removeItem('token');
+                });
+            }
+        }
+        
+        // 處理登錄
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await fetch(API_BASE + '/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    currentUser = data.user;
+                    updateUIForLoggedInUser();
+                    closeModal('loginModal');
+                    showToast('登錄成功！', 'success');
+                } else {
+                    showToast(data.message, 'error');
+                }
+            } catch (error) {
+                showToast('登錄失敗，請重試', 'error');
+            }
+        }
+        
+        // 處理註冊
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const role = document.getElementById('regRole').value;
+            
+            try {
+                const response = await fetch(API_BASE + '/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password, role })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    closeModal('registerModal');
+                    showToast('註冊成功！請登錄', 'success');
+                    openModal('loginModal');
+                } else {
+                    showToast(data.message, 'error');
+                }
+            } catch (error) {
+                showToast('註冊失敗，請重試', 'error');
+            }
+        }
+        
+        // 更新已登錄用戶的UI
+        function updateUIForLoggedInUser() {
+            // 隱藏登錄/註冊按鈕
+            document.querySelector('.nav-auth').style.display = 'none';
+            
+            // 顯示用戶菜單
+            const userMenu = document.querySelector('.user-menu');
+            userMenu.style.display = 'flex';
+            document.getElementById('username').textContent = currentUser.username;
+            
+            // 顯示儀表板
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('home').style.display = 'none';
+            
+            // 載入用戶數據
+            loadDashboardData();
+        }
+        
+        // 載入儀表板數據
+        async function loadDashboardData() {
+            const token = localStorage.getItem('token');
+            
+            try {
+                const response = await fetch(API_BASE + '/profile', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.user) {
+                    updateDashboard(data.user);
+                }
+            } catch (error) {
+                console.error('載入儀表板數據失敗:', error);
+            }
+        }
+        
+        // 更新儀表板
+        function updateDashboard(user) {
+            // API使用情況
+            const apiUsage = `${user.api_calls_used}/${user.api_calls_limit}`;
+            document.getElementById('apiUsage').textContent = apiUsage;
+            
+            const progress = (user.api_calls_used / user.api_calls_limit) * 100;
+            document.getElementById('apiProgress').style.width = progress + '%';
+            
+            // 成本分析
+            const costSaved = Math.floor(user.api_calls_used * 0.004 * 0.6); // 假設每次調用節省0.004*0.6
+            document.getElementById('costAnalysis').innerHTML = `
+                <p>本月已節省: ¥${costSaved}</p>
+                <p>訂閱: ${user.subscription}</p>
+                <p>積分: ${user.points}</p>
+            `;
+            
+            // AI模型性能
+            document.getElementById('modelPerformance').innerHTML = `
+                <p>Claude響應: 245ms</p>
+                <p>K2響應: 89ms</p>
+                <p>路由延遲: <100ms</p>
+                <p>準確率: 95%</p>
+            `;
+            
+            // 最近活動
+            document.getElementById('recentActivity').innerHTML = `
+                <p>最後登錄: ${new Date(user.last_login || Date.now()).toLocaleDateString()}</p>
+                <p>角色: ${user.role}</p>
+                <p>註冊時間: ${new Date(user.created_at).toLocaleDateString()}</p>
+            `;
+        }
+        
+        // 選擇訂閱計劃
+        async function selectPlan(plan) {
+            if (!currentUser) {
+                showToast('請先登錄', 'error');
+                openModal('loginModal');
+                return;
+            }
+            
+            if (!stripe) {
+                showToast('支付系統初始化中，請稍後重試', 'error');
+                return;
+            }
+            
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(API_BASE + '/payment/create-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ plan })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // 確認支付
+                    const { error } = await stripe.confirmCardPayment(data.client_secret, {
+                        payment_method: {
+                            card: {
+                                // 在實際實現中，這裡應該使用Stripe Elements
+                            }
+                        }
+                    });
+                    
+                    if (error) {
+                        showToast('支付失敗: ' + error.message, 'error');
+                    } else {
+                        showToast('支付成功！訂閱已更新', 'success');
+                        loadDashboardData();
+                    }
+                } else {
+                    showToast(data.message, 'error');
+                }
+            } catch (error) {
+                showToast('支付處理失敗', 'error');
+            }
+        }
+        
+        // 啟動ClaudeEditor
+        async function launchClaudeEditor() {
+            if (!currentUser) {
+                showToast('請先登錄', 'error');
+                return;
+            }
+            
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(API_BASE + '/claudeditor/launch', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // 在新窗口打開ClaudeEditor
+                    window.open('/claudeditor?session=' + data.session_id, '_blank');
+                } else {
+                    showToast(data.message, 'error');
+                }
+            } catch (error) {
+                showToast('啟動ClaudeEditor失敗', 'error');
+            }
+        }
+        
+        // 登出
+        function logout() {
+            localStorage.removeItem('token');
+            currentUser = null;
+            
+            // 重置UI
+            document.querySelector('.nav-auth').style.display = 'flex';
+            document.querySelector('.user-menu').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('home').style.display = 'block';
+            
+            showToast('已登出', 'success');
+        }
+        
+        // 模態框控制
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // 點擊模態框外部關閉
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // 顯示提示消息
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+        
+        // 統計數字動畫
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current);
+                }, 40);
+            });
+        }
+        
+        // 滾動動畫觀察者
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.feature-card, .pricing-card').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
