@@ -1,0 +1,87 @@
+{
+  "version": "v4.76",
+  "demo_mode": true,
+  "ui_layout": "three_panel",
+  "left_panel": {
+    "ai_model_control": {
+      "enabled": true,
+      "models": ["claude", "k2", "auto_routing"],
+      "default_model": "claude",
+      "cost_monitoring": true
+    },
+    "github_status": {
+      "enabled": true,
+      "auto_sync": true,
+      "branch_display": true
+    },
+    "quick_actions": {
+      "enabled": true,
+      "actions": ["run", "test", "deploy", "debug"]
+    },
+    "six_workflows": {
+      "enabled": true,
+      "workflows": [
+        "需求分析",
+        "架構設計", 
+        "編碼實現",
+        "測試工作流",
+        "部署工作流",
+        "監控運維"
+      ]
+    }
+  },
+  "center_panel": {
+    "editor_tabs": {
+      "enabled": true,
+      "tabs": ["code", "demo", "chat"]
+    },
+    "code_editor": {
+      "theme": "dark",
+      "language_support": ["javascript", "typescript", "python", "jsx"],
+      "monaco_integration": true
+    },
+    "demo_viewer": {
+      "enabled": true,
+      "available_demos": [
+        "auth_system_demo",
+        "k2_verification_demo", 
+        "workflows_demo",
+        "performance_demo"
+      ]
+    },
+    "chat_interface": {
+      "enabled": true,
+      "ai_assistant": true,
+      "smart_intervention": true
+    }
+  },
+  "right_panel": {
+    "ai_assistant": {
+      "enabled": true,
+      "suggestions": true,
+      "context_analysis": true
+    },
+    "performance_monitoring": {
+      "enabled": true,
+      "real_time_metrics": true,
+      "cost_tracking": true
+    }
+  },
+  "navigation": {
+    "mode_switching": {
+      "enabled": true,
+      "modes": ["edit", "demo", "chat"]
+    }
+  },
+  "authentication": {
+    "three_tier_auth": true,
+    "member_system": true,
+    "payment_integration": true
+  },
+  "mcp_integration": {
+    "enabled": true,
+    "components": 21,
+    "smart_intervention": true,
+    "claude_realtime_collector": true
+  }
+}

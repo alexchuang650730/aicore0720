@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClaudeEditor - 三欄式界面演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* 頂部導航區 */
+        .navigation-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-tab.active, .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        /* 主容器 */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 50px);
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        /* 左側控制台 */
+        .left-panel {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+        }
+        
+        .section-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-content {
+            padding: 16px;
+        }
+        
+        /* AI模型控制區 */
+        .ai-model-control {
+            flex: 0 0 180px;
+        }
+        
+        .model-selector {
+            margin-bottom: 16px;
+        }
+        
+        .model-selector select {
+            width: 100%;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .model-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff00;
+        }
+        
+        .cost-monitor {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .cost-monitor h4 {
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .cost-monitor div {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+        }
+        
+        /* GitHub狀態區 */
+        .github-status {
+            flex: 0 0 120px;
+        }
+        
+        .git-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .branch-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .branch-icon {
+            font-size: 12px;
+        }
+        
+        .git-info div {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* 快速操作區 */
+        .quick-actions {
+            flex: 0 0 140px;
+            min-height: 140px;
+        }
+        
+        .action-button {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 六大工作流區 */
+        .workflows {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 300px;
+            max-height: 400px;
+        }
+        
+        .workflow-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .workflow-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .workflow-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: white;
+        }
+        
+        .workflow-status {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 中間編輯區 */
+        .center-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .editor-header {
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        
+        .editor-tabs {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .editor-tab {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .editor-tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+        
+        .editor-content {
+            flex: 1;
+            position: relative;
+        }
+        
+        .code-editor, .demo-viewer, .chat-interface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+        
+        .code-editor.active, .demo-viewer.active, .chat-interface.active {
+            display: block;
+        }
+        
+        .code-editor {
+            background: #1a1a1a;
+            font-family: 'Fira Code', 'Monaco', monospace;
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 0 0 12px 12px;
+            color: #e0e0e0;
+        }
+        
+        .demo-viewer {
+            background: transparent;
+            padding: 20px;
+            overflow-y: auto;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .demo-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .demo-description {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .demo-button {
+            padding: 8px 16px;
+            background: #4a9eff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .demo-button:hover {
+            background: #2080ff;
+        }
+        
+        .demo-button.secondary {
+            background: #404040;
+        }
+        
+        .demo-button.secondary:hover {
+            background: #505050;
+        }
+        
+        .chat-interface {
+            display: flex;
+            flex-direction: column;
+            background: #1a1a1a;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .chat-message {
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .chat-message.user {
+            background: rgba(255, 255, 255, 0.1);
+            margin-left: 40px;
+            color: white;
+        }
+        
+        .chat-message.assistant {
+            background: rgba(74, 158, 255, 0.2);
+            margin-right: 40px;
+            color: white;
+        }
+        
+        .chat-input-area {
+            border-top: 1px solid #404040;
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            resize: none;
+            backdrop-filter: blur(5px);
+        }
+        
+        .chat-send {
+            padding: 12px 20px;
+            background: #4a9eff;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* 右側AI助手區 */
+        .right-panel {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ai-assistant-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        
+        .ai-assistant-header h2 {
+            color: white;
+        }
+        
+        .ai-assistant-header div {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .ai-assistant-content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        
+        .assistant-section {
+            margin-bottom: 24px;
+        }
+        
+        .assistant-section h3 {
+            color: white;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .suggestion-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+        }
+        
+        .suggestion-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+        
+        .context-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .context-info h4 {
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .context-info div {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+        }
+        
+        .performance-metrics {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .performance-metrics h4 {
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 1200px) {
+            .left-panel {
+                width: 250px;
+            }
+            .right-panel {
+                width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .left-panel, .right-panel {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 頂部導航區 -->
+    <div class="navigation-bar">
+        <div class="nav-logo">
+            🎯 ClaudeEditor v4.76
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchMode('edit')">編輯</button>
+            <button class="nav-tab" onclick="switchMode('demo')">演示</button>
+            <button class="nav-tab" onclick="switchMode('chat')">對話</button>
+        </div>
+        <div class="nav-user">
+            <span>👤 Developer</span>
+            <span>🔑 專業版</span>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 左側控制台 -->
+        <div class="left-panel">
+            <!-- AI模型控制區 -->
+            <div class="panel-section ai-model-control">
+                <div class="section-header">🤖 AI模型控制</div>
+                <div class="section-content">
+                    <div class="model-selector">
+                        <select id="modelSelect" onchange="switchModel()">
+                            <option value="claude">Claude Sonnet 4</option>
+                            <option value="k2">K2 優化模型</option>
+                            <option value="auto">智能路由</option>
+                        </select>
+                    </div>
+                    <div class="model-status">
+                        <div class="status-dot"></div>
+                        <span>Claude 已連接</span>
+                    </div>
+                    <div class="model-status">
+                        <div class="status-dot" style="background: #ffaa00;"></div>
+                        <span>K2 就緒 (95%準確率)</span>
+                    </div>
+                    <div class="cost-monitor">
+                        <h4>💰 成本監控</h4>
+                        <div>今日: $0.24 / $10.00</div>
+                        <div>K2優化: 節省60%</div>
+                        <div>效率: 2元→8元價值</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub狀態區 -->
+            <div class="panel-section github-status">
+                <div class="section-header">📱 GitHub狀態</div>
+                <div class="section-content">
+                    <div class="git-info">
+                        <div class="branch-info">
+                            <span class="branch-icon">🌿</span>
+                            <span>main</span>
+                        </div>
+                        <div style="font-size: 12px; color: #b0b0b0;">
+                            ✅ 3 commits ahead<br>
+                            📝 2 files changed<br>
+                            🔄 Auto-sync: ON
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速操作區 -->
+            <div class="panel-section quick-actions">
+                <div class="section-header">⚡ 快速操作</div>
+                <div class="section-content">
+                    <button class="action-button" onclick="quickAction('run')">▶️ 運行</button>
+                    <button class="action-button" onclick="quickAction('test')">🧪 測試</button>
+                    <button class="action-button" onclick="quickAction('deploy')">🚀 部署</button>
+                    <button class="action-button" onclick="quickAction('debug')">🐛 調試</button>
+                </div>
+            </div>
+
+            <!-- 六大工作流區 -->
+            <div class="panel-section workflows">
+                <div class="section-header">🔄 六大工作流</div>
+                <div class="section-content" style="padding: 0;">
+                    <div class="workflow-item" onclick="selectWorkflow('requirement')">
+                        <div class="workflow-title">📋 需求分析</div>
+                        <div class="workflow-status">✅ CodeFlow MCP分析</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow('architecture')">
+                        <div class="workflow-title">🏗️ 架構設計</div>
+                        <div class="workflow-status">⏳ 自動文檔生成</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow('coding')">
+                        <div class="workflow-title">💻 編碼實現</div>
+                        <div class="workflow-status">✅ 代碼生成優化</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow('testing')">
+                        <div class="workflow-title">🧪 測試工作流</div>
+                        <div class="workflow-status">✅ 自動測試生成</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow('deployment')">
+                        <div class="workflow-title">🚀 部署工作流</div>
+                        <div class="workflow-status">⏳ CI/CD整合</div>
+                    </div>
+                    <div class="workflow-item" onclick="selectWorkflow('monitoring')">
+                        <div class="workflow-title">📊 監控運維</div>
+                        <div class="workflow-status">✅ 性能監控告警</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中間編輯區 -->
+        <div class="center-panel">
+            <div class="editor-header">
+                <div class="editor-tabs">
+                    <button class="editor-tab active" onclick="switchTab('code')">代碼編輯</button>
+                    <button class="editor-tab" onclick="switchTab('demo')">演示預覽</button>
+                    <button class="editor-tab" onclick="switchTab('chat')">AI對話</button>
+                </div>
+            </div>
+            
+            <div class="editor-content">
+                <!-- 代碼編輯器 -->
+                <div class="code-editor active" id="codeEditor">
+<pre style="color: #e0e0e0;">
+<span style="color: #ff6b9d;">#!/usr/bin/env python3</span>
+<span style="color: #6bcf7f;">"""
+PowerAutomation ClaudeEditor 三欄式界面演示
+展示完整的AI開發環境
+"""</span>
+
+<span style="color: #ff6b9d;">import</span> asyncio
+<span style="color: #ff6b9d;">from</span> typing <span style="color: #ff6b9d;">import</span> Dict, Any
+
+<span style="color: #ff6b9d;">class</span> <span style="color: #4a9eff;">ClaudeEditorDemo</span>:
+    <span style="color: #6bcf7f;">"""ClaudeEditor演示類"""</span>
+    
+    <span style="color: #ff6b9d;">def</span> <span style="color: #4a9eff;">__init__</span>(<span style="color: #ffd93d;">self</span>):
+        <span style="color: #ffd93d;">self</span>.version = <span style="color: #6bcf7f;">"v4.76"</span>
+        <span style="color: #ffd93d;">self</span>.features = {
+            <span style="color: #6bcf7f;">"三欄式界面"</span>: <span style="color: #4a9eff;">True</span>,
+            <span style="color: #6bcf7f;">"AI模型控制"</span>: <span style="color: #4a9eff;">True</span>,
+            <span style="color: #6bcf7f;">"六大工作流"</span>: <span style="color: #4a9eff;">True</span>,
+            <span style="color: #6bcf7f;">"智能助手"</span>: <span style="color: #4a9eff;">True</span>
+        }
+    
+    <span style="color: #ff6b9d;">async def</span> <span style="color: #4a9eff;">demo_workflow</span>(<span style="color: #ffd93d;">self</span>, workflow_type: str):
+        <span style="color: #6bcf7f;">"""演示工作流功能"""</span>
+        <span style="color: #ff6b9d;">print</span>(<span style="color: #6bcf7f;">f"🚀 啟動 {workflow_type} 工作流"</span>)
+        
+        <span style="color: #888888;"># 模擬AI處理</span>
+        <span style="color: #ff6b9d;">await</span> asyncio.sleep(<span style="color: #ffd93d;">1</span>)
+        
+        <span style="color: #ff6b9d;">return</span> {
+            <span style="color: #6bcf7f;">"status"</span>: <span style="color: #6bcf7f;">"success"</span>,
+            <span style="color: #6bcf7f;">"workflow"</span>: workflow_type,
+            <span style="color: #6bcf7f;">"ai_model"</span>: <span style="color: #6bcf7f;">"Claude + K2"</span>
+        }
+
+<span style="color: #888888;"># 演示實例</span>
+demo = ClaudeEditorDemo()
+</pre>
+                </div>
+
+                <!-- 演示預覽 -->
+                <div class="demo-viewer" id="demoViewer">
+                    <div class="demo-card">
+                        <div class="demo-title">🎯 三權限系統演示</div>
+                        <div class="demo-description">
+                            展示使用者/開發者/管理者權限體系，包含會員積分登錄支付系統集成。
+                            驗證完整的認證流程和權限控制機制。
+                        </div>
+                        <div class="demo-controls">
+                            <button class="demo-button" onclick="runDemo('auth')">▶️ 運行演示</button>
+                            <button class="demo-button secondary" onclick="viewCode('auth')">📝 查看代碼</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-card">
+                        <div class="demo-title">🤖 K2工具調用驗證</div>
+                        <div class="demo-description">
+                            驗證K2工具調用能力與Claude的實際差距，Claude Router透明切換，
+                            RAG完整指令支持，用戶體驗一致性測試。
+                        </div>
+                        <div class="demo-controls">
+                            <button class="demo-button" onclick="runDemo('k2')">▶️ 運行演示</button>
+                            <button class="demo-button secondary" onclick="viewCode('k2')">📝 查看代碼</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-card">
+                        <div class="demo-title">🔄 六大工作流演示</div>
+                        <div class="demo-description">
+                            完整展示需求分析、架構設計、編碼實現、測試、部署、監控運維
+                            六大核心工作流的自動化處理能力。
+                        </div>
+                        <div class="demo-controls">
+                            <button class="demo-button" onclick="runDemo('workflows')">▶️ 運行演示</button>
+                            <button class="demo-button secondary" onclick="viewCode('workflows')">📝 查看代碼</button>
+                        </div>
+                    </div>
+
+                    <div class="demo-card">
+                        <div class="demo-title">⚡ 性能優化演示</div>
+                        <div class="demo-description">
+                            展示v4.76的核心性能突破：Smart Intervention延遲優化(147ms→&lt;100ms)，
+                            MemoryRAG壓縮提升(47.2%→2.4%)，SmartUI無障礙完整支持。
+                        </div>
+                        <div class="demo-controls">
+                            <button class="demo-button" onclick="runDemo('performance')">▶️ 運行演示</button>
+                            <button class="demo-button secondary" onclick="viewCode('performance')">📝 查看代碼</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI對話界面 -->
+                <div class="chat-interface" id="chatInterface">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message assistant">
+                            <strong>ClaudeEditor AI助手</strong><br>
+                            歡迎使用ClaudeEditor v4.76！我可以幫助您：<br>
+                            • 🤖 切換AI模型 (Claude/K2/智能路由)<br>
+                            • 🔄 執行六大工作流<br>
+                            • 📊 監控性能和成本<br>
+                            • 🚀 部署和測試代碼<br><br>
+                            請告訴我您想要做什麼？
+                        </div>
+                        <div class="chat-message user">
+                            我想要運行三權限系統演示，看看會員積分支付系統是如何集成的。
+                        </div>
+                        <div class="chat-message assistant">
+                            <strong>🎯 Smart Intervention 已觸發</strong><br><br>
+                            我為您準備了三權限系統演示：<br>
+                            ✅ 使用者/開發者/管理者權限體系<br>
+                            ✅ 會員積分系統集成<br>
+                            ✅ 支付寶/微信/Stripe支付<br>
+                            ✅ K2成本優化 (2元→8元價值)<br><br>
+                            <button class="demo-button" onclick="runDemo('auth')" style="margin-top: 10px;">▶️ 立即運行演示</button>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <textarea class="chat-input" placeholder="輸入您的問題或指令..." id="chatInput"></textarea>
+                        <button class="chat-send" onclick="sendChatMessage()">發送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右側AI助手區 -->
+        <div class="right-panel">
+            <div class="ai-assistant-header">
+                <h2>🤖 AI助手</h2>
+                <div style="font-size: 12px; color: #b0b0b0;">智能分析與建議</div>
+            </div>
+            <div class="ai-assistant-content">
+                <div class="assistant-section">
+                    <h3>💡 智能建議</h3>
+                    <div class="suggestion-item" onclick="applySuggestion('optimize')">
+                        🚀 建議優化K2模型切換延遲
+                    </div>
+                    <div class="suggestion-item" onclick="applySuggestion('test')">
+                        🧪 推薦運行自動化測試套件
+                    </div>
+                    <div class="suggestion-item" onclick="applySuggestion('deploy')">
+                        📦 準備部署到生產環境
+                    </div>
+                </div>
+
+                <div class="assistant-section">
+                    <h3>📊 上下文分析</h3>
+                    <div class="context-info">
+                        <h4>🎯 當前項目</h4>
+                        <div>PowerAutomation v4.76</div>
+                        <div>21個MCP組件</div>
+                        <div>演示模式啟用</div>
+                    </div>
+                    <div class="context-info">
+                        <h4>🔧 活躍工作流</h4>
+                        <div>需求分析: 已完成</div>
+                        <div>編碼實現: 進行中</div>
+                        <div>測試工作流: 等待中</div>
+                    </div>
+                </div>
+
+                <div class="assistant-section">
+                    <h3>📈 性能監控</h3>
+                    <div class="performance-metrics">
+                        <h4>🤖 AI模型性能</h4>
+                        <div class="metric-item">
+                            <span>Claude響應時間</span>
+                            <span>245ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>K2響應時間</span>
+                            <span>89ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>路由切換延遲</span>
+                            <span>&lt;100ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>準確率對比</span>
+                            <span>95%</span>
+                        </div>
+                    </div>
+                    <div class="performance-metrics">
+                        <h4>💰 成本效益</h4>
+                        <div class="metric-item">
+                            <span>今日成本</span>
+                            <span>$0.24</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>K2節省</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>價值產出</span>
+                            <span>4倍</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局狀態
+        let currentMode = 'edit';
+        let currentTab = 'code';
+        let currentModel = 'claude';
+
+        // 模式切換
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 根據模式切換界面
+            if (mode === 'demo') {
+                switchTab('demo');
+            } else if (mode === 'chat') {
+                switchTab('chat');
+            } else {
+                switchTab('code');
+            }
+        }
+
+        // 標籤頁切換
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // 更新標籤頁狀態
+            document.querySelectorAll('.editor-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            document.querySelectorAll('.editor-tab').forEach(t => {
+                if (t.textContent.includes(getTabText(tab))) {
+                    t.classList.add('active');
+                }
+            });
+
+            // 更新內容區域
+            document.querySelectorAll('.code-editor, .demo-viewer, .chat-interface').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            if (tab === 'code') {
+                document.getElementById('codeEditor').classList.add('active');
+            } else if (tab === 'demo') {
+                document.getElementById('demoViewer').classList.add('active');
+            } else if (tab === 'chat') {
+                document.getElementById('chatInterface').classList.add('active');
+            }
+        }
+
+        function getTabText(tab) {
+            const tabTexts = {
+                'code': '代碼編輯',
+                'demo': '演示預覽',
+                'chat': 'AI對話'
+            };
+            return tabTexts[tab] || '';
+        }
+
+        // AI模型切換
+        function switchModel() {
+            const model = document.getElementById('modelSelect').value;
+            currentModel = model;
+            
+            // 更新狀態顯示
+            const statusTexts = {
+                'claude': 'Claude 已連接',
+                'k2': 'K2 模型已啟用',
+                'auto': '智能路由已啟用'
+            };
+            
+            addChatMessage('system', `🤖 已切換到 ${statusTexts[model]}`);
+        }
+
+        // 快速操作
+        function quickAction(action) {
+            const actions = {
+                'run': '▶️ 正在運行代碼...',
+                'test': '🧪 正在執行測試...',
+                'deploy': '🚀 正在部署...',
+                'debug': '🐛 啟動調試模式...'
+            };
+            
+            addChatMessage('system', actions[action]);
+            
+            // 模擬操作完成
+            setTimeout(() => {
+                addChatMessage('system', `✅ ${action} 操作完成`);
+            }, 2000);
+        }
+
+        // 工作流選擇
+        function selectWorkflow(workflow) {
+            const workflows = {
+                'requirement': '📋 需求分析工作流',
+                'architecture': '🏗️ 架構設計工作流',
+                'coding': '💻 編碼實現工作流',
+                'testing': '🧪 測試工作流',
+                'deployment': '🚀 部署工作流',
+                'monitoring': '📊 監控運維工作流'
+            };
+            
+            addChatMessage('system', `🔄 啟動${workflows[workflow]}`);
+            
+            // 切換到演示模式
+            switchMode('demo');
+        }
+
+        // 運行演示
+        function runDemo(demo) {
+            const demos = {
+                'auth': '🎯 三權限系統演示',
+                'k2': '🤖 K2工具調用驗證',
+                'workflows': '🔄 六大工作流演示',
+                'performance': '⚡ 性能優化演示'
+            };
+            
+            addChatMessage('assistant', `🚀 正在啟動 ${demos[demo]}...`);
+            
+            // 模擬演示運行
+            setTimeout(() => {
+                addChatMessage('assistant', 
+                    `✅ ${demos[demo]} 運行完成！\n\n` +
+                    `📊 結果摘要：\n` +
+                    `• 演示成功率: 100%\n` +
+                    `• 性能指標: 優秀\n` +
+                    `• 用戶體驗: 一致\n` +
+                    `• AI模型: ${currentModel.toUpperCase()}\n\n` +
+                    `您可以查看詳細結果或運行其他演示。`
+                );
+            }, 3000);
+            
+            // 切換到對話模式查看結果
+            setTimeout(() => {
+                switchMode('chat');
+            }, 1000);
+        }
+
+        // 查看代碼
+        function viewCode(demo) {
+            switchTab('code');
+            addChatMessage('system', `📝 已切換到代碼編輯器，顯示${demo}相關代碼`);
+        }
+
+        // 應用建議
+        function applySuggestion(suggestion) {
+            const suggestions = {
+                'optimize': '🚀 正在優化K2模型切換...',
+                'test': '🧪 正在啟動自動化測試...',
+                'deploy': '📦 正在準備部署配置...'
+            };
+            
+            addChatMessage('system', suggestions[suggestion]);
+        }
+
+        // 發送聊天消息
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addChatMessage('user', message);
+                input.value = '';
+                
+                // 模擬AI回應
+                setTimeout(() => {
+                    handleAIResponse(message);
+                }, 1000);
+            }
+        }
+
+        // 添加聊天消息
+        function addChatMessage(type, message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${type}`;
+            
+            if (type === 'assistant') {
+                messageDiv.innerHTML = `<strong>ClaudeEditor AI助手</strong><br>${message}`;
+            } else if (type === 'system') {
+                messageDiv.innerHTML = `<strong>系統</strong><br>${message}`;
+            } else {
+                messageDiv.innerHTML = message;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // 處理AI回應
+        function handleAIResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            if (lowerMessage.includes('演示') || lowerMessage.includes('demo')) {
+                addChatMessage('assistant', 
+                    '🎯 我檢測到您想要查看演示。我為您推薦以下演示項目：\n\n' +
+                    '1. ✅ 三權限系統演示 (15分鐘)\n' +
+                    '2. 🤖 K2工具調用驗證 (10分鐘)\n' +
+                    '3. 🔄 六大工作流演示 (20分鐘)\n' +
+                    '4. ⚡ 性能優化演示 (12分鐘)\n\n' +
+                    '您想要運行哪個演示？我可以為您啟動。'
+                );
+            } else if (lowerMessage.includes('k2') || lowerMessage.includes('模型')) {
+                addChatMessage('assistant',
+                    '🤖 關於K2模型：\n\n' +
+                    '• 響應速度: 比Claude快63%\n' +
+                    '• 準確率: 95% (Claude基準)\n' +
+                    '• 成本效益: 節省60%費用\n' +
+                    '• 智能路由: 透明切換<100ms\n\n' +
+                    '您想要切換到K2模型還是查看性能對比？'
+                );
+            } else if (lowerMessage.includes('工作流') || lowerMessage.includes('workflow')) {
+                addChatMessage('assistant',
+                    '🔄 六大工作流系統：\n\n' +
+                    '1. 📋 需求分析 - CodeFlow MCP分析\n' +
+                    '2. 🏗️ 架構設計 - 自動文檔生成\n' +
+                    '3. 💻 編碼實現 - 代碼生成優化\n' +
+                    '4. 🧪 測試工作流 - 自動測試生成\n' +
+                    '5. 🚀 部署工作流 - CI/CD整合\n' +
+                    '6. 📊 監控運維 - 性能監控告警\n\n' +
+                    '您想要啟動哪個工作流？'
+                );
+            } else {
+                addChatMessage('assistant',
+                    '我理解您的問題。作為ClaudeEditor的AI助手，我可以幫助您：\n\n' +
+                    '• 🤖 管理AI模型和切換\n' +
+                    '• 🔄 執行開發工作流\n' +
+                    '• 📊 監控性能和成本\n' +
+                    '• 🚀 運行演示和測試\n' +
+                    '• 💡 提供智能建議\n\n' +
+                    '請告訴我您具體需要什麼幫助？'
+                );
+            }
+        }
+
+        // 鍵盤事件
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        });
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            addChatMessage('assistant', 
+                '🎉 歡迎使用 ClaudeEditor v4.76！\n\n' +
+                '本次演示將向您展示：\n' +
+                '• 🎯 三欄式智能界面\n' +
+                '• 🤖 Claude + K2 雙AI架構\n' +
+                '• 🔄 六大工作流自動化\n' +
+                '• 📊 實時性能監控\n' +
+                '• 💰 成本優化控制\n\n' +
+                '準備好開始探索了嗎？'
+            );
+        });
+    </script>
+</body>
+</html>

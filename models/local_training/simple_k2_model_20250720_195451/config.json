@@ -1,0 +1,10 @@
+{
+  "model_type": "simple_k2",
+  "vocab_size": 850,
+  "hidden_size": 256,
+  "num_layers": 4,
+  "max_length": 128,
+  "trained_on": "MacBook Air 2025",
+  "device": "mps",
+  "training_time": 0.8433279991149902
+}

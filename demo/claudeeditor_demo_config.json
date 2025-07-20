@@ -1,0 +1,37 @@
+{
+  "workspace": "/Users/alexchuang/alexchuangtest/aicore0720",
+  "demo_mode": true,
+  "available_demos": [
+    {
+      "id": "auth_system_demo",
+      "title": "三權限系統演示",
+      "script": "python3 demo/auth_system_demo.py",
+      "url": "/demo/auth_system_demo.py"
+    },
+    {
+      "id": "k2_verification_demo",
+      "title": "K2工具調用能力驗證",
+      "script": "python3 demo/k2_verification_demo.py",
+      "url": "/demo/k2_verification_demo.py"
+    },
+    {
+      "id": "mcp_components_demo",
+      "title": "21個MCP組件演示",
+      "script": "python3 demo/mcp_demo.py",
+      "url": "/demo/mcp_demo.py"
+    },
+    {
+      "id": "performance_optimization_demo",
+      "title": "v4.76性能優化演示",
+      "script": "python3 demo/performance_demo.py",
+      "url": "/demo/performance_demo.py"
+    },
+    {
+      "id": "claudeeditor_integration_demo",
+      "title": "ClaudeEditor集成演示",
+      "script": "python3 demo/claudeeditor_demo.py",
+      "url": "/demo/claudeeditor_demo.py"
+    }
+  ],
+  "default_demo": "auth_system_demo"
+}

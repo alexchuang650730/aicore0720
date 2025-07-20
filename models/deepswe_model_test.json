@@ -1,0 +1,13 @@
+{
+  "model_type": "deepswe",
+  "version": "1.0.0",
+  "trained_at": "2025-07-20T19:08:35.331720",
+  "training_samples": 1,
+  "architecture": "code_llama",
+  "specialization": "software_engineering",
+  "capabilities": [
+    "code_generation",
+    "debugging",
+    "refactoring"
+  ]
+}

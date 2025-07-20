@@ -1,0 +1,12 @@
+{
+  "model_type": "k2_optimizer",
+  "version": "1.0.0",
+  "trained_at": "2025-07-20T19:08:35.230266",
+  "training_samples": 1,
+  "architecture": "transformer",
+  "parameters": {
+    "hidden_size": 768,
+    "num_layers": 12,
+    "num_heads": 12
+  }
+}

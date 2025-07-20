@@ -436,7 +436,6 @@ def stripe_webhook():
     return jsonify({'status': 'success'})
 
 # 初始化數據庫
-@app.before_first_request
 def create_tables():
     db.create_all()
     
@@ -456,5 +455,9 @@ def create_tables():
         db.session.commit()
 
 if __name__ == '__main__':
-    # 開發環境配置
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # 初始化数据库
+    with app.app_context():
+        create_tables()
+    
+    # 開發環境配置 (使用5001端口避免macOS AirPlay冲突)
+    app.run(debug=True, host='0.0.0.0', port=5001)

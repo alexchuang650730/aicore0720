@@ -243,6 +243,23 @@ class MCPRegistry:
                 success_rate=0.90
             ),
             
+            # 第21個MCP組件 - Claude實時收集器
+            "claude_realtime_mcp": MCPMetadata(
+                name="claude_realtime_mcp",
+                description="Claude實時數據收集與K2/DeepSWE訓練數據生成器",
+                capabilities=[
+                    "realtime_collection", "training_data_generation", "k2_training", 
+                    "deepswe_training", "session_monitoring", "data_quality_assessment",
+                    "process_monitoring", "conversation_tracking", "tool_usage_analysis"
+                ],
+                context_size=3000,
+                priority="P0",
+                dependencies=["memoryrag_mcp"],
+                tags=["collection", "training", "k2", "deepswe", "realtime", "data"],
+                performance_score=0.94,
+                success_rate=0.91
+            ),
+            
             # 其他 MCP...
         }
         
