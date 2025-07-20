@@ -32,7 +32,7 @@ if ! command -v python3 &> /dev/null; then
     echo "請先安裝Python 3.9+: https://www.python.org/downloads/"
     exit 1
 fi
-PYTHON_VERSION=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+PYTHON_VERSION=$(python3 -V 2>&1 | sed 's/Python //')
 echo "✅ Python: $PYTHON_VERSION"
 
 # 檢查Node.js (可選)
