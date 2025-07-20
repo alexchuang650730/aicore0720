@@ -441,7 +441,7 @@ echo "=============================================="
 echo ""
 echo "💬 想要立即體驗嗎？ (y/n)"
 read -n 1 -r
-echo
+echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "🚀 啟動PowerAutomation v4.77..."
     exec "$INSTALL_DIR/powerautomation"
