@@ -1,0 +1,29 @@
+{
+  "version": "v4.76",
+  "deployment_type": "demo_showcase",
+  "components": [
+    {
+      "name": "PowerAutomation Core",
+      "status": "ready",
+      "port": 8000
+    },
+    {
+      "name": "ClaudeEditor UI",
+      "status": "ready",
+      "port": 3000
+    },
+    {
+      "name": "MCP Services",
+      "status": "ready",
+      "port": 8080
+    }
+  ],
+  "demo_features": [
+    "Smart Intervention MCP",
+    "Performance Excellence",
+    "Documentation MCP",
+    "K2 Integration",
+    "Three-Panel Interface"
+  ],
+  "generated_at": "2025-07-20T19:11:59.325900"
+}

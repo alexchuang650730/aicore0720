@@ -1,0 +1,160 @@
+{
+  "version": "4.76",
+  "ui_layout": "three_panel",
+  "theme": "dark",
+  "performance_monitoring": true,
+  "smart_intervention": {
+    "enabled": true,
+    "target_latency_ms": 100,
+    "detection_keywords": ["演示", "部署", "demo", "deploy", "claudeeditor", "三欄式"]
+  },
+  "mcp_drivers": {
+    "codeflow": {
+      "enabled": true,
+      "endpoint": "http://localhost:8001",
+      "capabilities": ["code_generation", "template_processing", "ast_analysis"]
+    },
+    "smartui": {
+      "enabled": true,
+      "endpoint": "http://localhost:8002",
+      "capabilities": ["ui_generation", "accessibility_check", "responsive_design"]
+    },
+    "stagewise": {
+      "enabled": true,
+      "endpoint": "http://localhost:8003",
+      "capabilities": ["testing", "deployment", "monitoring"]
+    },
+    "smart_intervention": {
+      "enabled": true,
+      "endpoint": "http://localhost:8004",
+      "capabilities": ["detection", "auto_trigger", "performance_optimization"]
+    }
+  },
+  "ui_components": {
+    "left_panel": {
+      "ai_model_control": {
+        "component": "ui/panels/AIModelControl.jsx",
+        "enabled": true,
+        "models": ["claude", "k2", "auto_routing"]
+      },
+      "github_status": {
+        "component": "ui/panels/GitHubStatus.jsx",
+        "enabled": true,
+        "auto_sync": true
+      },
+      "quick_actions": {
+        "component": "ui/panels/QuickActions.jsx",
+        "enabled": true,
+        "actions": ["run", "test", "deploy", "debug"]
+      },
+      "six_workflows": {
+        "component": "ui/workflows/SixWorkflowSidebar.jsx",
+        "enabled": true,
+        "workflows": [
+          "需求分析", "架構設計", "編碼實現", 
+          "測試驗證", "部署發布", "監控運維"
+        ]
+      }
+    },
+    "center_panel": {
+      "code_editor": {
+        "component": "ui/panels/CodeEditor.jsx",
+        "enabled": true,
+        "theme": "dark",
+        "monaco_integration": true
+      },
+      "demo_viewer": {
+        "component": "ui/demo/DemoViewer.jsx",
+        "enabled": true,
+        "available_demos": [
+          "auth_system_demo",
+          "k2_verification_demo",
+          "workflows_demo",
+          "performance_demo"
+        ]
+      },
+      "chat_interface": {
+        "component": "ui/panels/ChatInterface.jsx",
+        "enabled": true,
+        "ai_assistant": true,
+        "smart_intervention": true
+      }
+    },
+    "right_panel": {
+      "ai_assistant": {
+        "component": "ui/panels/AIAssistant.jsx",
+        "enabled": true,
+        "suggestions": true,
+        "context_analysis": true
+      },
+      "performance_monitoring": {
+        "component": "ui/shared/PerformanceMetrics.jsx",
+        "enabled": true,
+        "real_time_metrics": true,
+        "cost_tracking": true
+      },
+      "context_analysis": {
+        "component": "ui/panels/ContextAnalysis.jsx",
+        "enabled": true,
+        "smart_suggestions": true
+      }
+    },
+    "demo_components": {
+      "metrics_dashboard": {
+        "component": "ui/demo/MetricsTrackingDashboard.jsx",
+        "title": "性能指標儀表板",
+        "description": "實時監控系統性能和AI模型指標"
+      },
+      "stagewise_demo": {
+        "component": "ui/demo/StageWiseCommandDemo.jsx",
+        "title": "Stagewise命令演示",
+        "description": "端到端測試和命令執行演示"
+      },
+      "deployment_ui": {
+        "component": "ui/demo/UnifiedDeploymentUI.jsx",
+        "title": "統一部署界面",
+        "description": "一鍵部署和環境管理"
+      },
+      "workflow_dashboard": {
+        "component": "ui/demo/WorkflowAutomationDashboard.jsx",
+        "title": "工作流自動化儀表板",
+        "description": "六大工作流狀態和自動化控制"
+      },
+      "smart_intervention_demo": {
+        "component": "ui/demo/SmartInterventionDemo.jsx",
+        "title": "Smart Intervention演示",
+        "description": "智能介入檢測和自動觸發演示"
+      },
+      "claudeeditor_demo": {
+        "component": "ui/demo/ClaudeEditorDemoPanel.jsx",
+        "title": "ClaudeEditor完整演示",
+        "description": "三欄式界面和AI集成演示"
+      }
+    },
+    "codeflow_components": {
+      "codeflow_panel": {
+        "component": "ui/codeflow/CodeFlowPanel.jsx",
+        "title": "CodeFlow助手",
+        "description": "智能代碼生成和模板處理"
+      }
+    }
+  },
+  "navigation": {
+    "mode_switching": {
+      "enabled": true,
+      "modes": ["edit", "demo", "chat"]
+    },
+    "shortcuts": {
+      "toggle_left_panel": "Ctrl+1",
+      "toggle_right_panel": "Ctrl+3",
+      "switch_to_demo": "Ctrl+D",
+      "launch_smart_intervention": "Ctrl+I"
+    }
+  },
+  "authentication": {
+    "three_tier_auth": true,
+    "roles": ["user", "developer", "admin"],
+    "member_system": true,
+    "payment_integration": true
+  }
+}
