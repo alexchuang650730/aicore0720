@@ -36,6 +36,29 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 CORS(app)
 
+# 導入 Business MCP 和戰略演示引擎
+import sys
+import os
+sys.path.append('/Users/alexchuang/alexchuangtest/aicore0720')
+
+try:
+    from core.components.business_mcp.business_manager import business_manager
+    from core.components.business_mcp.strategic_demo_engine import strategic_demo_engine
+    from core.components.business_mcp.incremental_content_enhancer import incremental_content_enhancer
+    from core.components.business_mcp.strategic_demo_video_manager import strategic_demo_video_manager
+    BUSINESS_MCP_AVAILABLE = True
+except ImportError as e:
+    print(f"警告: Business MCP 模組載入失敗: {e}")
+    BUSINESS_MCP_AVAILABLE = False
+
+# 導入支付系統
+try:
+    from payment_system import payment_system, PaymentStatus, OrderStatus, PlanType
+    PAYMENT_SYSTEM_AVAILABLE = True
+except ImportError as e:
+    print(f"警告: 支付系統模組載入失敗: {e}")
+    PAYMENT_SYSTEM_AVAILABLE = False
+
 # Stripe配置
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_dummy_key')
 
@@ -434,6 +457,789 @@ def stripe_webhook():
             db.session.commit()
     
     return jsonify({'status': 'success'})
+
+# Business MCP 戰略演示 API 端點
+@app.route('/api/business/pricing-strategy', methods=['GET'])
+def get_pricing_strategy():
+    """獲取定價策略"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        pricing_data = loop.run_until_complete(business_manager.generate_pricing_strategy())
+        loop.close()
+        return jsonify(pricing_data)
+    except Exception as e:
+        return jsonify({'error': f'生成定價策略失敗: {str(e)}'}), 500
+
+@app.route('/api/business/roi-calculator', methods=['POST'])
+def calculate_roi():
+    """ROI 計算器"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    data = request.get_json()
+    scenario = {
+        'team_size': data.get('team_size', 10),
+        'avg_salary': data.get('avg_salary', 25000),
+        'current_productivity': data.get('current_productivity', 0.6)
+    }
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        roi_data = loop.run_until_complete(business_manager.generate_roi_analysis(scenario))
+        loop.close()
+        return jsonify(roi_data)
+    except Exception as e:
+        return jsonify({'error': f'ROI 計算失敗: {str(e)}'}), 500
+
+@app.route('/api/demo/analyze-profile', methods=['POST'])
+def analyze_customer_profile():
+    """分析客戶畫像並推薦演示場景"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    data = request.get_json()
+    
+    # 構建客戶數據
+    customer_data = {
+        'user_id': data.get('user_id', 'anonymous'),
+        'company_size': data.get('company_size', 1),
+        'role': data.get('role', 'developer'),
+        'industry': data.get('industry', 'technology'),
+        'pain_points': data.get('pain_points', []),
+        'budget_range': data.get('budget_range', 'unknown'),
+        'tech_stack': data.get('tech_stack', []),
+        'decision_timeline': data.get('decision_timeline', '1-3months')
+    }
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # 分析客戶畫像
+        profile = loop.run_until_complete(strategic_demo_engine.analyze_customer_profile(customer_data))
+        
+        # 推薦演示場景
+        recommendations = loop.run_until_complete(strategic_demo_engine.recommend_demo_scenarios(profile))
+        
+        # 生成最佳演示腳本
+        demo_script = None
+        if recommendations:
+            best_scenario = recommendations[0]["scenario"]
+            demo_script = loop.run_until_complete(strategic_demo_engine.generate_demo_script(best_scenario, profile))
+        
+        loop.close()
+        
+        # 構建響應
+        response = {
+            'customer_profile': {
+                'segment': strategic_demo_engine._infer_user_segment(profile).value,
+                'company_size': profile.company_size,
+                'industry': profile.industry,
+                'role': profile.role,
+                'pain_points': profile.pain_points,
+                'budget_range': profile.budget_range
+            },
+            'recommended_scenarios': [
+                {
+                    'scenario_id': rec['scenario'].scenario_id,
+                    'title': rec['scenario'].title,
+                    'description': rec['scenario'].description,
+                    'demo_type': rec['scenario'].demo_type.value,
+                    'estimated_time': rec['scenario'].estimated_time,
+                    'roi_potential': rec['scenario'].roi_potential,
+                    'conversion_probability': rec['scenario'].conversion_probability,
+                    'match_score': rec['match_score']
+                }
+                for rec in recommendations
+            ],
+            'best_demo_script': demo_script,
+            'acquisition_strategy': strategic_demo_engine._create_conversion_strategy(
+                recommendations[0]["scenario"] if recommendations else None, profile
+            ) if recommendations else None
+        }
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        return jsonify({'error': f'客戶分析失敗: {str(e)}'}), 500
+
+@app.route('/api/demo/scenarios', methods=['GET'])
+def get_demo_scenarios():
+    """獲取所有演示場景"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    try:
+        scenarios = []
+        for scenario in strategic_demo_engine.demo_scenarios:
+            scenarios.append({
+                'scenario_id': scenario.scenario_id,
+                'title': scenario.title,
+                'description': scenario.description,
+                'target_segment': scenario.target_segment.value,
+                'demo_type': scenario.demo_type.value,
+                'estimated_time': scenario.estimated_time,
+                'key_features': scenario.key_features,
+                'expected_outcome': scenario.expected_outcome,
+                'roi_potential': scenario.roi_potential,
+                'conversion_probability': scenario.conversion_probability
+            })
+        
+        return jsonify({
+            'scenarios': scenarios,
+            'total_count': len(scenarios)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'獲取演示場景失敗: {str(e)}'}), 500
+
+@app.route('/api/business/market-analysis', methods=['GET'])
+def get_market_analysis():
+    """獲取市場分析"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        market_data = loop.run_until_complete(business_manager.generate_market_analysis())
+        loop.close()
+        return jsonify(market_data)
+    except Exception as e:
+        return jsonify({'error': f'生成市場分析失敗: {str(e)}'}), 500
+
+@app.route('/api/business/customer-acquisition', methods=['GET'])
+def get_customer_acquisition_strategy():
+    """獲取客戶獲取策略"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        acquisition_data = loop.run_until_complete(business_manager.generate_customer_acquisition_strategy())
+        loop.close()
+        return jsonify(acquisition_data)
+    except Exception as e:
+        return jsonify({'error': f'生成客戶獲取策略失敗: {str(e)}'}), 500
+
+@app.route('/api/business/financial-projection', methods=['GET'])
+def get_financial_projection():
+    """獲取財務預測"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    years = request.args.get('years', 3, type=int)
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        projection_data = loop.run_until_complete(business_manager.generate_financial_projection(years))
+        loop.close()
+        return jsonify(projection_data)
+    except Exception as e:
+        return jsonify({'error': f'生成財務預測失敗: {str(e)}'}), 500
+
+# 智能演示路由端點
+@app.route('/api/smart-demo/start', methods=['POST'])
+def start_smart_demo():
+    """啟動智能演示"""
+    data = request.get_json()
+    
+    # 簡化的演示邏輯（不依賴 Business MCP）
+    demo_id = f"demo_{int(datetime.now().timestamp())}"
+    user_segment = data.get('segment', 'individual_developer')
+    
+    # 根據用戶細分選擇演示內容
+    demo_content = {
+        'individual_developer': {
+            'title': '個人開發者效率提升演示',
+            'features': ['Smart Intervention', 'K2模型', '代碼生成'],
+            'duration': 15,
+            'roi_message': '提升編程效率10倍，月節省時間80小時'
+        },
+        'startup_team': {
+            'title': '創業團隊協作演示',
+            'features': ['團隊工作流', '進度跟踪', '智能分配'],
+            'duration': 20,
+            'roi_message': '團隊生產力提升250%，產品上市時間縮短50%'
+        },
+        'enterprise': {
+            'title': '企業級集成演示',
+            'features': ['企業集成', 'SSO', '合規性', 'API管理'],
+            'duration': 30,
+            'roi_message': '數字化轉型成本降低60%，ROI達到500%'
+        }
+    }
+    
+    selected_demo = demo_content.get(user_segment, demo_content['individual_developer'])
+    
+    return jsonify({
+        'demo_id': demo_id,
+        'demo_url': f'/demo/{demo_id}',
+        'content': selected_demo,
+        'personalization': {
+            'user_segment': user_segment,
+            'company_size': data.get('company_size', 1),
+            'industry': data.get('industry', 'technology')
+        }
+    })
+
+# 增量內容增強 API 端點
+@app.route('/api/content/enhancements', methods=['GET'])
+def get_content_enhancements():
+    """獲取內容增強方案"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # 生成增強方案
+        enhancements = loop.run_until_complete(incremental_content_enhancer.analyze_and_enhance_website())
+        
+        # 轉換為 JSON 格式
+        enhancement_data = []
+        for enhancement in enhancements:
+            enhancement_data.append({
+                'enhancement_id': enhancement.enhancement_id,
+                'target_element': enhancement.target_element,
+                'enhancement_type': enhancement.enhancement_type,
+                'content': enhancement.content,
+                'business_rationale': enhancement.business_rationale,
+                'priority': enhancement.priority,
+                'conditions': enhancement.conditions,
+                'created_at': enhancement.created_at.isoformat()
+            })
+        
+        loop.close()
+        
+        return jsonify({
+            'enhancements': enhancement_data,
+            'total_count': len(enhancement_data),
+            'status': 'success'
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'生成內容增強失敗: {str(e)}'}), 500
+
+@app.route('/api/content/enhancement-script', methods=['GET'])
+def get_enhancement_script():
+    """獲取前端增強腳本"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # 生成增強腳本
+        script = loop.run_until_complete(incremental_content_enhancer.generate_enhancement_script())
+        
+        loop.close()
+        
+        # 返回 JavaScript 腳本
+        response = app.response_class(
+            response=script,
+            status=200,
+            mimetype='application/javascript'
+        )
+        response.headers['Cache-Control'] = 'no-cache'
+        return response
+        
+    except Exception as e:
+        return jsonify({'error': f'生成增強腳本失敗: {str(e)}'}), 500
+
+@app.route('/api/content/enhancement-report', methods=['GET'])
+def get_enhancement_report():
+    """獲取增強報告"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # 生成增強報告
+        report = loop.run_until_complete(incremental_content_enhancer.generate_enhancement_report())
+        
+        loop.close()
+        return jsonify(report)
+        
+    except Exception as e:
+        return jsonify({'error': f'生成增強報告失敗: {str(e)}'}), 500
+
+@app.route('/api/content/roi-calculator', methods=['POST'])
+def calculate_content_roi():
+    """計算內容增強 ROI"""
+    data = request.get_json()
+    
+    # 簡化的內容增強 ROI 計算
+    current_conversion_rate = data.get('current_conversion_rate', 0.05)
+    monthly_visitors = data.get('monthly_visitors', 10000)
+    avg_order_value = data.get('avg_order_value', 999)
+    
+    # 預估增強效果
+    estimated_improvement = 0.20  # 20% 提升
+    new_conversion_rate = current_conversion_rate * (1 + estimated_improvement)
+    
+    # 計算收益
+    current_monthly_revenue = monthly_visitors * current_conversion_rate * avg_order_value
+    new_monthly_revenue = monthly_visitors * new_conversion_rate * avg_order_value
+    monthly_increase = new_monthly_revenue - current_monthly_revenue
+    
+    # 實施成本（假設）
+    implementation_cost = 5000  # 一次性成本
+    monthly_maintenance = 500   # 月度維護
+    
+    # ROI 計算
+    annual_increase = monthly_increase * 12
+    annual_cost = implementation_cost + monthly_maintenance * 12
+    roi = ((annual_increase - annual_cost) / annual_cost) * 100
+    
+    return jsonify({
+        'current_metrics': {
+            'conversion_rate': current_conversion_rate,
+            'monthly_revenue': current_monthly_revenue
+        },
+        'projected_metrics': {
+            'conversion_rate': new_conversion_rate,
+            'monthly_revenue': new_monthly_revenue,
+            'improvement_percentage': estimated_improvement * 100
+        },
+        'financial_impact': {
+            'monthly_increase': monthly_increase,
+            'annual_increase': annual_increase,
+            'implementation_cost': implementation_cost,
+            'annual_maintenance': monthly_maintenance * 12,
+            'roi_percentage': roi,
+            'payback_months': implementation_cost / monthly_increase if monthly_increase > 0 else 999
+        }
+    })
+
+# 動態內容 API - 根據用戶特徵返回個性化內容
+@app.route('/api/content/personalized', methods=['POST'])
+def get_personalized_content():
+    """根據用戶特徵獲取個性化內容"""
+    data = request.get_json()
+    
+    user_segment = data.get('segment', 'individual_developer')
+    company_size = data.get('company_size', 1)
+    industry = data.get('industry', 'technology')
+    
+    # 根據用戶特徵定制內容
+    if user_segment == 'enterprise':
+        hero_content = {
+            'headline': '企業級AI開發自動化解決方案',
+            'subheadline': '為大型企業量身定制，支持複雜系統集成和合規要求',
+            'cta_text': '申請企業演示',
+            'benefits': ['企業級安全', 'SLA保證', '24/7專屬支持', '定制集成']
+        }
+    elif user_segment == 'startup_team':
+        hero_content = {
+            'headline': '讓創業團隊開發速度提升10倍',
+            'subheadline': '小團隊，大夢想。用AI加速你的產品開發週期',
+            'cta_text': '免費試用14天',
+            'benefits': ['快速部署', '成本控制', '靈活擴展', '團隊協作']
+        }
+    else:  # individual_developer
+        hero_content = {
+            'headline': '個人開發者的AI超能力',
+            'subheadline': '從重複工作中解放，專注於創造性的代碼藝術',
+            'cta_text': '立即免費開始',
+            'benefits': ['10倍效率', '智能代碼生成', '自動調試', '學習加速']
+        }
+    
+    # 行業特定內容
+    industry_focus = {
+        'fintech': '金融科技合規性和安全性',
+        'healthcare': '醫療健康數據保護',
+        'ecommerce': '電商平台性能優化',
+        'manufacturing': '製造業數字化轉型'
+    }.get(industry, '通用技術解決方案')
+    
+    return jsonify({
+        'hero_content': hero_content,
+        'industry_focus': industry_focus,
+        'recommended_plan': 'enterprise' if company_size > 100 else 'professional' if company_size > 10 else 'personal',
+        'customization_level': 'high' if user_segment == 'enterprise' else 'medium'
+    })
+
+# 戰略演示視頻 API 端點
+@app.route('/api/demo-videos/strategic-plan', methods=['GET'])
+def get_strategic_video_plan():
+    """獲取戰略視頻計劃"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        video_plan = loop.run_until_complete(strategic_demo_video_manager.generate_strategic_video_plan())
+        loop.close()
+        return jsonify(video_plan)
+    except Exception as e:
+        return jsonify({'error': f'生成戰略視頻計劃失敗: {str(e)}'}), 500
+
+@app.route('/api/demo-videos/audience-specific', methods=['POST'])
+def create_audience_specific_video():
+    """為特定受眾創建定制視頻"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    data = request.get_json()
+    video_id = data.get('video_id', 'hero_main_demo')
+    audience_type = data.get('audience_type', 'individual_developer')
+    
+    # 將字符串轉換為枚舉
+    audience_mapping = {
+        'individual_developer': 'INDIVIDUAL_DEVELOPER',
+        'startup_team': 'STARTUP_TEAM',
+        'sme_company': 'SME_COMPANY',
+        'enterprise': 'ENTERPRISE'
+    }
+    
+    if audience_type not in audience_mapping:
+        return jsonify({'error': '無效的受眾類型'}), 400
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # 動態獲取TargetAudience枚舉
+        from core.components.business_mcp.strategic_demo_video_manager import TargetAudience
+        target_audience = getattr(TargetAudience, audience_mapping[audience_type])
+        
+        editing_plan = loop.run_until_complete(
+            strategic_demo_video_manager.create_audience_specific_video(video_id, target_audience)
+        )
+        loop.close()
+        return jsonify(editing_plan)
+    except Exception as e:
+        return jsonify({'error': f'創建受眾特定視頻失敗: {str(e)}'}), 500
+
+@app.route('/api/demo-videos/homepage-integration', methods=['GET'])
+def get_homepage_video_integration():
+    """獲取首頁視頻集成代碼"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    import asyncio
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        integration_code = loop.run_until_complete(strategic_demo_video_manager.generate_homepage_video_integration())
+        loop.close()
+        
+        # 返回 HTML 代碼
+        response = app.response_class(
+            response=integration_code,
+            status=200,
+            mimetype='text/html'
+        )
+        response.headers['Cache-Control'] = 'no-cache'
+        return response
+    except Exception as e:
+        return jsonify({'error': f'生成首頁視頻集成失敗: {str(e)}'}), 500
+
+@app.route('/api/demo-videos/library', methods=['GET'])
+def get_demo_video_library():
+    """獲取演示視頻庫信息"""
+    if not BUSINESS_MCP_AVAILABLE:
+        return jsonify({'error': 'Business MCP 不可用'}), 503
+    
+    try:
+        videos = []
+        for video_id, video in strategic_demo_video_manager.demo_videos.items():
+            videos.append({
+                'video_id': video.video_id,
+                'title': video.title,
+                'description': video.description,
+                'video_type': video.video_type.value,
+                'target_audiences': [audience.value for audience in video.target_audiences],
+                'total_duration': video.total_duration,
+                'segments_count': len(video.segments),
+                'business_rationale': video.business_rationale,
+                'market_positioning': video.market_positioning,
+                'call_to_action': video.call_to_action,
+                'created_at': video.created_at.isoformat()
+            })
+        
+        return jsonify({
+            'videos': videos,
+            'total_count': len(videos),
+            'total_duration': sum(video['total_duration'] for video in videos),
+            'segments_total': sum(video['segments_count'] for video in videos)
+        })
+    except Exception as e:
+        return jsonify({'error': f'獲取視頻庫失敗: {str(e)}'}), 500
+
+# ========== 支付系統 API ==========
+
+@app.route('/api/customers/create', methods=['POST'])
+def create_customer():
+    """創建客戶"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    data = request.get_json()
+    try:
+        customer = payment_system.create_customer(
+            email=data.get('email'),
+            name=data.get('name'),
+            company=data.get('company'),
+            phone=data.get('phone'),
+            metadata=data.get('metadata', {})
+        )
+        return jsonify({
+            'customer_id': customer.customer_id,
+            'email': customer.email,
+            'name': customer.name
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/orders/create', methods=['POST'])
+def create_order():
+    """創建訂單"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    data = request.get_json()
+    customer_data = data.get('customer', {})
+    
+    try:
+        # 先創建客戶
+        customer = payment_system.create_customer(
+            email=customer_data.get('email'),
+            name=customer_data.get('name'),
+            company=customer_data.get('company'),
+            phone=customer_data.get('phone'),
+            metadata={
+                'industry': customer_data.get('industry'),
+                'team_size': customer_data.get('teamSize'),
+                'source': 'website_checkout'
+            }
+        )
+        
+        # 創建訂單
+        order = payment_system.create_order(
+            customer_id=customer.customer_id,
+            plan_id=data.get('plan'),
+            billing_cycle=data.get('billingCycle', 'monthly'),
+            payment_method=data.get('paymentMethod', 'stripe'),
+            metadata={
+                'source': 'website_checkout',
+                'user_agent': request.headers.get('User-Agent'),
+                'ip_address': request.remote_addr
+            }
+        )
+        
+        return jsonify({
+            'order_id': order.order_id,
+            'customer_id': customer.customer_id,
+            'amount': order.amount,
+            'currency': order.currency,
+            'status': order.status.value,
+            'expires_at': order.expires_at.isoformat() if order.expires_at else None
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/orders/<order_id>/payment-intent', methods=['POST'])
+def create_order_payment_intent(order_id):
+    """創建支付意圖"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    try:
+        payment_intent = payment_system.create_payment_intent(order_id)
+        return jsonify(payment_intent)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/payments/confirm', methods=['POST'])
+def confirm_payment():
+    """確認支付"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    data = request.get_json()
+    order_id = data.get('order_id')
+    
+    try:
+        # 模擬支付結果
+        payment_result = {
+            'status': 'succeeded',
+            'payment_method': data.get('payment_method_id', 'card'),
+            'amount_received': data.get('amount', 0)
+        }
+        
+        success = payment_system.confirm_payment(order_id, payment_result)
+        
+        if success:
+            order = payment_system.get_order(order_id)
+            return jsonify({
+                'success': True,
+                'order_id': order_id,
+                'status': order.status.value,
+                'subscription_id': order.subscription_id
+            })
+        else:
+            return jsonify({'success': False, 'error': '支付驗證失敗'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 400
+
+@app.route('/api/orders/<order_id>/status', methods=['GET'])
+def get_order_status(order_id):
+    """獲取訂單狀態"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    try:
+        order = payment_system.get_order(order_id)
+        if not order:
+            return jsonify({'error': '訂單不存在'}), 404
+        
+        return jsonify({
+            'order_id': order.order_id,
+            'status': order.status.value,
+            'payment_status': order.payment_status.value,
+            'amount': order.amount,
+            'currency': order.currency,
+            'created_at': order.created_at.isoformat(),
+            'updated_at': order.updated_at.isoformat()
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/plans', methods=['GET'])
+def get_pricing_plans():
+    """獲取定價方案"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    try:
+        plans = payment_system.get_pricing_plans()
+        plans_data = []
+        
+        for plan in plans:
+            plans_data.append({
+                'plan_id': plan.plan_id,
+                'name': plan.name,
+                'plan_type': plan.plan_type.value,
+                'price_monthly': plan.price_monthly,
+                'price_yearly': plan.price_yearly,
+                'currency': plan.currency,
+                'features': plan.features,
+                'api_calls_limit': plan.api_calls_limit,
+                'team_members_limit': plan.team_members_limit,
+                'support_level': plan.support_level,
+                'is_popular': plan.is_popular
+            })
+        
+        return jsonify({'plans': plans_data})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/enterprise/quote', methods=['POST'])
+def request_enterprise_quote():
+    """企業版詢價"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    data = request.get_json()
+    
+    try:
+        quote = payment_system.request_enterprise_quote(
+            company=data.get('company'),
+            email=data.get('email'),
+            phone=data.get('phone'),
+            team_size=data.get('teamSize'),
+            requirements=data.get('requirements', '')
+        )
+        
+        return jsonify(quote)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/orders/<order_id>/invoice', methods=['GET'])
+def generate_invoice(order_id):
+    """生成發票"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    try:
+        invoice = payment_system.generate_invoice(order_id)
+        return jsonify(invoice)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/payment-methods', methods=['GET'])
+def get_payment_methods():
+    """獲取可用支付方式"""
+    if not PAYMENT_SYSTEM_AVAILABLE:
+        return jsonify({'error': '支付系統不可用'}), 503
+    
+    try:
+        methods = payment_system.get_payment_methods()
+        methods_data = []
+        
+        for method in methods:
+            methods_data.append({
+                'method_id': method.method_id,
+                'type': method.type,
+                'display_name': method.display_name,
+                'is_enabled': method.is_enabled
+            })
+        
+        return jsonify({'payment_methods': methods_data})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+# 靜態路由 - 產品頁面和結帳頁面
+@app.route('/products')
+def products_page():
+    """產品頁面"""
+    return render_template('product_pages.html')
+
+@app.route('/checkout')
+def checkout_page():
+    """結帳頁面"""
+    plan = request.args.get('plan', 'professional')
+    return render_template('checkout_pages.html', selected_plan=plan)
+
+@app.route('/success')
+def success_page():
+    """支付成功頁面"""
+    order_id = request.args.get('order_id')
+    return render_template('success.html', order_id=order_id)
+
+# 註冊頁面（支持方案預選）
+@app.route('/register')
+def register_page():
+    """註冊頁面"""
+    plan = request.args.get('plan', 'personal')
+    return render_template('register.html', selected_plan=plan)
+
+# ========== 支付系統 API 結束 ==========
 
 # 初始化數據庫
 def create_tables():

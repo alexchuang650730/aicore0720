@@ -1,0 +1,22 @@
+{
+  "without_mcp_zero": {
+    "tool_discovery": "手動配置每個工具",
+    "tool_selection": "基於固定規則",
+    "error_handling": "需要人工干預",
+    "learning": "靜態模式",
+    "expected_accuracy": 0.74
+  },
+  "with_mcp_zero": {
+    "tool_discovery": "自動發現和註冊",
+    "tool_selection": "動態上下文感知",
+    "error_handling": "自動恢復和重試",
+    "learning": "持續從使用中學習",
+    "expected_accuracy": 0.92
+  },
+  "key_differences": [
+    "減少90%的工具配置時間",
+    "提升25%的工具選擇準確率",
+    "降低80%的錯誤率",
+    "實現持續自我改進"
+  ]
+}

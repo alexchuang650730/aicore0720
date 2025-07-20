@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAuto.ai - 結帳頁面</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .checkout-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .checkout-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+        }
+        
+        .checkout-main {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .checkout-sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .step.active .step-number {
+            background: #667eea;
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: #10b981;
+            color: white;
+        }
+        
+        .step-text {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .step.active .step-text {
+            color: #667eea;
+        }
+        
+        .step.completed .step-text {
+            color: #10b981;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #e5e7eb;
+            margin: 0 1rem;
+        }
+        
+        .step.completed ~ .step .step-line {
+            background: #10b981;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        
+        .form-section h3 {
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 1.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .payment-methods {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-method {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-method:hover {
+            border-color: #667eea;
+        }
+        
+        .payment-method.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .payment-method input[type="radio"] {
+            margin-right: 1rem;
+        }
+        
+        .payment-method-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .payment-method-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .payment-method-details h4 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .payment-method-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .card-element {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .order-summary {
+            margin-bottom: 2rem;
+        }
+        
+        .order-summary h3 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        
+        .plan-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .plan-features li {
+            padding: 0.25rem 0;
+            color: #555;
+        }
+        
+        .plan-features li i {
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+        
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .billing-option {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .billing-option.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .price-breakdown {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1rem;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-row.total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .discount-info {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .checkout-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .security-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .security-info i {
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .trust-badge i {
+            margin-right: 0.3rem;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkout-container {
+                padding: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-indicator {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .step {
+                margin-bottom: 1rem;
+            }
+            
+            .step-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div style="text-align: center;">
+            <div class="loading-spinner"></div>
+            <p style="margin-top: 1rem; color: #666;">處理中...</p>
+        </div>
+    </div>
+    
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>🚀 完成訂購</h1>
+            <p>選擇您的方案，開始AI驅動的開發之旅</p>
+        </div>
+        
+        <div class="checkout-grid">
+            <!-- 主要內容區 -->
+            <div class="checkout-main">
+                <!-- 步驟指示器 -->
+                <div class="step-indicator">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-text">選擇方案</div>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-text">用戶信息</div>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-text">支付方式</div>
+                    </div>
+                </div>
+                
+                <!-- 第一步：選擇方案 -->
+                <div class="checkout-step" id="stepContent1">
+                    <div class="form-section">
+                        <h3>選擇訂閱方案</h3>
+                        <div class="billing-toggle" id="billingToggle">
+                            <div class="billing-option active" data-cycle="monthly">月付</div>
+                            <div class="billing-option" data-cycle="yearly">年付 <small>(省2個月)</small></div>
+                        </div>
+                        
+                        <div class="payment-methods" id="planSelection">
+                            <!-- 方案選項將通過 JavaScript 動態加載 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第二步：用戶信息 -->
+                <div class="checkout-step" id="stepContent2" style="display: none;">
+                    <div class="form-section">
+                        <h3>聯繫信息</h3>
+                        <form id="customerForm">
+                            <div class="form-group">
+                                <label for="fullName">全名 *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">電子郵箱 *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="company">公司名稱</label>
+                                    <input type="text" id="company" name="company">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">聯繫電話</label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="industry">行業</label>
+                                    <select id="industry" name="industry">
+                                        <option value="">請選擇</option>
+                                        <option value="technology">科技</option>
+                                        <option value="finance">金融</option>
+                                        <option value="healthcare">醫療</option>
+                                        <option value="education">教育</option>
+                                        <option value="retail">零售</option>
+                                        <option value="manufacturing">製造業</option>
+                                        <option value="other">其他</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="teamSize">團隊規模</label>
+                                    <select id="teamSize" name="teamSize">
+                                        <option value="">請選擇</option>
+                                        <option value="1">個人 (1人)</option>
+                                        <option value="2-5">小團隊 (2-5人)</option>
+                                        <option value="6-20">中等團隊 (6-20人)</option>
+                                        <option value="21-50">大團隊 (21-50人)</option>
+                                        <option value="50+">企業 (50+人)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- 第三步：支付方式 -->
+                <div class="checkout-step" id="stepContent3" style="display: none;">
+                    <div class="form-section">
+                        <h3>選擇支付方式</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method selected" data-method="stripe">
+                                <input type="radio" name="paymentMethod" value="stripe" checked>
+                                <div class="payment-method-info">
+                                    <div class="payment-method-icon">
+                                        <i class="fab fa-cc-stripe" style="color: #635bff;"></i>
+                                    </div>
+                                    <div class="payment-method-details">
+                                        <h4>信用卡/借記卡</h4>
+                                        <p>支持 Visa、MasterCard、American Express</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="alipay">
+                                <input type="radio" name="paymentMethod" value="alipay">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-icon">
+                                        <i class="fab fa-alipay" style="color: #1677ff;"></i>
+                                    </div>
+                                    <div class="payment-method-details">
+                                        <h4>支付寶</h4>
+                                        <p>使用支付寶掃碼支付</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-method" data-method="wechat">
+                                <input type="radio" name="paymentMethod" value="wechat">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-icon">
+                                        <i class="fab fa-weixin" style="color: #07c160;"></i>
+                                    </div>
+                                    <div class="payment-method-details">
+                                        <h4>微信支付</h4>
+                                        <p>使用微信掃碼支付</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stripe Card Element -->
+                        <div id="stripeCardElement" class="card-element"></div>
+                        
+                        <!-- 支付寶/微信支付信息 -->
+                        <div id="qrPaymentInfo" style="display: none;">
+                            <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
+                                <div id="qrCode" style="margin-bottom: 1rem;">
+                                    <!-- QR 碼將在這裡顯示 -->
+                                </div>
+                                <p style="color: #666;">使用手機APP掃描二維碼完成支付</p>
+                                <div style="margin-top: 1rem;">
+                                    <span style="color: #f59e0b;">⏰ 請在 15 分鐘內完成支付</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 導航按鈕 -->
+                <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                    <button type="button" id="prevBtn" class="checkout-btn" style="background: #6b7280; max-width: 150px;" onclick="previousStep()" disabled>
+                        上一步
+                    </button>
+                    <button type="button" id="nextBtn" class="checkout-btn" style="max-width: 150px;" onclick="nextStep()">
+                        下一步
+                    </button>
+                    <button type="button" id="payBtn" class="checkout-btn" style="max-width: 150px; display: none;" onclick="processPayment()">
+                        確認支付
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 訂單摘要側邊欄 -->
+            <div class="checkout-sidebar">
+                <div class="order-summary">
+                    <h3>訂單摘要</h3>
+                    
+                    <div class="plan-details" id="selectedPlanDetails">
+                        <div class="plan-name">請選擇方案</div>
+                        <div class="plan-description">選擇最適合您的訂閱方案</div>
+                    </div>
+                    
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span>方案費用</span>
+                            <span id="planPrice">¥0</span>
+                        </div>
+                        <div class="price-row" id="discountRow" style="display: none;">
+                            <span>折扣</span>
+                            <span id="discountAmount" style="color: #10b981;">-¥0</span>
+                        </div>
+                        <div class="price-row">
+                            <span>稅費</span>
+                            <span>¥0</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>總計</span>
+                            <span id="totalPrice">¥0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="discount-info" id="discountInfo" style="display: none;">
+                        🎉 首月7折優惠已應用
+                    </div>
+                </div>
+                
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SSL 加密安全支付</span>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-lock"></i>
+                        <span>安全加密</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-undo"></i>
+                        <span>30天退款</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7支援</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 全局變量
+        let currentStep = 1;
+        let selectedPlan = null;
+        let billingCycle = 'monthly';
+        let stripe = null;
+        let cardElement = null;
+        
+        // 方案數據
+        const plans = {
+            professional: {
+                name: '專業版',
+                description: '適合專業開發者和小型團隊',
+                monthly: 299,
+                yearly: 2990,
+                features: [
+                    '每月10,000次API調用',
+                    '完整代碼生成功能',
+                    'Smart Intervention 無限制',
+                    'K2模型成本優化',
+                    '六大工作流自動化',
+                    '優先技術支持'
+                ],
+                popular: true
+            },
+            team: {
+                name: '團隊版',
+                description: '適合創業團隊和中型公司',
+                monthly: 999,
+                yearly: 9990,
+                features: [
+                    '每月50,000次API調用',
+                    '包含專業版所有功能',
+                    '團隊協作工具',
+                    '項目管理集成',
+                    '多人實時協作',
+                    '24/7 技術支持'
+                ]
+            }
+        };
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStripe();
+            loadPlansFromURL();
+            setupEventListeners();
+            renderPlans();
+        });
+        
+        function initializeStripe() {
+            stripe = Stripe('pk_test_51234567890'); // 替換為實際的 Stripe 公鑰
+            const elements = stripe.elements();
+            
+            cardElement = elements.create('card', {
+                style: {
+                    base: {
+                        fontSize: '16px',
+                        color: '#424770',
+                        '::placeholder': {
+                            color: '#aab7c4',
+                        },
+                    },
+                },
+            });
+            
+            cardElement.mount('#stripeCardElement');
+        }
+        
+        function loadPlansFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan');
+            if (plan && plans[plan]) {
+                selectedPlan = plan;
+                updateOrderSummary();
+            }
+        }
+        
+        function setupEventListeners() {
+            // 訂閱週期切換
+            document.getElementById('billingToggle').addEventListener('click', function(e) {
+                if (e.target.classList.contains('billing-option')) {
+                    document.querySelectorAll('.billing-option').forEach(opt => opt.classList.remove('active'));
+                    e.target.classList.add('active');
+                    billingCycle = e.target.dataset.cycle;
+                    renderPlans();
+                    updateOrderSummary();
+                }
+            });
+            
+            // 支付方式選擇
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                    
+                    const selectedMethod = this.dataset.method;
+                    if (selectedMethod === 'stripe') {
+                        document.getElementById('stripeCardElement').style.display = 'block';
+                        document.getElementById('qrPaymentInfo').style.display = 'none';
+                    } else {
+                        document.getElementById('stripeCardElement').style.display = 'none';
+                        document.getElementById('qrPaymentInfo').style.display = 'block';
+                        generateQRCode(selectedMethod);
+                    }
+                });
+            });
+        }
+        
+        function renderPlans() {
+            const planSelection = document.getElementById('planSelection');
+            planSelection.innerHTML = '';
+            
+            Object.keys(plans).forEach(planId => {
+                const plan = plans[planId];
+                const price = billingCycle === 'yearly' ? plan.yearly : plan.monthly;
+                const savings = billingCycle === 'yearly' ? 
+                    `省 ¥${(plan.monthly * 12 - plan.yearly).toLocaleString()}` : '';
+                
+                const planHtml = `
+                    <div class="payment-method ${selectedPlan === planId ? 'selected' : ''}" data-plan="${planId}">
+                        <input type="radio" name="selectedPlan" value="${planId}" ${selectedPlan === planId ? 'checked' : ''}>
+                        <div class="payment-method-info">
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <h4 style="margin: 0;">${plan.name}</h4>
+                                    ${plan.popular ? '<span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; margin-left: 0.5rem;">熱門</span>' : ''}
+                                </div>
+                                <p style="margin: 0 0 0.5rem 0; color: #666;">${plan.description}</p>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+                                    <span style="font-size: 1.5rem; font-weight: bold; color: #333;">¥${price.toLocaleString()}</span>
+                                    <span style="color: #666;">/${billingCycle === 'yearly' ? '年' : '月'}</span>
+                                    ${savings ? `<span style="color: #10b981; font-size: 0.9rem;">${savings}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                planSelection.innerHTML += planHtml;
+            });
+            
+            // 重新綁定事件
+            document.querySelectorAll('[data-plan]').forEach(plan => {
+                plan.addEventListener('click', function() {
+                    document.querySelectorAll('[data-plan]').forEach(p => p.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                    selectedPlan = this.dataset.plan;
+                    updateOrderSummary();
+                });
+            });
+        }
+        
+        function updateOrderSummary() {
+            if (!selectedPlan || !plans[selectedPlan]) return;
+            
+            const plan = plans[selectedPlan];
+            const price = billingCycle === 'yearly' ? plan.yearly : plan.monthly;
+            const isFirstMonth = billingCycle === 'monthly'; // 首月7折優惠
+            const discount = isFirstMonth ? price * 0.3 : 0;
+            const total = price - discount;
+            
+            // 更新方案詳情
+            const planDetails = document.getElementById('selectedPlanDetails');
+            planDetails.innerHTML = `
+                <div class="plan-name">${plan.name}</div>
+                <div class="plan-description">${plan.description}</div>
+                <ul class="plan-features">
+                    ${plan.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                </ul>
+            `;
+            
+            // 更新價格
+            document.getElementById('planPrice').textContent = `¥${price.toLocaleString()}`;
+            
+            if (discount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discountAmount').textContent = `-¥${discount.toLocaleString()}`;
+                document.getElementById('discountInfo').style.display = 'block';
+            } else {
+                document.getElementById('discountRow').style.display = 'none';
+                document.getElementById('discountInfo').style.display = 'none';
+            }
+            
+            document.getElementById('totalPrice').textContent = `¥${total.toLocaleString()}`;
+        }
+        
+        function nextStep() {
+            if (currentStep === 1) {
+                if (!selectedPlan) {
+                    alert('請選擇一個訂閱方案');
+                    return;
+                }
+                currentStep = 2;
+            } else if (currentStep === 2) {
+                if (!validateCustomerForm()) {
+                    return;
+                }
+                currentStep = 3;
+            }
+            
+            updateStepUI();
+        }
+        
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+            }
+        }
+        
+        function updateStepUI() {
+            // 更新步驟指示器
+            document.querySelectorAll('.step').forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'completed');
+                if (stepNum < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNum === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+            
+            // 顯示/隱藏步驟內容
+            document.querySelectorAll('.checkout-step').forEach((step, index) => {
+                step.style.display = index + 1 === currentStep ? 'block' : 'none';
+            });
+            
+            // 更新按鈕狀態
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').style.display = currentStep === 3 ? 'none' : 'inline-block';
+            document.getElementById('payBtn').style.display = currentStep === 3 ? 'inline-block' : 'none';
+        }
+        
+        function validateCustomerForm() {
+            const form = document.getElementById('customerForm');
+            const formData = new FormData(form);
+            
+            if (!formData.get('fullName') || !formData.get('email')) {
+                alert('請填寫必需的信息（姓名和郵箱）');
+                return false;
+            }
+            
+            const email = formData.get('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('請輸入有效的郵箱地址');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function generateQRCode(method) {
+            const qrCode = document.getElementById('qrCode');
+            // 這裡應該調用後端 API 生成真實的支付二維碼
+            qrCode.innerHTML = `
+                <div style="width: 200px; height: 200px; margin: 0 auto; background: #f0f0f0; 
+                           display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                    <i class="${method === 'alipay' ? 'fab fa-alipay' : 'fab fa-weixin'}" 
+                       style="font-size: 3rem; color: ${method === 'alipay' ? '#1677ff' : '#07c160'};"></i>
+                </div>
+                <p style="margin-top: 1rem; color: #333;">打開${method === 'alipay' ? '支付寶' : '微信'}掃一掃</p>
+            `;
+        }
+        
+        async function processPayment() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const customerForm = document.getElementById('customerForm');
+            const formData = new FormData(customerForm);
+            
+            showLoading(true);
+            
+            try {
+                // 創建客戶和訂單
+                const orderData = {
+                    customer: {
+                        name: formData.get('fullName'),
+                        email: formData.get('email'),
+                        company: formData.get('company'),
+                        phone: formData.get('phone'),
+                        industry: formData.get('industry'),
+                        teamSize: formData.get('teamSize')
+                    },
+                    plan: selectedPlan,
+                    billingCycle: billingCycle,
+                    paymentMethod: paymentMethod
+                };
+                
+                // 調用後端 API 創建訂單
+                const response = await fetch('/api/orders/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+                
+                const result = await response.json();
+                
+                if (paymentMethod === 'stripe') {
+                    await handleStripePayment(result.order_id);
+                } else {
+                    await handleQRPayment(result.order_id, paymentMethod);
+                }
+            } catch (error) {
+                console.error('支付處理失敗:', error);
+                alert('支付處理失敗，請稍後再試');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function handleStripePayment(orderId) {
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+            });
+            
+            if (error) {
+                alert('卡片信息有誤：' + error.message);
+                return;
+            }
+            
+            // 確認支付
+            const response = await fetch('/api/payments/confirm', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    order_id: orderId,
+                    payment_method_id: paymentMethod.id
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                window.location.href = `/success?order_id=${orderId}`;
+            } else {
+                alert('支付失敗：' + result.error);
+            }
+        }
+        
+        async function handleQRPayment(orderId, method) {
+            // 輪詢檢查支付狀態
+            const checkPaymentStatus = async () => {
+                const response = await fetch(`/api/orders/${orderId}/status`);
+                const result = await response.json();
+                
+                if (result.payment_status === 'completed') {
+                    window.location.href = `/success?order_id=${orderId}`;
+                } else if (result.payment_status === 'failed') {
+                    alert('支付失敗，請重新嘗試');
+                } else {
+                    // 繼續輪詢
+                    setTimeout(checkPaymentStatus, 3000);
+                }
+            };
+            
+            // 開始輪詢
+            setTimeout(checkPaymentStatus, 3000);
+            
+            alert(`請使用${method === 'alipay' ? '支付寶' : '微信'}掃描二維碼完成支付`);
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+        }
+        
+        // 初始化 UI
+        updateStepUI();
+    </script>
+</body>
+</html>

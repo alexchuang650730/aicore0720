@@ -1,0 +1,154 @@
+{
+  "test_suites": [
+    {
+      "phase": "第一階段：核心MCP",
+      "tests": [
+        {
+          "mcp_tool": "smarttool",
+          "test_cases": [
+            {
+              "name": "test_smarttool_basic",
+              "description": "基本功能測試 - smarttool",
+              "expected_improvement": 0.108
+            },
+            {
+              "name": "test_smarttool_complex",
+              "description": "複雜場景測試 - smarttool",
+              "expected_improvement": 0.054
+            },
+            {
+              "name": "test_smarttool_edge",
+              "description": "邊界情況測試 - smarttool",
+              "expected_improvement": 0.018
+            }
+          ]
+        },
+        {
+          "mcp_tool": "intent-analyzer",
+          "test_cases": [
+            {
+              "name": "test_intent-analyzer_basic",
+              "description": "基本功能測試 - intent-analyzer",
+              "expected_improvement": 0.03
+            },
+            {
+              "name": "test_intent-analyzer_complex",
+              "description": "複雜場景測試 - intent-analyzer",
+              "expected_improvement": 0.015
+            },
+            {
+              "name": "test_intent-analyzer_edge",
+              "description": "邊界情況測試 - intent-analyzer",
+              "expected_improvement": 0.005000000000000001
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "第二階段：優化工具",
+      "tests": [
+        {
+          "mcp_tool": "tool-validator",
+          "test_cases": [
+            {
+              "name": "test_tool-validator_basic",
+              "description": "基本功能測試 - tool-validator",
+              "expected_improvement": 0.018
+            },
+            {
+              "name": "test_tool-validator_complex",
+              "description": "複雜場景測試 - tool-validator",
+              "expected_improvement": 0.009
+            },
+            {
+              "name": "test_tool-validator_edge",
+              "description": "邊界情況測試 - tool-validator",
+              "expected_improvement": 0.003
+            }
+          ]
+        },
+        {
+          "mcp_tool": "memory-context",
+          "test_cases": [
+            {
+              "name": "test_memory-context_basic",
+              "description": "基本功能測試 - memory-context",
+              "expected_improvement": 0.012
+            },
+            {
+              "name": "test_memory-context_complex",
+              "description": "複雜場景測試 - memory-context",
+              "expected_improvement": 0.006
+            },
+            {
+              "name": "test_memory-context_edge",
+              "description": "邊界情況測試 - memory-context",
+              "expected_improvement": 0.002
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "第三階段：精細調優",
+      "tests": [
+        {
+          "mcp_tool": "workflow-optimizer",
+          "test_cases": [
+            {
+              "name": "test_workflow-optimizer_basic",
+              "description": "基本功能測試 - workflow-optimizer",
+              "expected_improvement": 0.012
+            },
+            {
+              "name": "test_workflow-optimizer_complex",
+              "description": "複雜場景測試 - workflow-optimizer",
+              "expected_improvement": 0.006
+            },
+            {
+              "name": "test_workflow-optimizer_edge",
+              "description": "邊界情況測試 - workflow-optimizer",
+              "expected_improvement": 0.002
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "validation_metrics": [
+    {
+      "metric": "tool_accuracy",
+      "target": 1.0,
+      "critical": true
+    },
+    {
+      "metric": "intent_recognition",
+      "target": 0.95,
+      "critical": true
+    },
+    {
+      "metric": "execution_efficiency",
+      "target": 0.9,
+      "critical": false
+    },
+    {
+      "metric": "user_satisfaction",
+      "target": 0.95,
+      "critical": false
+    }
+  ],
+  "continuous_monitoring": {
+    "frequency": "daily",
+    "metrics": [
+      "tool_accuracy",
+      "error_rate",
+      "performance"
+    ],
+    "alert_thresholds": {
+      "accuracy_drop": 0.05,
+      "error_spike": 0.1,
+      "performance_degradation": 0.2
+    }
+  }
+}

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAuto.ai - 產品方案</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+        
+        .product-card.featured {
+            transform: scale(1.05);
+            border: 3px solid #10b981;
+        }
+        
+        .product-card.featured::before {
+            content: "最受歡迎";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(12deg);
+        }
+        
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: #333;
+        }
+        
+        .product-subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-price {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .price-period {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .price-savings {
+            background: #10b981;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li i {
+            color: #10b981;
+            margin-right: 1rem;
+            width: 20px;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .roi-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .roi-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .roi-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .roi-stat {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .roi-stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+        
+        .roi-stat-label {
+            color: #666;
+        }
+        
+        .features-comparison {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .comparison-table .feature-name {
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .check-icon {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+        
+        .x-icon {
+            color: #dc2626;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-card.featured {
+                transform: none;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 選擇適合您的方案</h1>
+            <p>從個人開發者到大型企業，我們為每個團隊提供最佳的AI開發解決方案</p>
+        </div>
+        
+        <div class="products-grid">
+            <!-- 個人版 -->
+            <div class="product-card">
+                <div class="product-icon">👨‍💻</div>
+                <h3 class="product-title">個人版</h3>
+                <p class="product-subtitle">適合個人開發者和自由工作者</p>
+                
+                <div class="product-price">
+                    <div class="price-amount">免費</div>
+                    <div class="price-period">永久使用</div>
+                    <div class="price-savings">限制功能</div>
+                </div>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 每月100次API調用</li>
+                    <li><i class="fas fa-check"></i> 基礎代碼生成</li>
+                    <li><i class="fas fa-check"></i> Smart Intervention (有限)</li>
+                    <li><i class="fas fa-check"></i> 社區支持</li>
+                    <li><i class="fas fa-check"></i> 基礎模板庫</li>
+                    <li><i class="fas fa-times"></i> 團隊協作</li>
+                    <li><i class="fas fa-times"></i> 企業級功能</li>
+                </ul>
+                
+                <button class="cta-button secondary" onclick="selectPlan('personal')">
+                    立即開始免費使用
+                </button>
+            </div>
+            
+            <!-- 專業版 -->
+            <div class="product-card featured">
+                <div class="product-icon">⚡</div>
+                <h3 class="product-title">專業版</h3>
+                <p class="product-subtitle">適合專業開發者和小型團隊</p>
+                
+                <div class="product-price">
+                    <div class="price-amount">¥299</div>
+                    <div class="price-period">/月</div>
+                    <div class="price-savings">節省80%開發時間</div>
+                </div>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 每月10,000次API調用</li>
+                    <li><i class="fas fa-check"></i> 完整代碼生成功能</li>
+                    <li><i class="fas fa-check"></i> Smart Intervention 無限制</li>
+                    <li><i class="fas fa-check"></i> K2模型成本優化</li>
+                    <li><i class="fas fa-check"></i> 六大工作流自動化</li>
+                    <li><i class="fas fa-check"></i> 優先技術支持</li>
+                    <li><i class="fas fa-check"></i> 高級模板庫</li>
+                    <li><i class="fas fa-check"></i> GitHub集成</li>
+                </ul>
+                
+                <button class="cta-button" onclick="selectPlan('professional')">
+                    立即升級專業版
+                </button>
+            </div>
+            
+            <!-- 團隊版 -->
+            <div class="product-card">
+                <div class="product-icon">🚀</div>
+                <h3 class="product-title">團隊版</h3>
+                <p class="product-subtitle">適合創業團隊和中型公司</p>
+                
+                <div class="product-price">
+                    <div class="price-amount">¥999</div>
+                    <div class="price-period">/月</div>
+                    <div class="price-savings">5-20人團隊</div>
+                </div>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 每月50,000次API調用</li>
+                    <li><i class="fas fa-check"></i> 包含專業版所有功能</li>
+                    <li><i class="fas fa-check"></i> 團隊協作工具</li>
+                    <li><i class="fas fa-check"></i> 項目管理集成</li>
+                    <li><i class="fas fa-check"></i> 進度跟踪和報告</li>
+                    <li><i class="fas fa-check"></i> 多人實時協作</li>
+                    <li><i class="fas fa-check"></i> 團隊分析儀表板</li>
+                    <li><i class="fas fa-check"></i> 24/7 技術支持</li>
+                </ul>
+                
+                <button class="cta-button" onclick="selectPlan('team')">
+                    選擇團隊版
+                </button>
+            </div>
+            
+            <!-- 企業版 -->
+            <div class="product-card">
+                <div class="product-icon">🏢</div>
+                <h3 class="product-title">企業版</h3>
+                <p class="product-subtitle">適合大型企業和組織</p>
+                
+                <div class="product-price">
+                    <div class="price-amount">定制</div>
+                    <div class="price-period">報價</div>
+                    <div class="price-savings">無限可能</div>
+                </div>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> 無限API調用</li>
+                    <li><i class="fas fa-check"></i> 包含團隊版所有功能</li>
+                    <li><i class="fas fa-check"></i> 企業級安全和合規</li>
+                    <li><i class="fas fa-check"></i> SSO單點登錄</li>
+                    <li><i class="fas fa-check"></i> 私有部署選項</li>
+                    <li><i class="fas fa-check"></i> 定制集成服務</li>
+                    <li><i class="fas fa-check"></i> 專屬客戶經理</li>
+                    <li><i class="fas fa-check"></i> SLA服務保證</li>
+                </ul>
+                
+                <button class="cta-button" onclick="requestEnterpriseQuote()">
+                    聯繫企業銷售
+                </button>
+            </div>
+        </div>
+        
+        <!-- ROI 統計 -->
+        <div class="roi-section">
+            <h2 class="roi-title">🎯 客戶成功數據</h2>
+            <p>看看其他用戶如何通過 PowerAuto.ai 實現突破性成果</p>
+            
+            <div class="roi-stats">
+                <div class="roi-stat">
+                    <div class="roi-stat-number">10倍</div>
+                    <div class="roi-stat-label">平均開發效率提升</div>
+                </div>
+                <div class="roi-stat">
+                    <div class="roi-stat-number">60%</div>
+                    <div class="roi-stat-label">成本節省</div>
+                </div>
+                <div class="roi-stat">
+                    <div class="roi-stat-number">200%+</div>
+                    <div class="roi-stat-label">年化ROI</div>
+                </div>
+                <div class="roi-stat">
+                    <div class="roi-stat-number">30天</div>
+                    <div class="roi-stat-label">平均回本週期</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 功能對比表 -->
+        <div class="features-comparison">
+            <h2 style="text-align: center; margin-bottom: 1rem;">📊 詳細功能對比</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">選擇最適合您需求的方案</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-name">功能特性</th>
+                        <th>個人版</th>
+                        <th>專業版</th>
+                        <th>團隊版</th>
+                        <th>企業版</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">API調用次數/月</td>
+                        <td>100次</td>
+                        <td>10,000次</td>
+                        <td>50,000次</td>
+                        <td>無限制</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Smart Intervention</td>
+                        <td>基礎版</td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">K2模型優化</td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">團隊協作</td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">企業級安全</td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-times x-icon"></i></td>
+                        <td><i class="fas fa-check check-icon"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">技術支持</td>
+                        <td>社區</td>
+                        <td>優先支持</td>
+                        <td>24/7支持</td>
+                        <td>專屬經理</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function selectPlan(planType) {
+            // 記錄用戶選擇
+            localStorage.setItem('selectedPlan', planType);
+            
+            // 分析跟踪
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'plan_selection', {
+                    'plan_type': planType,
+                    'source': 'product_page'
+                });
+            }
+            
+            // 根據計劃類型跳轉到不同的註冊/支付頁面
+            if (planType === 'personal') {
+                window.location.href = '/register?plan=personal';
+            } else {
+                window.location.href = '/checkout?plan=' + planType;
+            }
+        }
+        
+        function requestEnterpriseQuote() {
+            // 企業版詢價
+            const contactInfo = {
+                company: prompt('請輸入您的公司名稱：'),
+                email: prompt('請輸入您的企業郵箱：'),
+                phone: prompt('請輸入您的聯繫電話：'),
+                teamSize: prompt('請輸入您的團隊規模：')
+            };
+            
+            if (contactInfo.email) {
+                fetch('/api/enterprise/quote-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(contactInfo)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('✅ 企業詢價申請已提交！我們的企業銷售團隊將在24小時內與您聯繫。');
+                })
+                .catch(error => {
+                    alert('⚠️ 申請提交失敗，請直接聯繫 enterprise@powerauto.ai 或致電 400-888-0123');
+                });
+            }
+        }
+        
+        // 頁面載入時的用戶細分檢測
+        document.addEventListener('DOMContentLoaded', function() {
+            // 根據 referrer 和用戶代理自動推薦方案
+            const referrer = document.referrer;
+            const userAgent = navigator.userAgent;
+            const screenWidth = window.innerWidth;
+            
+            let recommendedPlan = 'professional'; // 默認推薦專業版
+            
+            if (referrer.includes('github.com') || referrer.includes('stackoverflow.com')) {
+                recommendedPlan = 'professional';
+            } else if (screenWidth > 1400 && !userAgent.includes('Mobile')) {
+                recommendedPlan = 'enterprise';
+            } else if (referrer.includes('startup') || referrer.includes('team')) {
+                recommendedPlan = 'team';
+            }
+            
+            // 高亮推薦方案
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const button = card.querySelector('.cta-button');
+                const planType = button.getAttribute('onclick').match(/selectPlan\('(\w+)'\)/);
+                if (planType && planType[1] === recommendedPlan) {
+                    card.style.animation = 'pulse 2s infinite';
+                    card.style.border = '2px solid #10b981';
+                }
+            });
+            
+            console.log('🎯 推薦方案:', recommendedPlan);
+        });
+        
+        // 動畫效果
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+                70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

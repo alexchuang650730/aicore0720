@@ -1,0 +1,37 @@
+{
+  "start_time": "2025-07-21T01:09:50.970988",
+  "milestones": [
+    {
+      "day": 1,
+      "milestone": "MCP Zero\u57fa\u790e\u8a2d\u65bd\u5c31\u7dd2",
+      "expected_accuracy": 0.8,
+      "key_deliverables": [
+        "\u81ea\u52d5\u5de5\u5177\u767c\u73fe\u904b\u884c",
+        "K2\u9069\u914d\u5668\u5b8c\u6210",
+        "\u57fa\u790e\u914d\u7f6e\u5c31\u7dd2"
+      ]
+    },
+    {
+      "day": 2,
+      "milestone": "K2\u6574\u5408\u5b8c\u6210",
+      "expected_accuracy": 0.85,
+      "key_deliverables": [
+        "\u4e0a\u4e0b\u6587\u611f\u77e5\u9078\u64c7\u5c31\u7dd2",
+        "\u6574\u5408\u5c64\u6e2c\u8a66\u901a\u904e",
+        "\u76e3\u63a7\u7cfb\u7d71\u904b\u884c"
+      ]
+    },
+    {
+      "day": 3,
+      "milestone": "\u9054\u621089%\u6e96\u78ba\u7387",
+      "expected_accuracy": 0.89,
+      "key_deliverables": [
+        "SmartTool\u5354\u540c\u5b8c\u6210",
+        "\u6e2c\u8a66\u5957\u4ef6\u901a\u904e",
+        "\u76ee\u6a19\u9054\u6210\u9a57\u8b49"
+      ]
+    }
+  ],
+  "current_accuracy": 0.74,
+  "checkpoints": []
+}

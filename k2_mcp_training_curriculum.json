@@ -1,0 +1,124 @@
+{
+  "total_duration_days": 26,
+  "total_samples": 50000,
+  "phases": [
+    {
+      "phase_number": 1,
+      "name": "基礎工具選擇",
+      "focus": "正確選擇基本工具",
+      "start_day": 1,
+      "end_day": 3,
+      "training_samples": 5000,
+      "mcp_tools": [
+        "smarttool"
+      ],
+      "expected_accuracy": 0.85,
+      "key_improvements": [
+        "正確識別文件操作需要的工具",
+        "避免使用不必要的工具",
+        "單一任務不重複調用"
+      ]
+    },
+    {
+      "phase_number": 2,
+      "name": "意圖理解強化",
+      "focus": "深度理解用戶意圖",
+      "start_day": 4,
+      "end_day": 7,
+      "training_samples": 8000,
+      "mcp_tools": [
+        "smarttool",
+        "intent-analyzer"
+      ],
+      "expected_accuracy": 0.92,
+      "key_improvements": [
+        "理解複雜的多步驟請求",
+        "正確分解任務",
+        "識別條件邏輯"
+      ]
+    },
+    {
+      "phase_number": 3,
+      "name": "工具組合優化",
+      "focus": "多工具協同和順序",
+      "start_day": 8,
+      "end_day": 12,
+      "training_samples": 10000,
+      "mcp_tools": [
+        "smarttool",
+        "intent-analyzer",
+        "tool-validator"
+      ],
+      "expected_accuracy": 0.96,
+      "key_improvements": [
+        "多工具協同工作",
+        "保持正確的執行順序",
+        "優化工具調用數量"
+      ]
+    },
+    {
+      "phase_number": 4,
+      "name": "記憶學習整合",
+      "focus": "從歷史模式學習",
+      "start_day": 13,
+      "end_day": 19,
+      "training_samples": 12000,
+      "mcp_tools": [
+        "smarttool",
+        "intent-analyzer",
+        "tool-validator",
+        "memory-context"
+      ],
+      "expected_accuracy": 0.98,
+      "key_improvements": [
+        "從成功案例學習",
+        "記住用戶偏好",
+        "快速適應新模式"
+      ]
+    },
+    {
+      "phase_number": 5,
+      "name": "精細調優",
+      "focus": "處理邊緣案例",
+      "start_day": 20,
+      "end_day": 26,
+      "training_samples": 15000,
+      "mcp_tools": [
+        "all"
+      ],
+      "expected_accuracy": 1.0,
+      "key_improvements": [
+        "處理罕見情況",
+        "100%準確率",
+        "零錯誤容忍"
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "day": 3,
+      "milestone": "基礎工具選擇完成",
+      "accuracy": 0.85
+    },
+    {
+      "day": 7,
+      "milestone": "意圖理解強化完成",
+      "accuracy": 0.92
+    },
+    {
+      "day": 12,
+      "milestone": "工具組合優化完成",
+      "accuracy": 0.96
+    },
+    {
+      "day": 19,
+      "milestone": "記憶學習整合完成",
+      "accuracy": 0.98
+    },
+    {
+      "day": 26,
+      "milestone": "精細調優完成",
+      "accuracy": 1.0
+    }
+  ]
+}

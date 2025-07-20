@@ -1,0 +1,59 @@
+{
+  "semantic_tests": [
+    {
+      "prompt": "請解釋一下什麼是機器學習",
+      "k2_response": "機器學習（Machine Learning）是一種「讓電腦從數據中自動學習並改進表現」的技術，屬於人工智慧（AI）的子領域。其核心概念是：**不寫死規則，而是讓演算法從經驗（數據）中自行找出規律，進而預測或決策**。\n\n---\n\n### 用簡單例子理解：\n想像你要教電腦分辨「貓」和「狗」的照片：\n\n- **傳統程式設計**：工程師手動寫規則（例如「如果有尖耳朵且鬍鬚長→貓」），但規則複雜且難涵蓋所有情況。  \n- **機器學習做法**：給電腦看**上萬張已標記的貓狗照片**，讓演算法自動找出「哪些特徵組合能區分兩者」。最終，電腦學會一套**非人為設計的辨識邏輯**。\n\n---\n\n### 關鍵組成部分：\n1. **數據（Data）**：  \n   訓練用的「教材」，例如圖片、文字、交易紀錄等。  \n   *例：病患的X光片與對應的診斷結果。*\n\n2. **模型（Model）**：  \n   一種數學函數（如神經網路、決策樹），用來「記憶」數據中的規律。  \n   *例：一個能預測房價的方程式。*\n\n3. **訓練（Training）**：  \n   調整模型參數，讓預測結果越來越接近真實答案的過程。  \n   *例：反覆比對「預測房價」與「實際成交價」的差異並修正模型。*\n\n4. **預測/推論（Inference）**：  \n   使用訓練好的模型處理**新數據**並輸出結果。  \n   *例：上傳一張新照片，模型回答「這是貓」。*\n\n---\n\n### 常見的機器學習類型：\n| 類型         | 概念類比                     | 應用案例                     |\n|--------------|------------------------------|------------------------------|\n| **監督式學習** | 有「標準答案」的練習題         | 垃圾郵件過濾（已標記垃圾信） |\n| **非監督式學習** | 無答案的分群分析             | 顧客分群（無預設類別）       |\n| **強化學習**   | 透過獎懲學習最佳策略         | AlphaGo 下圍棋               |\n\n---\n\n### 為什麼現在才「紅」？\n- **數據量爆炸**（社群、感測器產生大量資料）  \n- **運算力提升**（GPU、雲端平行計算）  \n- **演算法突破**（如2012年深度學習在圖像辨識的突破性成果）\n\n---\n\n一句話總結：  \n機器學習讓電腦**從經驗中學習**，而非**被動執行指令**，因此能解決過於複雜、難以用規則描述的問題。"
+    },
+    {
+      "prompt": "如何優化 Python 代碼的性能？",
+      "k2_response": "優化 Python 效能時，建議採用「量測 → 找瓶頸 → 局部加速 → 再量測」的循環流程，而非一開始就重寫全部程式。以下從巨觀到微觀給出可落地的策略與工具。\n\n────────────────\n1. 先量測：知道「慢在哪」\n• cProfile + pstats  \n  ```bash\n  python -m cProfile -o profile.out my_script.py\n  python -m pstats profile.out\n  ```\n• line_profiler：逐行看時間  \n  ```python\n  @profile\n  def slow_foo():\n      ...\n  kernprof -l -v my_script.py\n  ```\n• memory_profiler：看記憶體洩漏  \n  ```python\n  @profile\n  def leak_bar():\n      ...\n  python -m memory_profiler my_script.py\n  ```\n量測後，通常 80 % 的時間集中在 <20 % 的程式碼，先針對這些熱點優化。\n\n────────────────\n2. 演算法與資料結構：成本最低的加速\n• 用 set / dict 取代 list 的線性查找  \n  ```python\n  # O(n) → O(1)\n  if x in my_set: ...\n  ```\n• 排序一次，再二分搜 (bisect) 取代多次迴圈比較  \n• 使用 heapq 取代暴力取最小/最大值  \n• 善用 deque 取代 list.insert(0, …) 的 O(n) 操作  \n\n────────────────\n3. 內建與 C 擴充：把循環「推」到底層\n• 儘量用內建函式 (sum, min, any, sorted…) → 它們用 C 寫的  \n• 列表 / 字典 / 集合推導式、生成器表達式：  \n  ```python\n  squares = [i*i for i in range(10**6)]   # 快且省記憶體\n  ```\n• itertools、functools、operator、numpy、Pandas：  \n  把「純 Python for-loop」換成高度優化的 C/彙編實作。\n\n────────────────\n4. 迴圈與函式開銷細節\n• 區域變數比全域變數快（LEGB 查詢成本），可預先綁定：  \n  ```python\n  local_append = my_list.append\n  for x in data:\n      local_append(x)\n  ```\n• 使用 join 取代字串串接：  \n  ```python\n  ''.join(list_of_str)   # O(n) 而非 O(n²)\n  ```\n• 避免在迴圈內重複計算常數表達式：  \n  ```python\n  # 壞\n  for x in data:\n      y = math.sqrt(2) * x\n  # 好\n  factor = math.sqrt(2)\n  for x in data:\n      y = factor * x\n  ```\n\n────────────────\n5. 平行與非同步\n• multiprocessing.Pool：CPU-bound，繞開 GIL  \n  ```python\n  from multiprocessing import Pool\n  with Pool() as p:\n      results = p.map(cpu_intensive, big_list)\n  ```\n• concurrent.futures.ThreadPoolExecutor / ProcessPoolExecutor：  \n  統一的 Future 介面，可快速切換。\n• asyncio：I/O-bound 時，單線程 + 協程可支撐上萬連線。  \n  ```python\n  import asyncio, aiohttp\n  ```\n\n────────────────\n6. 進階：JIT / 編譯 / 向量\n• NumPy 向量化：  \n  ```python\n  y = np.sin(x) * 2\n  ```\n• Numba：一行 decorator 把純 Python 迴圈變機器碼  \n  ```python\n  from numba import njit\n  @njit(fastmath=True, parallel=True)\n  def heavy_calc(a):\n      ...\n  ```\n• Cython：在 .pyx 裡加型別、編譯成 C 擴充  \n• PyPy：替代直譯器，內建 JIT，適合純 Python 邏輯\n• 若需 GPU 加速：CuPy、PyTorch、JAX\n\n────────────────\n7. 記憶體優化\n• 使用 __slots__ 減少實例字典開銷  \n  ```python\n  class Point:\n      __slots__ = ('x', 'y"
+    },
+    {
+      "prompt": "寫一個快速排序算法",
+      "k2_response": "以下示範一個**快速排序（Quick Sort）**的 Python 實作，採用「就地排序」（in-place）版本，平均時間複雜度 O(n log n)，最壞 O(n²)。  \n若需更穩定的效能，可改用「隨機 pivot」或「三數取中（median-of-three）」策略。\n\n```python\nfrom typing import List\n\ndef quick_sort(arr: List[int]) -> List[int]:\n    \"\"\"\n    快速排序（就地排序版）\n    回傳排序後的新清單，不改變原輸入。\n    \"\"\"\n    def _partition(nums: List[int], low: int, high: int) -> int:\n        pivot = nums[high]          # 選最右邊當 pivot\n        i = low - 1                 # i 指向 < pivot 區塊的尾端\n        for j in range(low, high):\n            if nums[j] <= pivot:\n                i += 1\n                nums[i], nums[j] = nums[j], nums[i]\n        nums[i + 1], nums[high] = nums[high], nums[i + 1]\n        return i + 1\n\n    def _quick_sort(nums: List[int], low: int, high: int) -> None:\n        if low < high:\n            pi = _partition(nums, low, high)\n            _quick_sort(nums, low, pi - 1)\n            _quick_sort(nums, pi + 1, high)\n\n    # 複製一份，避免修改原輸入\n    arr_copy = arr.copy()\n    _quick_sort(arr_copy, 0, len(arr_copy) - 1)\n    return arr_copy\n\n\n# 使用範例\nif __name__ == \"__main__\":\n    data = [5, 3, 8, 4, 2, 7, 1, 10]\n    sorted_data = quick_sort(data)\n    print(\"原始資料:\", data)\n    print(\"排序結果:\", sorted_data)\n```\n\n執行結果：\n```\n原始資料: [5, 3, 8, 4, 2, 7, 1, 10]\n排序結果: [1, 2, 3, 4, 5, 7, 8, 10]\n```\n\n如需「原地」直接修改原輸入，只需呼叫 `_quick_sort(arr, 0, len(arr)-1)` 即可。"
+    }
+  ],
+  "tool_tests": [
+    {
+      "prompt": "請幫我讀取 config.json 文件",
+      "response": "<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">config.json</parameter>\n</invoke>\n</function_calls>",
+      "tool_calls": [
+        {
+          "tool": "Read",
+          "parameters": {
+            "path": "config.json"
+          }
+        }
+      ],
+      "has_tools": true
+    },
+    {
+      "prompt": "搜索所有包含 TODO 的 Python 文件",
+      "response": "<function_calls>\n<invoke name=\"Glob\">\n<parameter name=\"pattern\">**/*.py</parameter>\n</invoke>\n</function_calls>",
+      "tool_calls": [
+        {
+          "tool": "Glob",
+          "parameters": {
+            "pattern": "**/*.py"
+          }
+        }
+      ],
+      "has_tools": true
+    },
+    {
+      "prompt": "創建一個新的測試文件 test.py",
+      "response": "<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">test.py</parameter>\n<parameter name=\"content\"># test.py\n\"\"\"\n新創建的測試檔案\n\"\"\"\n\ndef main():\n    print(\"Hello from test.py\")\n\nif __name__ == \"__main__\":\n    main()\n</parameter>\n</invoke>\n</function_calls>",
+      "tool_calls": [
+        {
+          "tool": "Write",
+          "parameters": {
+            "path": "test.py",
+            "content": "# test.py\n\"\"\"\n新創建的測試檔案\n\"\"\"\n\ndef main():\n    print(\"Hello from test.py\")\n\nif __name__ == \"__main__\":\n    main()\n"
+          }
+        }
+      ],
+      "has_tools": true
+    }
+  ],
+  "timestamp": "2025-07-21 00:12:12"
+}

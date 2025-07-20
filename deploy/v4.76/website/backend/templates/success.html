@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付成功 - PowerAuto.ai</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .success-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .success-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+        
+        .success-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+        
+        .success-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .order-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .order-details h3 {
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #10b981;
+        }
+        
+        .detail-label {
+            color: #666;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .next-steps {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .next-steps h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .steps-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .steps-list li i {
+            margin-right: 1rem;
+            width: 20px;
+            opacity: 0.8;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .support-info {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f0f4ff;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .support-info h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .support-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .support-contacts {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .support-contact {
+            display: flex;
+            align-items: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .support-contact i {
+            margin-right: 0.5rem;
+        }
+        
+        .celebration {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            animation: celebrate 3s ease-out infinite;
+        }
+        
+        @keyframes celebrate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .loading-skeleton {
+            display: none;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .success-title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .support-contacts {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 慶祝動畫 -->
+    <div id="celebrationContainer"></div>
+    
+    <div class="success-container">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <h1 class="success-title">🎉 支付成功！</h1>
+        <p class="success-subtitle">
+            恭喜您成功訂閱 PowerAuto.ai！您的AI開發之旅即將開始。
+        </p>
+        
+        <div class="order-details" id="orderDetails">
+            <h3>📋 訂單詳情</h3>
+            <div class="loading-skeleton" style="height: 200px; border-radius: 8px;" id="orderSkeleton">
+                正在載入訂單詳情...
+            </div>
+            <div id="orderContent" style="display: none;">
+                <!-- 訂單詳情將通過 JavaScript 載入 -->
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h3>🚀 接下來該做什麼？</h3>
+            <ul class="steps-list">
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    查看您的郵箱，我們已發送歡迎郵件和登錄信息
+                </li>
+                <li>
+                    <i class="fas fa-key"></i>
+                    使用您的帳戶登錄 PowerAuto.ai 開發平台
+                </li>
+                <li>
+                    <i class="fas fa-play-circle"></i>
+                    觀看入門教程，快速上手AI開發工具
+                </li>
+                <li>
+                    <i class="fas fa-code"></i>
+                    開始您的第一個AI輔助開發項目
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    加入我們的開發者社區，獲取技術支持
+                </li>
+            </ul>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="/dashboard" class="btn btn-primary">
+                <i class="fas fa-tachometer-alt"></i>
+                進入控制台
+            </a>
+            <a href="/docs" class="btn btn-secondary">
+                <i class="fas fa-book"></i>
+                查看文檔
+            </a>
+        </div>
+        
+        <div class="support-info">
+            <h4>需要幫助？</h4>
+            <p>我們的支持團隊隨時為您提供幫助。如有任何問題，請隨時聯繫我們：</p>
+            <div class="support-contacts">
+                <div class="support-contact">
+                    <i class="fas fa-envelope"></i>
+                    support@powerauto.ai
+                </div>
+                <div class="support-contact">
+                    <i class="fas fa-phone"></i>
+                    400-888-0123
+                </div>
+                <div class="support-contact">
+                    <i class="fab fa-discord"></i>
+                    Discord 社區
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 獲取訂單ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id');
+        
+        // 慶祝動畫
+        function createCelebration() {
+            const container = document.getElementById('celebrationContainer');
+            const colors = ['#10b981', '#667eea', '#f59e0b', '#ef4444', '#8b5cf6'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const celebration = document.createElement('div');
+                    celebration.className = 'celebration';
+                    celebration.style.left = Math.random() * 100 + 'vw';
+                    celebration.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    celebration.style.animationDelay = Math.random() * 2 + 's';
+                    celebration.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    container.appendChild(celebration);
+                    
+                    setTimeout(() => {
+                        celebration.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+        
+        // 載入訂單詳情
+        async function loadOrderDetails() {
+            if (!orderId) {
+                document.getElementById('orderContent').innerHTML = `
+                    <div style="text-align: center; color: #f59e0b; padding: 2rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>無法獲取訂單信息，請聯繫客服。</p>
+                    </div>
+                `;
+                document.getElementById('orderSkeleton').style.display = 'none';
+                document.getElementById('orderContent').style.display = 'block';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/orders/${orderId}/status`);
+                const order = await response.json();
+                
+                if (response.ok) {
+                    const orderContent = `
+                        <div class="detail-row">
+                            <span class="detail-label">訂單號</span>
+                            <span class="detail-value">${order.order_id}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">訂閱方案</span>
+                            <span class="detail-value">${getPlanName(order.order_id)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">支付狀態</span>
+                            <span class="detail-value" style="color: #10b981;">
+                                <i class="fas fa-check-circle"></i> 已支付
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">支付金額</span>
+                            <span class="detail-value">¥${order.amount}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">訂單時間</span>
+                            <span class="detail-value">${new Date(order.created_at).toLocaleString('zh-TW')}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服務狀態</span>
+                            <span class="detail-value">
+                                <i class="fas fa-rocket"></i> 已激活
+                            </span>
+                        </div>
+                    `;
+                    
+                    document.getElementById('orderContent').innerHTML = orderContent;
+                    
+                    // 生成發票
+                    if (order.payment_status === 'completed') {
+                        generateInvoiceButton();
+                    }
+                } else {
+                    throw new Error(order.error || '獲取訂單失敗');
+                }
+            } catch (error) {
+                console.error('載入訂單詳情失敗:', error);
+                document.getElementById('orderContent').innerHTML = `
+                    <div style="text-align: center; color: #ef4444; padding: 2rem;">
+                        <i class="fas fa-times-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>載入訂單詳情失敗，請稍後再試。</p>
+                        <button onclick="loadOrderDetails()" style="margin-top: 1rem; padding: 0.5rem 1rem; 
+                                background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            重試
+                        </button>
+                    </div>
+                `;
+            } finally {
+                document.getElementById('orderSkeleton').style.display = 'none';
+                document.getElementById('orderContent').style.display = 'block';
+            }
+        }
+        
+        function getPlanName(orderId) {
+            // 這裡可以根據實際情況解析訂單ID或調用API獲取方案名稱
+            return '專業版'; // 簡化處理
+        }
+        
+        function generateInvoiceButton() {
+            const actionButtons = document.querySelector('.action-buttons');
+            const invoiceBtn = document.createElement('a');
+            invoiceBtn.href = `/api/orders/${orderId}/invoice`;
+            invoiceBtn.className = 'btn btn-secondary';
+            invoiceBtn.innerHTML = '<i class="fas fa-file-invoice"></i> 下載發票';
+            invoiceBtn.target = '_blank';
+            actionButtons.appendChild(invoiceBtn);
+        }
+        
+        // 發送確認郵件
+        async function sendConfirmationEmail() {
+            if (!orderId) return;
+            
+            try {
+                await fetch('/api/orders/send-confirmation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order_id: orderId })
+                });
+            } catch (error) {
+                console.error('發送確認郵件失敗:', error);
+            }
+        }
+        
+        // 頁面載入時執行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 啟動慶祝動畫
+            createCelebration();
+            
+            // 載入訂單詳情
+            loadOrderDetails();
+            
+            // 發送確認郵件
+            sendConfirmationEmail();
+            
+            // 分析跟踪
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'purchase_completed', {
+                    'order_id': orderId,
+                    'payment_method': 'online'
+                });
+            }
+            
+            console.log('🎉 支付成功頁面已載入');
+        });
+        
+        // 錯誤處理
+        window.addEventListener('error', function(e) {
+            console.error('頁面錯誤:', e.error);
+        });
+    </script>
+</body>
+</html>

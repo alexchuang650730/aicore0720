@@ -1,0 +1,272 @@
+[
+  {
+    "prompt": "讀取test.tsx文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取test.tsx文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取main.py文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取main.py文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取main.py文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取README.md文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取README.md文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取config.js文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取config.js文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  },
+  {
+    "prompt": "讀取config.js文件",
+    "correct_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"file_path\">示例參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "incorrect_response": "我將幫助您完成這個任務。\n\n<function_calls>\n<invoke name=\"Write\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Edit\">\n<parameter name=\"path\">錯誤參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n<function_calls>\n<invoke name=\"Read\">\n<parameter name=\"path\">重複參數</parameter>\n</invoke>\n</function_calls>\n\n",
+    "tools": [
+      "Read"
+    ],
+    "phase": "基礎工具選擇",
+    "mcp_guidance": {
+      "smarttool": {
+        "recommended_tools": [
+          "Read"
+        ],
+        "avoid_tools": [
+          "Write",
+          "Edit"
+        ],
+        "max_calls": {},
+        "sequence": []
+      },
+      "intent_analyzer": {
+        "intent_type": "simple",
+        "requires_decomposition": false,
+        "requires_validation": false
+      }
+    }
+  }
+]
