@@ -83,36 +83,42 @@ echo "📁 創建安裝目錄: $INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
-# 下載預編譯的PowerAutomation v4.77
-echo "⬇️  下載PowerAutomation v4.77預編譯版本..."
+# 下載PowerAutomation v4.77
+echo "⬇️  下載PowerAutomation v4.77..."
 
-# 檢測架構
-ARCH=$(uname -m)
-if [[ "$ARCH" == "x86_64" ]]; then
-    ARCH="amd64"
-elif [[ "$ARCH" == "arm64" ]] || [[ "$ARCH" == "aarch64" ]]; then
-    ARCH="arm64"
+# 檢查是否已存在安裝
+if [ -d "aicore0720" ]; then
+    echo "   發現現有安裝，正在更新..."
+    cd aicore0720
+    
+    # 如果是git倉庫，更新到最新版本
+    if [ -d ".git" ]; then
+        git fetch origin 2>/dev/null || true
+        git checkout main 2>/dev/null || git checkout -b main 2>/dev/null || true
+        git pull origin main 2>/dev/null || git reset --hard origin/main 2>/dev/null || true
+        echo "✅ 更新到最新版本完成"
+    else
+        echo "   重新下載最新版本..."
+        cd ..
+        rm -rf aicore0720
+        git clone --depth 1 --branch main https://github.com/alexchuang650730/aicore0720.git
+        cd aicore0720
+        echo "✅ 重新下載完成"
+    fi
 else
-    echo "❌ 不支持的架構: $ARCH"
-    exit 1
-fi
-
-# 構建下載URL
-DOWNLOAD_URL="https://github.com/alexchuang650730/aicore0720/releases/download/v4.77/powerautomation-v4.77-${OS}-${ARCH}.tar.gz"
-
-echo "   正在下載: powerautomation-v4.77-${OS}-${ARCH}.tar.gz"
-
-# 如果預編譯版本不存在，回退到源碼安裝
-if ! curl -fsSL "$DOWNLOAD_URL" -o powerautomation-v4.77.tar.gz 2>/dev/null; then
-    echo "   預編譯版本不可用，下載源碼版本..."
+    echo "   全新安裝..."
+    # 檢測架構（為未來預編譯版本準備）
+    ARCH=$(uname -m)
+    if [[ "$ARCH" == "x86_64" ]]; then
+        ARCH="amd64"
+    elif [[ "$ARCH" == "arm64" ]] || [[ "$ARCH" == "aarch64" ]]; then
+        ARCH="arm64"
+    fi
+    
+    # 下載源碼版本
     git clone --depth 1 --branch main https://github.com/alexchuang650730/aicore0720.git
     cd aicore0720
     echo "✅ 源碼下載完成"
-else
-    echo "   解壓預編譯版本..."
-    tar -xzf powerautomation-v4.77.tar.gz
-    cd powerautomation-v4.77
-    echo "✅ 預編譯版本解壓完成"
 fi
 
 # 安裝Python依賴
@@ -193,7 +199,7 @@ INSTALL_DIR="$HOME/powerautomation/aicore0720"
 # 檢查安裝
 if [ ! -d "$INSTALL_DIR" ]; then
     echo "❌ PowerAutomation 未安裝"
-    echo "請運行: curl -fsSL https://get.powerauto.ai/install | bash"
+    echo "請運行: curl -fsSL https://raw.githubusercontent.com/alexchuang650730/aicore0720/main/install.sh | bash"
     exit 1
 fi
 
