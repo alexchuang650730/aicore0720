@@ -1,9 +1,9 @@
-# PowerAutomation v4.74 - AI 驅動的全棧開發平台
+# PowerAutomation v4.75 - AI 驅動的全棧開發平台
 
 <div align="center">
   <img src="docs/images/logo.png" alt="PowerAutomation Logo" width="200"/>
   
-  [![Version](https://img.shields.io/badge/version-4.74-blue.svg)](https://github.com/alexchuang650730/aicore0720)
+  [![Version](https://img.shields.io/badge/version-4.75-blue.svg)](https://github.com/alexchuang650730/aicore0720)
   [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
   [![Status](https://img.shields.io/badge/status-active-success.svg)]()
   [![SmartTool](https://img.shields.io/badge/SmartTool-MCP-orange.svg)]()
@@ -12,6 +12,32 @@
 ## 🚀 概述
 
 PowerAutomation 是一個革命性的 AI 驅動全棧開發平台，通過六大核心工作流和智能 MCP 組件，實現 99% 的開發任務自動化。
+
+## ⚠️ 重要開發政策 (CRITICAL POLICY)
+
+> **此政策具有最高優先級，所有開發必須嚴格遵守**
+
+### UI 系統開發規範
+- ✅ **所有 UI 組件必須在 `core/components/smartui_mcp/` 工作區創建或優化**
+- ❌ **禁止在其他位置創建 UI 組件**
+- ❌ **禁止另行創建新的 UI 目錄**
+
+### MCP 系統開發規範
+- ✅ **所有 MCP 系統必須在 `core/components/` 目錄下創建**
+- ❌ **禁止在其他位置創建 MCP 文件**
+- ❌ **禁止創建獨立的 MCP 目錄結構**
+
+### CodeFlow MCP 監管
+- 🔍 如有違反以上規範，CodeFlow MCP 將自動進行重構
+- 🔄 所有組件必須符合 CodeFlow MCP 的架構標準
+- 📐 UI 組件必須遵循 SmartUI 規範
+
+### ClaudeEditor 三欄式架構
+- **左欄（左下角）**: 六大工作流控制面板
+- **中間欄**: 演示及編輯區
+- **右欄**: AI 助手（Claude/K2）
+
+> **違反此政策的代碼將被拒絕合併並要求重構**
 
 ## 📁 項目結構
 

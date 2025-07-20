@@ -67,6 +67,21 @@ class MCPRegistry:
         """初始化 MCP 目錄"""
         self.mcp_catalog = {
             # P0 核心 MCP
+            "smart_intervention": MCPMetadata(
+                name="smart_intervention",
+                description="智能干預系統 - 自動檢測並切換到 ClaudeEditor",
+                capabilities=[
+                    "capability_detection", "auto_switch", "keyword_listening",
+                    "hook_system", "claude_integration", "task_routing"
+                ],
+                context_size=1000,
+                priority="P0",
+                dependencies=[],
+                tags=["intervention", "automation", "intelligence", "ux"],
+                performance_score=0.98,
+                success_rate=0.95
+            ),
+            
             "codeflow_mcp": MCPMetadata(
                 name="codeflow_mcp",
                 description="代碼生成、分析、重構和測試生成",

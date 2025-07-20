@@ -87,30 +87,52 @@ class K2OptimizerTrainer:
         
         analysis_path = Path(analysis_dir)
         if not analysis_path.exists():
-            logger.error(f"目錄不存在: {analysis_dir}")
+            logger.warning(f"目錄不存在: {analysis_dir}")
             return 0
         
         loaded = 0
         # 查找所有分析文件
-        for analysis_file in analysis_path.glob("manus_analysis_*.json"):
+        pattern_files = list(analysis_path.glob("manus_analysis_*.json")) + list(analysis_path.glob("manus_raw_data_*.json"))
+        logger.info(f"找到 {len(pattern_files)} 個 Manus 文件")
+        
+        for analysis_file in pattern_files:
             try:
                 with open(analysis_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                 
-                # 提取分類後的消息
-                categories = data.get('categories', {})
-                
-                for category, messages in categories.items():
+                # 處理不同的數據格式
+                if 'categories' in data:
+                    # 分析格式的數據
+                    categories = data.get('categories', {})
+                    for category, messages in categories.items():
+                        for msg in messages:
+                            if msg.get('content'):
+                                training_sample = TrainingSample(
+                                    instruction="分析並執行任務",
+                                    input=msg['content'][:500],
+                                    output=self._generate_response(msg, category),
+                                    category=category,
+                                    tools_used=self._extract_tools(msg),
+                                    confidence=msg.get('confidence', 0.5),
+                                    source='manus'
+                                )
+                                self.training_data.append(training_sample)
+                                loaded += 1
+                elif 'messages' in data:
+                    # 原始消息格式的數據
+                    messages = data.get('messages', [])
                     for msg in messages:
                         # 構建訓練樣本
                         if msg.get('content'):
+                            # 根據內容推斷類別
+                            category = self._infer_category(msg)
                             training_sample = TrainingSample(
                                 instruction="分析並執行任務",
                                 input=msg['content'][:500],
                                 output=self._generate_response(msg, category),
                                 category=category,
                                 tools_used=self._extract_tools(msg),
-                                confidence=msg.get('confidence', 0.5),
+                                confidence=0.6,
                                 source='manus'
                             )
                             self.training_data.append(training_sample)
@@ -152,6 +174,28 @@ class K2OptimizerTrainer:
                 tools.append(tool)
         
         return tools
+    
+    def _infer_category(self, msg: Dict) -> str:
+        """根據消息內容推斷類別"""
+        content = msg.get('content', '').lower()
+        
+        # 思考類關鍵詞
+        thinking_keywords = ['分析', '理解', '需要', '應該', '可以', '思考', 'think', 'analyze']
+        # 觀察類關鍵詞
+        observation_keywords = ['顯示', '看到', '發現', '結果', '狀態', 'show', 'display', 'result']
+        # 動作類關鍵詞
+        action_keywords = ['執行', '運行', '創建', '修改', 'git', 'python', '命令']
+        
+        thinking_score = sum(1 for kw in thinking_keywords if kw in content)
+        observation_score = sum(1 for kw in observation_keywords if kw in content)
+        action_score = sum(1 for kw in action_keywords if kw in content)
+        
+        if action_score > max(thinking_score, observation_score):
+            return 'action'
+        elif observation_score > thinking_score:
+            return 'observation'
+        else:
+            return 'thinking'
     
     def prepare_datasets(self, train_ratio: float = 0.8, val_ratio: float = 0.1):
         """準備訓練、驗證和測試數據集"""
@@ -347,20 +391,34 @@ def main():
     # 創建訓練器
     trainer = K2OptimizerTrainer()
     
-    # 載入 Claude 數據
+    # 獲取基礎目錄
+    base_dir = Path(__file__).parent.parent.parent.parent  # 回到 aicore0720 根目錄
+    
+    # 載入 Claude 數據 - 使用絕對路徑
     claude_files = [
-        'data/claude_conversations/training_examples_20250719_054254.jsonl'
+        str(base_dir / 'data/claude_conversations/training_examples_20250719_054254.jsonl')
     ]
+    
+    print(f"Debug: 檢查 Claude 文件:")
+    for cfile in claude_files:
+        print(f"  {cfile} - 存在: {Path(cfile).exists()}")
     
     for file in claude_files:
         if Path(file).exists():
             trainer.load_claude_data(file)
     
-    # 載入 Manus 數據
+    # 載入 Manus 數據 - 使用絕對路徑
+    base_dir = Path(__file__).parent.parent.parent.parent  # 回到 aicore0720 根目錄
     manus_dirs = [
-        'manus_test_output',
-        'data/manus_analysis'
+        str(base_dir / 'data/manus_test_output'),
+        str(base_dir / 'data/manus_advanced_analysis'),
+        str(base_dir / 'data/manus_complete_collection'),
     ]
+    
+    print(f"Debug: 當前工作目錄: {os.getcwd()}")
+    print(f"Debug: 基礎目錄: {base_dir}")
+    for mdir in manus_dirs:
+        print(f"Debug: 檢查目錄: {mdir} - 存在: {Path(mdir).exists()}")
     
     for dir in manus_dirs:
         if Path(dir).exists():
