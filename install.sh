@@ -123,22 +123,37 @@ fi
 
 # 安裝Python依賴
 echo "📦 安裝Python依賴..."
+
+# 創建虛擬環境
+if [ ! -d "venv" ]; then
+    echo "   創建Python虛擬環境..."
+    python3 -m venv venv
+fi
+
+# 激活虛擬環境
+echo "   激活虛擬環境..."
+source venv/bin/activate
+
+# 安裝依賴
 if [ -f "requirements.txt" ]; then
-    python3 -m pip install --user -r requirements.txt
+    echo "   安裝requirements.txt中的依賴..."
+    pip install -r requirements.txt
 else
-    echo "⚠️  requirements.txt 不存在，創建基本依賴..."
+    echo "   創建基本依賴並安裝..."
     cat > requirements.txt << 'EOF'
 flask>=2.3.0
 flask-sqlalchemy>=3.0.0
 flask-cors>=4.0.0
 requests>=2.31.0
-asyncio>=3.4.3
 python-dotenv>=1.0.0
 anthropic>=0.3.0
+click>=8.0.0
+colorama>=0.4.0
 EOF
-    python3 -m pip install --user -r requirements.txt
+    pip install -r requirements.txt
 fi
-echo "✅ Python依賴安裝完成"
+
+echo "✅ Python依賴安裝完成 (虛擬環境: venv/)"
 
 # 安裝Node.js依賴 (如果有Node.js)
 if command -v npm &> /dev/null && [ -f "package.json" ]; then
@@ -204,6 +219,12 @@ if [ ! -d "$INSTALL_DIR" ]; then
 fi
 
 cd "$INSTALL_DIR"
+
+# 激活虛擬環境
+if [ -d "venv" ]; then
+    source venv/bin/activate
+    echo "✅ 虛擬環境已激活"
+fi
 
 # 創建用戶友好的GUI界面 (如果有Python tkinter)
 if python3 -c "import tkinter" &>/dev/null; then
