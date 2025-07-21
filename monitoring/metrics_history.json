@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-07-21T10:58:54.061121",
+  "timestamp": "2025-07-21T11:09:40.440372",
   "health_score": 100,
   "tool_accuracy": [
     80.0,
@@ -26,10 +26,10 @@
     50
   ],
   "system_metrics": {
-    "cpu_usage": 4.2,
-    "memory_usage": 69.4,
-    "memory_available_gb": 4.888275146484375,
+    "cpu_usage": 5.0,
+    "memory_usage": 68.2,
+    "memory_available_gb": 5.085418701171875,
     "disk_usage": 47.2,
-    "disk_free_gb": 16.697486877441406
+    "disk_free_gb": 16.682769775390625
   }
 }
