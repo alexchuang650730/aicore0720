@@ -1,0 +1,2809 @@
+{
+  "7000ade30e39f82c": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "530cf0782e645420": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1c60df84f925e8ea": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3bafb5eaebab6feb": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0efbbcbf746bad19": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "eba5534690ca30a3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "284373ca8daf74b4": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ffd1fc0a26c59ae9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "14d1e31c6478213b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c8626d011cf6524b": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "29645ce7713a9d14": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3fb0e7093a2438d8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7071bf91c55a33c0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3650625a7a876a78": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c3477a896a487162": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3a1d2f7d94965a16": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f9a45e3fdabc8875": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2e28fc0e699a566e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "0cd054eb6524f78f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "724309f2773ac1ab": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b60fe525e403a4cc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6e0d2f372f3dc9f9": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "8692ed5f11d523bb": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "103586702597afea": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d43d70cc88d52380": {
+    "source": "learned",
+    "pattern": [
+      "CodeFlow",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7dbaa8d564b506be": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6345cbaf99e74f47": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c0086bcd98cc4451": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9770e2186dbe6fe1": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "53ab80f09997ca42": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9f9e014d1c33f75f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9a1454830024774f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "23235a8eca119d01": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "9cd9ea848d667123": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "10015fca2dd866e2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "bc75df2c62c55851": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "0d6f0f44b0d7fbee": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "26de3c7be374e840": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a3991cf2b3fdc3e8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b2dd246b7af9ea30": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7dc5220ee4c8f3cd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b9ca367117899513": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "dcb2240cb8c3d438": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "26f8c4f084db6506": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "81066d4e300cef9e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "44dfb667f6d65472": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "83d23ee42269f73f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "63776ee585ee0304": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7d2bedfc0265a21e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1a18a120e9d9b86c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d22958e0d20e54e9": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "12ba35a7cdbcc931": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b55c52cb8e6e7978": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a916d6a3ba637870": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "475c7f426756b7fd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6c028068c20c104d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d9c52619a7311409": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "33896c05fd35baf3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ddcfc9a40fde188c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6ce01bd0292726df": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "58e633853ce0300a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "50c111927b51a6f5": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "8dded965e1d2f306": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c2dbdc911727e17e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "498fa9559e51ec5e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d0d6ba0c2fa766c2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "51f82d8b40762816": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "12b1b520f4fdd7e3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e35219bb15e7838f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e1cd8d5d73a2e38c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "76204357e76753c3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ecc398aa922032ae": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c3c1c0acd3247102": {
+    "source": "learned",
+    "pattern": [
+      "CodeFlow",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6069477c6c079c8f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f48faa72a2a9433a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "eaa8754bc2f81804": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7752110b8f486faf": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1d3ffab432e04f02": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "348b128849a469f5": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "37690da84e340571": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4774cc2736b67de8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1211c9f28ae505b3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "416823ad21519d91": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "08f1feb63d74f24f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "dfd8584a80ac39ce": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "712ff8de4650ad40": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4146bb1396617c0a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a600d9425cad6172": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "80fde9e5b79f5ec4": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6f1e186396da1fca": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d60dfbe9eb03aee4": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1663499ea9372af9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "37a59c468ecd3e41": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "5f1869f384a9dbda": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3311f9199f847633": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "554270de8cab4fe8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c4c67fc97abfca29": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2f1b20cf48c00917": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "d51d9553dbabe4b7": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "307909b014daa18e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9174aa2fde8b6957": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9ff0a949f2aaee66": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f69295648d966d91": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f52143b5c7f7ba95": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "512dcdbddfad677c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "351887dd7c02e6d0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "17a21d6eb201a886": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b04e59ae0231f688": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c97c739b3c449ffe": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "3b2e865afd660fd0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "da19415e23198212": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "59215c449b64e719": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "77a78b474a4ecf86": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "62126ba920a8194e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "826a8fa5a0cf4c3d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2fd71b97a223caa6": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "49b53bd970c6a458": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "86f0a574035a5ba6": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f349b77c1928db7a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a791e81a4603c403": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "187f7339b61208d3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e63c2ff9d70ae007": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c8d91b79a7840fd4": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f79884126473f30d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f2da5d05e6743b18": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9cf23e8278701097": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "fcc8d37d28ebe953": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "bd61aadad3f2bf47": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "486818cadb40df6f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "8b92ad19c9dd294b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4dece25be61be8fc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "017b0b7035d5b4f6": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e53b3b60ba8a17c2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a117efa60deaac94": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "46873a1ea8fb1a84": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "5fbff615f7e99991": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7e7b9ba6a52a4c2f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e6d5dd76b8935a60": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e612715366086f24": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "47a4155c81d65cb3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4d489340cb7a9e42": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "20b37ab8691de757": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "fcb56ec43fcaeb8c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ad795ba4c897b138": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4857e1a03df92745": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7475c7ed3df981c4": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "591371bb5301c9aa": {
+    "source": "learned",
+    "pattern": [
+      "CodeFlow",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b8ef6ddfc3a60ead": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0e339ae7c6a82456": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "42a6399e693cc0a9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4adae4b13a4dbf16": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "bd0d372229a85fc3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4cb503c4a89d87d0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ae883a9cba512621": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b8b83104fe99e1fd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b317fdf14f2717bf": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "15fbe427c0673dc2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "29b0b7b576c4d4ad": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b14ec79848ebd58b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "bc485b3759e86f72": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f3396134933359f8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1fd297399a0d1a6f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0ee20feecf5b232a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d40af25cf8c10a50": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1656b3780d481f6b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0bbfe0a973cad25b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "5fae1c52678dd9b9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c2814fef8bb83b5e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2d2f3a01e4ea94fd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1ad66057cf7861fa": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0c5e48fe0c5b60e8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c66d0f9f7d9d8d63": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9c196eae7b111723": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "71683b4ea184faf3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ac810e30b51ef009": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "902fd861c76c1c51": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3f7b12652fdeff36": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "fe1a0b2622e7e20b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0c2c33e2537dcc3e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d1d6f302ef7a7a60": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "08d08ec25e176e8b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "646eef07945fa12a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4cd53557dc2e4295": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "94ab1c713d3bc44e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a7cb1b63d81b01fe": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b1ba6736e97a47d3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "d0dbd077fb029cd2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7509d0b4e88d49b2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "57b05eb458821ba0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "b3258a58827b0003": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "84d31c50f05abd2d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "305e0fbbf7d31763": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "536d8153ff0c00df": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "0f4625ef486b2239": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "da5fb4fc99e09a38": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "efffaf2c90857cde": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c9de02833dc2dd84": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0924e559a6348dc6": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "78d06927e244dcd1": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "8f76bbe985e078aa": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "bdae5ea1d23c8cee": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "cedaf0a8e7c0d84a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3d2e0d8dc2a30a5a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "24708677af062d0a": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4f4e32636c6a6598": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "ce2cc76913b99007": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "72ab77a236f0b002": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3e526ac3d8279b6f": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "73c9f8d1e1328a9c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "dacb8756e71692b2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "fe479eabe4fd2f51": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "370683a93d4a21be": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1f64808721e0c1ba": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0ebfda181367c656": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7b44f666a1320dc8": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "470e221206453715": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "add48c50d88ee8dd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4d6cbe751dcfea0d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "be444113792a2121": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "4d474990b598ee00": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7b56b71fadb40d78": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6aa2ecaaaab1c2e2": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "1bc5096dee689b17": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2eb50e4d9e0bf6f0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "5bd70aafa6607648": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c055d43b2f2ce4de": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "0fab7e471ed172c6": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "37e1182ee4f506ff": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e8cec572bb812b38": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "306918aa0d4a4235": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "14a092a1e0eb64d7": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "48bbe3e632c77e92": {
+    "source": "learned",
+    "pattern": [
+      "SmartTool",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "06a0f3fd5645c184": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "88cd2c6936b00605": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2809bca76fe40454": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "048dddb80622448c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7fc01f2e0c0635ee": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "472118b6a1b926b1": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3d7d7c49c4a1b4a3": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6aab8eb13add89fc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "385b290bcff23847": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c6aaff156930d424": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.865,
+    "boost": 0.12
+  },
+  "596c4b65fa9e11db": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "125feb134b076b82": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "551af5b8801a4a79": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7c244c67dd6314dc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "8d59b7983b608f2d": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e7f2c398f26501b9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "40831ec17048afe9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "542eb343fbdeca92": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "6fbea18f87000783": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "755509827674ae0e": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "0dfca4fa26517659": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e01d26dbb4c83e83": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3db90ce2747b0c63": {
+    "source": "learned",
+    "pattern": [
+      "CodeFlow",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "89e4c33e7ada4929": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9eb701dc95d2f468": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "27d15222286fc0cc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "a0818d22253073fc": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "7610ef55c5c7e350": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "cb9df96763d7dd94": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2e57f0366fa231b7": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "2f36d0683ff57396": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "c7b53c80865eb3dd": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "5b2ae91b0bf55c4c": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "be02db8004a6c1f0": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "3e9edf7f2492a579": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "SmartTool"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "9ad21c71c9aee896": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Grep",
+      "Search"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "942cb8a5652d9e4b": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PermissionFixer",
+      "CodeFlow"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "e00c32baf2d1c5a9": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  },
+  "f6c0d744ebf73ffe": {
+    "source": "learned",
+    "pattern": [
+      "SmartIntervention",
+      "PDFReader",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "confidence": 0.915,
+    "boost": 0.12
+  }
+}

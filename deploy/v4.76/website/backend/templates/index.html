@@ -101,16 +101,46 @@
                             <span id="current-lang">繁體中文</span>
                             <i class="fas fa-chevron-down ml-2"></i>
                         </button>
-                        <div id="language-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border hidden z-50">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="zh-tw">
-                                🇹🇼 繁體中文
-                            </a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="zh-cn">
-                                🇨🇳 简体中文
-                            </a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="en">
-                                🇺🇸 English
-                            </a>
+                        <div id="language-menu" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border hidden z-50 max-h-80 overflow-y-auto">
+                            <div class="py-2">
+                                <p class="px-4 py-1 text-xs font-medium text-gray-400 uppercase">亞洲語言</p>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="zh-tw">
+                                    🇹🇼 繁體中文
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="zh-cn">
+                                    🇨🇳 简体中文
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="ja">
+                                    🇯🇵 日本語
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="ko">
+                                    🇰🇷 한국어
+                                </a>
+                            </div>
+                            <div class="border-t py-2">
+                                <p class="px-4 py-1 text-xs font-medium text-gray-400 uppercase">歐美語言</p>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="en">
+                                    🇺🇸 English
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="es">
+                                    🇪🇸 Español
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="fr">
+                                    🇫🇷 Français
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="de">
+                                    🇩🇪 Deutsch
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="pt">
+                                    🇵🇹 Português
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="it">
+                                    🇮🇹 Italiano
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 language-option" data-lang="ru">
+                                    🇷🇺 Русский
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
@@ -155,10 +185,10 @@
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                     <a href="/products" class="bg-white text-indigo-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
-                        <i class="fas fa-rocket mr-2"></i>免費開始使用
+                        <i class="fas fa-rocket mr-2"></i><span data-i18n="hero.cta1">免費開始使用</span>
                     </a>
                     <a href="#demo" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all">
-                        <i class="fas fa-play mr-2"></i>觀看演示
+                        <i class="fas fa-play mr-2"></i><span data-i18n="hero.cta2">觀看演示</span>
                     </a>
                 </div>
                 
@@ -200,8 +230,8 @@
     <section id="demo" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">親自體驗 PowerAuto.ai</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-i18n="demo.title">親自體驗 PowerAuto.ai</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="demo.subtitle">
                     看看 AI 如何革命性地改變你的開發流程，從構思到部署，全程 AI 加速
                 </p>
             </div>
@@ -433,8 +463,8 @@
     <section id="features" class="py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">強大的 AI 功能特色</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-i18n="features.title">強大的 AI 功能特色</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="features.subtitle">
                     從智能代碼生成到自動化測試，PowerAuto.ai 為現代開發團隊提供全方位的 AI 驅動解決方案
                 </p>
             </div>
@@ -933,6 +963,8 @@
                 'nav.start': '立即開始',
                 'hero.title1': '讓 AI 成為你的',
                 'hero.subtitle': 'PowerAuto.ai 結合最先進的 AI 技術，為開發者和團隊提供智能代碼生成、自動化測試、團隊協作工具，讓你的開發效率提升 10 倍',
+                'hero.cta1': '免費開始使用',
+                'hero.cta2': '觀看演示',
                 'demo.title': '親自體驗 PowerAuto.ai',
                 'demo.subtitle': '看看 AI 如何革命性地改變你的開發流程，從構思到部署，全程 AI 加速',
                 'features.title': '強大的 AI 功能特色',
@@ -946,6 +978,8 @@
                 'nav.start': '立即开始',
                 'hero.title1': '让 AI 成为你的',
                 'hero.subtitle': 'PowerAuto.ai 结合最先进的 AI 技术，为开发者和团队提供智能代码生成、自动化测试、团队协作工具，让你的开发效率提升 10 倍',
+                'hero.cta1': '免费开始使用',
+                'hero.cta2': '观看演示',
                 'demo.title': '亲自体验 PowerAuto.ai',
                 'demo.subtitle': '看看 AI 如何革命性地改变你的开发流程，从构思到部署，全程 AI 加速',
                 'features.title': '强大的 AI 功能特色',
@@ -959,10 +993,132 @@
                 'nav.start': 'Get Started',
                 'hero.title1': 'Make AI Your',
                 'hero.subtitle': 'PowerAuto.ai combines cutting-edge AI technology to provide developers and teams with intelligent code generation, automated testing, and collaboration tools, boosting your development efficiency 10x',
+                'hero.cta1': 'Start Free',
+                'hero.cta2': 'Watch Demo',
                 'demo.title': 'Experience PowerAuto.ai Yourself',
                 'demo.subtitle': 'See how AI revolutionizes your development process, from concept to deployment, with full AI acceleration',
                 'features.title': 'Powerful AI Features',
                 'features.subtitle': 'From intelligent code generation to automated testing, PowerAuto.ai provides comprehensive AI-driven solutions for modern development teams'
+            },
+            'ja': {
+                'nav.features': '機能',
+                'nav.solutions': 'ソリューション',
+                'nav.pricing': '料金プラン',
+                'nav.testimonials': 'お客様の声',
+                'nav.start': '今すぐ始める',
+                'hero.title1': 'AIをあなたの',
+                'hero.subtitle': 'PowerAuto.aiは最先端のAI技術を組み合わせ、開発者とチームにインテリジェントなコード生成、自動テスト、コラボレーションツールを提供し、開発効率を10倍向上させます',
+                'hero.cta1': '無料で始める',
+                'hero.cta2': 'デモを見る',
+                'demo.title': 'PowerAuto.aiを体験してください',
+                'demo.subtitle': 'AIが開発プロセスをどのように革命的に変えるか、構想から展開まで、完全なAI加速をご覧ください',
+                'features.title': '強力なAI機能',
+                'features.subtitle': 'インテリジェントなコード生成から自動テストまで、PowerAuto.aiは現代の開発チームに包括的なAI駆動ソリューションを提供します'
+            },
+            'ko': {
+                'nav.features': '기능',
+                'nav.solutions': '솔루션',
+                'nav.pricing': '요금제',
+                'nav.testimonials': '고객 후기',
+                'nav.start': '시작하기',
+                'hero.title1': 'AI를 당신의',
+                'hero.subtitle': 'PowerAuto.ai는 최첨단 AI 기술을 결합하여 개발자와 팀에게 지능형 코드 생성, 자동화된 테스트, 협업 도구를 제공하여 개발 효율성을 10배 향상시킵니다',
+                'hero.cta1': '무료로 시작하기',
+                'hero.cta2': '데모 보기',
+                'demo.title': 'PowerAuto.ai를 직접 체험해보세요',
+                'demo.subtitle': 'AI가 개발 프로세스를 어떻게 혁명적으로 바꾸는지, 개념부터 배포까지 완전한 AI 가속을 확인하세요',
+                'features.title': '강력한 AI 기능',
+                'features.subtitle': '지능형 코드 생성부터 자동화된 테스트까지, PowerAuto.ai는 현대 개발 팀에게 포괄적인 AI 기반 솔루션을 제공합니다'
+            },
+            'es': {
+                'nav.features': 'Características',
+                'nav.solutions': 'Soluciones',
+                'nav.pricing': 'Precios',
+                'nav.testimonials': 'Testimonios',
+                'nav.start': 'Comenzar',
+                'hero.title1': 'Haz que la IA sea tu',
+                'hero.subtitle': 'PowerAuto.ai combina tecnología de IA de vanguardia para proporcionar a desarrolladores y equipos generación inteligente de código, pruebas automatizadas y herramientas de colaboración, aumentando tu eficiencia de desarrollo 10 veces',
+                'hero.cta1': 'Comenzar Gratis',
+                'hero.cta2': 'Ver Demo',
+                'demo.title': 'Experimenta PowerAuto.ai tú mismo',
+                'demo.subtitle': 'Ve cómo la IA revoluciona tu proceso de desarrollo, desde el concepto hasta el despliegue, con aceleración completa de IA',
+                'features.title': 'Características Poderosas de IA',
+                'features.subtitle': 'Desde generación inteligente de código hasta pruebas automatizadas, PowerAuto.ai proporciona soluciones integrales impulsadas por IA para equipos de desarrollo modernos'
+            },
+            'fr': {
+                'nav.features': 'Fonctionnalités',
+                'nav.solutions': 'Solutions',
+                'nav.pricing': 'Tarifs',
+                'nav.testimonials': 'Témoignages',
+                'nav.start': 'Commencer',
+                'hero.title1': 'Faites de l\'IA votre',
+                'hero.subtitle': 'PowerAuto.ai combine une technologie IA de pointe pour fournir aux développeurs et aux équipes une génération de code intelligente, des tests automatisés et des outils de collaboration, augmentant votre efficacité de développement de 10 fois',
+                'hero.cta1': 'Commencer Gratuitement',
+                'hero.cta2': 'Voir la Démo',
+                'demo.title': 'Expérimentez PowerAuto.ai vous-même',
+                'demo.subtitle': 'Voyez comment l\'IA révolutionne votre processus de développement, du concept au déploiement, avec une accélération IA complète',
+                'features.title': 'Fonctionnalités IA Puissantes',
+                'features.subtitle': 'De la génération intelligente de code aux tests automatisés, PowerAuto.ai fournit des solutions complètes pilotées par l\'IA pour les équipes de développement modernes'
+            },
+            'de': {
+                'nav.features': 'Funktionen',
+                'nav.solutions': 'Lösungen',
+                'nav.pricing': 'Preise',
+                'nav.testimonials': 'Bewertungen',
+                'nav.start': 'Loslegen',
+                'hero.title1': 'Machen Sie KI zu Ihrer',
+                'hero.subtitle': 'PowerAuto.ai kombiniert modernste KI-Technologie, um Entwicklern und Teams intelligente Code-Generierung, automatisierte Tests und Kollaborationstools zu bieten und Ihre Entwicklungseffizienz um das 10-fache zu steigern',
+                'hero.cta1': 'Kostenlos starten',
+                'hero.cta2': 'Demo ansehen',
+                'demo.title': 'Erleben Sie PowerAuto.ai selbst',
+                'demo.subtitle': 'Sehen Sie, wie KI Ihren Entwicklungsprozess revolutioniert, vom Konzept bis zur Bereitstellung, mit vollständiger KI-Beschleunigung',
+                'features.title': 'Mächtige KI-Funktionen',
+                'features.subtitle': 'Von intelligenter Code-Generierung bis zu automatisierten Tests bietet PowerAuto.ai umfassende KI-gesteuerte Lösungen für moderne Entwicklungsteams'
+            },
+            'pt': {
+                'nav.features': 'Recursos',
+                'nav.solutions': 'Soluções',
+                'nav.pricing': 'Preços',
+                'nav.testimonials': 'Depoimentos',
+                'nav.start': 'Começar',
+                'hero.title1': 'Faça da IA sua',
+                'hero.subtitle': 'PowerAuto.ai combina tecnologia de IA de ponta para fornecer aos desenvolvedores e equipes geração inteligente de código, testes automatizados e ferramentas de colaboração, aumentando sua eficiência de desenvolvimento em 10 vezes',
+                'hero.cta1': 'Começar Grátis',
+                'hero.cta2': 'Ver Demo',
+                'demo.title': 'Experimente o PowerAuto.ai você mesmo',
+                'demo.subtitle': 'Veja como a IA revoluciona seu processo de desenvolvimento, do conceito ao deployment, com aceleração completa de IA',
+                'features.title': 'Recursos Poderosos de IA',
+                'features.subtitle': 'Da geração inteligente de código aos testes automatizados, PowerAuto.ai fornece soluções abrangentes impulsionadas por IA para equipes de desenvolvimento modernas'
+            },
+            'it': {
+                'nav.features': 'Caratteristiche',
+                'nav.solutions': 'Soluzioni',
+                'nav.pricing': 'Prezzi',
+                'nav.testimonials': 'Testimonianze',
+                'nav.start': 'Inizia',
+                'hero.title1': 'Rendi l\'IA la tua',
+                'hero.subtitle': 'PowerAuto.ai combina tecnologia IA all\'avanguardia per fornire a sviluppatori e team generazione intelligente di codice, test automatizzati e strumenti di collaborazione, aumentando la tua efficienza di sviluppo di 10 volte',
+                'hero.cta1': 'Inizia Gratis',
+                'hero.cta2': 'Guarda Demo',
+                'demo.title': 'Sperimenta PowerAuto.ai tu stesso',
+                'demo.subtitle': 'Vedi come l\'IA rivoluziona il tuo processo di sviluppo, dal concetto al deployment, con accelerazione IA completa',
+                'features.title': 'Caratteristiche IA Potenti',
+                'features.subtitle': 'Dalla generazione intelligente di codice ai test automatizzati, PowerAuto.ai fornisce soluzioni complete guidate dall\'IA per team di sviluppo moderni'
+            },
+            'ru': {
+                'nav.features': 'Возможности',
+                'nav.solutions': 'Решения',
+                'nav.pricing': 'Цены',
+                'nav.testimonials': 'Отзывы',
+                'nav.start': 'Начать',
+                'hero.title1': 'Сделайте ИИ своим',
+                'hero.subtitle': 'PowerAuto.ai объединяет передовые технологии ИИ для предоставления разработчикам и командам интеллектуальной генерации кода, автоматизированного тестирования и инструментов совместной работы, повышая эффективность разработки в 10 раз',
+                'hero.cta1': 'Начать Бесплатно',
+                'hero.cta2': 'Смотреть Демо',
+                'demo.title': 'Испытайте PowerAuto.ai сами',
+                'demo.subtitle': 'Посмотрите, как ИИ революционизирует ваш процесс разработки, от концепции до развертывания, с полным ускорением ИИ',
+                'features.title': 'Мощные возможности ИИ',
+                'features.subtitle': 'От интеллектуальной генерации кода до автоматизированного тестирования, PowerAuto.ai предоставляет комплексные решения на основе ИИ для современных команд разработчиков'
             }
         };
 
@@ -1029,7 +1185,15 @@
                 const langNames = {
                     'zh-tw': '繁體中文',
                     'zh-cn': '简体中文', 
-                    'en': 'English'
+                    'en': 'English',
+                    'ja': '日本語',
+                    'ko': '한국어',
+                    'es': 'Español',
+                    'fr': 'Français',
+                    'de': 'Deutsch',
+                    'pt': 'Português',
+                    'it': 'Italiano',
+                    'ru': 'Русский'
                 };
                 currentLangSpan.textContent = langNames[this.currentLang];
             }
@@ -1039,7 +1203,15 @@
                 const typingTexts = {
                     'zh-tw': ['開發超能力', '編程助手', '團隊神器', 'AI伙伴'],
                     'zh-cn': ['开发超能力', '编程助手', '团队神器', 'AI伙伴'],
-                    'en': ['Superpower', 'Coding Assistant', 'Team Tool', 'AI Partner']
+                    'en': ['Superpower', 'Coding Assistant', 'Team Tool', 'AI Partner'],
+                    'ja': ['スーパーパワー', 'コーディングアシスタント', 'チームツール', 'AIパートナー'],
+                    'ko': ['슈퍼파워', '코딩 어시스턴트', '팀 도구', 'AI 파트너'],
+                    'es': ['Superpoder', 'Asistente de Código', 'Herramienta de Equipo', 'Socio IA'],
+                    'fr': ['Superpouvoir', 'Assistant Codage', 'Outil d\'Équipe', 'Partenaire IA'],
+                    'de': ['Superkraft', 'Coding-Assistent', 'Team-Tool', 'KI-Partner'],
+                    'pt': ['Superpoder', 'Assistente de Código', 'Ferramenta de Equipe', 'Parceiro IA'],
+                    'it': ['Superpotere', 'Assistente di Codifica', 'Strumento del Team', 'Partner IA'],
+                    'ru': ['Суперсила', 'Помощник Кодирования', 'Командный Инструмент', 'ИИ Партнер']
                 };
                 window.currentTypingTexts = typingTexts[lang] || typingTexts['zh-tw'];
             }

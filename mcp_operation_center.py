@@ -24,9 +24,9 @@ class MCPOperationCenter:
         self.operation_dir = self.base_dir / "monitoring" / "mcp_operation"
         self.operation_dir.mkdir(parents=True, exist_ok=True)
         
-        # MCP註冊表 - 所有可用的MCP
+        # MCP註冊表 - 所有21個MCP模塊
         self.mcp_registry = {
-            # 核心MCP
+            # 核心MCP (P0優先級)
             "mcp_zero": {
                 "name": "MCP Zero",
                 "type": "core",
@@ -34,106 +34,141 @@ class MCPOperationCenter:
                 "capabilities": ["tool_discovery", "auto_routing", "context_management"],
                 "status": "active"
             },
-            
-            # 智能介入MCP
             "smart_intervention": {
                 "name": "SmartIntervention MCP",
                 "type": "intervention",
                 "priority": "P0",
-                "capabilities": ["error_handling", "auto_fix", "pdf_processing"],
-                "handlers": {
-                    "pdf_error": "smartintervention_operation_mcp.fix_error",
-                    "permission_error": "smartintervention_operation_mcp.fix_error",
-                    "encoding_error": "smartintervention_operation_mcp.fix_error"
-                }
+                "capabilities": ["error_handling", "auto_fix", "pdf_processing"]
             },
-            
-            # 工具MCP
             "smarttool": {
                 "name": "SmartTool MCP",
                 "type": "tool",
                 "priority": "P0",
                 "capabilities": ["tool_enhancement", "capability_expansion"]
             },
-            
-            # 內存MCP
             "memoryrag": {
                 "name": "MemoryRAG MCP",
                 "type": "memory",
                 "priority": "P0",
                 "capabilities": ["context_retention", "learning_from_history"]
             },
+            "memoryos": {
+                "name": "MemoryOS MCP",
+                "type": "memory",
+                "priority": "P0",
+                "capabilities": ["memory_optimization", "personalization", "rllm_integration"]
+            },
+            "deepswe": {
+                "name": "DeepSWE MCP",
+                "type": "core",
+                "priority": "P0",
+                "capabilities": ["deep_learning", "swe_integration"]
+            },
             
-            # 代碼流MCP
+            # 功能MCP (P1優先級)
             "codeflow": {
                 "name": "CodeFlow MCP",
                 "type": "workflow",
                 "priority": "P1",
                 "capabilities": ["code_generation", "spec_to_code", "code_to_spec"]
             },
-            
-            # UI MCP
             "smartui": {
                 "name": "SmartUI MCP",
                 "type": "ui",
                 "priority": "P1",
                 "capabilities": ["ui_generation", "interaction_handling"]
             },
-            
-            # 測試MCP
+            "ag_ui": {
+                "name": "AG UI MCP",
+                "type": "ui",
+                "priority": "P1",
+                "capabilities": ["advanced_ui", "ag_integration"]
+            },
             "test_mcp": {
                 "name": "Test MCP",
                 "type": "testing",
                 "priority": "P1",
                 "capabilities": ["test_generation", "validation", "coverage_analysis"]
             },
-            
-            # 業務MCP
-            "business": {
-                "name": "Business MCP",
-                "type": "business",
-                "priority": "P2",
-                "capabilities": ["demo_generation", "website_optimization"]
-            },
-            
-            # 本地適配器MCP
-            "local_adapter": {
-                "name": "Local Adapter MCP",
-                "type": "adapter",
-                "priority": "P1",
-                "capabilities": ["file_system_access", "local_tool_integration"]
-            },
-            
-            # 命令MCP
             "command": {
                 "name": "Command MCP",
                 "type": "command",
                 "priority": "P1",
                 "capabilities": ["command_execution", "usage_tracking"]
             },
+            "local_adapter": {
+                "name": "Local Adapter MCP",
+                "type": "adapter",
+                "priority": "P1",
+                "capabilities": ["file_system_access", "local_tool_integration"]
+            },
+            "claudeeditor": {
+                "name": "ClaudeEditor MCP",
+                "type": "editor",
+                "priority": "P1",
+                "capabilities": ["editor_integration", "ui_consolidation"]
+            },
+            "claude": {
+                "name": "Claude MCP",
+                "type": "ai",
+                "priority": "P1",
+                "capabilities": ["claude_integration", "api_management"]
+            },
+            "claude_realtime": {
+                "name": "Claude Realtime MCP",
+                "type": "realtime",
+                "priority": "P1",
+                "capabilities": ["realtime_processing", "streaming"]
+            },
+            "claude_router": {
+                "name": "Claude Router MCP",
+                "type": "routing",
+                "priority": "P1",
+                "capabilities": ["request_routing", "load_balancing"]
+            },
+            "mcp_coordinator": {
+                "name": "MCP Coordinator",
+                "type": "coordinator",
+                "priority": "P1",
+                "capabilities": ["mcp_orchestration", "consolidation_analysis"]
+            },
+            "stagewise": {
+                "name": "Stagewise MCP",
+                "type": "workflow",
+                "priority": "P1",
+                "capabilities": ["stage_management", "workflow_control"]
+            },
             
-            # 文檔MCP
+            # 業務/整合MCP (P2優先級)
+            "business": {
+                "name": "Business MCP",
+                "type": "business",
+                "priority": "P2",
+                "capabilities": ["demo_generation", "website_optimization", "strategic_planning"]
+            },
             "docs": {
                 "name": "Docs MCP",
                 "type": "documentation",
                 "priority": "P2",
                 "capabilities": ["doc_generation", "api_documentation"]
             },
-            
-            # AWS Bedrock MCP
             "aws_bedrock": {
                 "name": "AWS Bedrock MCP",
                 "type": "integration",
                 "priority": "P2",
                 "capabilities": ["multi_model_routing", "cloud_integration"]
             },
-            
-            # X-Masters MCP
             "xmasters": {
                 "name": "X-Masters MCP",
                 "type": "advanced",
                 "priority": "P2",
                 "capabilities": ["advanced_reasoning", "multi_agent_coordination"]
+            },
+            "zen": {
+                "name": "Zen MCP",
+                "type": "workflow",
+                "priority": "P2",
+                "capabilities": ["zen_workflow", "optimization"]
             }
         }
         

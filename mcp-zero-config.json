@@ -1,0 +1,11 @@
+{
+  "discovery": {
+    "enabled": true,
+    "auto_detect": true,
+    "tool_registry": "./tools"
+  },
+  "integration": {
+    "k2_model": true,
+    "smarttool": true
+  }
+}
