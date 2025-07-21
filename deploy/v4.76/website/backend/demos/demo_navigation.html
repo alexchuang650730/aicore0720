@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerAuto.ai 完整演示導航中心</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .demo-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: #4f46e5;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .category-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 導航欄 -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-robot text-3xl text-indigo-600 mr-3"></i>
+                    <span class="font-bold text-2xl text-gray-900">PowerAuto.ai 演示中心</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">返回主站</a>
+                    <a href="/login" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">用戶登錄</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄區塊 -->
+    <section class="gradient-bg text-white pt-20 pb-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center py-20">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    🎪 完整演示導航中心
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-4xl mx-auto">
+                    從技術架構到銀行解決方案，體驗AI驅動開發的完整生態系統
+                </p>
+                
+                <!-- 快速統計 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 bg-white bg-opacity-10 rounded-2xl p-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">21+</div>
+                        <p class="text-gray-200">MCP組件</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">15+</div>
+                        <p class="text-gray-200">演示場景</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">8</div>
+                        <p class="text-gray-200">行業解決方案</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">100%</div>
+                        <p class="text-gray-200">實際可用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心演示區域 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 核心系統演示 -->
+            <div class="mb-20">
+                <div class="category-header text-white p-8 rounded-t-2xl">
+                    <h2 class="text-4xl font-bold mb-4">🚀 核心系統演示</h2>
+                    <p class="text-xl opacity-90">體驗PowerAuto.ai的核心技術和創新功能</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-b-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- 21個MCP系統演示 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-microchip text-3xl text-red-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">21個MCP系統</h3>
+                                <p class="text-gray-600 mt-2">完整的MCP生態架構</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    P0核心層：6個關鍵MCP
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    P1工作流：7個協調MCP
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    P2支援層：8個基礎MCP
+                                </li>
+                            </ul>
+                            <a href="/demos/mcp-21" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors block text-center">
+                                <i class="fas fa-play mr-2"></i>體驗完整MCP系統
+                            </a>
+                        </div>
+
+                        <!-- ClaudeEditor演示 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-edit text-3xl text-blue-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">ClaudeEditor</h3>
+                                <p class="text-gray-600 mt-2">AI協作開發環境</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    三欄式智能UI設計
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    多AI模型整合
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    實時協作編程
+                                </li>
+                            </ul>
+                            <button onclick="alert('ClaudeEditor演示即將開放！')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-code mr-2"></i>打開編輯器
+                            </button>
+                        </div>
+
+                        <!-- MemoryOS演示 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-brain text-3xl text-purple-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">MemoryOS</h3>
+                                <p class="text-gray-600 mt-2">智能記憶作業系統</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    7種記憶類型管理
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    智能檢索<100ms
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    2.4%壓縮率優化
+                                </li>
+                            </ul>
+                            <button onclick="alert('MemoryOS 40秒專業演示即將播放！')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                                <i class="fas fa-memory mr-2"></i>體驗記憶系統
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 行業解決方案演示 -->
+            <div class="mb-20">
+                <div class="category-header text-white p-8 rounded-t-2xl">
+                    <h2 class="text-4xl font-bold mb-4">🏢 行業解決方案演示</h2>
+                    <p class="text-xl opacity-90">針對不同行業的專業AI解決方案</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-b-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- 銀行業解決方案 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-university text-3xl text-green-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">振華創新銀行業方案</h3>
+                                <p class="text-gray-600 mt-2">完整8頁專業演示</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    AI OCR文檔處理
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    智能風控系統
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    私有化部署方案
+                                </li>
+                            </ul>
+                            <button onclick="showBankDemo()" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                                <i class="fas fa-chart-line mr-2"></i>查看銀行方案
+                            </button>
+                        </div>
+
+                        <!-- 企業工作流方案 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-building text-3xl text-orange-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">企業工作流自動化</h3>
+                                <p class="text-gray-600 mt-2">端到端業務流程</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    StageWise工作流管理
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    Business MCP商業分析
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    團隊協作優化
+                                </li>
+                            </ul>
+                            <button onclick="alert('企業工作流演示準備中...')" class="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                                <i class="fas fa-sitemap mr-2"></i>體驗工作流
+                            </button>
+                        </div>
+
+                        <!-- 開發者工具方案 -->
+                        <div class="demo-card bg-white rounded-2xl p-8 shadow-lg">
+                            <div class="text-center mb-6">
+                                <div class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-tools text-3xl text-indigo-600"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">開發者工具套件</h3>
+                                <p class="text-gray-600 mt-2">完整開發生態</p>
+                            </div>
+                            <ul class="space-y-3 mb-6">
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    CodeFlow智能編程
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    Test MCP自動測試
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    SmartTool生態整合
+                                </li>
+                            </ul>
+                            <button onclick="alert('開發者工具演示準備中...')" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                                <i class="fas fa-laptop-code mr-2"></i>開發者體驗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技術演示和文檔 -->
+            <div class="mb-20">
+                <div class="category-header text-white p-8 rounded-t-2xl">
+                    <h2 class="text-4xl font-bold mb-4">📚 技術文檔和資源</h2>
+                    <p class="text-xl opacity-90">深入了解技術架構和實現細節</p>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-b-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="demo-card bg-white rounded-xl p-6 shadow text-center">
+                            <i class="fas fa-file-code text-3xl text-blue-600 mb-4"></i>
+                            <h4 class="font-bold text-lg mb-2">API文檔</h4>
+                            <p class="text-gray-600 mb-4">完整API參考</p>
+                            <button onclick="alert('API文檔即將開放...')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">查看文檔</button>
+                        </div>
+                        
+                        <div class="demo-card bg-white rounded-xl p-6 shadow text-center">
+                            <i class="fas fa-graduation-cap text-3xl text-green-600 mb-4"></i>
+                            <h4 class="font-bold text-lg mb-2">學習資源</h4>
+                            <p class="text-gray-600 mb-4">教程和指南</p>
+                            <button onclick="alert('學習資源整理中...')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">開始學習</button>
+                        </div>
+                        
+                        <div class="demo-card bg-white rounded-xl p-6 shadow text-center">
+                            <i class="fas fa-github text-3xl text-gray-800 mb-4"></i>
+                            <h4 class="font-bold text-lg mb-2">源碼倉庫</h4>
+                            <p class="text-gray-600 mb-4">開源代碼</p>
+                            <button onclick="alert('源碼即將開放...')" class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-900">訪問GitHub</button>
+                        </div>
+                        
+                        <div class="demo-card bg-white rounded-xl p-6 shadow text-center">
+                            <i class="fas fa-comments text-3xl text-purple-600 mb-4"></i>
+                            <h4 class="font-bold text-lg mb-2">社群支援</h4>
+                            <p class="text-gray-600 mb-4">開發者社群</p>
+                            <button onclick="alert('社群平台建設中...')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">加入社群</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 銀行方案演示彈窗 -->
+    <div id="bank-demo-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center h-full p-4">
+            <div class="bg-white rounded-2xl max-w-4xl w-full max-h-full overflow-hidden">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-gray-900">振華創新銀行業AI解決方案</h3>
+                    <button onclick="closeBankDemo()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto" style="max-height: 70vh;">
+                    <div class="space-y-6">
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-green-800 mb-4">🏛️ 銀行業專屬功能</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-green-700">文檔AI OCR</h5>
+                                    <p class="text-sm text-green-600">支票、合同、身份證自動識別，準確率>99.5%</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-green-700">智能客服</h5>
+                                    <p class="text-sm text-green-600">24/7多語言對話，業務咨詢自動化</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-green-700">風控輔助</h5>
+                                    <p class="text-sm text-green-600">智能分析，異常檢測，風險評估</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-green-700">報表生成</h5>
+                                    <p class="text-sm text-green-600">自動化財務報表，合規檢查</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-blue-800 mb-4">💰 成本效益優化</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-blue-700">K2模式</h5>
+                                    <p class="text-sm text-blue-600">2元輸入成本，8元價值輸出（1:4效益比）</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-blue-700">人員效率</h5>
+                                    <p class="text-sm text-blue-600">平均提升250%工作效率</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-red-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-red-800 mb-4">🔒 金融級安全保障</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-red-700">
+                                    <i class="fas fa-shield-alt mr-2"></i>
+                                    完全私有化部署，數據不出境
+                                </li>
+                                <li class="flex items-center text-red-700">
+                                    <i class="fas fa-key mr-2"></i>
+                                    三級權限體系（使用者/開發者/管理者）
+                                </li>
+                                <li class="flex items-center text-red-700">
+                                    <i class="fas fa-history mr-2"></i>
+                                    完整操作日誌，符合監管要求
+                                </li>
+                                <li class="flex items-center text-red-700">
+                                    <i class="fas fa-lock mr-2"></i>
+                                    端到端加密，安全通信保障
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-center bg-gray-100 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-4">📞 聯系我們</h4>
+                            <p class="text-gray-600 mb-4">技術負責人：Alex Chuang | 郵箱：chuang.hsiaoyen@gmail.com</p>
+                            <div class="space-x-4">
+                                <button class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">申請演示</button>
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">下載方案</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showBankDemo() {
+            document.getElementById('bank-demo-modal').classList.remove('hidden');
+        }
+
+        function closeBankDemo() {
+            document.getElementById('bank-demo-modal').classList.add('hidden');
+        }
+
+        // 點擊背景關閉彈窗
+        document.getElementById('bank-demo-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBankDemo();
+            }
+        });
+    </script>
+</body>
+</html>

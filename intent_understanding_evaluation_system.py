@@ -535,7 +535,7 @@ class IntentUnderstandingEvaluator:
 
 def main():
     """主函數"""
-    api_key = "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"
+    api_key = os.getenv("GROQ_API_KEY", "your-api-key-here")
     
     logger.info("🚀 啟動意圖理解評估系統")
     logger.info("🎯 目標：第一階段達到100%工具調用準確率")
